@@ -99,7 +99,15 @@ public class Main extends Application {
             }
         });
 
+        
+        
         Button statistiekenButton = new Button();
+        Button zoekButton = new Button();
+        Button instellingenButton = new Button();
+        Button helpButton = new Button();
+        Button formulierButton = new Button();
+        
+        
         statistiekenButton.setText("Statistieken");
         statistiekenButton.setGraphic(new ImageView(Statistieken));
         statistiekenButton.setContentDisplay(ContentDisplay.TOP);
@@ -109,12 +117,17 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(statistieken);
+                zoekButton.setDisable(false);
+                statistiekenButton.setDisable(true);
+                instellingenButton.setDisable(false);
+                helpButton.setDisable(false);
+                formulierButton.setDisable(false);
             }
         });
 
         
         
-        Button zoekButton = new Button();
+        
         zoekButton.setText("Zoeken");
         zoekButton.setGraphic(new ImageView(Zoom));
         zoekButton.setContentDisplay(ContentDisplay.TOP);
@@ -124,10 +137,15 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(zoekScherm);
+                zoekButton.setDisable(true);
+                statistiekenButton.setDisable(false);
+                instellingenButton.setDisable(false);
+                helpButton.setDisable(false);
+                formulierButton.setDisable(false);
             }
         });
         
-        Button instellingenButton = new Button();
+        
         instellingenButton.setText("Instellingen");
         instellingenButton.setGraphic(new ImageView(Instellingen));
         instellingenButton.setContentDisplay(ContentDisplay.TOP);
@@ -138,10 +156,15 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(instellingen);
+                zoekButton.setDisable(false);
+                statistiekenButton.setDisable(false);
+                instellingenButton.setDisable(true);
+                helpButton.setDisable(false);
+                formulierButton.setDisable(false);
             }
         });
 
-        Button helpButton = new Button();
+        
         helpButton.setText("Help");
         helpButton.setGraphic(new ImageView(Help));
         helpButton.setContentDisplay(ContentDisplay.TOP);
@@ -151,10 +174,15 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(helpScherm);
+                zoekButton.setDisable(false);
+                statistiekenButton.setDisable(false);
+                instellingenButton.setDisable(false);
+                helpButton.setDisable(true);
+                formulierButton.setDisable(false);
             }
         });
 
-        Button formulierButton = new Button();
+        
         formulierButton.setText("Invoer");
         formulierButton.setGraphic(new ImageView(Formulier));
         formulierButton.setContentDisplay(ContentDisplay.TOP);
@@ -164,6 +192,11 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(formulierScherm);
+                zoekButton.setDisable(false);
+                statistiekenButton.setDisable(false);
+                instellingenButton.setDisable(false);
+                helpButton.setDisable(false);
+                formulierButton.setDisable(true);
             }
         });
 
