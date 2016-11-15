@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -82,13 +83,14 @@ public class Main extends Application
         
         scherm.setCenter(inlogScherm);
         
-        Scene scene = new Scene(scherm, 800, 450);
+        Scene scene = new Scene(scherm, 1920, 1080);
         String css = Main.class.getResource("Theme.css").toExternalForm();
         scene.getStylesheets().add(css);
                 
         primaryStage.setTitle("Main Screen");
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         primaryStage.setFullScreen(true);
     }
     
