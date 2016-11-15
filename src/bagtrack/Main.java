@@ -62,6 +62,7 @@ public class Main extends Application {
         Image Formulier = new Image("doc_edit_icon&48.png");
         Image Help = new Image("info_icon&48.png");
         Image Statistieken = new Image ("chart_line_icon&48.png");
+        Image Instellingen = new Image ("cog_icon&48.png");
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int h = (int) screenSize.getHeight();
@@ -90,6 +91,7 @@ public class Main extends Application {
         statistiekenButton.setGraphic(new ImageView(Statistieken));
         statistiekenButton.setContentDisplay(ContentDisplay.TOP);
         statistiekenButton.setPrefSize(menuwidth, 112.5);
+        statistiekenButton.setPrefSize(200, 112.5);
         statistiekenButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -104,6 +106,7 @@ public class Main extends Application {
         zoekButton.setGraphic(new ImageView(Zoom));
         zoekButton.setContentDisplay(ContentDisplay.TOP);
         zoekButton.setPrefSize(menuwidth, 112.5);
+        zoekButton.setPrefSize(200, 112.5);
         zoekButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -113,7 +116,8 @@ public class Main extends Application {
         
         Button instellingenButton = new Button();
         instellingenButton.setText("Instellingen");
-
+        instellingenButton.setGraphic(new ImageView(Instellingen));
+        instellingenButton.setContentDisplay(ContentDisplay.TOP);
         instellingenButton.setPrefSize(menuwidth, 112.5);
         instellingenButton.setPrefSize(200, 112.5);
         instellingenButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -129,6 +133,7 @@ public class Main extends Application {
         helpButton.setGraphic(new ImageView(Help));
         helpButton.setContentDisplay(ContentDisplay.TOP);
         helpButton.setPrefSize(menuwidth, 112.5);
+        helpButton.setPrefSize(200, 112.5);
         helpButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -141,6 +146,7 @@ public class Main extends Application {
         formulierButton.setGraphic(new ImageView(Formulier));
         formulierButton.setContentDisplay(ContentDisplay.TOP);
         formulierButton.setPrefSize(menuwidth, 112.5);
+        formulierButton.setPrefSize(200, 112.5);
         formulierButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
