@@ -1,4 +1,4 @@
-package sefyscorendon;
+package bagtrack;
 
 import javafx.scene.control.Label;
 import javafx.application.Application;
@@ -22,7 +22,7 @@ import javafx.scene.text.Font;
  *
  * @author Rick
  */
-public class Rick extends Application {
+public class Zoekscherm extends Application {
 
     @Override
     public void start(Stage primaryStage) {
@@ -109,7 +109,7 @@ public class Rick extends Application {
                 textveldGewicht.setText(null);
                 comboBoxSoort.setValue(null);
                 comboBoxOpdruk.setValue(null);
-                SeFYSCORENDON.change(Rick.returnScherm2());
+                //scherm.change(Rick.returnScherm2());
 
             }
         });

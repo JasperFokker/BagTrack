@@ -25,10 +25,10 @@ public class BagTrack extends Application
     {
         BorderPane ui = new BorderPane();
         VBox menu = new VBox();
-        GridPane rick = Rick.returnScherm();
-        GridPane jason = Rick.returnScherm();
-        GridPane thom = Rick.returnScherm();
-        GridPane floris = Rick.returnScherm();
+        GridPane rick = Zoekscherm.returnScherm();
+        GridPane jason = Zoekscherm.returnScherm();
+        GridPane thom = Zoekscherm.returnScherm();
+        GridPane floris = Zoekscherm.returnScherm();
         
         
         Button btn1 = new Button();

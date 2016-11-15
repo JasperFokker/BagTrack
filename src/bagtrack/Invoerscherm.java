@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  *
  * @author jimmy
  */
-public class Jason extends Application
+public class Invoerscherm extends Application
 {
     @Override
     public void start(Stage primaryStage)

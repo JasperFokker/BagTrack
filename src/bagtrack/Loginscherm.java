@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  *
  * @author jimmy
  */
-public class Floris extends Application
+public class Loginscherm extends Application
 {
     @Override
     public void start(Stage primaryStage)
