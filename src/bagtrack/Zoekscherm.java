@@ -41,14 +41,6 @@ public class Zoekscherm extends Application {
         scherm.setPadding(new Insets(25, 25, 25, 25));
 
         //Inhoud 1e combobox
-        ObservableList<String> options = FXCollections.observableArrayList(
-                "Samsonite",
-                "Lacoste",
-                "SuperTrash",
-                "Visconti",
-                "Converse"
-        );
-        //Inhoud 2e combobox
         ObservableList<String> kleuren = FXCollections.observableArrayList(
                 "Blauw",
                 "Rood",
@@ -56,15 +48,35 @@ public class Zoekscherm extends Application {
                 "Bruin",
                 "Paars"
         );
+        //Inhoud 2e combobox
+        ObservableList<String> luchthaven = FXCollections.observableArrayList(
+                "AMS",
+                "ADA",
+                "KYA"
+        );
+        //Inhoud 3e combobox
+        ObservableList<String> soort = FXCollections.observableArrayList(
+                "Tas",
+                "Koffer",
+                "Zak"
+        );
+        //Inhoud 4e combobox
+        ObservableList<String> opdruk = FXCollections.observableArrayList(
+                "Effen kleur",
+                "Afbeelding",
+                "Patroon"
+        );
 
         //Labels, Textvelden, buttons en comboboxen.
-        final ComboBox comboBoxMerk = new ComboBox(options);
         final ComboBox comboBoxKleur = new ComboBox(kleuren);
+        final ComboBox comboBoxLuchthaven = new ComboBox(luchthaven);
+        final ComboBox comboBoxSoort = new ComboBox(soort);
+        final ComboBox comboBoxOpdruk = new ComboBox(opdruk);
 
-        TextField textveld = new TextField();
-
-        TextField textveld4 = new TextField();
-        textveld4.setPromptText("In Kilogrammen");
+        TextField textveldNaam = new TextField();
+        TextField textveldMerk = new TextField();
+        TextField textveldGewicht = new TextField();
+        textveldGewicht.setPromptText("In Kilogrammen");
 
         Label label = new Label();
         label.setText("Naam:");
@@ -76,17 +88,29 @@ public class Zoekscherm extends Application {
         label3.setText("Kleur:");
 
         Label label4 = new Label();
-        label4.setText("Gewicht:");
+        label4.setText("Luchthaven: ");
+
+        Label label5 = new Label();
+        label5.setText("Gewicht:");
+
+        Label label6 = new Label();
+        label6.setText("Soort:");
+
+        Label label7 = new Label("Opdruk");
 
         Button btn = new Button("Zoek");
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                textveld.setText(null);
-                comboBoxMerk.setValue(null);
+                textveldNaam.setText(null);
+                textveldMerk.setText(null);
                 comboBoxKleur.setValue(null);
-                textveld4.setText(null);
+                comboBoxLuchthaven.setValue(null);
+                textveldGewicht.setText(null);
+                comboBoxSoort.setValue(null);
+                comboBoxOpdruk.setValue(null);
+
                 Main.change(Zoekscherm.returnScherm2());
 
             }
@@ -97,13 +121,20 @@ public class Zoekscherm extends Application {
         scherm.add(label2, 0, 1);
         scherm.add(label3, 0, 2);
         scherm.add(label4, 0, 3);
-        scherm.add(textveld, 1, 0);
-        scherm.add(comboBoxMerk, 1, 1);
+        scherm.add(label5, 0, 4);
+        scherm.add(label6, 0, 5);
+        scherm.add(label7, 0, 6);
+        scherm.add(textveldNaam, 1, 0);
+        scherm.add(textveldMerk, 1, 1);
         scherm.add(comboBoxKleur, 1, 2);
-        scherm.add(textveld4, 1, 3);
-        scherm.add(btn, 1, 4);
+        scherm.add(comboBoxLuchthaven, 1, 3);
+        scherm.add(textveldGewicht, 1, 4);
+        scherm.add(comboBoxSoort, 1, 5);
+        scherm.add(comboBoxOpdruk, 1, 6);
+        scherm.add(btn, 1, 7);
 
         return scherm;
+
     }
 
     public static GridPane returnScherm2() {
@@ -112,11 +143,11 @@ public class Zoekscherm extends Application {
         scherm2.setPrefSize(600, 450);
 
         ObservableList<Tabeldata> data = FXCollections.observableArrayList(
-                new Tabeldata("Anna de Bruin", "Samsonite", "Blauw", "17 KG"),
-                new Tabeldata("Johann Visser", "Visconti", "Zwart", "21 KG"),
-                new Tabeldata("Robin van Dijk", "Lacoste", "Rood", "24 KG"),
-                new Tabeldata("Melissa Watergang", "SuperTrash", "Paars", "15 KG"),
-                new Tabeldata("Dennis Bakker", "Converse", "Bruin", "12 KG")
+                new Tabeldata("Anna de Bruin", "Samsonite", "Blauw", "AMS", "17 KG", "Tas", "Effen Kleur"),
+                new Tabeldata("Johann Visser", "Visconti", "Zwart", "ADA", "21 KG", "Koffer", "Geen"),
+                new Tabeldata("Robin van Dijk", "Lacoste", "Rood", "AMS", "24 KG", "Zak", "Geen"),
+                new Tabeldata("Melissa Watergang", "SuperTrash", "Paars", "KYA", "15 KG", "Koffer", "Patroon"),
+                new Tabeldata("Dennis Bakker", "Converse", "Bruin", "ADA", "12 KG", "Tas", "Geen")
         );
 
         final Label label = new Label("Zoekresultaten");
@@ -125,8 +156,8 @@ public class Zoekscherm extends Application {
 
         final TableView table = new TableView();
         table.setEditable(true);
-        table.setPrefWidth(600);
-        table.setPrefHeight(450);
+        table.setPrefWidth(1170);
+        table.setPrefHeight(680);
 
         //Dit werkt, vraag me niet hoe.
         TableColumn naamCol = new TableColumn("Naam");
@@ -138,17 +169,28 @@ public class Zoekscherm extends Application {
         TableColumn kleurCol = new TableColumn("Kleur");
         kleurCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Kleur"));
 
+        TableColumn luchthavenCol = new TableColumn("Luchthaven");
+        luchthavenCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Luchthaven"));
+
         TableColumn gewichtCol = new TableColumn("Gewicht");
         gewichtCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Gewicht"));
 
-        //Verdeeld de colommen gelijk over de gridpane.
-        naamCol.prefWidthProperty().bind(table.widthProperty().multiply(0.25));
-        merkCol.prefWidthProperty().bind(table.widthProperty().multiply(0.25));
-        kleurCol.prefWidthProperty().bind(table.widthProperty().multiply(0.25));
-        gewichtCol.prefWidthProperty().bind(table.widthProperty().multiply(0.246));
+        TableColumn soortCol = new TableColumn("Soort");
+        soortCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Soort"));
 
+        TableColumn opdrukCol = new TableColumn("Opdruk");
+        opdrukCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Opdruk"));
+
+        //Verdeeld de colommen gelijk over de gridpane.
+        naamCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
+        merkCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
+        kleurCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
+        luchthavenCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
+        gewichtCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
+        soortCol.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
+        opdrukCol.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
         table.setItems(data);
-        table.getColumns().addAll(naamCol, merkCol, kleurCol, gewichtCol);
+        table.getColumns().addAll(naamCol, merkCol, kleurCol, luchthavenCol, gewichtCol, soortCol, opdrukCol);
 
         scherm2.add(label, 0, 0);
         scherm2.add(table, 0, 1);
