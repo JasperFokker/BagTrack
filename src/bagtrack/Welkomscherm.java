@@ -1,6 +1,8 @@
 package bagtrack;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import static javafx.scene.paint.Color.WHITE;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -26,6 +29,10 @@ public class Welkomscherm extends Application {
     }
 
     public static GridPane returnScherm() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int h = (int) screenSize.getHeight();
+        int w = (int) screenSize.getWidth();
+        
         Image plaatje = new Image("Corendon Logo.jpg");
         ImageView iv1 = new ImageView();
         iv1.setImage(plaatje);
@@ -46,6 +53,7 @@ public class Welkomscherm extends Application {
         Text welkombericht1 = new Text();
         welkombericht1.setText("Welkom bij het Corendon bagagesysteem");
         welkombericht1.setFont(Font.font("Verdana", 35));
+        welkombericht1.setFill(WHITE);
 
         scherm.add(welkombericht1, 10, 5);
         scherm.add(iv1, 10, 20);

@@ -59,7 +59,8 @@ public class Loginscherm extends Application {
         scherm.add(pwBox, 1, 2);
 
         Button btn = new Button("Log in");
-        HBox hbBtn = new HBox(10);
+        HBox hbBtn = new HBox();
+        btn.setPrefSize(200, 20);
         hbBtn.setAlignment(Pos.BOTTOM_CENTER);
         hbBtn.getChildren().add(btn);
         scherm.add(hbBtn, 1, 4);
