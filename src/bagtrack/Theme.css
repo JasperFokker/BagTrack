@@ -16,6 +16,10 @@ HBox{
     -fx-background-color: #d81e05;
 }
 
+VBox{
+    -fx-background-color: #d81e05;
+}
+
 .table-view .column-header-background .label{
     -fx-text-fill: black;
 }
