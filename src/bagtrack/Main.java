@@ -1,7 +1,10 @@
+/**
+ * @author TEAM TWEE
+ */
+
 package bagtrack;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,15 +14,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/**
- *
- * @author TEAM TWEE
- */
 public class Main extends Application
-{
-    
-    
-    
+{   
     @Override
     public void start(Stage primaryStage)
     {
@@ -44,7 +40,7 @@ public class Main extends Application
         });
         
         Button btn2 = new Button();
-        btn2.setText("RICK");
+        btn2.setText("Zoeken");
         btn2.setPrefSize(200, 90);
         btn2.setOnAction(new EventHandler<ActionEvent>() {
             @Override 
@@ -83,7 +79,6 @@ public class Main extends Application
         btn5.setOnAction(new EventHandler<ActionEvent>() {
             @Override 
             public void handle(ActionEvent event) {
-                //event handle voor de button
                 ui.setCenter(floris);
             }
         });
@@ -95,8 +90,7 @@ public class Main extends Application
         
         
         
-        Scene scene = new Scene(ui, 800, 450);
-        
+        Scene scene = new Scene(ui, 1980, 1020);
         primaryStage.setTitle("Main Screen");
         primaryStage.setScene(scene);
         primaryStage.show();

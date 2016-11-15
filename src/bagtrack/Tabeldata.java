@@ -1,7 +1,7 @@
 /*
  * @author Rick van den Berg
  */
-package sefyscorendon;
+package bagtrack;
 
 import javafx.beans.property.SimpleStringProperty;
 
