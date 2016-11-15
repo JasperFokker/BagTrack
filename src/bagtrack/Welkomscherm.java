@@ -28,15 +28,10 @@ public class Welkomscherm extends Application {
         scherm.setPadding(new Insets(50, 25, 25, 25));
 
         Text welkombericht1 = new Text();
-        welkombericht1.setText("Welkom bij het");
-        welkombericht1.setFont(Font.font("Verdana", 36));
+        welkombericht1.setText("Welkom bij het Corendon bagagesysteem");
+        welkombericht1.setFont(Font.font("Verdana", 52));
         
-        Text welkombericht2 = new Text();
-        welkombericht2.setText("Corendon bagagesysteem.");
-        welkombericht2.setFont(Font.font("Verdana", 36));
-        
-        scherm.add(welkombericht1, 1, 10);
-        scherm.add(welkombericht2, 1, 12);
+        scherm.add(welkombericht1, 25, 15);
 
         return scherm;
     }
