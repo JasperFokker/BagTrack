@@ -1,6 +1,8 @@
 package bagtrack;
 
+import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.image.ImageObserver;
 import java.sql.Connection;
@@ -54,10 +56,14 @@ public class Main extends Application
         GridPane welkomScherm = Welkomscherm.returnScherm();
         GridPane statistieken = Statistiekenscherm.returnScherm();
         
-        //Rectangle r = this.getBounds();
-        //int h = r.height;
-        //int w = r.width;
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int h = (int) screenSize.getHeight();
+        int w = (int) screenSize.getWidth();
                 
+        Button placeholder = new Button();
+        placeholder.setVisible(false);
+        placeholder.setPrefSize(1720, 50);
+        
         Button uitlogButton = new Button();
         uitlogButton.setText("Uitloggen");
         uitlogButton.setPrefSize(200, 50);
@@ -112,7 +118,7 @@ public class Main extends Application
         });
         
         menu.getChildren().addAll(zoekButton,formulierButton,helpButton, statistiekenButton);
-        topmenu.getChildren().addAll( uitlogButton);
+        topmenu.getChildren().addAll(placeholder, uitlogButton);
         
         scherm.setCenter(inlogScherm);
         
