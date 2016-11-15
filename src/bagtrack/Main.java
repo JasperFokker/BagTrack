@@ -1,10 +1,7 @@
 package bagtrack;
 
 import java.awt.Dimension;
-import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.Window;
-import java.awt.image.ImageObserver;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,8 +12,8 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -24,7 +21,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javax.swing.JPanel;
 
 /**
  * @author Jasper & Jimmy
@@ -89,6 +85,7 @@ public class Main extends Application {
         Button statistiekenButton = new Button();
         statistiekenButton.setText("Statistieken");
         statistiekenButton.setGraphic(new ImageView(Statistieken));
+        statistiekenButton.setContentDisplay(ContentDisplay.TOP);
         statistiekenButton.setPrefSize(200, 112.5);
         statistiekenButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -100,8 +97,9 @@ public class Main extends Application {
         
         
         Button zoekButton = new Button();
-        //zoekButton.setText("Zoeken");
+        zoekButton.setText("Zoeken");
         zoekButton.setGraphic(new ImageView(Zoom));
+        zoekButton.setContentDisplay(ContentDisplay.TOP);
         zoekButton.setPrefSize(200, 112.5);
         zoekButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -113,6 +111,7 @@ public class Main extends Application {
         Button helpButton = new Button();
         helpButton.setText("Help");
         helpButton.setGraphic(new ImageView(Help));
+        helpButton.setContentDisplay(ContentDisplay.TOP);
         helpButton.setPrefSize(200, 112.5);
         helpButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -122,8 +121,9 @@ public class Main extends Application {
         });
 
         Button formulierButton = new Button();
-        formulierButton.setText("Formulier");
+        formulierButton.setText("Invoer");
         formulierButton.setGraphic(new ImageView(Formulier));
+        formulierButton.setContentDisplay(ContentDisplay.TOP);
         formulierButton.setPrefSize(200, 112.5);
         formulierButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
