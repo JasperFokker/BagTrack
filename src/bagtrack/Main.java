@@ -76,13 +76,14 @@ public class Main extends Application {
         
         Button uitlogButton = new Button();
         uitlogButton.setText("Uitloggen");
-        uitlogButton.setPrefSize(menuwidth, 50);
+        uitlogButton.setPrefSize(menuwidth, 48);
         uitlogButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 //Veranderd het huidige scherm naar het inlogscherm en maakt het menu onzichtbaar.
                 scherm.setCenter(inlogScherm);
                 scherm.setLeft(null);
+                scherm.setTop(null);
             }
         });
 
