@@ -29,7 +29,7 @@ public class Main extends Application
     
     @Override
     public void start(Stage primaryStage)
-    {
+    {        
         GridPane zoekScherm = Zoekscherm.returnScherm();
         GridPane helpScherm = Helpscherm.returnScherm();
         GridPane inlogScherm = Loginscherm.returnScherm();
@@ -85,10 +85,11 @@ public class Main extends Application
         Scene scene = new Scene(scherm, 800, 450);
         String css = Main.class.getResource("Theme.css").toExternalForm();
         scene.getStylesheets().add(css);
-        
+                
         primaryStage.setTitle("Main Screen");
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.setFullScreen(true);
     }
     
     public static void main(String[] args)
