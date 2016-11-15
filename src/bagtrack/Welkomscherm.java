@@ -29,9 +29,9 @@ public class Welkomscherm extends Application {
 
         Text welkombericht1 = new Text();
         welkombericht1.setText("Welkom bij het Corendon bagagesysteem");
-        welkombericht1.setFont(Font.font("Verdana", 52));
+        welkombericht1.setFont(Font.font("Verdana", 35));
         
-        scherm.add(welkombericht1, 25, 15);
+        scherm.add(welkombericht1, 10, 5);
 
         return scherm;
     }

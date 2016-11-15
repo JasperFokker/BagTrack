@@ -44,7 +44,7 @@ public class Loginscherm extends Application {
 
         Text scenetitle = new Text("Welkom");
         scenetitle.setFont(Font.font("Verdana", FontWeight.NORMAL, 20));
-        scherm.add(scenetitle, 0, 0, 2, 1);
+        scherm.add(scenetitle, 1, 0, 2, 1);
 
         Label userName = new Label("Gebruikersnaam:");
         scherm.add(userName, 0, 1);
