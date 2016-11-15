@@ -36,6 +36,7 @@ public class Main extends Application
         GridPane inlogScherm = Loginscherm.returnScherm();
         GridPane formulierScherm = Invoerscherm.returnScherm();
         GridPane welkomScherm = Welkomscherm.returnScherm();
+        GridPane statistieken = Statistiekenscherm.returnScherm();
         
         Button uitlogButton = new Button();
         uitlogButton.setText("Uitloggen");
@@ -48,6 +49,17 @@ public class Main extends Application
                 scherm.setLeft(null);
             }
         });
+        
+        Button statistiekenButton = new Button();
+        statistiekenButton.setText("Statistieken");
+        statistiekenButton.setPrefSize(200, 112.5);
+        statistiekenButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                scherm.setCenter(statistieken);
+            }
+        });
+                
         
         Button zoekButton = new Button();
         zoekButton.setText("Zoeken");
@@ -79,7 +91,7 @@ public class Main extends Application
             }
         });
         
-        menu.getChildren().addAll(zoekButton,formulierButton,helpButton,uitlogButton);
+        menu.getChildren().addAll(zoekButton,formulierButton,helpButton,uitlogButton, statistiekenButton);
         
         scherm.setCenter(inlogScherm);
         
