@@ -12,6 +12,7 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import static javafx.geometry.Pos.TOP_LEFT;
 import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
@@ -20,6 +21,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 /**
@@ -46,7 +49,6 @@ public class Main extends Application {
     public static void topmenu(){
         scherm.setTop(topmenu);
     }
-    
 
     @Override
     public void start(Stage primaryStage) {
@@ -57,25 +59,35 @@ public class Main extends Application {
         GridPane welkomScherm = Welkomscherm.returnScherm();
         GridPane statistieken = Statistiekenscherm.returnScherm();
         GridPane instellingen = Instellingenscherm.returnScherm();
-
-        Image Zoom = new Image("zoom_icon&48.png");
-        Image Formulier = new Image("doc_edit_icon&48.png");
-        Image Help = new Image("info_icon&48.png");
-        Image Statistieken = new Image ("chart_line_icon&48.png");
-        Image Instellingen = new Image ("cog_icon&48.png");
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int h = (int) screenSize.getHeight();
         int w = (int) screenSize.getWidth();
         
+        Image Zoom = new Image("zoom_icon&48.png");
+        Image Formulier = new Image("doc_edit_icon&48.png");
+        Image Help = new Image("info_icon&48.png");
+        Image Statistieken = new Image ("chart_line_icon&48.png");
+        Image Instellingen = new Image ("cog_icon&48.png");
+        Image Logo = new Image ("randjerandje.png", h*0.05,h*0.05, false, false);
+
+       
+        
         int menuwidth = (int)(w*0.10);
                 
         Button placeholder = new Button();
-        placeholder.setVisible(false);
+        placeholder.setVisible(true);
         placeholder.setPrefSize(w-menuwidth, 50);
+        placeholder.setGraphic(new ImageView(Logo));
+        placeholder.setContentDisplay(ContentDisplay.LEFT);
+        placeholder.setAlignment(TOP_LEFT);
+        placeholder.setText("BagTrack");
+        placeholder.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        
         
         Button uitlogButton = new Button();
         uitlogButton.setText("Uitloggen");
+        
         uitlogButton.setPrefSize(menuwidth, 48);
         uitlogButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
