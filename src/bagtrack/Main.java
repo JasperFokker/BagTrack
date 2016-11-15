@@ -56,6 +56,7 @@ public class Main extends Application {
         GridPane formulierScherm = Invoerscherm.returnScherm();
         GridPane welkomScherm = Welkomscherm.returnScherm();
         GridPane statistieken = Statistiekenscherm.returnScherm();
+        GridPane instellingen = Instellingenscherm.returnScherm();
 
         Image Zoom = new Image("zoom_icon&48.png");
         Image Formulier = new Image("doc_edit_icon&48.png");
@@ -107,6 +108,16 @@ public class Main extends Application {
                 scherm.setCenter(zoekScherm);
             }
         });
+        
+        Button instellingenButton = new Button();
+        instellingenButton.setText("Instellingen");
+        instellingenButton.setPrefSize(200, 112.5);
+        zoekButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                scherm.setCenter(instellingen);
+            }
+        });
 
         Button helpButton = new Button();
         helpButton.setText("Help");
@@ -133,7 +144,8 @@ public class Main extends Application {
         });
 
         
-        menu.getChildren().addAll(zoekButton,formulierButton,helpButton, statistiekenButton);
+        menu.getChildren().addAll(zoekButton,formulierButton,helpButton, statistiekenButton,
+                instellingenButton);
         topmenu.getChildren().addAll(placeholder, uitlogButton);
         
 
