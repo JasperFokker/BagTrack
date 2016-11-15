@@ -66,14 +66,16 @@ public class Main extends Application {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int h = (int) screenSize.getHeight();
         int w = (int) screenSize.getWidth();
+        
+        int menuwidth = (int)(w*0.10);
                 
         Button placeholder = new Button();
         placeholder.setVisible(false);
-        placeholder.setPrefSize(1720, 50);
+        placeholder.setPrefSize(w-menuwidth, 50);
         
         Button uitlogButton = new Button();
         uitlogButton.setText("Uitloggen");
-        uitlogButton.setPrefSize(200, 50);
+        uitlogButton.setPrefSize(menuwidth, 50);
         uitlogButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -87,7 +89,7 @@ public class Main extends Application {
         statistiekenButton.setText("Statistieken");
         statistiekenButton.setGraphic(new ImageView(Statistieken));
         statistiekenButton.setContentDisplay(ContentDisplay.TOP);
-        statistiekenButton.setPrefSize(200, 112.5);
+        statistiekenButton.setPrefSize(menuwidth, 112.5);
         statistiekenButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -101,7 +103,7 @@ public class Main extends Application {
         zoekButton.setText("Zoeken");
         zoekButton.setGraphic(new ImageView(Zoom));
         zoekButton.setContentDisplay(ContentDisplay.TOP);
-        zoekButton.setPrefSize(200, 112.5);
+        zoekButton.setPrefSize(menuwidth, 112.5);
         zoekButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -111,7 +113,7 @@ public class Main extends Application {
         
         Button instellingenButton = new Button();
         instellingenButton.setText("Instellingen");
-        instellingenButton.setPrefSize(200, 112.5);
+        instellingenButton.setPrefSize(menuwidth, 112.5);
         zoekButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -123,7 +125,7 @@ public class Main extends Application {
         helpButton.setText("Help");
         helpButton.setGraphic(new ImageView(Help));
         helpButton.setContentDisplay(ContentDisplay.TOP);
-        helpButton.setPrefSize(200, 112.5);
+        helpButton.setPrefSize(menuwidth, 112.5);
         helpButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -135,7 +137,7 @@ public class Main extends Application {
         formulierButton.setText("Invoer");
         formulierButton.setGraphic(new ImageView(Formulier));
         formulierButton.setContentDisplay(ContentDisplay.TOP);
-        formulierButton.setPrefSize(200, 112.5);
+        formulierButton.setPrefSize(menuwidth, 112.5);
         formulierButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
