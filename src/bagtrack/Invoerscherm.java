@@ -1,5 +1,6 @@
 package bagtrack;
 
+import java.time.LocalDate;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.application.Application;
@@ -12,7 +13,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -39,9 +39,9 @@ public class Invoerscherm extends Application
         //datum
         Label dateLabel = new Label("Datum");
         scherm.add(dateLabel, 0, 0, 2, 1);
-
         
-        DatePicker dp = new DatePicker();
+        LocalDate date = LocalDate.now();
+        DatePicker dp = new DatePicker(date);
         scherm.add(dp, 1, 0);
 
         //luchthaven
@@ -109,22 +109,29 @@ public class Invoerscherm extends Application
         final ComboBox graphicBox = new ComboBox(graphic);
         scherm.add(graphicBox, 1, 5);
         
+        //invoer labelnummer
+        Label numberLabel = new Label("Labelnummer");
+        scherm.add(numberLabel, 0, 6);
+        
+        TextField numberField = new TextField();
+        scherm.add(numberField, 1, 6);
+        
         //invoer opmerkingen
         Label commentLabel = new Label("Opmerkingen");
-        scherm.add(commentLabel, 0, 6);
+        scherm.add(commentLabel, 0, 7);
         
         TextField commentField = new TextField();
-        scherm.add(commentField, 1, 6);
+        scherm.add(commentField, 1, 7);
 
         //opslaan
         Button save = new Button();
         save.setText("Opslaan");
-        scherm.add(save, 0,7);
+        scherm.add(save, 0,8);
 
         //clear
         Button clear = new Button();
         clear.setText("Leegmaken");
-        scherm.add(clear, 1,7);
+        scherm.add(clear, 1,8);
         clear.setOnAction(new EventHandler<ActionEvent>() {
             @Override 
             public void handle(ActionEvent event) {
