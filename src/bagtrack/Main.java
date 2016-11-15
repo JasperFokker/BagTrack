@@ -113,8 +113,11 @@ public class Main extends Application {
         
         Button instellingenButton = new Button();
         instellingenButton.setText("Instellingen");
+
         instellingenButton.setPrefSize(menuwidth, 112.5);
-        zoekButton.setOnAction(new EventHandler<ActionEvent>() {
+        instellingenButton.setPrefSize(200, 112.5);
+        instellingenButton.setOnAction(new EventHandler<ActionEvent>() {
+
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(instellingen);
