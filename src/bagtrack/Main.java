@@ -102,7 +102,7 @@ public class Main extends Application
         primaryStage.setTitle("Main Screen");
         primaryStage.setScene(scene);
         primaryStage.show();
-        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+       
         primaryStage.setFullScreen(true);
     }
     
