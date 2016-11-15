@@ -9,13 +9,18 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -56,7 +61,7 @@ public class Statistiekenscherm extends Application
         lineChart.setTitle("Teruggevonden baggage");
 
         XYChart.Series series = new XYChart.Series();
-        series.setName("My portfolio");
+        series.setName("Teruggevonden koffers");
 
         series.getData().add(new XYChart.Data("Jan", 23));
         series.getData().add(new XYChart.Data("Feb", 14));
@@ -71,10 +76,30 @@ public class Statistiekenscherm extends Application
         series.getData().add(new XYChart.Data("Nov", 29));
         series.getData().add(new XYChart.Data("Dec", 25));
 
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                    new PieChart.Data("Samsonite", 13),
+                    new PieChart.Data("Hema huismerk", 25),
+                    new PieChart.Data("AH Basic Koffer", 10),
+                    new PieChart.Data("Dora's rugzak", 22),
+                    new PieChart.Data("overig", 30)
+                        
+                );
+        
+        final PieChart pieChart = new PieChart(pieChartData);
+        pieChart.setTitle("Verloren merken");
+        
+        final Label caption = new Label("");
+        
+        caption.setTextFill(Color.DARKORANGE);
+        caption.setStyle("-fx-font: 24 arial;");
+
+                
         Scene scene = new Scene(lineChart, 800, 600);
         lineChart.getData().add(series);
 
         scherm.add(lineChart, 0, 1);
+        scherm.add(pieChart, 1, 1);
         
         
         

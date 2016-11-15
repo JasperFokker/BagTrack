@@ -12,6 +12,8 @@
     -fx-faint-focus-color: transparent; 
 }
 
+
+
 HBox{
     -fx-background-color: #d81e05;
 }
@@ -35,3 +37,34 @@ VBox{
     -fx-background-color: #d81e05;
 }
 
+.chart-legend-item{
+    -fx-text-fill: black;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparant;
+}
+
+.chart-alternative-row-fill {
+    -fx-fill: transparent;
+    -fx-stroke: transparent;
+    -fx-stroke-width: 0;
+}
+
+.axis{
+    -fx-font-size: 1.4em;    
+    -fx-tick-label-fill: white;
+}
+
+.axis-label {
+   -fx-text-fill: white; 
+}
+
+.chart-pie{
+    -fx-border-fill: black;
+}
+
+.chart-pie-label {
+    -fx-fill: white;
+    -fx-font-size: 1em;
+} 
