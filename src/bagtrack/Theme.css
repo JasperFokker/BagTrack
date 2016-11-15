@@ -12,7 +12,9 @@
     -fx-faint-focus-color: transparent; 
 }
 
-
+HBox{
+    -fx-background-color: #d81e05;
+}
 
 .table-view .column-header-background .label{
     -fx-text-fill: black;

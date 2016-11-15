@@ -1,15 +1,21 @@
 package bagtrack;
 
+import java.awt.Rectangle;
+import java.awt.Window;
+import java.awt.image.ImageObserver;
 import javafx.scene.control.Button;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javax.swing.JPanel;
 
 /**
  * @author Jasper & Jimmy
@@ -18,6 +24,7 @@ public class Main extends Application
 {
     static BorderPane scherm = new BorderPane();
     static VBox menu = new VBox();
+    static HBox topmenu = new HBox();
     
     //wissel scherm.
     public static void change(GridPane gridpane){
@@ -26,6 +33,10 @@ public class Main extends Application
     
     public static void menu(){
         scherm.setLeft(menu);
+    }
+    
+    public static void topmenu(){
+        scherm.setTop(topmenu);
     }
     
     @Override
@@ -38,9 +49,13 @@ public class Main extends Application
         GridPane welkomScherm = Welkomscherm.returnScherm();
         GridPane statistieken = Statistiekenscherm.returnScherm();
         
+        //Rectangle r = this.getBounds();
+        //int h = r.height;
+        //int w = r.width;
+                
         Button uitlogButton = new Button();
         uitlogButton.setText("Uitloggen");
-        uitlogButton.setPrefSize(200, 112.5);
+        uitlogButton.setPrefSize(200, 50);
         uitlogButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override 
             public void handle(ActionEvent event) {
@@ -91,7 +106,8 @@ public class Main extends Application
             }
         });
         
-        menu.getChildren().addAll(zoekButton,formulierButton,helpButton,uitlogButton, statistiekenButton);
+        menu.getChildren().addAll(zoekButton,formulierButton,helpButton, statistiekenButton);
+        topmenu.getChildren().addAll( uitlogButton);
         
         scherm.setCenter(inlogScherm);
         

@@ -71,6 +71,7 @@ public class Loginscherm extends Application {
             public void handle(ActionEvent e) {
                 Main.change(Welkomscherm.returnScherm());
                 Main.menu();
+                Main.topmenu();
                 
             
             }
