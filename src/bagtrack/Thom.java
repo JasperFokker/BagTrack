@@ -5,72 +5,55 @@
  */
 package bagtrack;
 
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
  *
  * @author jimmy
  */
-public class Thom extends Application
-{
+public class Thom extends Application {
+
     @Override
-    public void start(Stage primaryStage)
-    {
+    public void start(Stage primaryStage) {
         returnScherm();
     }
-    
+
     public static GridPane returnScherm() {
         GridPane scherm = new GridPane();
-        scherm.setPrefSize(800, 450);
+        scherm.setPrefSize(600, 450);
+        scherm.setHgap(10);
+        scherm.setVgap(10);
+        scherm.setPadding(new Insets(25, 25, 25, 25));
+
+        Text scenetitle = new Text("Veelgestelde vragen:");
+        scenetitle.setFont(Font.font("Verdana", FontWeight.BOLD, 36));
+        scherm.add(scenetitle, 0, 0, 2, 1);
+
         
-        /* 
-        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        =====================================================================
-        HIERONDER WERK JE!!
-        HIERONDER WERK JE!!
-        Thom: Ik heb jouw template iets groter gemaakt omdat het over de menubar gaat -jasper
-        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        =====================================================================
-        */
+
+        Text t = new Text();
+        t.setText("Waarom kan ik geen koffers invoeren?");
+        t.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        Text t1 = new Text();
+        t1.setText("Omdat je niet goed genoeg kijkt.");
+        Text t2 = new Text();
+        t2.setText("Hoe log ik uit?");
+        t2.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        Text t3 = new Text();
+        t3.setText("Klik op de \"uitloggen\" knop.");
         
-        
-        
-        Label label = new Label();
-        label.setText("Hello World");
-        
-        
-        Button btn = new Button();
-        btn.setText("Hello World");
-        btn.setPrefSize(300, 20);
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override 
-            public void handle(ActionEvent event) {
-                //event handle voor de button
-                System.out.println("Hello World");
-            }
-        });
-                    
-        scherm.add(label, 0, 0);
-        scherm.add(btn, 0, 1);
-        
-        
-        
-        
-        
-        /* 
-        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        =====================================================================
-        HIERONDER WERK JE NIET!!
-        HIERONDER WERK JE NIET!!
-        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        =====================================================================
-        */
+        scherm.add(t, 0, 3);
+        scherm.add(t1, 0, 4);
+        scherm.add(t2, 0, 5);
+        scherm.add(t3, 0, 6);
+
         return scherm;
     }
 }
