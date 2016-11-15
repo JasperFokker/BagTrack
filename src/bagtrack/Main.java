@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  *
  * @author TEAM TWEE
  */
-public class BagTrack extends Application
+public class Main extends Application
 {
     
     
