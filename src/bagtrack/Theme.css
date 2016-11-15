@@ -72,3 +72,7 @@ VBox{
     -fx-fill: white;
     -fx-font-size: 1em;
 } 
+
+.label-kofferklik{
+    -fx-padding: 10 20 10 20;
+}

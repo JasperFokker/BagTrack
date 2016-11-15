@@ -58,7 +58,7 @@ public class Main extends Application {
         GridPane formulierScherm = Invoerscherm.returnScherm();
         GridPane welkomScherm = Welkomscherm.returnScherm();
         GridPane statistieken = Statistiekenscherm.returnScherm();
-        GridPane instellingen = Instellingenscherm.returnScherm();
+        GridPane instellingen = Kofferklikker.returnScherm();
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int h = (int) screenSize.getHeight();
