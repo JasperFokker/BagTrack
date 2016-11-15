@@ -75,6 +75,38 @@ public class Statistiekenscherm extends Application
         series.getData().add(new XYChart.Data("Oct", 17));
         series.getData().add(new XYChart.Data("Nov", 29));
         series.getData().add(new XYChart.Data("Dec", 25));
+        
+         XYChart.Series series2 = new XYChart.Series();
+        series2.setName("Vermist gemeld");
+        series2.getData().add(new XYChart.Data("Jan", 33));
+        series2.getData().add(new XYChart.Data("Feb", 34));
+        series2.getData().add(new XYChart.Data("Mar", 25));
+        series2.getData().add(new XYChart.Data("Apr", 44));
+        series2.getData().add(new XYChart.Data("May", 39));
+        series2.getData().add(new XYChart.Data("Jun", 16));
+        series2.getData().add(new XYChart.Data("Jul", 55));
+        series2.getData().add(new XYChart.Data("Aug", 54));
+        series2.getData().add(new XYChart.Data("Sep", 48));
+        series2.getData().add(new XYChart.Data("Oct", 27));
+        series2.getData().add(new XYChart.Data("Nov", 37));
+        series2.getData().add(new XYChart.Data("Dec", 29));
+        
+        XYChart.Series series3 = new XYChart.Series();
+        series3.setName("Koffers kwijt");
+        series3.getData().add(new XYChart.Data("Jan", 2));
+        series3.getData().add(new XYChart.Data("Feb", 3));
+        series3.getData().add(new XYChart.Data("Mar", 1));
+        series3.getData().add(new XYChart.Data("Apr", 5));
+        series3.getData().add(new XYChart.Data("May", 6));
+        series3.getData().add(new XYChart.Data("Jun", 2));
+        series3.getData().add(new XYChart.Data("Jul", 3));
+        series3.getData().add(new XYChart.Data("Aug", 8));
+        series3.getData().add(new XYChart.Data("Sep", 5));
+        series3.getData().add(new XYChart.Data("Oct", 4));
+        series3.getData().add(new XYChart.Data("Nov", 12));
+        series3.getData().add(new XYChart.Data("Dec", 1));
+        
+        
 
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
@@ -96,7 +128,7 @@ public class Statistiekenscherm extends Application
 
                 
         Scene scene = new Scene(lineChart, 800, 600);
-        lineChart.getData().add(series);
+        lineChart.getData().addAll(series, series2, series3);
 
         scherm.add(lineChart, 0, 1);
         scherm.add(pieChart, 1, 1);

@@ -51,6 +51,14 @@ VBox{
     -fx-stroke-width: 0;
 }
 
+.default-color0.chart-series-line { -fx-stroke: blueviolet; }
+.default-color1.chart-series-line { -fx-stroke: #ff9900; }
+.default-color2.chart-series-line { -fx-stroke: #d81e05; }
+ 
+.default-color0.chart-line-symbol { -fx-background-color: blueviolet, white; }
+.default-color1.chart-line-symbol { -fx-background-color: #ff9900, white; }
+.default-color2.chart-line-symbol { -fx-background-color: #d81e05, white; }
+
 .axis{
     -fx-font-size: 1.4em;    
     -fx-tick-label-fill: white;
@@ -58,10 +66,6 @@ VBox{
 
 .axis-label {
    -fx-text-fill: white; 
-}
-
-.chart-pie{
-    -fx-border-fill: black;
 }
 
 .chart-pie-label {
