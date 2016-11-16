@@ -180,11 +180,11 @@ public class Kofferklikker extends Application
  
             @Override
             public  void handle(ActionEvent event) {
-                if(amountx > MEDEWERKER_KOSTEN){
-                    amountx = amountx - MEDEWERKER_KOSTEN;
+                if(amountx > LOOPBAND_KOSTEN){
+                    amountx = amountx - LOOPBAND_KOSTEN;
                     label.setText(Integer.toString(amountx));
                     aantalLoopbanden++;
-                    loopbandAdd = loopbandAdd + 20;
+                    loopbandAdd = loopbandAdd + 500;
                     lblaantalLoopbanden.setText("Aantal loopbanden is: " + aantalLoopbanden + 
                             " Dit geeft " + loopbandAdd + " koffers per seconde");
                     
