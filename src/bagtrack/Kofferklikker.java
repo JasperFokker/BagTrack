@@ -31,8 +31,13 @@ import javafx.stage.Stage;
 
 public class Kofferklikker extends Application
 {
-    static Thread thread = null;
+    static Thread threadMedewerker = null;
+    static Thread threadLoopband = null;
     static int amountx = 0;
+    static int medewerkerAdd = 0;
+    static int aantalMedewerkers = 0;
+    static int loopbandAdd = 0;
+    static int aantalLoopbanden = 0;
     
     @Override
     public void start(Stage primaryStage)
@@ -62,26 +67,39 @@ public class Kofferklikker extends Application
         label.getStyleClass().add("label-kofferklik");
         label.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
         
+        
+        
+        Label lblaantalMedewerkers = new Label();
+        lblaantalMedewerkers.setText("Aantal medewerkers is: " + aantalMedewerkers);
+        lblaantalMedewerkers.setFont(Font.font("Verdana", FontWeight.NORMAL, 20));
+        
+        Label lblaantalLoopbanden = new Label();
+        lblaantalLoopbanden.setText("Aantal loopbanden is: " + aantalLoopbanden);
+        lblaantalLoopbanden.setFont(Font.font("Verdana", FontWeight.NORMAL, 20));
+        
         Button kofferButton = new Button();
         Image koffer = new Image("randjerandje.png");
         int amount = 0;
         
+        final int MEDEWERKER_KOSTEN = 30;
+        final int LOOPBAND_KOSTEN = 800;
         
-        final long timeInterval = 1000;
-        Runnable runnable = new Runnable(){
+        final long INTERVAL_MEDEWERKER = 3000;
+        final long INTERVAL_LOOPBAND = 6000;
+        
+        Runnable runnableMedewerker = new Runnable(){
             int check = 0;
             public void run(){
                 while(true){
-                    System.out.println("yo" + ++check);
                     Platform.runLater(new Runnable(){
                         @Override
                         public void run() {
-                            label.setText(Integer.toString(AddAmount(20)));
+                            label.setText(Integer.toString(AddAmount(medewerkerAdd)));
                         }
                     });
                     
                     try {
-                        Thread.sleep(timeInterval);
+                        Thread.sleep(INTERVAL_MEDEWERKER);
                     } catch (InterruptedException e) {
                         System.out.println(e);
                     }
@@ -89,36 +107,90 @@ public class Kofferklikker extends Application
             }
         };
         
-        thread = new Thread(runnable);              
-        thread.setDaemon(true);
+        Runnable runnableLoopband = new Runnable(){
+            int check = 0;
+            public void run(){
+                while(true){
+                    Platform.runLater(new Runnable(){
+                        @Override
+                        public void run() {
+                            label.setText(Integer.toString(AddAmount(loopbandAdd)));
+                        }
+                    });
+                    
+                    try {
+                        Thread.sleep(INTERVAL_LOOPBAND);
+                    } catch (InterruptedException e) {
+                        System.out.println(e);
+                    }
+                }             
+            }
+        };
         
+        threadMedewerker = new Thread(runnableMedewerker);              
+        threadMedewerker.setDaemon(true);
+        threadMedewerker.start();
+        
+        threadLoopband = new Thread(runnableLoopband);
+        threadLoopband.setDaemon(true);
+        threadLoopband.start();
         
         kofferButton.setText("");
         kofferButton.setGraphic(new ImageView(koffer));
         kofferButton.setContentDisplay(ContentDisplay.TOP);
         kofferButton.setPrefSize(200, 112.5);
         kofferButton.setPrefSize(200, 112.5);
+        kofferButton.getStyleClass().add("button-kofferklik");
         kofferButton.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
             public  void handle(ActionEvent event) {
-                System.out.println("noice"); 
                 label.setText(Integer.toString(AddAmount(1)));
             }
         });
         
         Button bagagemedewerker = new Button();
-        bagagemedewerker.setText("Huur een bagagemedewerker");
-        //bagagemedewerker.setGraphic(new ImageView(koffer));
-        //bagagemedewerker.setContentDisplay(ContentDisplay.TOP);
-        bagagemedewerker.setPrefSize(200, 112.5);
-        bagagemedewerker.setPrefSize(200, 112.5);
+        bagagemedewerker.setText("Huur een bagagemedewerker in. Kost " + MEDEWERKER_KOSTEN + " Koffers");
+        
+        bagagemedewerker.setPrefSize(350, 112.5);
+        bagagemedewerker.getStyleClass().add("button-kofferklik-medewerker");
         bagagemedewerker.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
             public  void handle(ActionEvent event) {
-                System.out.println("noice"); 
-                thread.start();
+                if(amountx > MEDEWERKER_KOSTEN){
+                    amountx = amountx - MEDEWERKER_KOSTEN;
+                    label.setText(Integer.toString(amountx));
+                    aantalMedewerkers++;                    
+                    medewerkerAdd = medewerkerAdd + 20;
+                    lblaantalMedewerkers.setText("Aantal medewerkers is: " + aantalMedewerkers + 
+                            " Dit geeft " + medewerkerAdd + " koffers per seconde");
+                } 
+                
+                
+            }
+        });
+        
+        Button bagageLoopband = new Button();
+        bagageLoopband.setText("Koop een bagageloopband. Kost " + LOOPBAND_KOSTEN + " Koffers");
+        
+        bagageLoopband.setPrefSize(350, 112.5);
+        bagageLoopband.getStyleClass().add("button-kofferklik-medewerker");
+        bagageLoopband.setOnAction(new EventHandler<ActionEvent>() {
+ 
+            @Override
+            public  void handle(ActionEvent event) {
+                if(amountx > MEDEWERKER_KOSTEN){
+                    amountx = amountx - MEDEWERKER_KOSTEN;
+                    label.setText(Integer.toString(amountx));
+                    aantalLoopbanden++;
+                    loopbandAdd = loopbandAdd + 20;
+                    lblaantalLoopbanden.setText("Aantal loopbanden is: " + aantalLoopbanden + 
+                            " Dit geeft " + loopbandAdd + " koffers per seconde");
+                    
+                } 
+                
+                
             }
         });
         
@@ -129,6 +201,9 @@ public class Kofferklikker extends Application
         scherm.add(label,2,1);
         scherm.add(kofferButton, 1,1);
         scherm.add(bagagemedewerker, 1, 2);
+        scherm.add(lblaantalMedewerkers, 2, 2);
+        scherm.add(bagageLoopband, 1, 3);
+        scherm.add(lblaantalLoopbanden, 2, 3);
         
         
         

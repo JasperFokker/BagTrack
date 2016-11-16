@@ -76,3 +76,12 @@ VBox{
 .label-kofferklik{
     -fx-padding: 10 20 10 20;
 }
+
+.button-kofferklik{
+    -fx-padding: 30 30 30 30;
+    -fx-background-color: transparent;
+}
+
+.button-kofferklik-medewerker{
+    -fx-padding: 30 30 30 30;
+}
