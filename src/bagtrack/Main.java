@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -77,17 +78,16 @@ public class Main extends Application {
                 
         Button placeholder = new Button();
         placeholder.setVisible(true);
-        placeholder.setPrefSize(w-menuwidth, 50);
+        placeholder.setPrefSize(w-menuwidth, 48);
         placeholder.setGraphic(new ImageView(Logo));
         placeholder.setContentDisplay(ContentDisplay.LEFT);
         placeholder.setAlignment(TOP_LEFT);
         placeholder.setText("BagTrack");
         placeholder.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-        
+        placeholder.setDisable(true);
         
         Button uitlogButton = new Button();
         uitlogButton.setText("Uitloggen");
-        
         uitlogButton.setPrefSize(menuwidth, 48);
         uitlogButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -98,8 +98,6 @@ public class Main extends Application {
                 scherm.setTop(null);
             }
         });
-
-        
         
         Button statistiekenButton = new Button();
         Button zoekButton = new Button();
@@ -270,12 +268,7 @@ public class Main extends Application {
             }
             
         }
-        
-              
-        
-            
-        
-        
+
         return rs;
     }
     
