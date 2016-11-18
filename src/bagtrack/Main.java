@@ -64,17 +64,17 @@ public class Main extends Application {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int h = (int) screenSize.getHeight();
         int w = (int) screenSize.getWidth();
-        
+        int menuwidth = (int)(w*0.10);
         Image Zoom = new Image("zoom_icon&48.png");
         Image Formulier = new Image("doc_edit_icon&48.png");
         Image Help = new Image("info_icon&48.png");
         Image Statistieken = new Image ("chart_line_icon&48.png");
         Image Instellingen = new Image ("cog_icon&48.png");
-        Image Logo = new Image ("randjerandje.png", h*0.05,h*0.05, false, false);
+        Image Logo = new Image ("logo.png", menuwidth * 1.40, w*0.04, false, false);
 
        
         
-        int menuwidth = (int)(w*0.10);
+        
                 
         Button placeholder = new Button();
         placeholder.setVisible(true);
@@ -82,8 +82,7 @@ public class Main extends Application {
         placeholder.setGraphic(new ImageView(Logo));
         placeholder.setContentDisplay(ContentDisplay.LEFT);
         placeholder.setAlignment(TOP_LEFT);
-        placeholder.setText("BagTrack");
-        placeholder.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        
         placeholder.setDisable(true);
         
         Button uitlogButton = new Button();
