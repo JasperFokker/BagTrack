@@ -71,10 +71,6 @@ public class Main extends Application {
         Image Statistieken = new Image ("chart_line_icon&48.png");
         Image Instellingen = new Image ("cog_icon&48.png");
         Image Logo = new Image ("logo.png", menuwidth * 1.40, w*0.04, false, false);
-
-       
-        
-        
                 
         Button placeholder = new Button();
         placeholder.setVisible(true);
@@ -88,6 +84,8 @@ public class Main extends Application {
         Button uitlogButton = new Button();
         uitlogButton.setText("Uitloggen");
         uitlogButton.setPrefSize(menuwidth, 48);
+        uitlogButton.setAlignment(TOP_LEFT);
+        uitlogButton.setFont(Font.font("Verdana", 26));
         uitlogButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
