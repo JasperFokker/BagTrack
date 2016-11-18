@@ -5,6 +5,8 @@
  */
 package bagtrack;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
@@ -33,7 +35,7 @@ public class Kofferklikker extends Application
 {
     static Thread threadMedewerker = null;
     static Thread threadLoopband = null;
-    static int amountx = 0;
+    static long amountx = 0;
     static int medewerkerAdd = 0;
     static int aantalMedewerkers = 0;
     static int loopbandAdd = 0;
@@ -60,10 +62,12 @@ public class Kofferklikker extends Application
         =====================================================================
         */
         
-        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int h = (int) screenSize.getHeight();
+        int w = (int) screenSize.getWidth();
         
         Label label = new Label();
-        label.setText("Kofferklikker demo");
+        label.setText("<- Klik de koffer om te beginnen.");
         label.getStyleClass().add("label-kofferklik");
         label.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
         
@@ -78,7 +82,7 @@ public class Kofferklikker extends Application
         lblaantalLoopbanden.setFont(Font.font("Verdana", FontWeight.NORMAL, 20));
         
         Button kofferButton = new Button();
-        Image koffer = new Image("randjerandje.png");
+        Image koffer = new Image("randjerandje.png", h*0.3,h*0.3, false, false);
         int amount = 0;
         
         final int MEDEWERKER_KOSTEN = 30;
@@ -94,7 +98,7 @@ public class Kofferklikker extends Application
                     Platform.runLater(new Runnable(){
                         @Override
                         public void run() {
-                            label.setText(Integer.toString(AddAmount(medewerkerAdd)));
+                            label.setText(Long.toString(AddAmount(medewerkerAdd)));
                         }
                     });
                     
@@ -114,7 +118,7 @@ public class Kofferklikker extends Application
                     Platform.runLater(new Runnable(){
                         @Override
                         public void run() {
-                            label.setText(Integer.toString(AddAmount(loopbandAdd)));
+                            label.setText(Long.toString(AddAmount(loopbandAdd)));
                         }
                     });
                     
@@ -145,7 +149,7 @@ public class Kofferklikker extends Application
  
             @Override
             public  void handle(ActionEvent event) {
-                label.setText(Integer.toString(AddAmount(1)));
+                label.setText(Long.toString(AddAmount(1)));
             }
         });
         
@@ -160,7 +164,7 @@ public class Kofferklikker extends Application
             public  void handle(ActionEvent event) {
                 if(amountx > MEDEWERKER_KOSTEN){
                     amountx = amountx - MEDEWERKER_KOSTEN;
-                    label.setText(Integer.toString(amountx));
+                    label.setText(Long.toString(amountx));
                     aantalMedewerkers++;                    
                     medewerkerAdd = medewerkerAdd + 20;
                     lblaantalMedewerkers.setText("Aantal medewerkers is: " + aantalMedewerkers + 
@@ -180,9 +184,15 @@ public class Kofferklikker extends Application
  
             @Override
             public  void handle(ActionEvent event) {
+<<<<<<< HEAD
                 if(amountx > LOOPBAND_KOSTEN){
                     amountx = amountx - LOOPBAND_KOSTEN;
                     label.setText(Integer.toString(amountx));
+=======
+                if(amountx > MEDEWERKER_KOSTEN){
+                    amountx = amountx - LOOPBAND_KOSTEN;
+                    label.setText(Long.toString(amountx));
+>>>>>>> origin/master
                     aantalLoopbanden++;
                     loopbandAdd = loopbandAdd + 500;
                     lblaantalLoopbanden.setText("Aantal loopbanden is: " + aantalLoopbanden + 
@@ -222,7 +232,7 @@ public class Kofferklikker extends Application
         return scherm;
     }
     
-    protected static int AddAmount(int a){
+    protected static long AddAmount(int a){
         amountx = amountx + a;
         return amountx;
     }
