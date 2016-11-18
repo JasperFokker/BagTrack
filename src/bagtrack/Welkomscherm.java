@@ -32,9 +32,13 @@ public class Welkomscherm extends Application {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int h = (int) screenSize.getHeight();
         int w = (int) screenSize.getWidth();
+        int menuwidth = (int)(w*0.10);
+        int menuheight = (int)(h*0.10);
         
-        Image plaatje = new Image("Corendon Logo.jpg");
+        Image plaatje = new Image("Corendon Logo.jpg", w*0.50,h*0.50, false, false);
+        
         ImageView iv1 = new ImageView();
+       
         iv1.setImage(plaatje);
 
         Group root = new Group();
@@ -55,8 +59,8 @@ public class Welkomscherm extends Application {
         welkombericht1.setFont(Font.font("Verdana", 35));
         welkombericht1.setFill(WHITE);
 
-        scherm.add(welkombericht1, 10, 5);
-        scherm.add(iv1, 10, 20);
+        scherm.add(welkombericht1, 2, 1);
+        scherm.add(iv1, 2, 4);
 
         return scherm;
     }
