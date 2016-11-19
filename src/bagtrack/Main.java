@@ -70,7 +70,7 @@ public class Main extends Application {
         Image Help = new Image("info_icon&48.png");
         Image Statistieken = new Image ("chart_line_icon&48.png");
         Image Instellingen = new Image ("cog_icon&48.png");
-        Image Logo = new Image ("logo.png", menuwidth * 1.40, w*0.04, false, false);
+        Image Logo = new Image ("titel_simpel.png", menuwidth * 1.30, w*0.035, false, false);
                 
         Button placeholder = new Button();
         placeholder.setVisible(true);
@@ -79,7 +79,7 @@ public class Main extends Application {
         placeholder.setContentDisplay(ContentDisplay.LEFT);
         placeholder.setAlignment(TOP_LEFT);
         
-        placeholder.setDisable(true);
+        placeholder.setDisable(false);
         
         Button uitlogButton = new Button();
         uitlogButton.setText("Uitloggen");
