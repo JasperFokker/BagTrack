@@ -59,7 +59,7 @@ public class Main extends Application {
         GridPane formulierScherm = Invoerscherm.returnScherm();
         GridPane welkomScherm = Welkomscherm.returnScherm();
         GridPane statistieken = Statistiekenscherm.returnScherm();
-        GridPane instellingen = Kofferklikker.returnScherm();
+        GridPane instellingen = Instellingenscherm.returnScherm();
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int h = (int) screenSize.getHeight();
@@ -218,56 +218,7 @@ public class Main extends Application {
     
 
     
-    public static ResultSet sqlquery(String stat){
-        Connection con = null;
-        ResultSet rs = null;
-        Statement st = null;
-        
-        String url = "jdbc:mysql://localhost:3306/bagtrack";
-        String user = "java";
-        String password = "password";
-        
-        try{
-            System.out.println("connecting..");
-            con = DriverManager.getConnection(url,user,password);
-            System.out.println("Creating statement");
-            st = (Statement) con.createStatement();
-            rs = st.executeQuery("SELECT idkoffers;");
-            System.out.println("Sending query");
-            
-            if(rs.next()) {
-                System.out.println(rs.getString(1));
-            }
-            
-            
-        }catch(SQLException e){
-            System.out.println(e);            
-        } finally {
-            
-            try {
-                
-                if (rs != null) {
-                    rs.close();
-                }
-                
-                if (st != null) {
-                    st.close();
-                }
-                
-                if (con != null) {
-                    con.close();
-                }
-
-            } catch (SQLException ex) {
-                
-                System.out.println(ex);
-                
-            }
-            
-        }
-
-        return rs;
-    }
+    
     
     public static void main(String[] args)
     {
