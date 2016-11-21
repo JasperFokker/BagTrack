@@ -7,7 +7,9 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -31,14 +33,17 @@ public class Invoerscherm extends Application
         GridPane scherm = new GridPane();
         scherm.setPrefSize(600, 450);
         
-//        scherm.setAlignment(Pos.CENTER);
+        //scherm.setAlignment(Pos.CENTER);
         scherm.setHgap(10);
         scherm.setVgap(10);
         scherm.setPadding(new Insets(25, 25, 25, 25));
         
+        
         //datum
         Label dateLabel = new Label("Datum");
-        scherm.add(dateLabel, 0, 0, 2, 1);
+        GridPane.setHalignment(dateLabel, HPos.RIGHT);
+        scherm.add(dateLabel, 0, 0);
+        
         
         LocalDate date = LocalDate.now();
         DatePicker dp = new DatePicker(date);
@@ -46,6 +51,7 @@ public class Invoerscherm extends Application
 
         //luchthaven
         Label airportLabel = new Label("Luchthaven");
+        GridPane.setHalignment(airportLabel, HPos.RIGHT);
         scherm.add(airportLabel, 0, 1);
         
         ObservableList<String> airport
@@ -59,6 +65,7 @@ public class Invoerscherm extends Application
 
         //combobox soort
         Label typeBagLabel = new Label("Soort");
+        GridPane.setHalignment(typeBagLabel, HPos.RIGHT);
         scherm.add(typeBagLabel, 0, 2);
 
         ObservableList<String> typeBag
@@ -72,6 +79,7 @@ public class Invoerscherm extends Application
 
         //invoer merk
         Label brandLabel = new Label("Merk");
+        GridPane.setHalignment(brandLabel, HPos.RIGHT);
         scherm.add(brandLabel, 0, 3);
 
         TextField brandField = new TextField();
@@ -79,6 +87,7 @@ public class Invoerscherm extends Application
 
         //comboboxes kleur
         Label color1Label = new Label("Kleur 1");
+        GridPane.setHalignment(color1Label, HPos.RIGHT);
         scherm.add(color1Label, 0, 4);
         
         ObservableList<String> color
@@ -91,6 +100,7 @@ public class Invoerscherm extends Application
         scherm.add(color1Box, 1, 4);
         
         Label color2Label = new Label("Kleur 2");
+        GridPane.setHalignment(color2Label, HPos.RIGHT);
         scherm.add(color2Label, 2, 4);
         
         final ComboBox color2Box = new ComboBox(color);
@@ -98,6 +108,7 @@ public class Invoerscherm extends Application
         
         //combobox opdruk
         Label graphicLabel = new Label ("Opdruk");
+        GridPane.setHalignment(graphicLabel, HPos.RIGHT);
         scherm.add(graphicLabel, 0, 5);
         
         ObservableList<String> graphic
@@ -111,6 +122,7 @@ public class Invoerscherm extends Application
         
         //invoer labelnummer
         Label numberLabel = new Label("Labelnummer");
+        GridPane.setHalignment(numberLabel, HPos.RIGHT);
         scherm.add(numberLabel, 0, 6);
         
         TextField numberField = new TextField();
@@ -118,6 +130,7 @@ public class Invoerscherm extends Application
         
         //invoer opmerkingen
         Label commentLabel = new Label("Opmerkingen");
+        GridPane.setHalignment(commentLabel, HPos.RIGHT);
         scherm.add(commentLabel, 0, 7);
         
         TextField commentField = new TextField();

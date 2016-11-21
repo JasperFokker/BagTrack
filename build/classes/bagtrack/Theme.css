@@ -27,7 +27,7 @@ VBox{
 }
 
 .label{
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: white;
 }
 .tablenormaal{
     -fx-text-fill: black;
