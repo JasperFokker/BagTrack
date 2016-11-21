@@ -1,6 +1,5 @@
 package bagtrack;
 
-import java.util.Objects;
 import javafx.scene.control.Label;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -15,7 +14,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
 
@@ -39,6 +40,11 @@ public class Zoekscherm extends Application {
         scherm.setHgap(1);
         scherm.setVgap(10);
         scherm.setPadding(new Insets(25, 25, 25, 25));
+        //scherm.setGridLinesVisible(true);
+        ColumnConstraints column = new ColumnConstraints(100);
+        scherm.getColumnConstraints().add(column);
+        RowConstraints row = new RowConstraints(50);
+        scherm.getRowConstraints().add(row);
 
         //Inhoud 1e combobox
         ObservableList<String> kleuren = FXCollections.observableArrayList(
@@ -66,37 +72,54 @@ public class Zoekscherm extends Application {
                 "Afbeelding",
                 "Patroon"
         );
-
+        
+        
         //Labels, Textvelden, buttons en comboboxen.
+        int textWidth = 400;
+        int boxWidth = 200;
         final ComboBox comboBoxKleur = new ComboBox(kleuren);
+        comboBoxKleur.setPrefWidth(boxWidth);
         final ComboBox comboBoxLuchthaven = new ComboBox(luchthaven);
+        comboBoxLuchthaven.setPrefWidth(boxWidth);
         final ComboBox comboBoxSoort = new ComboBox(soort);
+        comboBoxSoort.setPrefWidth(boxWidth);
         final ComboBox comboBoxOpdruk = new ComboBox(opdruk);
+        comboBoxOpdruk.setPrefWidth(boxWidth);
 
         TextField textveldNaam = new TextField();
+        textveldNaam.setPrefWidth(textWidth);
         TextField textveldMerk = new TextField();
+        textveldMerk.setPrefWidth(textWidth);
         TextField textveldGewicht = new TextField();
+        textveldGewicht.setPrefWidth(textWidth);
         textveldGewicht.setPromptText("In Kilogrammen");
 
         Label label = new Label();
-        label.setText("Naam:");
+        label.setText("Naam:   ");
+        GridPane.setHalignment(label, HPos.RIGHT);
 
         Label label2 = new Label();
-        label2.setText("Merk:");
+        label2.setText("Merk:   ");
+        GridPane.setHalignment(label2, HPos.RIGHT);
 
         Label label3 = new Label();
-        label3.setText("Kleur:");
+        label3.setText("Kleur:   ");
+        GridPane.setHalignment(label3, HPos.RIGHT);
 
         Label label4 = new Label();
-        label4.setText("Luchthaven: ");
+        label4.setText("Luchthaven:   ");
+        GridPane.setHalignment(label4, HPos.RIGHT);
 
         Label label5 = new Label();
-        label5.setText("Gewicht:");
+        label5.setText("Gewicht:   ");
+        GridPane.setHalignment(label5, HPos.RIGHT);
 
         Label label6 = new Label();
-        label6.setText("Soort:");
+        label6.setText("Soort:   ");
+        GridPane.setHalignment(label6, HPos.RIGHT);
 
-        Label label7 = new Label("Opdruk");
+        Label label7 = new Label("Opdruk:   ");
+        GridPane.setHalignment(label7, HPos.RIGHT);
 
         Button btn = new Button("Zoek");
 
@@ -117,21 +140,21 @@ public class Zoekscherm extends Application {
         });
 
         //Dit kan korter, geen idee hoe.
-        scherm.add(label, 0, 0);
-        scherm.add(label2, 0, 1);
-        scherm.add(label3, 0, 2);
-        scherm.add(label4, 0, 3);
-        scherm.add(label5, 0, 4);
-        scherm.add(label6, 0, 5);
-        scherm.add(label7, 0, 6);
-        scherm.add(textveldNaam, 1, 0);
-        scherm.add(textveldMerk, 1, 1);
-        scherm.add(comboBoxKleur, 1, 2);
-        scherm.add(comboBoxLuchthaven, 1, 3);
-        scherm.add(textveldGewicht, 1, 4);
-        scherm.add(comboBoxSoort, 1, 5);
-        scherm.add(comboBoxOpdruk, 1, 6);
-        scherm.add(btn, 1, 7);
+        scherm.add(label, 1, 1);
+        scherm.add(label2, 1, 2);
+        scherm.add(label3, 1, 3);
+        scherm.add(label4, 1, 4);
+        scherm.add(label5, 1, 5);
+        scherm.add(label6, 1, 6);
+        scherm.add(label7, 1, 7);
+        scherm.add(textveldNaam, 2, 1);
+        scherm.add(textveldMerk, 2, 2);
+        scherm.add(comboBoxKleur, 2, 3);
+        scherm.add(comboBoxLuchthaven, 2, 4);
+        scherm.add(textveldGewicht, 2, 5);
+        scherm.add(comboBoxSoort, 2, 6);
+        scherm.add(comboBoxOpdruk, 2, 7);
+        scherm.add(btn, 2, 8);
 
         return scherm;
 
@@ -189,6 +212,7 @@ public class Zoekscherm extends Application {
         gewichtCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
         soortCol.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
         opdrukCol.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
+        
         table.setItems(data);
         table.getColumns().addAll(naamCol, merkCol, kleurCol, luchthavenCol, gewichtCol, soortCol, opdrukCol);
 
