@@ -3,6 +3,7 @@ package bagtrack;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -26,17 +27,21 @@ public class Helpscherm extends Application {
 
     public static GridPane returnScherm() {
         GridPane scherm = new GridPane();
-        scherm.setPrefSize(800, 450);
+        scherm.setPrefSize(600, 450);
+        
+        
 
         GridPane faq = new GridPane();
+        faq.setStyle("-fx-background-color:#333333;");
         faq.setPrefSize(600, 450);
         faq.setAlignment(Pos.TOP_CENTER);
 
         faq.setVgap(4);
         faq.setPadding(new Insets(5, 5, 5, 5));
 
-        Text titel = new Text("Veelgestelde vragen:");
+        Label titel = new Label("Informatie over:");
         titel.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        titel.setAlignment(Pos.CENTER);
 
         TitledPane vraag1 = new TitledPane();
         vraag1.setText("Het zoeken naar koffers.");
@@ -79,14 +84,28 @@ public class Helpscherm extends Application {
                 + "\ncccccccccccccccccccccccccccccccccccc\n\ndddddddddddddddddddddddddddddddddddddd"
                 + "\neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"));
         vraag6.setExpanded(false);
+        
+        faq.addRow(0, new Text(""));
+        faq.addRow(1, new Text(""));
+        faq.addRow(2, new Text(""));
+        faq.addRow(3, new Text(""));
+        faq.addRow(5, new Text(""));
+        faq.addRow(6, new Text(""));
+        faq.addRow(7, new Text(""));
+        faq.addRow(8, new Text(""));
+        faq.addRow(15, new Text(""));
+        faq.addRow(16, new Text(""));
+        
+        
+        
 
         faq.add(titel, 0, 4);
-        faq.add(vraag1, 0, 6);
-        faq.add(vraag2, 0, 7);
-        faq.add(vraag3, 0, 8);
-        faq.add(vraag4, 0, 9);
-        faq.add(vraag5, 0, 10);
-        faq.add(vraag6, 0, 11);
+        faq.add(vraag1, 0, 9);
+        faq.add(vraag2, 0, 10);
+        faq.add(vraag3, 0, 11);
+        faq.add(vraag4, 0, 12);
+        faq.add(vraag5, 0, 13);
+        faq.add(vraag6, 0, 14);
         
         ScrollPane scrollpane = new ScrollPane();
 
