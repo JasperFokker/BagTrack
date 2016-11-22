@@ -5,17 +5,13 @@
  */
 package bagtrack;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import javafx.scene.control.Label;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import static javafx.geometry.Pos.TOP_LEFT;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -29,11 +25,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import static bagtrack.Main.scherm;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -54,36 +47,29 @@ public class Loginscherm extends Application {
         StackPane stack = new StackPane();
         stack.setPrefSize(800, 450);
         scherm.setAlignment(Pos.CENTER);
-        scherm.setHgap(10);
-        scherm.setVgap(10);
+        scherm.setHgap(30);
+        scherm.setVgap(30);
         scherm.setPadding(new Insets(25, 25, 25, 25));
+        
+        Image Logo = new Image ("titel_simpel.png", 250, 68, false, false);
+        Label logoDingetje = new Label();
+        logoDingetje.setGraphic(new ImageView(Logo));
+        scherm.add(logoDingetje, 0, 0);
 
-        //welkomstekst
-        Text scenetitle = new Text("Welkom");
-        scenetitle.setFont(Font.font("Verdana", FontWeight.NORMAL, 20));
-        scherm.add(scenetitle, 1, 0, 2, 1);
-       
-        //invoer gebruikersnaam
-        Label userName = new Label("Gebruikersnaam:");
-        userName.getStyleClass().add("label-inlog");
-        scherm.add(userName, 0, 1);
         TextField userTextField = new TextField();
-        scherm.add(userTextField, 1, 1);
-        
-        //invoer wachtwoord
-        Label pw = new Label("Wachtwoord:");
-        pw.getStyleClass().add("label-inlog");
-        scherm.add(pw, 0, 2);
+        userTextField.setPromptText("Gebruikersnaam");
+        scherm.add(userTextField, 0, 1);
+
         PasswordField pwBox = new PasswordField();
-        scherm.add(pwBox, 1, 2);
-        
-        //log in button
+        pwBox.setPromptText("Wachtwoord");
+        scherm.add(pwBox, 0, 2);
+
         Button btn = new Button("Log in");
         HBox hbBtn = new HBox();
         btn.setPrefSize(200, 20);
         hbBtn.setAlignment(Pos.BOTTOM_CENTER);
         hbBtn.getChildren().add(btn);
-        scherm.add(hbBtn, 1, 4);
+        scherm.add(hbBtn, 0, 3);
 
         // new Image(url)
         Image image = new Image("background.jpg");
@@ -96,12 +82,12 @@ public class Loginscherm extends Application {
 
         stack.setBackground(background);
 
-        Rectangle rect = new Rectangle(400, 200);
+        Rectangle rect = new Rectangle(300, 300);
 
         rect.setArcHeight(30);
         rect.setArcWidth(30);
         rect.setStroke(Color.BLACK);
-        rect.setFill(Color.WHITE);
+        rect.setFill(Color.rgb(120,120,120));
 
         stack.getChildren().addAll(rect, scherm);
 
