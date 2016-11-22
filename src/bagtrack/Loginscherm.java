@@ -37,7 +37,6 @@ import static bagtrack.Main.scherm;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-
 /**
  *
  * @author Thom
@@ -50,7 +49,7 @@ public class Loginscherm extends Application {
     }
 
     public static StackPane returnScherm() {
-
+        //log in scherm
         GridPane scherm = new GridPane();
         StackPane stack = new StackPane();
         stack.setPrefSize(800, 450);
@@ -59,24 +58,26 @@ public class Loginscherm extends Application {
         scherm.setVgap(10);
         scherm.setPadding(new Insets(25, 25, 25, 25));
 
+        //welkomstekst
         Text scenetitle = new Text("Welkom");
         scenetitle.setFont(Font.font("Verdana", FontWeight.NORMAL, 20));
         scherm.add(scenetitle, 1, 0, 2, 1);
-
+       
+        //invoer gebruikersnaam
         Label userName = new Label("Gebruikersnaam:");
         userName.getStyleClass().add("label-inlog");
         scherm.add(userName, 0, 1);
-
         TextField userTextField = new TextField();
         scherm.add(userTextField, 1, 1);
-
+        
+        //invoer wachtwoord
         Label pw = new Label("Wachtwoord:");
         pw.getStyleClass().add("label-inlog");
         scherm.add(pw, 0, 2);
-
         PasswordField pwBox = new PasswordField();
         scherm.add(pwBox, 1, 2);
-
+        
+        //log in button
         Button btn = new Button("Log in");
         HBox hbBtn = new HBox();
         btn.setPrefSize(200, 20);
@@ -84,14 +85,13 @@ public class Loginscherm extends Application {
         hbBtn.getChildren().add(btn);
         scherm.add(hbBtn, 1, 4);
 
-
         // new Image(url)
         Image image = new Image("background.jpg");
-// new BackgroundSize(width, height, widthAsPercentage, heightAsPercentage, contain, cover)
+        // new BackgroundSize(width, height, widthAsPercentage, heightAsPercentage, contain, cover)
         BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
-//// new BackgroundImage(image, repeatX, repeatY, position, size)
+        //// new BackgroundImage(image, repeatX, repeatY, position, size)
         BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
-//// new Background(images...)
+        //// new Background(images...)
         Background background = new Background(backgroundImage);
 
         stack.setBackground(background);
@@ -105,21 +105,19 @@ public class Loginscherm extends Application {
 
         stack.getChildren().addAll(rect, scherm);
 
-        
         //Enter button
         scherm.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.ENTER)){
-                Main.change(Welkomscherm.returnScherm());
-                Main.menu();
-                Main.topmenu();            
+                if (event.getCode().equals(KeyCode.ENTER)) {
+                    Main.change(Welkomscherm.returnScherm());
+                    Main.menu();
+                    Main.topmenu();
+                }
             }
-            }
-            
+
         });
 
-        
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override

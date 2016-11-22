@@ -29,19 +29,17 @@ public class Welkomscherm extends Application {
     }
 
     public static GridPane returnScherm() {
-        
+        //
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int h = (int) screenSize.getHeight();
         int w = (int) screenSize.getWidth();
         int menuwidth = (int)(w*0.10);
         int menuheight = (int)(h*0.10);
         
+        //Corendon logo
         Image plaatje = new Image("Corendon Logo.png", w*0.45,h*0.45, false, false);
-        
         ImageView iv1 = new ImageView();
-       
         iv1.setImage(plaatje);
-
         Group root = new Group();
         Scene scene = new Scene(root);
         scene.setFill(javafx.scene.paint.Color.BLACK);
@@ -49,6 +47,7 @@ public class Welkomscherm extends Application {
         box.getChildren().add(iv1);
         root.getChildren().add(box);
 
+        //scherm settings
         GridPane scherm = new GridPane();
         scherm.setPrefSize(600, 450);
         scherm.setHgap(10);
@@ -57,11 +56,13 @@ public class Welkomscherm extends Application {
         scherm.setAlignment(Pos.CENTER);
         //scherm.setGridLinesVisible(true);
 
+        //welkomstekst
         Text welkombericht1 = new Text();
         welkombericht1.setText("Welkom bij het Corendon bagagesysteem");
         welkombericht1.setFont(Font.font("Verdana", 40));
         welkombericht1.setFill(WHITE);
-
+        
+        //positie tekst en logo
         scherm.add(welkombericht1, 2, 1);
         scherm.add(iv1, 2, 4);
 
