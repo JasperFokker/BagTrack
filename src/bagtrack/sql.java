@@ -18,19 +18,21 @@ import java.util.ArrayList;
 public class sql {
     
    
-    public static void select(String query){
+    public static ResultSet select(String query){
         try{
             Connection con = getConnection();
             PreparedStatement statement = con.prepareStatement(query);
             
             ResultSet results = statement.executeQuery();
             
+            return results;
             
             
-            while(results.next()){
-                System.out.println(results.getString("naam"));
+            //while(results.next()){
+            //    System.out.println(results.getString("naam"));
+            //    array.add(results.getString(query));
                 
-            }
+            //}
             
             
             
@@ -41,7 +43,7 @@ public class sql {
         }finally{
             System.out.println("Selection finished");
         }
-        
+        return null;
     }
     
     public static void insert(String query){
