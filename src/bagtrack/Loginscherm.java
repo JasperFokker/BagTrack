@@ -33,6 +33,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import static bagtrack.Main.scherm;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+
 
 /**
  *
@@ -78,6 +82,7 @@ public class Loginscherm extends Application {
         hbBtn.getChildren().add(btn);
         scherm.add(hbBtn, 1, 4);
 
+
         // new Image(url)
         Image image = new Image("background.jpg");
 // new BackgroundSize(width, height, widthAsPercentage, heightAsPercentage, contain, cover)
@@ -97,6 +102,21 @@ public class Loginscherm extends Application {
         rect.setFill(Color.WHITE);
 
         stack.getChildren().addAll(rect, scherm);
+
+        
+        //Enter button
+        scherm.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.ENTER)){
+                Main.change(Welkomscherm.returnScherm());
+                Main.menu();
+                Main.topmenu();            
+            }
+            }
+            
+        });
+
         
         btn.setOnAction(new EventHandler<ActionEvent>() {
 

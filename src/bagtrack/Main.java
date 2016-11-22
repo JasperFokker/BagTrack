@@ -12,9 +12,11 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import static javafx.geometry.Pos.TOP_LEFT;
 import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Border;
@@ -31,11 +33,15 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    int h = (int) screenSize.getHeight();
+    int w = (int) screenSize.getWidth();
+    int menuwidth = (int)(w*0.10);
+        
     static BorderPane scherm = new BorderPane();
     static VBox menu = new VBox();
-
     static HBox topmenu = new HBox();
-    
+    static HBox logo = new HBox();    
 
     //wissel scherm.
     public static void change(GridPane gridpane) {
@@ -45,7 +51,6 @@ public class Main extends Application {
     public static void menu() {
         scherm.setLeft(menu);
     }
-
     
     public static void topmenu(){
         scherm.setTop(topmenu);
@@ -57,51 +62,21 @@ public class Main extends Application {
         GridPane helpScherm = Helpscherm.returnScherm();
         GridPane inlogScherm = Loginscherm.returnScherm();
         GridPane formulierScherm = Invoerscherm.returnScherm();
-        GridPane welkomScherm = Welkomscherm.returnScherm();
         GridPane statistieken = Statistiekenscherm.returnScherm();
         GridPane instellingen = Instellingenscherm.returnScherm();
         
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int h = (int) screenSize.getHeight();
-        int w = (int) screenSize.getWidth();
-        int menuwidth = (int)(w*0.10);
         Image Zoom = new Image("zoom_icon&48.png");
         Image Formulier = new Image("doc_edit_icon&48.png");
         Image Help = new Image("info_icon&48.png");
         Image Statistieken = new Image ("chart_line_icon&48.png");
         Image Instellingen = new Image ("cog_icon&48.png");
         Image Logo = new Image ("titel_simpel.png", menuwidth * 1.30, w*0.035, false, false);
-                
-        Button placeholder = new Button();
-        placeholder.setVisible(true);
-        placeholder.setPrefSize(w-menuwidth, 48);
-        placeholder.setGraphic(new ImageView(Logo));
-        placeholder.setContentDisplay(ContentDisplay.LEFT);
-        placeholder.setAlignment(TOP_LEFT);
-        
-        placeholder.setDisable(false);
-        
-        Button uitlogButton = new Button();
-        uitlogButton.setText("Uitloggen");
-        uitlogButton.setPrefSize(menuwidth, 48);
-        uitlogButton.setAlignment(TOP_LEFT);
-        uitlogButton.setFont(Font.font("Verdana", 26));
-        uitlogButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                //Veranderd het huidige scherm naar het inlogscherm en maakt het menu onzichtbaar.
-                scherm.setCenter(inlogScherm);
-                scherm.setLeft(null);
-                scherm.setTop(null);
-            }
-        });
         
         Button statistiekenButton = new Button();
         Button zoekButton = new Button();
         Button instellingenButton = new Button();
         Button helpButton = new Button();
         Button formulierButton = new Button();
-        
         
         statistiekenButton.setText("Statistieken");
         statistiekenButton.setGraphic(new ImageView(Statistieken));
@@ -120,9 +95,6 @@ public class Main extends Application {
             }
         });
 
-        
-        
-        
         zoekButton.setText("Zoeken");
         zoekButton.setGraphic(new ImageView(Zoom));
         zoekButton.setContentDisplay(ContentDisplay.TOP);
@@ -195,18 +167,47 @@ public class Main extends Application {
             }
         });
 
+        Label placeholder = new Label();
+        placeholder.setVisible(true);
+        placeholder.setPrefSize(w-menuwidth, 60);
+        placeholder.setGraphic(new ImageView(Logo));
+        placeholder.setContentDisplay(ContentDisplay.LEFT);
+        placeholder.setDisable(false);
         
-        menu.getChildren().addAll(zoekButton,formulierButton,helpButton, statistiekenButton,
+        Button uitlogButton = new Button();
+        uitlogButton.setText("Uitloggen");
+        uitlogButton.setContentDisplay(ContentDisplay.RIGHT);
+        uitlogButton.setPrefSize(menuwidth, 65);
+        uitlogButton.setFont(Font.font("Verdana", 23));
+        uitlogButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //Veranderd het huidige scherm naar het inlogscherm en maakt het menu onzichtbaar.
+                scherm.setCenter(inlogScherm);
+                scherm.setLeft(null);
+                scherm.setTop(null);
+                zoekButton.setDisable(false);
+                statistiekenButton.setDisable(false);
+                instellingenButton.setDisable(false);
+                helpButton.setDisable(false);
+                formulierButton.setDisable(false);
+            }
+        });
+                        
+        menu.getChildren().addAll(zoekButton, formulierButton, helpButton, statistiekenButton,
                 instellingenButton);
-        topmenu.getChildren().addAll(placeholder, uitlogButton);
+        topmenu.getChildren().addAll(logo, uitlogButton);
+        logo.getChildren().addAll(placeholder);
         
-
         scherm.setCenter(inlogScherm);
 
-        Scene scene = new Scene(scherm, 1920, 1080);
+        Scene scene = new Scene(scherm, w, h);
         String css = Main.class.getResource("Theme.css").toExternalForm();
         scene.getStylesheets().add(css);
-
+        logo.setStyle("-fx-background-color: #c10b0b;");
+        logo.setPrefWidth(menuwidth);
+        topmenu.setSpacing(w-menuwidth-250);
+        
         primaryStage.setTitle("Main Screen");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -214,12 +215,6 @@ public class Main extends Application {
         primaryStage.setFullScreen(true);
     }
 
-
-    
-
-    
-    
-    
     public static void main(String[] args)
     {
 

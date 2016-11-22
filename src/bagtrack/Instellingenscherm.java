@@ -5,6 +5,7 @@
  */
 package bagtrack;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -51,7 +52,19 @@ public class Instellingenscherm extends Application
             
             @Override 
             public void handle(ActionEvent event) {
-                sql.select("SELECT naam FROM bagage;");
+                ResultSet results;
+                results = sql.select("SELECT * FROM bagage;");
+                try{
+                    if(results.next()){
+                        System.out.println(results.getString("naam"));
+                    }
+                    
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+                
+        
+                
                 
                 
                 
