@@ -64,12 +64,14 @@ public class Loginscherm extends Application {
         scherm.add(scenetitle, 1, 0, 2, 1);
 
         Label userName = new Label("Gebruikersnaam:");
+        userName.getStyleClass().add("label-inlog");
         scherm.add(userName, 0, 1);
 
         TextField userTextField = new TextField();
         scherm.add(userTextField, 1, 1);
 
         Label pw = new Label("Wachtwoord:");
+        pw.getStyleClass().add("label-inlog");
         scherm.add(pw, 0, 2);
 
         PasswordField pwBox = new PasswordField();
