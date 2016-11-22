@@ -67,12 +67,15 @@ public class Loginscherm extends Application {
         hbBtn.getChildren().add(btn);
         scherm.add(hbBtn, 1, 4);
         
+        //Enter button
         scherm.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.ENTER)){
                 Main.change(Welkomscherm.returnScherm());
                 Main.menu();
                 Main.topmenu();            
+            }
             }
             
         });
