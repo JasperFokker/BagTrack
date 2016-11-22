@@ -50,7 +50,6 @@ public class Loginscherm extends Application {
         scherm.setHgap(30);
         scherm.setVgap(30);
         scherm.setPadding(new Insets(25, 25, 25, 25));
-<<<<<<< HEAD
         
         Image Logo = new Image ("titel_simpel.png", 250, 68, false, false);
         Label logoDingetje = new Label();
@@ -65,29 +64,6 @@ public class Loginscherm extends Application {
         pwBox.setPromptText("Wachtwoord");
         scherm.add(pwBox, 0, 2);
 
-=======
-
-        //welkomstekst
-        Text scenetitle = new Text("Welkom");
-        scenetitle.setFont(Font.font("Verdana", FontWeight.NORMAL, 20));
-        scherm.add(scenetitle, 1, 0, 2, 1);
-       
-        //invoer gebruikersnaam
-        Label userName = new Label("Gebruikersnaam:");
-        userName.getStyleClass().add("label-inlog");
-        scherm.add(userName, 0, 1);
-        TextField userTextField = new TextField();
-        scherm.add(userTextField, 1, 1);
-        
-        //invoer wachtwoord
-        Label pw = new Label("Wachtwoord:");
-        pw.getStyleClass().add("label-inlog");
-        scherm.add(pw, 0, 2);
-        PasswordField pwBox = new PasswordField();
-        scherm.add(pwBox, 1, 2);
-        
-        //log in button
->>>>>>> f212ba4324923ad09dfcecc0ad8ee583fb583c63
         Button btn = new Button("Log in");
         HBox hbBtn = new HBox();
         btn.setPrefSize(200, 20);
