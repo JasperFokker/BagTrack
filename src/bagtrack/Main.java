@@ -178,7 +178,7 @@ public class Main extends Application {
         uitlogButton.setText("Uitloggen");
         uitlogButton.setContentDisplay(ContentDisplay.RIGHT);
         uitlogButton.setPrefSize(menuwidth, 65);
-        uitlogButton.setFont(Font.font("Verdana", 26));
+        uitlogButton.setFont(Font.font("Verdana", 23));
         uitlogButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
