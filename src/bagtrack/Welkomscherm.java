@@ -1,6 +1,11 @@
+/* 
+ * Dit is het scherm dat de gebruiker te zien krijgt als hij/zij inlogt.
+ * Het scherm bestaat uit het logo van corendon en een welkomsbericht.
+ * @author Team Twee
+ */
+
 package bagtrack;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javafx.application.Application;
@@ -17,10 +22,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-/**
- *
- * @author Jason
- */
 public class Welkomscherm extends Application {
 
     @Override
@@ -29,43 +30,29 @@ public class Welkomscherm extends Application {
     }
 
     public static GridPane returnScherm() {
-        //
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int h = (int) screenSize.getHeight();
-        int w = (int) screenSize.getWidth();
-        int menuwidth = (int)(w*0.10);
-        int menuheight = (int)(h*0.10);
         
-        //Corendon logo
-        Image plaatje = new Image("Corendon Logo.png", w*0.45,h*0.45, false, false);
-        ImageView iv1 = new ImageView();
-        iv1.setImage(plaatje);
-        Group root = new Group();
-        Scene scene = new Scene(root);
-        scene.setFill(javafx.scene.paint.Color.BLACK);
-        HBox box = new HBox();
-        box.getChildren().add(iv1);
-        root.getChildren().add(box);
-
-        //scherm settings
         GridPane scherm = new GridPane();
-        scherm.setPrefSize(600, 450);
-        scherm.setHgap(10);
-        scherm.setVgap(10);
-        scherm.setPadding(new Insets(50, 25, 25, 25));
-        scherm.setAlignment(Pos.CENTER);
-        //scherm.setGridLinesVisible(true);
-
-        //welkomstekst
-        Text welkombericht1 = new Text();
-        welkombericht1.setText("Welkom bij het Corendon bagagesysteem");
-        welkombericht1.setFont(Font.font("Verdana", 40));
-        welkombericht1.setFill(WHITE);
+        HBox box = new HBox();
         
-        //positie tekst en logo
-        scherm.add(welkombericht1, 2, 1);
-        scherm.add(iv1, 2, 4);
-
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int logoWidth = (int) (screenSize.getWidth() * 0.45);
+        int logoHeight = (int) (screenSize.getHeight() * 0.45);
+        
+        Text welkomBericht = new Text();
+        Image logo = new Image("Corendon Logo.png", logoWidth, logoHeight, false, false);
+        ImageView logoView = new ImageView();
+        logoView.setImage(logo);
+        
+        welkomBericht.setText("Welkom bij het Corendon bagagesysteem");
+        welkomBericht.setFont(Font.font("Verdana", 40));
+        welkomBericht.setFill(WHITE);
+        
+        scherm.setAlignment(Pos.CENTER);
+        //scherm.setGridLinesVisible(true);        
+        
+        scherm.add(welkomBericht, 2, 1);
+        scherm.add(logoView, 2, 4);
+        
         return scherm;
     }
 }

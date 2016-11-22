@@ -1,6 +1,5 @@
 package bagtrack;
 
-import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javafx.event.EventHandler;
@@ -142,37 +141,6 @@ public class Invoerscherm extends Application
         Button save = new Button();
         save.setText("Opslaan");
         scherm.add(save, 0,8);
-        save.setOnAction(new EventHandler<ActionEvent>() {
-            @Override 
-            public void handle(ActionEvent event){
-                System.out.println(dp.getValue());
-               
-                String date1 = dp.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                String merk = brandField.getText();
-                
-                System.out.println(date1);
-                ResultSet idget = sql.select("SELECT * FROM bagage ORDER BY idbagage DESC LIMIT 1;");
-                int id = 0;
-                try{
-                    if(idget.next()){
-                        id = idget.getInt("idbagage");
-                    }
-                }catch(Exception e){
-                    System.out.println(e);
-                }
-                
-                System.out.println("INSERT INTO bagtrack.bagage (idbagage,merk,kleur1,kleur2,soort,opdruk,luchthaven,datum,labelnummer,opmerkingen) VALUES ('"+ 50 +"','" + date1 + "','" +
-                        merk + "','" + color1Box.getValue() + "','"+ color2Box.getValue() + "','"+ typeBagBox.getValue() +
-                        "','"+ graphicBox.getValue() + "','"+ airportBox.getValue() + "','" + date1 + "','"+ numberField.getText() +
-                        "','"+ commentField.getText() +"');");
-                
-                sql.insert("INSERT INTO bagtrack.bagage (idbagage,merk,kleur1,kleur2,soort,opdruk,luchthaven,datum,labelnummer,opmerkingen) VALUES ('"+ 50 +"','" + 
-                        merk + "','" + color1Box.getValue() + "','"+ color2Box.getValue() + "','"+ typeBagBox.getValue() +
-                        "','"+ graphicBox.getValue() + "','"+ airportBox.getValue() + "','" + date1 + "','"+ numberField.getText() +
-                        "','"+ commentField.getText() +"');");
-                
-            }
-        });
 
         //clear
         Button clear = new Button();
@@ -181,7 +149,13 @@ public class Invoerscherm extends Application
         clear.setOnAction(new EventHandler<ActionEvent>() {
             @Override 
             public void handle(ActionEvent event) {
+                System.out.println(dp.getValue());
+               
+                String date1 = dp.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 
+                System.out.println(date1);
+                
+                sql.insert("INSERT INTO bagage (datum) VALUES ('" + date1 + "');");
                 
                 
                 dp.setValue(null);
