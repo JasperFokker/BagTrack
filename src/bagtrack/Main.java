@@ -2,30 +2,22 @@ package bagtrack;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javafx.scene.control.Button;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import static javafx.geometry.Pos.TOP_LEFT;
 import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 /**
@@ -60,7 +52,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         GridPane zoekScherm = Zoekscherm.returnScherm();
         GridPane helpScherm = Helpscherm.returnScherm();
-        GridPane inlogScherm = Loginscherm.returnScherm();
+        StackPane inlogScherm = Loginscherm.returnScherm();
         GridPane formulierScherm = Invoerscherm.returnScherm();
         GridPane statistieken = Statistiekenscherm.returnScherm();
         GridPane instellingen = Instellingenscherm.returnScherm();
