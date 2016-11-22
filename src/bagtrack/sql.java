@@ -36,6 +36,7 @@ public class sql {
             
         }catch(Exception e){
             System.out.println(e);
+            System.out.println("NULL GIVEN");
             
         }finally{
             System.out.println("Selection finished");
@@ -62,7 +63,7 @@ public class sql {
     public static Connection getConnection(){
         try{
             String driver = "com.mysql.jdbc.Driver";
-            String url = "jdbc:mysql://localhost:3306/bagtrackdb";
+            String url = "jdbc:mysql://localhost:3306/bagtrack";
             String username = "java";
             String password = "password";
             Class.forName(driver); Connection conn = DriverManager.getConnection(url,username,password);
@@ -71,6 +72,7 @@ public class sql {
         } catch(Exception e){
             System.out.println(e);
         } 
+        System.out.println("NULL returned");
         return null;
     }
 }

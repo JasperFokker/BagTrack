@@ -51,7 +51,7 @@ public class Instellingenscherm extends Application
             
             @Override 
             public void handle(ActionEvent event) {
-                sql.select("SELECT naam FROM bagage;");
+                sql.select("SELECT * FROM bagage;");
                 
                 
                 
