@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Thom
+ * @author Jason
  */
 public class Welkomscherm extends Application {
 
@@ -29,6 +29,7 @@ public class Welkomscherm extends Application {
     }
 
     public static GridPane returnScherm() {
+        
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int h = (int) screenSize.getHeight();
         int w = (int) screenSize.getWidth();
@@ -54,6 +55,7 @@ public class Welkomscherm extends Application {
         scherm.setVgap(10);
         scherm.setPadding(new Insets(50, 25, 25, 25));
         scherm.setAlignment(Pos.CENTER);
+        //scherm.setGridLinesVisible(true);
 
         Text welkombericht1 = new Text();
         welkombericht1.setText("Welkom bij het Corendon bagagesysteem");
