@@ -12,7 +12,13 @@
     -fx-faint-focus-color: transparent; 
 }
 
+.scroll-pane{
+    -fx-background-color: #333333;
+}
 
+.grid-pane{
+    -fx-background-color: #333333;
+}
 
 HBox{
     -fx-background-color: #d81e05;
