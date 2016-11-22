@@ -35,6 +35,11 @@ VBox{
 .label{
     -fx-text-fill: #ffffff;
 }
+
+.label-inlog{
+    -fx-text-fill: black;
+}
+
 .tablenormaal{
     -fx-text-fill: black;
     -fx-background-color: #d81e05;

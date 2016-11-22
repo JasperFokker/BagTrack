@@ -1,6 +1,7 @@
 package bagtrack;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.application.Application;
@@ -148,6 +149,15 @@ public class Invoerscherm extends Application
         clear.setOnAction(new EventHandler<ActionEvent>() {
             @Override 
             public void handle(ActionEvent event) {
+                System.out.println(dp.getValue());
+               
+                String date1 = dp.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                
+                System.out.println(date1);
+                
+                sql.insert("INSERT INTO bagage (datum) VALUES ('" + date1 + "');");
+                
+                
                 dp.setValue(null);
                 airportBox.setValue(null);
                 typeBagBox.setValue(null);
