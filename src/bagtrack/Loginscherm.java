@@ -21,6 +21,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import static bagtrack.Main.scherm;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 /**
  *
@@ -64,8 +66,17 @@ public class Loginscherm extends Application {
         hbBtn.setAlignment(Pos.BOTTOM_CENTER);
         hbBtn.getChildren().add(btn);
         scherm.add(hbBtn, 1, 4);
-
-             
+        
+        scherm.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                Main.change(Welkomscherm.returnScherm());
+                Main.menu();
+                Main.topmenu();            
+            }
+            
+        });
+        
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
