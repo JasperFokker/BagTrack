@@ -5,22 +5,21 @@
  */
 package bagtrack;
 
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.scene.Scene;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
 /**
@@ -37,6 +36,7 @@ public class Statistiekenscherm extends Application
     
     public static GridPane returnScherm() {
         GridPane scherm = new GridPane();
+        scherm.getStyleClass().add("root");
         scherm.setPrefSize(600, 450);
         
         /* 
@@ -47,9 +47,6 @@ public class Statistiekenscherm extends Application
         +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         =====================================================================
         */
-        
-        
-        
         
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
@@ -76,7 +73,7 @@ public class Statistiekenscherm extends Application
         series.getData().add(new XYChart.Data("Nov", 29));
         series.getData().add(new XYChart.Data("Dec", 25));
         
-         XYChart.Series series2 = new XYChart.Series();
+        XYChart.Series series2 = new XYChart.Series();
         series2.setName("Vermist gemeld");
         series2.getData().add(new XYChart.Data("Jan", 33));
         series2.getData().add(new XYChart.Data("Feb", 34));
@@ -106,8 +103,6 @@ public class Statistiekenscherm extends Application
         series3.getData().add(new XYChart.Data("Nov", 12));
         series3.getData().add(new XYChart.Data("Dec", 1));
         
-        
-
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
                     new PieChart.Data("Samsonite", 13),
@@ -120,22 +115,35 @@ public class Statistiekenscherm extends Application
         
         final PieChart pieChart = new PieChart(pieChartData);
         pieChart.setTitle("Verloren merken");
+        pieChart.setVisible(false);
+                 
+        ComboBox statistiekenKeuze = new ComboBox();
+        statistiekenKeuze.getItems().addAll("Line Chart", "Graph Chart");
+        statistiekenKeuze.setPromptText("Line Chart");
+        statistiekenKeuze.setStyle("-fx-font: 15px \"Arial\";");
         
-        final Label caption = new Label("");
-        
-        caption.setTextFill(Color.DARKORANGE);
-        caption.setStyle("-fx-font: 24 arial;");
+        statistiekenKeuze.valueProperty().addListener(new ChangeListener<String>() {
+                @Override 
+                public void changed(ObservableValue ov, String s, String s1) {
+                    if ("Line Chart".equals(s1))
+                    {
+                        lineChart.setVisible(true);
+                        pieChart.setVisible(false);
+                    } else {
+                        lineChart.setVisible(false);
+                        pieChart.setVisible(true);
+                    }
 
-                
-        Scene scene = new Scene(lineChart, 800, 600);
+                }    
+         });
+         
+        GridPane.setHgrow(lineChart, Priority.ALWAYS);
+        GridPane.setVgrow(lineChart, Priority.ALWAYS);
+        GridPane.setHalignment(statistiekenKeuze, HPos.RIGHT);
+        GridPane.setValignment(statistiekenKeuze, VPos.TOP);
+        
         lineChart.getData().addAll(series, series2, series3);
-
-        scherm.add(lineChart, 0, 1);
-        scherm.add(pieChart, 1, 1);
-        
-        
-        
-        
+        scherm.getChildren().addAll(lineChart, pieChart, statistiekenKeuze);
         
         /* 
         +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
