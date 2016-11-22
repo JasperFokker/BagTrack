@@ -5,22 +5,34 @@
  */
 package bagtrack;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javafx.scene.control.Label;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import static javafx.geometry.Pos.TOP_LEFT;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import static bagtrack.Main.scherm;
 
 /**
  *
@@ -33,13 +45,14 @@ public class Loginscherm extends Application {
         returnScherm();
     }
 
-    public static GridPane returnScherm() {
+    public static StackPane returnScherm() {
 
         GridPane scherm = new GridPane();
-        scherm.setPrefSize(800, 450);
+        StackPane stack = new StackPane();
+        stack.setPrefSize(800, 450);
         scherm.setAlignment(Pos.CENTER);
         scherm.setHgap(10);
-        scherm.setVgap(10); 
+        scherm.setVgap(10);
         scherm.setPadding(new Insets(25, 25, 25, 25));
 
         Text scenetitle = new Text("Welkom");
@@ -65,7 +78,26 @@ public class Loginscherm extends Application {
         hbBtn.getChildren().add(btn);
         scherm.add(hbBtn, 1, 4);
 
-             
+        // new Image(url)
+        Image image = new Image("background.jpg");
+// new BackgroundSize(width, height, widthAsPercentage, heightAsPercentage, contain, cover)
+        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
+//// new BackgroundImage(image, repeatX, repeatY, position, size)
+        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+//// new Background(images...)
+        Background background = new Background(backgroundImage);
+
+        stack.setBackground(background);
+
+        Rectangle rect = new Rectangle(400, 200);
+
+        rect.setArcHeight(30);
+        rect.setArcWidth(30);
+        rect.setStroke(Color.BLACK);
+        rect.setFill(Color.WHITE);
+
+        stack.getChildren().addAll(rect, scherm);
+        
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -73,11 +105,10 @@ public class Loginscherm extends Application {
                 Main.change(Welkomscherm.returnScherm());
                 Main.menu();
                 Main.topmenu();
-                
-            
+
             }
         });
-        
-        return scherm;
+
+        return stack;
     }
 }
