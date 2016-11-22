@@ -71,35 +71,12 @@ public class Main extends Application {
         Image Statistieken = new Image ("chart_line_icon&48.png");
         Image Instellingen = new Image ("cog_icon&48.png");
         Image Logo = new Image ("titel_simpel.png", menuwidth * 1.30, w*0.035, false, false);
-                        
-        Label placeholder = new Label();
-        placeholder.setVisible(true);
-        placeholder.setPrefSize(w-menuwidth, 60);
-        placeholder.setGraphic(new ImageView(Logo));
-        placeholder.setContentDisplay(ContentDisplay.LEFT);
-        placeholder.setDisable(false);
-        
-        Button uitlogButton = new Button();
-        uitlogButton.setText("Uitloggen");
-        uitlogButton.setContentDisplay(ContentDisplay.RIGHT);
-        uitlogButton.setPrefSize(menuwidth, 65);
-        uitlogButton.setFont(Font.font("Verdana", 26));
-        uitlogButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                //Veranderd het huidige scherm naar het inlogscherm en maakt het menu onzichtbaar.
-                scherm.setCenter(inlogScherm);
-                scherm.setLeft(null);
-                scherm.setTop(null);
-            }
-        });
         
         Button statistiekenButton = new Button();
         Button zoekButton = new Button();
         Button instellingenButton = new Button();
         Button helpButton = new Button();
         Button formulierButton = new Button();
-        
         
         statistiekenButton.setText("Statistieken");
         statistiekenButton.setGraphic(new ImageView(Statistieken));
@@ -118,9 +95,6 @@ public class Main extends Application {
             }
         });
 
-        
-        
-        
         zoekButton.setText("Zoeken");
         zoekButton.setGraphic(new ImageView(Zoom));
         zoekButton.setContentDisplay(ContentDisplay.TOP);
@@ -190,6 +164,33 @@ public class Main extends Application {
                 instellingenButton.setDisable(false);
                 helpButton.setDisable(false);
                 formulierButton.setDisable(true);
+            }
+        });
+
+        Label placeholder = new Label();
+        placeholder.setVisible(true);
+        placeholder.setPrefSize(w-menuwidth, 60);
+        placeholder.setGraphic(new ImageView(Logo));
+        placeholder.setContentDisplay(ContentDisplay.LEFT);
+        placeholder.setDisable(false);
+        
+        Button uitlogButton = new Button();
+        uitlogButton.setText("Uitloggen");
+        uitlogButton.setContentDisplay(ContentDisplay.RIGHT);
+        uitlogButton.setPrefSize(menuwidth, 65);
+        uitlogButton.setFont(Font.font("Verdana", 26));
+        uitlogButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //Veranderd het huidige scherm naar het inlogscherm en maakt het menu onzichtbaar.
+                scherm.setCenter(inlogScherm);
+                scherm.setLeft(null);
+                scherm.setTop(null);
+                zoekButton.setDisable(false);
+                statistiekenButton.setDisable(false);
+                instellingenButton.setDisable(false);
+                helpButton.setDisable(false);
+                formulierButton.setDisable(false);
             }
         });
                         
