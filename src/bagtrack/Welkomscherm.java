@@ -36,7 +36,7 @@ public class Welkomscherm extends Application {
         int menuwidth = (int)(w*0.10);
         int menuheight = (int)(h*0.10);
         
-        Image plaatje = new Image("Corendon Logo.png", w*0.50,h*0.50, false, false);
+        Image plaatje = new Image("Corendon Logo.png", w*0.45,h*0.45, false, false);
         
         ImageView iv1 = new ImageView();
        
@@ -59,7 +59,7 @@ public class Welkomscherm extends Application {
 
         Text welkombericht1 = new Text();
         welkombericht1.setText("Welkom bij het Corendon bagagesysteem");
-        welkombericht1.setFont(Font.font("Verdana", 35));
+        welkombericht1.setFont(Font.font("Verdana", 40));
         welkombericht1.setFill(WHITE);
 
         scherm.add(welkombericht1, 2, 1);
