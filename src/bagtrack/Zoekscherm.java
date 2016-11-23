@@ -137,56 +137,23 @@ public class Zoekscherm extends Application {
             @Override
             public void handle(ActionEvent event) {
                 String query = null;
-                
-                String kleur1 = (String)comboBoxKleur1.getValue();
-                String kleur2 = (String)comboBoxKleur2.getValue();
-                String luchthaven = (String)comboBoxLuchthaven.getValue();
-                String soort = (String)comboBoxSoort.getValue();
-                String opdruk = (String)comboBoxOpdruk.getValue();
-                String labelnr = (String)textveldLabelnr.getText();
-                
-                if(textveldLabelnr.getText() == null){
-                    labelnr = "";
-                }
-                
-                if(comboBoxKleur1.getValue() == null){
-                    kleur1 = "";
-                }
-                
-                if(comboBoxKleur2.getValue() == null){
-                    kleur2 = "";
-                }
-                
-                if(comboBoxLuchthaven.getValue() == null){
-                    luchthaven = "";
-                }
-                
-                if(comboBoxSoort.getValue() == null){
-                    soort = "";
-                }
-                
-                if(comboBoxOpdruk.getValue() == null){
-                    opdruk = "";
-                }
-                
-                System.out.println(kleur1);
                 System.out.println("SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%"+
-                        kleur1 +"%' AND kleur2 LIKE '%"+ kleur2 +"%' AND soort LIKE '%"+
-                        soort +"%' AND opdruk LIKE '%"+
-                        opdruk +"%' AND luchthaven LIKE '%"+ luchthaven +"%' AND labelnummer LIKE '%"+
+                        comboBoxKleur1.getValue() +"%' AND kleur2 LIKE '%"+ comboBoxKleur2.getValue() +"%' AND soort LIKE '%"+
+                        comboBoxSoort.getValue() +"%' AND opdruk LIKE '%"+
+                        comboBoxOpdruk.getValue() +"%' AND luchthaven LIKE '%"+ comboBoxLuchthaven.getValue() +"%' AND labelnummer LIKE '%"+
                         textveldLabelnr.getText() +"%';");
                 query = "SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%"+
-                        kleur1 +"%' AND kleur2 LIKE '%"+ kleur2 +"%' AND soort LIKE '%"+
-                        soort +"%' AND opdruk LIKE '%"+
-                        opdruk +"%' AND luchthaven LIKE '%"+ luchthaven +"%' AND labelnummer LIKE '%"+
+                        comboBoxKleur1.getValue() +"%' AND kleur2 LIKE '%"+ comboBoxKleur2.getValue() +"%' AND soort LIKE '%"+
+                        comboBoxSoort.getValue() +"%' AND opdruk LIKE '%"+
+                        comboBoxOpdruk.getValue() +"%' AND luchthaven LIKE '%"+ comboBoxLuchthaven.getValue() +"%' AND labelnummer LIKE '%"+
                         textveldLabelnr.getText() +"%';";
                 
                 //textveldNaam.setText(null);
-                textveldMerk.setText("");
+                textveldMerk.setText(null);
                 comboBoxKleur1.setValue(null);
                 comboBoxKleur2.setValue(null);
                 comboBoxLuchthaven.setValue(null);
-                textveldLabelnr.setText("");
+                textveldLabelnr.setText(null);
                 comboBoxSoort.setValue(null);
                 comboBoxOpdruk.setValue(null);
 
