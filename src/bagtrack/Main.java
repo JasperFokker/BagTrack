@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -53,7 +54,7 @@ public class Main extends Application {
         GridPane zoekScherm = Zoekscherm.returnScherm();
         GridPane helpScherm = Helpscherm.returnScherm();
         StackPane inlogScherm = Loginscherm.returnScherm();
-        GridPane formulierScherm = Invoerscherm.returnScherm();
+        TabPane formulierScherm = Invoerscherm.returnScherm();
         GridPane statistieken = Statistiekenscherm.returnScherm();
         GridPane instellingen = Instellingenscherm.returnScherm();
         
