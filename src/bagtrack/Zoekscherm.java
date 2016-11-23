@@ -137,8 +137,16 @@ public class Zoekscherm extends Application {
             @Override
             public void handle(ActionEvent event) {
                 String query = null;
-                
-                query = "SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%AU%'";
+                System.out.println("SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%"+
+                        comboBoxKleur1.getValue() +"%' AND kleur2 LIKE '%"+ comboBoxKleur2.getValue() +"%' AND soort LIKE '%"+
+                        comboBoxSoort.getValue() +"%' AND opdruk LIKE '%"+
+                        comboBoxOpdruk.getValue() +"%' AND luchthaven LIKE '%"+ comboBoxLuchthaven.getValue() +"%' AND labelnummer LIKE '%"+
+                        textveldLabelnr.getText() +"%';");
+                query = "SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%"+
+                        comboBoxKleur1.getValue() +"%' AND kleur2 LIKE '%"+ comboBoxKleur2.getValue() +"%' AND soort LIKE '%"+
+                        comboBoxSoort.getValue() +"%' AND opdruk LIKE '%"+
+                        comboBoxOpdruk.getValue() +"%' AND luchthaven LIKE '%"+ comboBoxLuchthaven.getValue() +"%' AND labelnummer LIKE '%"+
+                        textveldLabelnr.getText() +"%';";
                 
                 //textveldNaam.setText(null);
                 textveldMerk.setText(null);
