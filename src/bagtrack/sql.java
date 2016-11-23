@@ -36,6 +36,8 @@ public class sql {
             
             
             
+            
+            
         }catch(Exception e){
             System.out.println(e);
             System.out.println("NULL GIVEN");

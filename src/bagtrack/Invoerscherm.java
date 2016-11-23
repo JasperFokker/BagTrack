@@ -166,7 +166,7 @@ public class Invoerscherm extends Application
                         "','"+ graphicBox.getValue() + "','"+ airportBox.getValue() + "','" + date1 + "','"+ numberField.getText() +
                         "','"+ commentField.getText() +"');");
                 
-                sql.insert("INSERT INTO bagtrack.bagage (idbagage,merk,kleur1,kleur2,soort,opdruk,luchthaven,datum,labelnummer,opmerkingen) VALUES ('"+ 50 +"','" + 
+                sql.insert("INSERT INTO bagtrack.bagage (idbagage,merk,kleur1,kleur2,soort,opdruk,luchthaven,datum,labelnummer,opmerkingen) VALUES ('"+ (id+1) +"','" + 
                         merk + "','" + color1Box.getValue() + "','"+ color2Box.getValue() + "','"+ typeBagBox.getValue() +
                         "','"+ graphicBox.getValue() + "','"+ airportBox.getValue() + "','" + date1 + "','"+ numberField.getText() +
                         "','"+ commentField.getText() +"');");

@@ -1,7 +1,10 @@
 package bagtrack;
 
+import java.sql.ResultSet;
 import javafx.scene.control.Label;
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +14,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,6 +23,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
+import javafx.util.Callback;
 
 /**
  *
@@ -165,13 +170,9 @@ public class Zoekscherm extends Application {
         GridPane scherm2 = new GridPane();
         scherm2.setPrefSize(600, 450);
 
-        ObservableList<Tabeldata> data = FXCollections.observableArrayList(
-                new Tabeldata("Anna de Bruin", "Samsonite", "Blauw", "AMS", "17 KG", "Tas", "Effen Kleur"),
-                new Tabeldata("Johann Visser", "Visconti", "Zwart", "ADA", "21 KG", "Koffer", "Geen"),
-                new Tabeldata("Robin van Dijk", "Lacoste", "Rood", "AMS", "24 KG", "Zak", "Geen"),
-                new Tabeldata("Melissa Watergang", "SuperTrash", "Paars", "KYA", "15 KG", "Koffer", "Patroon"),
-                new Tabeldata("Dennis Bakker", "Converse", "Bruin", "ADA", "12 KG", "Tas", "Geen")
-        );
+        ObservableList<ObservableList> data = FXCollections.observableArrayList();
+        
+        
 
         final Label label = new Label("Zoekresultaten");
         label.setFont(new Font("Arial", 18));
@@ -181,8 +182,55 @@ public class Zoekscherm extends Application {
         table.setEditable(true);
         table.setPrefWidth(1170);
         table.setPrefHeight(680);
+        
+        ResultSet rs = sql.select("SELECT * FROM bagage;");
+          
+        
+        try{
+            for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
+                //We are using non property style for making dynamic table
+                final int j = i;                
+                System.out.println((String)rs.getMetaData().getColumnName(i+1));
+                if(i == 0){
+                    continue;
+                }
+                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
+                
+                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
+                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
+                        return new SimpleStringProperty(param.getValue().get(j).toString());                        
+                    }                    
+                });
 
+                table.getColumns().addAll(col); 
+                System.out.println("Column ["+i+"] ");
+            }
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        try{
+            while(rs.next()){
+                //Iterate Row
+                ObservableList<String> row = FXCollections.observableArrayList();
+                for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
+                    //Iterate Column
+                    row.add(rs.getString(i));
+                }
+                System.out.println("Row [1] added "+row );
+                data.add(row);
+
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+        
+        
+        
+        
+        
         //Dit werkt, vraag me niet hoe.
+        /*
         TableColumn naamCol = new TableColumn("Naam");
         naamCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Naam"));
 
@@ -203,8 +251,11 @@ public class Zoekscherm extends Application {
 
         TableColumn opdrukCol = new TableColumn("Opdruk");
         opdrukCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Opdruk"));
+        
+        */    
 
         //Verdeeld de colommen gelijk over de gridpane.
+        /*
         naamCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
         merkCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
         kleurCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
@@ -212,9 +263,9 @@ public class Zoekscherm extends Application {
         gewichtCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
         soortCol.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
         opdrukCol.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
-        
+        */
         table.setItems(data);
-        table.getColumns().addAll(naamCol, merkCol, kleurCol, luchthavenCol, gewichtCol, soortCol, opdrukCol);
+        //table.getColumns().addAll(naamCol, merkCol, kleurCol, luchthavenCol, gewichtCol, soortCol, opdrukCol);
 
         scherm2.add(label, 0, 0);
         scherm2.add(table, 0, 1);
