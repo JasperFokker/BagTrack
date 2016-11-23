@@ -80,10 +80,12 @@ public class Zoekscherm extends Application {
         
         
         //Labels, Textvelden, buttons en comboboxen.
-        int textWidth = 400;
-        int boxWidth = 200;
-        final ComboBox comboBoxKleur = new ComboBox(kleuren);
-        comboBoxKleur.setPrefWidth(boxWidth);
+        final int textWidth = 200;
+        final int boxWidth = 200;
+        final ComboBox comboBoxKleur1 = new ComboBox(kleuren);
+        comboBoxKleur1.setPrefWidth(boxWidth);
+        final ComboBox comboBoxKleur2 = new ComboBox(kleuren);
+        comboBoxKleur2.setPrefWidth(boxWidth);
         final ComboBox comboBoxLuchthaven = new ComboBox(luchthaven);
         comboBoxLuchthaven.setPrefWidth(boxWidth);
         final ComboBox comboBoxSoort = new ComboBox(soort);
@@ -91,13 +93,13 @@ public class Zoekscherm extends Application {
         final ComboBox comboBoxOpdruk = new ComboBox(opdruk);
         comboBoxOpdruk.setPrefWidth(boxWidth);
 
-        TextField textveldNaam = new TextField();
-        textveldNaam.setPrefWidth(textWidth);
+        //TextField textveldNaam = new TextField();
+        //textveldNaam.setPrefWidth(textWidth);
         TextField textveldMerk = new TextField();
         textveldMerk.setPrefWidth(textWidth);
-        TextField textveldGewicht = new TextField();
-        textveldGewicht.setPrefWidth(textWidth);
-        textveldGewicht.setPromptText("In Kilogrammen");
+        TextField textveldLabelnr = new TextField();
+        textveldLabelnr.setPrefWidth(textWidth);
+        
 
         Label label = new Label();
         label.setText("Naam:   ");
@@ -116,7 +118,7 @@ public class Zoekscherm extends Application {
         GridPane.setHalignment(label4, HPos.RIGHT);
 
         Label label5 = new Label();
-        label5.setText("Gewicht:   ");
+        label5.setText("Labelnummer:   ");
         GridPane.setHalignment(label5, HPos.RIGHT);
 
         Label label6 = new Label();
@@ -125,47 +127,57 @@ public class Zoekscherm extends Application {
 
         Label label7 = new Label("Opdruk:   ");
         GridPane.setHalignment(label7, HPos.RIGHT);
+        
+        Label label8 = new Label("      Kleur 2: ");
+        GridPane.setHalignment(label8, HPos.RIGHT);
 
         Button btn = new Button("Zoek");
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                textveldNaam.setText(null);
+                String query = null;
+                
+                query = "SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%AU%'";
+                
+                //textveldNaam.setText(null);
                 textveldMerk.setText(null);
-                comboBoxKleur.setValue(null);
+                comboBoxKleur1.setValue(null);
+                comboBoxKleur2.setValue(null);
                 comboBoxLuchthaven.setValue(null);
-                textveldGewicht.setText(null);
+                textveldLabelnr.setText(null);
                 comboBoxSoort.setValue(null);
                 comboBoxOpdruk.setValue(null);
 
-                Main.change(Zoekscherm.returnScherm2());
+                Main.change(Zoekscherm.returnScherm2(query));
 
             }
         });
 
         //Dit kan korter, geen idee hoe.
-        scherm.add(label, 1, 1);
-        scherm.add(label2, 1, 2);
-        scherm.add(label3, 1, 3);
-        scherm.add(label4, 1, 4);
-        scherm.add(label5, 1, 5);
-        scherm.add(label6, 1, 6);
-        scherm.add(label7, 1, 7);
-        scherm.add(textveldNaam, 2, 1);
-        scherm.add(textveldMerk, 2, 2);
-        scherm.add(comboBoxKleur, 2, 3);
-        scherm.add(comboBoxLuchthaven, 2, 4);
-        scherm.add(textveldGewicht, 2, 5);
-        scherm.add(comboBoxSoort, 2, 6);
-        scherm.add(comboBoxOpdruk, 2, 7);
+        //scherm.add(label, 1, 1);
+        scherm.add(label2, 1, 3);
+        scherm.add(label3, 1, 4);
+        scherm.add(label4, 1, 1);
+        scherm.add(label5, 1, 6);
+        scherm.add(label6, 1, 2);
+        scherm.add(label7, 1, 5);
+        scherm.add(label8, 3, 4);
+        //scherm.add(textveldNaam, 2, 1);
+        scherm.add(textveldMerk, 2, 3);
+        scherm.add(comboBoxKleur1, 2, 4);
+        scherm.add(comboBoxKleur2, 4, 4);
+        scherm.add(comboBoxLuchthaven, 2, 1);
+        scherm.add(textveldLabelnr, 2, 6);
+        scherm.add(comboBoxSoort, 2, 2);
+        scherm.add(comboBoxOpdruk, 2, 5);
         scherm.add(btn, 2, 8);
 
         return scherm;
 
     }
 
-    public static GridPane returnScherm2() {
+    public static GridPane returnScherm2(String query) {
         //Tabelscherm dat linkt naar Tabeldata.java 
         GridPane scherm2 = new GridPane();
         scherm2.setPrefSize(600, 450);
@@ -183,7 +195,7 @@ public class Zoekscherm extends Application {
         table.setPrefWidth(1170);
         table.setPrefHeight(680);
         
-        ResultSet rs = sql.select("SELECT * FROM bagage;");
+        ResultSet rs = sql.select(query);
           
         
         try{
