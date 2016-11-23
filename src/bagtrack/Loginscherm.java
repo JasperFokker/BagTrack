@@ -29,21 +29,28 @@ import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Border;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  *
  * @author Thom
  */
-public class Loginscherm extends Application {
-
+public class Loginscherm extends Application
+{
+    
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage)
+    {
         returnScherm();
     }
-
-    public static StackPane returnScherm() {
+    
+    public static StackPane returnScherm()
+    {
         //log in scherm
         GridPane scherm = new GridPane();
+        StackPane uitlog = new StackPane();
         StackPane stack = new StackPane();
         stack.setPrefSize(800, 450);
         scherm.setAlignment(Pos.CENTER);
@@ -51,22 +58,22 @@ public class Loginscherm extends Application {
         scherm.setVgap(30);
         scherm.setPadding(new Insets(25, 25, 25, 25));
         
-        Image Logo = new Image ("titel_simpel.png", 250, 68, false, false);
+        Image Logo = new Image("titel_simpel.png", 250, 68, false, false);
         Label logoDingetje = new Label();
         logoDingetje.setGraphic(new ImageView(Logo));
         scherm.add(logoDingetje, 0, 0);
-
+        
         TextField userTextField = new TextField();
         userTextField.setPromptText("Gebruikersnaam");
         scherm.add(userTextField, 0, 1);
-
+        
         PasswordField pwBox = new PasswordField();
         pwBox.setPromptText("Wachtwoord");
         scherm.add(pwBox, 0, 2);
-
+        
         Button btn = new Button("Log in");
         HBox hbBtn = new HBox();
-        btn.setPrefSize(250, 20);
+        btn.setPrefSize(200, 20);
         hbBtn.setAlignment(Pos.BOTTOM_CENTER);
         hbBtn.getChildren().add(btn);
         scherm.add(hbBtn, 0, 3);
@@ -79,42 +86,74 @@ public class Loginscherm extends Application {
         BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         //// new Background(images...)
         Background background = new Background(backgroundImage);
-
+        
         stack.setBackground(background);
-
+        
         Rectangle rect = new Rectangle(300, 300);
-
+        
         rect.setArcHeight(30);
         rect.setArcWidth(30);
         rect.setStroke(Color.BLACK);
-        rect.setFill(Color.rgb(120,120,120));
-
-        stack.getChildren().addAll(rect, scherm);
+        rect.setFill(Color.rgb(120, 120, 120));
+        
+        Rectangle omhel = new Rectangle(90, 40);
+        
+        omhel.setArcHeight(30);
+        omhel.setArcWidth(30);
+        omhel.setStroke(Color.BLACK);
+        omhel.setFill(Color.rgb(120, 120, 120));
+        
+        Button uitlogButton = new Button();
+        uitlogButton.setPrefSize(90, 40);
+        uitlogButton.setText("Stoppen");
+        uitlogButton.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        
+        uitlogButton.setStyle("-fx-background-color: transparent;");
+        uitlogButton.setOnAction(new EventHandler<ActionEvent>()
+        {
+            
+            @Override
+            public void handle(ActionEvent e)
+            {
+                System.exit(0);
+            }
+        });        
+        
+        uitlog.setAlignment(Pos.TOP_RIGHT);
+        
+        uitlog.getChildren().addAll(omhel, uitlogButton);
+        scherm.setFocusTraversable(true);
+        stack.getChildren().addAll(rect, scherm, uitlog);
 
         //Enter button
-        scherm.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        scherm.setOnKeyPressed(new EventHandler<KeyEvent>()
+        {
             @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.ENTER)) {
+            public void handle(KeyEvent event)
+            {
+                if (event.getCode().equals(KeyCode.ENTER))
+                {
                     Main.change(Welkomscherm.returnScherm());
                     Main.menu();
                     Main.topmenu();
                 }
             }
-
+            
         });
-
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-
+        
+        btn.setOnAction(new EventHandler<ActionEvent>()
+        {
+            
             @Override
-            public void handle(ActionEvent e) {
+            public void handle(ActionEvent e)
+            {
                 Main.change(Welkomscherm.returnScherm());
                 Main.menu();
                 Main.topmenu();
-
+                
             }
         });
-
+        
         return stack;
     }
 }
