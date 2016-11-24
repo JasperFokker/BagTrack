@@ -70,7 +70,6 @@ public class Loginscherm extends Application {
         melding.setText("Onjuiste combinatie gebruikersnaam en wachtwoord.");
         melding.setVisible(false);
         scherm.add(melding, 0, 4);
-        
 
         Button btn = new Button("Log in");
         HBox hbBtn = new HBox();
@@ -104,9 +103,23 @@ public class Loginscherm extends Application {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
-                    Main.change(Welkomscherm.returnScherm());
-                    Main.menu();
-                    Main.topmenu();
+                    String username = userTextField.getText();
+                    String password = pwBox.getText();
+                    ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord FROM users WHERE loginnaam LIKE '" + username + "' AND wachtwoord LIKE '" + password + "'");
+
+                    try {
+                        if (getUser.next()) {
+                            Main.change(Welkomscherm.returnScherm());
+                            Main.menu();
+                            Main.topmenu();
+
+                        } else {
+                            melding.setVisible(true);
+
+                        }
+                    } catch (Exception r) {
+                        System.out.println(r);
+                    }
                 }
             }
 
@@ -129,7 +142,7 @@ public class Loginscherm extends Application {
 
                     } else {
                         melding.setVisible(true);
-                        
+
                     }
                 } catch (Exception r) {
                     System.out.println(r);
