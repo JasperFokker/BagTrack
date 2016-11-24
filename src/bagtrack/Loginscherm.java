@@ -107,7 +107,8 @@ public class Loginscherm extends Application {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     String username = userTextField.getText();
                     String password = pwBox.getText();
-                    ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord FROM users WHERE loginnaam LIKE '" + username + "' AND wachtwoord LIKE '" + password + "'");
+                    ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord FROM users WHERE BINARY loginnaam = '" + username + "' "
+                            + "AND BINARY wachtwoord = '" + password + "'");
 
                     try {
                         if (getUser.next()) {
@@ -137,7 +138,7 @@ public class Loginscherm extends Application {
 
                 String username = userTextField.getText();
                 String password = pwBox.getText();
-                ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord FROM users WHERE loginnaam LIKE '" + username + "' AND wachtwoord LIKE '" + password + "'");
+                ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord FROM users WHERE BINARY loginnaam = '" + username + "' AND BINARY wachtwoord = '" + password + "'");
 
                 try {
                     if (getUser.next()) {
