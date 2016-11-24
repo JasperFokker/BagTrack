@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.AccessibleRole;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -31,6 +30,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -66,9 +66,11 @@ public class Loginscherm extends Application {
         pwBox.setPromptText("Wachtwoord");
         scherm.add(pwBox, 0, 2);
 
-        Label melding = new Label();
+        Text melding = new Text();
         melding.setText("Onjuiste combinatie gebruikersnaam en wachtwoord.");
+        melding.setFill(Color.RED);
         melding.setVisible(false);
+        
         scherm.add(melding, 0, 4);
 
         Button btn = new Button("Log in");
@@ -112,6 +114,9 @@ public class Loginscherm extends Application {
                             Main.change(Welkomscherm.returnScherm());
                             Main.menu();
                             Main.topmenu();
+                            melding.setVisible(false);
+                            userTextField.setText(null);
+                            pwBox.setText(null);
 
                         } else {
                             melding.setVisible(true);
@@ -139,9 +144,13 @@ public class Loginscherm extends Application {
                         Main.change(Welkomscherm.returnScherm());
                         Main.menu();
                         Main.topmenu();
+                        melding.setVisible(false);
+                        userTextField.setText(null);
+                        pwBox.setText(null);
 
                     } else {
                         melding.setVisible(true);
+                        
 
                     }
                 } catch (Exception r) {
