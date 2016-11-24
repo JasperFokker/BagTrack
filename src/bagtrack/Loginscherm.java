@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.AccessibleRole;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -67,6 +68,9 @@ public class Loginscherm extends Application {
 
         Label melding = new Label();
         melding.setText("Onjuiste combinatie gebruikersnaam en wachtwoord.");
+        melding.setVisible(false);
+        scherm.add(melding, 0, 4);
+        
 
         Button btn = new Button("Log in");
         HBox hbBtn = new HBox();
@@ -112,32 +116,24 @@ public class Loginscherm extends Application {
 
             @Override
             public void handle(ActionEvent e) {
-                Main.change(Welkomscherm.returnScherm());
-                Main.menu();
-                Main.topmenu();
 
-//                String username = userTextField.getText();
-//                String password = pwBox.getText();
                 String username = userTextField.getText();
                 String password = pwBox.getText();
-
-                ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord FROM users WHERE loginnaam '" + username + "' AND wachtwoord '" + password + "'");
-                String username2;
-                String password2;
+                ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord FROM users WHERE loginnaam LIKE '" + username + "' AND wachtwoord LIKE '" + password + "'");
 
                 try {
-                    while (getUser.next()) {
-                        username2 = (getUser.getString("loginnaam"));
-                        password2 = (getUser.getString("wachtwoord"));
+                    if (getUser.next()) {
+                        Main.change(Welkomscherm.returnScherm());
+                        Main.menu();
+                        Main.topmenu();
 
+                    } else {
+                        melding.setVisible(true);
                         
-
                     }
                 } catch (Exception r) {
                     System.out.println(r);
                 }
-                
-                
 
             }
 
