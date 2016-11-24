@@ -63,7 +63,7 @@ public class Main extends Application {
         Image Help = new Image("info_icon&48.png");
         Image Statistieken = new Image ("chart_line_icon&48.png");
         Image Instellingen = new Image ("cog_icon&48.png");
-        Image Logo = new Image ("titel_simpel.png", menuwidth * 1.30, w*0.035, false, false);
+        Image Logo = new Image ("titel_simpel.png", menuwidth * 1.50, w*0.035, false, false);
         
         Button statistiekenButton = new Button();
         Button zoekButton = new Button();
@@ -198,8 +198,8 @@ public class Main extends Application {
         String css = Main.class.getResource("Theme.css").toExternalForm();
         scene.getStylesheets().add(css);
         logo.setStyle("-fx-background-color: #c10b0b;");
-        logo.setPrefWidth(menuwidth);
-        topmenu.setSpacing(w-menuwidth-200);
+        logo.setPrefWidth(menuwidth+200);
+        topmenu.setSpacing(w-menuwidth-300);
         
         primaryStage.setTitle("Main Screen");
         primaryStage.setScene(scene);
