@@ -170,8 +170,8 @@ public class Main extends Application {
         Button uitlogButton = new Button();
         uitlogButton.setText("Uitloggen");
         uitlogButton.setContentDisplay(ContentDisplay.RIGHT);
-        uitlogButton.setPrefSize(menuwidth, 65);
-        uitlogButton.setFont(Font.font("Verdana", 23));
+        uitlogButton.setPrefSize(menuwidth, 55);
+        uitlogButton.setFont(Font.font("Verdana", 18));
         uitlogButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -199,7 +199,7 @@ public class Main extends Application {
         scene.getStylesheets().add(css);
         logo.setStyle("-fx-background-color: #c10b0b;");
         logo.setPrefWidth(menuwidth);
-        topmenu.setSpacing(w-menuwidth-250);
+        topmenu.setSpacing(w-menuwidth-200);
         
         primaryStage.setTitle("Main Screen");
         primaryStage.setScene(scene);
