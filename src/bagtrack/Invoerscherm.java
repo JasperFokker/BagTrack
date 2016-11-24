@@ -39,8 +39,7 @@ public class Invoerscherm extends Application {
         GridPane kofferGegevensGrid = new GridPane();
         GridPane persoonGegevensGrid = new GridPane();
         
-        VBox kofferGegevensBox = new VBox();
-        VBox persoonGegevensBox = new VBox();
+        
         
         kofferGegevensGrid.setHgap(10);
         kofferGegevensGrid.setVgap(10);
@@ -310,7 +309,7 @@ public class Invoerscherm extends Application {
         });
         
         TabPane invoerTabs = new TabPane();
-        BorderPane persoonBorderPane = new BorderPane();
+        
 
         Tab kofferGegevens = new Tab();
         kofferGegevens.setText("Koffergegevens");
@@ -319,18 +318,13 @@ public class Invoerscherm extends Application {
         persoonGegevens.setText("Persoongegevens");
         persoonGegevens.setClosable(false);
         
-        kofferGegevensBox.setStyle("-fx-background-color: #333333;");
-        persoonGegevensBox.setStyle("-fx-background-color: #333333;");
-        
-        kofferGegevensBox.getChildren().add(kofferGegevensGrid);
-        persoonGegevensBox.getChildren().add(persoonGegevensGrid);
-        kofferGegevens.setContent(kofferGegevensBox);
-        persoonGegevens.setContent(persoonGegevensBox);
+        kofferGegevens.setContent(kofferGegevensGrid);
+        persoonGegevens.setContent(persoonGegevensGrid);
         invoerTabs.getTabs().addAll(kofferGegevens, persoonGegevens);
         
         
-        persoonBorderPane.setCenter(invoerTabs);
-        kofferGegevensGrid.getChildren().add(persoonBorderPane);
+        
+       
 
         return invoerTabs;
     }

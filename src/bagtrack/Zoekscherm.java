@@ -96,7 +96,7 @@ GridPane scherm3 = new GridPane();
         GridPane.setHalignment(label4, HPos.RIGHT);
 
         Label label5 = new Label();
-        label5.setText("VakantieAdres   ");
+        label5.setText("Vakantieadres   ");
         GridPane.setHalignment(label5, HPos.RIGHT);
 
         Label label6 = new Label();
