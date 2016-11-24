@@ -13,11 +13,12 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -36,8 +37,118 @@ public class Zoekscherm extends Application {
 
         returnScherm();
     }
+public static GridPane returnScherm3() {
+GridPane scherm3 = new GridPane();
+        scherm3.setPrefSize(600, 450);
+        scherm3.setHgap(1);
+        scherm3.setVgap(10);
+        scherm3.setPadding(new Insets(25, 25, 25, 25));
+        //scherm.setGridLinesVisible(true);
+        ColumnConstraints column = new ColumnConstraints(100);
+        scherm3.getColumnConstraints().add(column);
+        RowConstraints row = new RowConstraints(50);
+        scherm3.getRowConstraints().add(row);
 
-    public static GridPane returnScherm() {
+        
+        
+        
+        //Labels, Textvelden, buttons en comboboxen.
+        final int textWidth = 200;
+        final int boxWidth = 200;
+        
+
+        //TextField textveldNaam = new TextField();
+        //textveldNaam.setPrefWidth(textWidth);
+        TextField textveldVoornaam = new TextField();
+        textveldVoornaam.setPrefWidth(textWidth);
+        TextField textveldVoorletters = new TextField();
+        textveldVoorletters.setPrefWidth(textWidth);
+        TextField textveldAchternaam = new TextField();
+        textveldAchternaam.setPrefWidth(textWidth);
+        TextField textveldAdres = new TextField();
+        textveldAdres.setPrefWidth(textWidth);
+        TextField textveldVakantieadres = new TextField();
+        textveldVakantieadres.setPrefWidth(textWidth);
+        TextField textveldTelefoon1 = new TextField();
+        textveldTelefoon1.setPrefWidth(textWidth);
+        TextField textveldTelefoon2 = new TextField();
+        textveldTelefoon2.setPrefWidth(textWidth);
+        TextField textveldEmail = new TextField();
+        textveldEmail.setPrefWidth(textWidth);
+        TextField textveldVluchtnummer = new TextField();
+        textveldVluchtnummer.setPrefWidth(textWidth);
+        
+
+        Label label = new Label();
+        label.setText("Voornaam   ");
+        GridPane.setHalignment(label, HPos.RIGHT);
+
+        Label label2 = new Label();
+        label2.setText("Voorletters   ");
+        GridPane.setHalignment(label2, HPos.RIGHT);
+
+        Label label3 = new Label();
+        label3.setText("Achternaam   ");
+        GridPane.setHalignment(label3, HPos.RIGHT);
+
+        Label label4 = new Label();
+        label4.setText("Adres   ");
+        GridPane.setHalignment(label4, HPos.RIGHT);
+
+        Label label5 = new Label();
+        label5.setText("VakantieAdres   ");
+        GridPane.setHalignment(label5, HPos.RIGHT);
+
+        Label label6 = new Label();
+        label6.setText("Telefoon1   ");
+        GridPane.setHalignment(label6, HPos.RIGHT);
+
+        Label label7 = new Label("Telefoon2   ");
+        GridPane.setHalignment(label7, HPos.RIGHT);
+        
+        Label label8 = new Label("Email   ");
+        GridPane.setHalignment(label8, HPos.RIGHT);
+        
+        Label label9 = new Label ("Vluchtnummer   ");
+        GridPane.setHalignment(label9,HPos.RIGHT);
+
+        Button btn = new Button("Zoek");
+
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String query = null;
+                
+
+                Main.change(Zoekscherm.returnScherm2(query));
+
+            }
+        });
+
+        //Dit kan korter, geen idee hoe.
+        scherm3.add(label, 1, 1);
+        scherm3.add(label2, 1, 2);
+        scherm3.add(label3, 1, 3);
+        scherm3.add(label4, 1, 4);
+        scherm3.add(label5, 1, 5);
+        scherm3.add(label6, 1, 6);
+        scherm3.add(label7, 1, 7);
+        scherm3.add(label8, 1, 8);
+        scherm3.add(label9, 1, 9);
+        
+        scherm3.add(textveldVoornaam, 2, 1);
+        scherm3.add(textveldVoorletters, 2, 2);
+        scherm3.add(textveldAchternaam, 2, 3);
+        scherm3.add(textveldAdres, 2, 4);
+        scherm3.add(textveldVakantieadres, 2, 5);
+        scherm3.add(textveldTelefoon1, 2, 6);
+        scherm3.add(textveldTelefoon2, 2, 7);
+        scherm3.add(textveldEmail, 2, 8);
+        scherm3.add(textveldVluchtnummer, 2, 9);
+        scherm3.add(btn, 2, 10);
+        return scherm3;
+}
+    public static TabPane returnScherm() {
 
         //Zoekscherm met dropdown boxen en textfield
         GridPane scherm = new GridPane();
@@ -102,33 +213,33 @@ public class Zoekscherm extends Application {
         
 
         Label label = new Label();
-        label.setText("Naam:   ");
+        label.setText("Naam   ");
         GridPane.setHalignment(label, HPos.RIGHT);
 
         Label label2 = new Label();
-        label2.setText("Merk:   ");
+        label2.setText("Merk   ");
         GridPane.setHalignment(label2, HPos.RIGHT);
 
         Label label3 = new Label();
-        label3.setText("Kleur:   ");
+        label3.setText("Kleur   ");
         GridPane.setHalignment(label3, HPos.RIGHT);
 
         Label label4 = new Label();
-        label4.setText("Luchthaven:   ");
+        label4.setText("Luchthaven   ");
         GridPane.setHalignment(label4, HPos.RIGHT);
 
         Label label5 = new Label();
-        label5.setText("Labelnummer:   ");
+        label5.setText("Labelnummer   ");
         GridPane.setHalignment(label5, HPos.RIGHT);
 
         Label label6 = new Label();
-        label6.setText("Soort:   ");
+        label6.setText("Soort   ");
         GridPane.setHalignment(label6, HPos.RIGHT);
 
-        Label label7 = new Label("Opdruk:   ");
+        Label label7 = new Label("Opdruk   ");
         GridPane.setHalignment(label7, HPos.RIGHT);
         
-        Label label8 = new Label("      Kleur 2: ");
+        Label label8 = new Label("      Kleur 2 ");
         GridPane.setHalignment(label8, HPos.RIGHT);
 
         Button btn = new Button("Zoek");
@@ -213,8 +324,33 @@ public class Zoekscherm extends Application {
         scherm.add(comboBoxSoort, 2, 2);
         scherm.add(comboBoxOpdruk, 2, 5);
         scherm.add(btn, 2, 8);
+        
+        
 
-        return scherm;
+        TabPane ZoekTabs = new TabPane();
+        
+
+        Tab KoffersZoeken = new Tab();
+        KoffersZoeken.setText("Koffergegevens");
+        KoffersZoeken.setClosable(false);
+        Tab PersoonZoeken = new Tab();
+        PersoonZoeken.setText("Persoongegevens");
+        PersoonZoeken.setClosable(false);
+        
+        
+        
+        //kofferGegevensBox.getChildren().add(kofferGegevensGrid);
+        //persoonGegevensBox.getChildren().add(persoonGegevensGrid);
+        KoffersZoeken.setContent(scherm);
+        
+        
+        PersoonZoeken.setContent(returnScherm3());
+        ZoekTabs.getTabs().addAll(KoffersZoeken, PersoonZoeken);
+        
+        
+        
+
+        return ZoekTabs;
 
     }
 
@@ -326,5 +462,8 @@ public class Zoekscherm extends Application {
         return scherm2;
 
     }
+    
+    
 
 }
+

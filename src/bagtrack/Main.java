@@ -51,7 +51,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        GridPane zoekScherm = Zoekscherm.returnScherm();
+        TabPane zoekScherm = Zoekscherm.returnScherm();
         GridPane helpScherm = Helpscherm.returnScherm();
         StackPane inlogScherm = Loginscherm.returnScherm();
         TabPane formulierScherm = Invoerscherm.returnScherm();
