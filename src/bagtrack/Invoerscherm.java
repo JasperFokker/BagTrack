@@ -44,11 +44,11 @@ public class Invoerscherm extends Application {
         
         kofferGegevensGrid.setHgap(10);
         kofferGegevensGrid.setVgap(10);
-        kofferGegevensGrid.setPadding(new Insets(40, 20, 0, 160));
+        kofferGegevensGrid.setPadding(new Insets(25, 25, 25, 25));
         
         persoonGegevensGrid.setHgap(10);
         persoonGegevensGrid.setVgap(10);
-        persoonGegevensGrid.setPadding(new Insets(40, 20, 0, 160));
+        persoonGegevensGrid.setPadding(new Insets(25, 25, 25, 25));
         
         //datum
         Label dateLabel = new Label("Datum");
@@ -242,56 +242,56 @@ public class Invoerscherm extends Application {
         //vakantieadress
         Label vakantieAdressLabel = new Label("Vakantieadres");
         GridPane.setHalignment(vakantieAdressLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(vakantieAdressLabel, 0, 3);
+        persoonGegevensGrid.add(vakantieAdressLabel, 0, 4);
         
         TextField vakantieAdressField = new TextField();
-        persoonGegevensGrid.add(vakantieAdressField, 1, 3);
+        persoonGegevensGrid.add(vakantieAdressField, 1, 4);
         
         //telefoon1
         Label phoneLabel = new Label("Telefoon 1");
         GridPane.setHalignment(phoneLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(phoneLabel, 0, 4);
+        persoonGegevensGrid.add(phoneLabel, 0, 5);
         
         TextField phoneField = new TextField();
-        persoonGegevensGrid.add(phoneField, 1, 4);
+        persoonGegevensGrid.add(phoneField, 1, 5);
         
         //telefoon2
         Label phone2Label = new Label("Telefoon 2");
         GridPane.setHalignment(phone2Label, HPos.RIGHT);
-        persoonGegevensGrid.add(phone2Label, 0, 5);
+        persoonGegevensGrid.add(phone2Label, 0, 6);
         
         TextField phone2Field = new TextField();
-        persoonGegevensGrid.add(phone2Field, 1, 5);
+        persoonGegevensGrid.add(phone2Field, 1, 6);
         
         //email
         Label emailLabel = new Label("Email");
         GridPane.setHalignment(emailLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(emailLabel, 0, 6);
+        persoonGegevensGrid.add(emailLabel, 0, 7);
         
         TextField emailField = new TextField();
-        persoonGegevensGrid.add(emailField, 1, 6);
+        persoonGegevensGrid.add(emailField, 1, 7);
         
         //vluchtnummer
         Label vluchtnummerLabel = new Label("Vluchtnummer");
         GridPane.setHalignment(vluchtnummerLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(vluchtnummerLabel, 0, 7);
+        persoonGegevensGrid.add(vluchtnummerLabel, 0, 8);
         
         TextField vluchtnummerField = new TextField();
-        persoonGegevensGrid.add(vluchtnummerField, 1, 7);
+        persoonGegevensGrid.add(vluchtnummerField, 1, 8);
         
         
         //opmerkingen
         Label persoonCommentLabel = new Label("Opmerkingen");
         GridPane.setHalignment(persoonCommentLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(persoonCommentLabel, 0, 8);
+        persoonGegevensGrid.add(persoonCommentLabel, 0, 9);
         
         TextField persoonCommentField = new TextField();
-        persoonGegevensGrid.add(persoonCommentField, 1, 8);
+        persoonGegevensGrid.add(persoonCommentField, 1, 9);
         
         //clear
         Button clearPersoon = new Button();
         clearPersoon.setText("Leegmaken");
-        kofferGegevensGrid.add(clearPersoon, 1, 8);
+        persoonGegevensGrid.add(clearPersoon, 1, 10);
         clearPersoon.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -303,6 +303,8 @@ public class Invoerscherm extends Application {
                 vakantieAdressField.setText(null);
                 phoneField.setText(null);
                 phone2Field.setText(null);
+                emailField.setText(null);
+                vluchtnummerField.setText(null);
                 persoonCommentField.setText(null);
             }
         });
@@ -325,6 +327,7 @@ public class Invoerscherm extends Application {
         kofferGegevens.setContent(kofferGegevensBox);
         persoonGegevens.setContent(persoonGegevensBox);
         invoerTabs.getTabs().addAll(kofferGegevens, persoonGegevens);
+        
         
         persoonBorderPane.setCenter(invoerTabs);
         kofferGegevensGrid.getChildren().add(persoonBorderPane);

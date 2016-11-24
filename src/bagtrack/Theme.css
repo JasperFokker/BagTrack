@@ -96,3 +96,31 @@ VBox{
 .button-kofferklik-medewerker{
     -fx-padding: 30 30 30 30;
 }
+
+.tab-pane .tab-header-area .tab-header-background {
+    /*-fx-opacity: 0;*/
+    -fx-background-color:grey;
+}
+
+.tab-pane
+{
+    -fx-tab-min-width:120px;
+}
+
+.tab .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.tab-pane .tab:selected
+{
+    -fx-background-color: #333333;
+}
