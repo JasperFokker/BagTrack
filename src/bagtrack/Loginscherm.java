@@ -5,6 +5,7 @@
  */
 package bagtrack;
 
+import java.sql.ResultSet;
 import javafx.scene.control.Label;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -50,8 +51,8 @@ public class Loginscherm extends Application {
         scherm.setHgap(30);
         scherm.setVgap(30);
         scherm.setPadding(new Insets(25, 25, 25, 25));
-        
-        Image Logo = new Image ("titel_simpel.png", 250, 68, false, false);
+
+        Image Logo = new Image("titel_simpel.png", 250, 68, false, false);
         Label logoDingetje = new Label();
         logoDingetje.setGraphic(new ImageView(Logo));
         scherm.add(logoDingetje, 0, 0);
@@ -63,6 +64,9 @@ public class Loginscherm extends Application {
         PasswordField pwBox = new PasswordField();
         pwBox.setPromptText("Wachtwoord");
         scherm.add(pwBox, 0, 2);
+
+        Label melding = new Label();
+        melding.setText("Onjuiste combinatie gebruikersnaam en wachtwoord.");
 
         Button btn = new Button("Log in");
         HBox hbBtn = new HBox();
@@ -87,7 +91,7 @@ public class Loginscherm extends Application {
         rect.setArcHeight(30);
         rect.setArcWidth(30);
         rect.setStroke(Color.BLACK);
-        rect.setFill(Color.rgb(120,120,120));
+        rect.setFill(Color.rgb(120, 120, 120));
 
         stack.getChildren().addAll(rect, scherm);
 
@@ -112,7 +116,31 @@ public class Loginscherm extends Application {
                 Main.menu();
                 Main.topmenu();
 
+//                String username = userTextField.getText();
+//                String password = pwBox.getText();
+                String username = userTextField.getText();
+                String password = pwBox.getText();
+
+                ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord FROM users WHERE loginnaam '" + username + "' AND wachtwoord '" + password + "'");
+                String username2;
+                String password2;
+
+                try {
+                    while (getUser.next()) {
+                        username2 = (getUser.getString("loginnaam"));
+                        password2 = (getUser.getString("wachtwoord"));
+
+                        
+
+                    }
+                } catch (Exception r) {
+                    System.out.println(r);
+                }
+                
+                
+
             }
+
         });
 
         return stack;

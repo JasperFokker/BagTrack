@@ -1,7 +1,10 @@
 package bagtrack;
 
+import java.sql.ResultSet;
 import javafx.scene.control.Label;
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +14,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,6 +23,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
+import javafx.util.Callback;
 
 /**
  *
@@ -75,10 +80,12 @@ public class Zoekscherm extends Application {
         
         
         //Labels, Textvelden, buttons en comboboxen.
-        int textWidth = 400;
-        int boxWidth = 200;
-        final ComboBox comboBoxKleur = new ComboBox(kleuren);
-        comboBoxKleur.setPrefWidth(boxWidth);
+        final int textWidth = 200;
+        final int boxWidth = 200;
+        final ComboBox comboBoxKleur1 = new ComboBox(kleuren);
+        comboBoxKleur1.setPrefWidth(boxWidth);
+        final ComboBox comboBoxKleur2 = new ComboBox(kleuren);
+        comboBoxKleur2.setPrefWidth(boxWidth);
         final ComboBox comboBoxLuchthaven = new ComboBox(luchthaven);
         comboBoxLuchthaven.setPrefWidth(boxWidth);
         final ComboBox comboBoxSoort = new ComboBox(soort);
@@ -86,13 +93,13 @@ public class Zoekscherm extends Application {
         final ComboBox comboBoxOpdruk = new ComboBox(opdruk);
         comboBoxOpdruk.setPrefWidth(boxWidth);
 
-        TextField textveldNaam = new TextField();
-        textveldNaam.setPrefWidth(textWidth);
+        //TextField textveldNaam = new TextField();
+        //textveldNaam.setPrefWidth(textWidth);
         TextField textveldMerk = new TextField();
         textveldMerk.setPrefWidth(textWidth);
-        TextField textveldGewicht = new TextField();
-        textveldGewicht.setPrefWidth(textWidth);
-        textveldGewicht.setPromptText("In Kilogrammen");
+        TextField textveldLabelnr = new TextField();
+        textveldLabelnr.setPrefWidth(textWidth);
+        
 
         Label label = new Label();
         label.setText("Naam:   ");
@@ -111,7 +118,7 @@ public class Zoekscherm extends Application {
         GridPane.setHalignment(label4, HPos.RIGHT);
 
         Label label5 = new Label();
-        label5.setText("Gewicht:   ");
+        label5.setText("Labelnummer:   ");
         GridPane.setHalignment(label5, HPos.RIGHT);
 
         Label label6 = new Label();
@@ -120,58 +127,105 @@ public class Zoekscherm extends Application {
 
         Label label7 = new Label("Opdruk:   ");
         GridPane.setHalignment(label7, HPos.RIGHT);
+        
+        Label label8 = new Label("      Kleur 2: ");
+        GridPane.setHalignment(label8, HPos.RIGHT);
 
         Button btn = new Button("Zoek");
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                textveldNaam.setText(null);
-                textveldMerk.setText(null);
-                comboBoxKleur.setValue(null);
+                String query = null;
+                
+                String kleur1 = (String)comboBoxKleur1.getValue();
+                String kleur2 = (String)comboBoxKleur2.getValue();
+                String luchthaven = (String)comboBoxLuchthaven.getValue();
+                String soort = (String)comboBoxSoort.getValue();
+                String opdruk = (String)comboBoxOpdruk.getValue();
+                String labelnr = (String)textveldLabelnr.getText();
+                
+                if(textveldLabelnr.getText() == null){
+                    labelnr = "";
+                }
+                
+                if(comboBoxKleur1.getValue() == null){
+                    kleur1 = "";
+                }
+                
+                if(comboBoxKleur2.getValue() == null){
+                    kleur2 = "";
+                }
+                
+                if(comboBoxLuchthaven.getValue() == null){
+                    luchthaven = "";
+                }
+                
+                if(comboBoxSoort.getValue() == null){
+                    soort = "";
+                }
+                
+                if(comboBoxOpdruk.getValue() == null){
+                    opdruk = "";
+                }
+                
+                System.out.println(kleur1);
+                System.out.println("SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%"+
+                        kleur1 +"%' AND kleur2 LIKE '%"+ kleur2 +"%' AND soort LIKE '%"+
+                        soort +"%' AND opdruk LIKE '%"+
+                        opdruk +"%' AND luchthaven LIKE '%"+ luchthaven +"%' AND labelnummer LIKE '%"+
+                        textveldLabelnr.getText() +"%';");
+                query = "SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%"+
+                        kleur1 +"%' AND kleur2 LIKE '%"+ kleur2 +"%' AND soort LIKE '%"+
+                        soort +"%' AND opdruk LIKE '%"+
+                        opdruk +"%' AND luchthaven LIKE '%"+ luchthaven +"%' AND labelnummer LIKE '%"+
+                        textveldLabelnr.getText() +"%';";
+                
+                //textveldNaam.setText(null);
+                textveldMerk.setText("");
+                comboBoxKleur1.setValue(null);
+                comboBoxKleur2.setValue(null);
                 comboBoxLuchthaven.setValue(null);
-                textveldGewicht.setText(null);
+                textveldLabelnr.setText("");
                 comboBoxSoort.setValue(null);
                 comboBoxOpdruk.setValue(null);
 
-                Main.change(Zoekscherm.returnScherm2());
+                Main.change(Zoekscherm.returnScherm2(query));
 
             }
         });
 
         //Dit kan korter, geen idee hoe.
-        scherm.add(label, 1, 1);
-        scherm.add(label2, 1, 2);
-        scherm.add(label3, 1, 3);
-        scherm.add(label4, 1, 4);
-        scherm.add(label5, 1, 5);
-        scherm.add(label6, 1, 6);
-        scherm.add(label7, 1, 7);
-        scherm.add(textveldNaam, 2, 1);
-        scherm.add(textveldMerk, 2, 2);
-        scherm.add(comboBoxKleur, 2, 3);
-        scherm.add(comboBoxLuchthaven, 2, 4);
-        scherm.add(textveldGewicht, 2, 5);
-        scherm.add(comboBoxSoort, 2, 6);
-        scherm.add(comboBoxOpdruk, 2, 7);
+        //scherm.add(label, 1, 1);
+        scherm.add(label2, 1, 3);
+        scherm.add(label3, 1, 4);
+        scherm.add(label4, 1, 1);
+        scherm.add(label5, 1, 6);
+        scherm.add(label6, 1, 2);
+        scherm.add(label7, 1, 5);
+        scherm.add(label8, 3, 4);
+        //scherm.add(textveldNaam, 2, 1);
+        scherm.add(textveldMerk, 2, 3);
+        scherm.add(comboBoxKleur1, 2, 4);
+        scherm.add(comboBoxKleur2, 4, 4);
+        scherm.add(comboBoxLuchthaven, 2, 1);
+        scherm.add(textveldLabelnr, 2, 6);
+        scherm.add(comboBoxSoort, 2, 2);
+        scherm.add(comboBoxOpdruk, 2, 5);
         scherm.add(btn, 2, 8);
 
         return scherm;
 
     }
 
-    public static GridPane returnScherm2() {
+    public static GridPane returnScherm2(String query) {
         //Tabelscherm dat linkt naar Tabeldata.java 
         GridPane scherm2 = new GridPane();
         scherm2.setPrefSize(600, 450);
 
-        ObservableList<Tabeldata> data = FXCollections.observableArrayList(
-                new Tabeldata("Anna de Bruin", "Samsonite", "Blauw", "AMS", "17 KG", "Tas", "Effen Kleur"),
-                new Tabeldata("Johann Visser", "Visconti", "Zwart", "ADA", "21 KG", "Koffer", "Geen"),
-                new Tabeldata("Robin van Dijk", "Lacoste", "Rood", "AMS", "24 KG", "Zak", "Geen"),
-                new Tabeldata("Melissa Watergang", "SuperTrash", "Paars", "KYA", "15 KG", "Koffer", "Patroon"),
-                new Tabeldata("Dennis Bakker", "Converse", "Bruin", "ADA", "12 KG", "Tas", "Geen")
-        );
+        ObservableList<ObservableList> data = FXCollections.observableArrayList();
+        
+        
 
         final Label label = new Label("Zoekresultaten");
         label.setFont(new Font("Arial", 18));
@@ -181,8 +235,55 @@ public class Zoekscherm extends Application {
         table.setEditable(true);
         table.setPrefWidth(1170);
         table.setPrefHeight(680);
+        
+        ResultSet rs = sql.select(query);
+          
+        
+        try{
+            for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
+                //We are using non property style for making dynamic table
+                final int j = i;                
+                System.out.println((String)rs.getMetaData().getColumnName(i+1));
+                if(i == 0){
+                    continue;
+                }
+                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
+                
+                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
+                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
+                        return new SimpleStringProperty(param.getValue().get(j).toString());                        
+                    }                    
+                });
 
+                table.getColumns().addAll(col); 
+                System.out.println("Column ["+i+"] ");
+            }
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        try{
+            while(rs.next()){
+                //Iterate Row
+                ObservableList<String> row = FXCollections.observableArrayList();
+                for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
+                    //Iterate Column
+                    row.add(rs.getString(i));
+                }
+                System.out.println("Row [1] added "+row );
+                data.add(row);
+
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+        
+        
+        
+        
+        
         //Dit werkt, vraag me niet hoe.
+        /*
         TableColumn naamCol = new TableColumn("Naam");
         naamCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Naam"));
 
@@ -203,8 +304,11 @@ public class Zoekscherm extends Application {
 
         TableColumn opdrukCol = new TableColumn("Opdruk");
         opdrukCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Opdruk"));
+        
+        */    
 
         //Verdeeld de colommen gelijk over de gridpane.
+        /*
         naamCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
         merkCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
         kleurCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
@@ -212,9 +316,9 @@ public class Zoekscherm extends Application {
         gewichtCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
         soortCol.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
         opdrukCol.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
-        
+        */
         table.setItems(data);
-        table.getColumns().addAll(naamCol, merkCol, kleurCol, luchthavenCol, gewichtCol, soortCol, opdrukCol);
+        //table.getColumns().addAll(naamCol, merkCol, kleurCol, luchthavenCol, gewichtCol, soortCol, opdrukCol);
 
         scherm2.add(label, 0, 0);
         scherm2.add(table, 0, 1);
