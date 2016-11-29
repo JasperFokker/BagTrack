@@ -169,23 +169,43 @@ GridPane scherm3 = new GridPane();
 
         //Inhoud 1e combobox
         ObservableList<String> kleuren = FXCollections.observableArrayList(
-                "Blauw",
-                "Rood",
                 "Zwart",
+                "Wit",
+                "Grijs",
                 "Bruin",
-                "Paars"
+                "Rood",
+                "Blauw",
+                "Groen",
+                "Geel",
+                "Oranje",
+                "Paars",
+                "Roze"
+
         );
         //Inhoud 2e combobox
         ObservableList<String> luchthaven = FXCollections.observableArrayList(
+                "LHR",
+                "CDG",
+                "FRA",
                 "AMS",
-                "ADA",
-                "KYA"
+                "IST",
+                "MAD",
+                "MUC",
+                "FMC",
+                "LGW",
+                "BCN",
+                "DPS",
+                "HRG",
+                "CUR"
+
         );
         //Inhoud 3e combobox
         ObservableList<String> soort = FXCollections.observableArrayList(
-                "Tas",
                 "Koffer",
+                "Trolley",
+                "Tas",
                 "Zak"
+
         );
         //Inhoud 4e combobox
         ObservableList<String> opdruk = FXCollections.observableArrayList(
@@ -200,8 +220,10 @@ GridPane scherm3 = new GridPane();
         final int boxWidth = 200;
         final ComboBox comboBoxKleur1 = new ComboBox(kleuren);
         comboBoxKleur1.setPrefWidth(boxWidth);
+        comboBoxKleur1.setVisibleRowCount(12);
         final ComboBox comboBoxKleur2 = new ComboBox(kleuren);
         comboBoxKleur2.setPrefWidth(boxWidth);
+        comboBoxKleur2.setVisibleRowCount(12);
         final ComboBox comboBoxLuchthaven = new ComboBox(luchthaven);
         comboBoxLuchthaven.setPrefWidth(boxWidth);
         final ComboBox comboBoxSoort = new ComboBox(soort);

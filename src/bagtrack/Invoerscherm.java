@@ -17,9 +17,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -66,9 +66,20 @@ public class Invoerscherm extends Application {
 
         ObservableList<String> airport
                 = FXCollections.observableArrayList(
+                        "LHR",
+                        "CDG",
+                        "FRA",
                         "AMS",
-                        "ADA",
-                        "KYA"
+                        "IST",
+                        "MAD",
+                        "MUC",
+                        "FMC",
+                        "LGW",
+                        "BCN",
+                        "DPS",
+                        "HRG",
+                        "CUR"
+
                 );
         final ComboBox airportBox = new ComboBox(airport);
         kofferGegevensGrid.add(airportBox, 1, 1);
@@ -80,9 +91,11 @@ public class Invoerscherm extends Application {
 
         ObservableList<String> typeBag
                 = FXCollections.observableArrayList(
-                        "Tas",
                         "Koffer",
+                        "Trolley",
+                        "Tas",
                         "Zak"
+
                 );
         final ComboBox typeBagBox = new ComboBox(typeBag);
         kofferGegevensGrid.add(typeBagBox, 1, 2);
@@ -102,11 +115,21 @@ public class Invoerscherm extends Application {
 
         ObservableList<String> color
                 = FXCollections.observableArrayList(
+                        "Zwart",
+                        "Wit",
+                        "Grijs",
+                        "Bruin",
                         "Rood",
                         "Blauw",
-                        "Geel"
+                        "Groen",
+                        "Geel",
+                        "Oranje",
+                        "Paars",
+                        "Roze"
+
                 );
         final ComboBox color1Box = new ComboBox(color);
+        color1Box.setVisibleRowCount(12);
         kofferGegevensGrid.add(color1Box, 1, 4);
 
         Label color2Label = new Label("Kleur 2");
@@ -114,6 +137,7 @@ public class Invoerscherm extends Application {
         kofferGegevensGrid.add(color2Label, 2, 4);
 
         final ComboBox color2Box = new ComboBox(color);
+        color2Box.setVisibleRowCount(12);
         kofferGegevensGrid.add(color2Box, 3, 4);
 
         //combobox opdruk
@@ -145,15 +169,76 @@ public class Invoerscherm extends Application {
 
         TextField commentField = new TextField();
         kofferGegevensGrid.add(commentField, 1, 7);
-
+        
         //opslaan
         Button save = new Button();
         save.setText("Opslaan");
-        GridPane.setHalignment(save, HPos.LEFT);
+        GridPane.setHalignment(save, HPos.RIGHT);
         kofferGegevensGrid.add(save, 0, 8);
+        
+        //melding
+        Text melding = new Text();
+        melding.setText("Niet alle velden zijn ingevuld.");
+        melding.setFill(Color.RED);
+        melding.setVisible(false);
+        kofferGegevensGrid.add(melding, 0, 9);
+
         save.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                if (dp.getValue() == null) {
+                    dp.setStyle("-fx-background-color: tomato;");
+                    melding.setVisible(true);
+                } else {
+                    dp.setStyle("");
+                }
+                
+                if (airportBox.getValue() == null) {
+                    airportBox.setStyle("-fx-background-color: tomato;");
+                    melding.setVisible(true);
+                } else {
+                    airportBox.setStyle("");
+                }
+                
+                if (typeBagBox.getValue() == null) {
+                    typeBagBox.setStyle("-fx-background-color: tomato;");
+                    melding.setVisible(true);
+                } else {
+                    typeBagBox.setStyle("");
+                }
+                
+                if (brandField.getText().trim().equals("")) {
+                    brandField.setStyle("-fx-background-color: tomato;");
+                    melding.setVisible(true);
+                } else {
+                    brandField.setStyle("");
+                }
+                
+                if (color1Box.getValue() == null) {
+                    color1Box.setStyle("-fx-background-color: tomato;");
+                    melding.setVisible(true);
+                } else {
+                    color1Box.setStyle("");
+                }
+                
+                if (color2Box.getValue() == null) {
+                    color2Box.setStyle("-fx-background-color: tomato;");
+                    melding.setVisible(true);
+                } else {
+                    color2Box.setStyle("");
+                }
+                
+                if (graphicBox.getValue() == null) {
+                    graphicBox.setStyle("-fx-background-color: tomato;");
+                    melding.setVisible(true);
+                } else {
+                    graphicBox.setStyle("");
+                }
+
+                if (dp.getValue() != null && airportBox.getValue() != null && typeBagBox.getValue() != null && brandField.getText() != null && color1Box.getValue() != null && color2Box.getValue() != null && graphicBox.getValue() != null) {
+
+                    melding.setVisible(false);
+
                 System.out.println(dp.getValue());
 
                 String date1 = dp.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -185,7 +270,7 @@ public class Invoerscherm extends Application {
                 
 
             }
-        });
+            }});
 
         //clear
         Button clear = new Button();
