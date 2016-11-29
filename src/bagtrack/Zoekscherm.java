@@ -37,9 +37,8 @@ public class Zoekscherm extends Application {
 
         returnScherm();
     }
-
-    public static GridPane returnScherm3() {
-        GridPane scherm3 = new GridPane();
+public static GridPane returnScherm3() {
+GridPane scherm3 = new GridPane();
         scherm3.setPrefSize(600, 450);
         scherm3.setHgap(1);
         scherm3.setVgap(10);
@@ -50,9 +49,13 @@ public class Zoekscherm extends Application {
         RowConstraints row = new RowConstraints(50);
         scherm3.getRowConstraints().add(row);
 
+        
+        
+        
         //Labels, Textvelden, buttons en comboboxen.
         final int textWidth = 200;
         final int boxWidth = 200;
+        
 
         //TextField textveldNaam = new TextField();
         //textveldNaam.setPrefWidth(textWidth);
@@ -74,6 +77,7 @@ public class Zoekscherm extends Application {
         textveldEmail.setPrefWidth(textWidth);
         TextField textveldVluchtnummer = new TextField();
         textveldVluchtnummer.setPrefWidth(textWidth);
+        
 
         Label label = new Label();
         label.setText("Voornaam   ");
@@ -101,12 +105,12 @@ public class Zoekscherm extends Application {
 
         Label label7 = new Label("Telefoon2   ");
         GridPane.setHalignment(label7, HPos.RIGHT);
-
+        
         Label label8 = new Label("Email   ");
         GridPane.setHalignment(label8, HPos.RIGHT);
-
-        Label label9 = new Label("Vluchtnummer   ");
-        GridPane.setHalignment(label9, HPos.RIGHT);
+        
+        Label label9 = new Label ("Vluchtnummer   ");
+        GridPane.setHalignment(label9,HPos.RIGHT);
 
         Button btn = new Button("Zoek");
 
@@ -114,6 +118,7 @@ public class Zoekscherm extends Application {
             @Override
             public void handle(ActionEvent event) {
                 String query = null;
+                
 
                 Main.change(Zoekscherm.returnScherm2(query));
 
@@ -130,7 +135,7 @@ public class Zoekscherm extends Application {
         scherm3.add(label7, 1, 7);
         scherm3.add(label8, 1, 8);
         scherm3.add(label9, 1, 9);
-
+        
         scherm3.add(textveldVoornaam, 2, 1);
         scherm3.add(textveldVoorletters, 2, 2);
         scherm3.add(textveldAchternaam, 2, 3);
@@ -142,8 +147,7 @@ public class Zoekscherm extends Application {
         scherm3.add(textveldVluchtnummer, 2, 9);
         scherm3.add(btn, 2, 10);
         return scherm3;
-    }
-
+}
     public static TabPane returnScherm() {
 
         //Zoekscherm met dropdown boxen en textfield
@@ -160,40 +164,22 @@ public class Zoekscherm extends Application {
 
         //Inhoud 1e combobox
         ObservableList<String> kleuren = FXCollections.observableArrayList(
-                "Zwart",
-                "Wit",
-                "Grijs",
-                "Bruin",
-                "Rood",
                 "Blauw",
-                "Groen",
-                "Geel",
-                "Oranje",
-                "Paars",
-                "Roze"
+                "Rood",
+                "Zwart",
+                "Bruin",
+                "Paars"
         );
         //Inhoud 2e combobox
         ObservableList<String> luchthaven = FXCollections.observableArrayList(
-                "LHR",
-                "CDG",
-                "FRA",
                 "AMS",
-                "IST",
-                "MAD",
-                "MUC",
-                "FMC",
-                "LGW",
-                "BCN",
-                "DPS",
-                "HRG",
-                "CUR"
-                
+                "ADA",
+                "KYA"
         );
         //Inhoud 3e combobox
         ObservableList<String> soort = FXCollections.observableArrayList(
-                "Koffer",
-                "Trolley",
                 "Tas",
+                "Koffer",
                 "Zak"
         );
         //Inhoud 4e combobox
@@ -202,7 +188,8 @@ public class Zoekscherm extends Application {
                 "Afbeelding",
                 "Patroon"
         );
-
+        
+        
         //Labels, Textvelden, buttons en comboboxen.
         final int textWidth = 200;
         final int boxWidth = 200;
@@ -223,6 +210,7 @@ public class Zoekscherm extends Application {
         textveldMerk.setPrefWidth(textWidth);
         TextField textveldLabelnr = new TextField();
         textveldLabelnr.setPrefWidth(textWidth);
+        
 
         Label label = new Label();
         label.setText("Naam   ");
@@ -250,7 +238,7 @@ public class Zoekscherm extends Application {
 
         Label label7 = new Label("Opdruk   ");
         GridPane.setHalignment(label7, HPos.RIGHT);
-
+        
         Label label8 = new Label("      Kleur 2 ");
         GridPane.setHalignment(label8, HPos.RIGHT);
 
@@ -260,50 +248,50 @@ public class Zoekscherm extends Application {
             @Override
             public void handle(ActionEvent event) {
                 String query = null;
-
-                String kleur1 = (String) comboBoxKleur1.getValue();
-                String kleur2 = (String) comboBoxKleur2.getValue();
-                String luchthaven = (String) comboBoxLuchthaven.getValue();
-                String soort = (String) comboBoxSoort.getValue();
-                String opdruk = (String) comboBoxOpdruk.getValue();
-                String labelnr = (String) textveldLabelnr.getText();
-
-                if (textveldLabelnr.getText() == null) {
+                
+                String kleur1 = (String)comboBoxKleur1.getValue();
+                String kleur2 = (String)comboBoxKleur2.getValue();
+                String luchthaven = (String)comboBoxLuchthaven.getValue();
+                String soort = (String)comboBoxSoort.getValue();
+                String opdruk = (String)comboBoxOpdruk.getValue();
+                String labelnr = (String)textveldLabelnr.getText();
+                
+                if(textveldLabelnr.getText() == null){
                     labelnr = "";
                 }
-
-                if (comboBoxKleur1.getValue() == null) {
+                
+                if(comboBoxKleur1.getValue() == null){
                     kleur1 = "";
                 }
-
-                if (comboBoxKleur2.getValue() == null) {
+                
+                if(comboBoxKleur2.getValue() == null){
                     kleur2 = "";
                 }
-
-                if (comboBoxLuchthaven.getValue() == null) {
+                
+                if(comboBoxLuchthaven.getValue() == null){
                     luchthaven = "";
                 }
-
-                if (comboBoxSoort.getValue() == null) {
+                
+                if(comboBoxSoort.getValue() == null){
                     soort = "";
                 }
-
-                if (comboBoxOpdruk.getValue() == null) {
+                
+                if(comboBoxOpdruk.getValue() == null){
                     opdruk = "";
                 }
-
+                
                 System.out.println(kleur1);
-                System.out.println("SELECT * FROM bagage WHERE merk LIKE '%" + textveldMerk.getText() + "%' AND kleur1 LIKE '%"
-                        + kleur1 + "%' AND kleur2 LIKE '%" + kleur2 + "%' AND soort LIKE '%"
-                        + soort + "%' AND opdruk LIKE '%"
-                        + opdruk + "%' AND luchthaven LIKE '%" + luchthaven + "%' AND labelnummer LIKE '%"
-                        + textveldLabelnr.getText() + "%';");
-                query = "SELECT * FROM bagage WHERE merk LIKE '%" + textveldMerk.getText() + "%' AND kleur1 LIKE '%"
-                        + kleur1 + "%' AND kleur2 LIKE '%" + kleur2 + "%' AND soort LIKE '%"
-                        + soort + "%' AND opdruk LIKE '%"
-                        + opdruk + "%' AND luchthaven LIKE '%" + luchthaven + "%' AND labelnummer LIKE '%"
-                        + textveldLabelnr.getText() + "%';";
-
+                System.out.println("SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%"+
+                        kleur1 +"%' AND kleur2 LIKE '%"+ kleur2 +"%' AND soort LIKE '%"+
+                        soort +"%' AND opdruk LIKE '%"+
+                        opdruk +"%' AND luchthaven LIKE '%"+ luchthaven +"%' AND labelnummer LIKE '%"+
+                        textveldLabelnr.getText() +"%';");
+                query = "SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%"+
+                        kleur1 +"%' AND kleur2 LIKE '%"+ kleur2 +"%' AND soort LIKE '%"+
+                        soort +"%' AND opdruk LIKE '%"+
+                        opdruk +"%' AND luchthaven LIKE '%"+ luchthaven +"%' AND labelnummer LIKE '%"+
+                        textveldLabelnr.getText() +"%';";
+                
                 //textveldNaam.setText(null);
                 textveldMerk.setText("");
                 comboBoxKleur1.setValue(null);
@@ -336,8 +324,11 @@ public class Zoekscherm extends Application {
         scherm.add(comboBoxSoort, 2, 2);
         scherm.add(comboBoxOpdruk, 2, 5);
         scherm.add(btn, 2, 8);
+        
+        
 
         TabPane ZoekTabs = new TabPane();
+        
 
         Tab KoffersZoeken = new Tab();
         KoffersZoeken.setText("Koffergegevens");
@@ -345,13 +336,19 @@ public class Zoekscherm extends Application {
         Tab PersoonZoeken = new Tab();
         PersoonZoeken.setText("Persoongegevens");
         PersoonZoeken.setClosable(false);
-
+        
+        
+        
         //kofferGegevensBox.getChildren().add(kofferGegevensGrid);
         //persoonGegevensBox.getChildren().add(persoonGegevensGrid);
         KoffersZoeken.setContent(scherm);
-
+        
+        
         PersoonZoeken.setContent(returnScherm3());
         ZoekTabs.getTabs().addAll(KoffersZoeken, PersoonZoeken);
+        
+        
+        
 
         return ZoekTabs;
 
@@ -363,6 +360,8 @@ public class Zoekscherm extends Application {
         scherm2.setPrefSize(600, 450);
 
         ObservableList<ObservableList> data = FXCollections.observableArrayList();
+        
+        
 
         final Label label = new Label("Zoekresultaten");
         label.setFont(new Font("Arial", 18));
@@ -372,47 +371,53 @@ public class Zoekscherm extends Application {
         table.setEditable(true);
         table.setPrefWidth(1170);
         table.setPrefHeight(680);
-
+        
         ResultSet rs = sql.select(query);
-
-        try {
-            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+          
+        
+        try{
+            for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
                 //We are using non property style for making dynamic table
-                final int j = i;
-                System.out.println((String) rs.getMetaData().getColumnName(i + 1));
-                if (i == 0) {
+                final int j = i;                
+                System.out.println((String)rs.getMetaData().getColumnName(i+1));
+                if(i == 0){
                     continue;
                 }
-                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
-
-                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
-                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {
-                        return new SimpleStringProperty(param.getValue().get(j).toString());
-                    }
+                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
+                
+                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
+                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
+                        return new SimpleStringProperty(param.getValue().get(j).toString());                        
+                    }                    
                 });
 
-                table.getColumns().addAll(col);
-                System.out.println("Column [" + i + "] ");
+                table.getColumns().addAll(col); 
+                System.out.println("Column ["+i+"] ");
             }
-        } catch (Exception e) {
+        } catch(Exception e) {
             System.out.println(e);
         }
-        try {
-            while (rs.next()) {
+        try{
+            while(rs.next()){
                 //Iterate Row
                 ObservableList<String> row = FXCollections.observableArrayList();
-                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
                     //Iterate Column
                     row.add(rs.getString(i));
                 }
-                System.out.println("Row [1] added " + row);
+                System.out.println("Row [1] added "+row );
                 data.add(row);
 
             }
-        } catch (Exception e) {
+        }catch(Exception e){
             System.out.println(e);
         }
-
+        
+        
+        
+        
+        
+        
         //Dit werkt, vraag me niet hoe.
         /*
         TableColumn naamCol = new TableColumn("Naam");
@@ -436,7 +441,8 @@ public class Zoekscherm extends Application {
         TableColumn opdrukCol = new TableColumn("Opdruk");
         opdrukCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Opdruk"));
         
-         */
+        */    
+
         //Verdeeld de colommen gelijk over de gridpane.
         /*
         naamCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
@@ -446,7 +452,7 @@ public class Zoekscherm extends Application {
         gewichtCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
         soortCol.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
         opdrukCol.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
-         */
+        */
         table.setItems(data);
         //table.getColumns().addAll(naamCol, merkCol, kleurCol, luchthavenCol, gewichtCol, soortCol, opdrukCol);
 
@@ -456,5 +462,8 @@ public class Zoekscherm extends Application {
         return scherm2;
 
     }
+    
+    
 
 }
+
