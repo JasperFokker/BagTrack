@@ -494,61 +494,17 @@ GridPane scherm3 = new GridPane();
         });
         
         
-        
-        
-        
-        
-        
-        
-        
-        //Dit werkt, vraag me niet hoe.
-        /*
-        TableColumn naamCol = new TableColumn("Naam");
-        naamCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Naam"));
-
-        TableColumn merkCol = new TableColumn("Merk");
-        merkCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Merk"));
-
-        TableColumn kleurCol = new TableColumn("Kleur");
-        kleurCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Kleur"));
-
-        TableColumn luchthavenCol = new TableColumn("Luchthaven");
-        luchthavenCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Luchthaven"));
-
-        TableColumn gewichtCol = new TableColumn("Gewicht");
-        gewichtCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Gewicht"));
-
-        TableColumn soortCol = new TableColumn("Soort");
-        soortCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Soort"));
-
-        TableColumn opdrukCol = new TableColumn("Opdruk");
-        opdrukCol.setCellValueFactory(new PropertyValueFactory<Tabeldata, String>("Opdruk"));
-        
-        */    
-
-        //Verdeeld de colommen gelijk over de gridpane.
-        /*
-        naamCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
-        merkCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
-        kleurCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
-        luchthavenCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
-        gewichtCol.prefWidthProperty().bind(table.widthProperty().multiply(0.14));
-        soortCol.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
-        opdrukCol.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
-        */
         table.setItems(data);
-        //table.getColumns().addAll(naamCol, merkCol, kleurCol, luchthavenCol, gewichtCol, soortCol, opdrukCol);
-
         
-        //scherm2.add(matchOld, 1, 3);
+        scherm2.add(matchOld, 1, 3);
         scherm2.add(label, 0, 0);
         scherm2.add(table, 0, 1);
-        scherm2.add(hbox, 0, 3);
+        scherm2.add(hbox, 0, 2);
         
         hbox.getChildren().addAll(matchNew,matchOld);
         
         border.setCenter(scherm2);
-        border.setRight(hbox);
+        
 
         return scherm2;
 
