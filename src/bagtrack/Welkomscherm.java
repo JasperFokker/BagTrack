@@ -2,8 +2,7 @@
  * Dit is het scherm dat de gebruiker te zien krijgt als zij/hij inlogt.
  * Het scherm bestaat uit het Corendon logo en een welkomsbericht.
  * @author Team Twee
- */ 
-
+ */
 package bagtrack;
 
 import java.awt.Dimension;
@@ -13,21 +12,21 @@ import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import static javafx.scene.paint.Color.RED;
 import static javafx.scene.paint.Color.WHITE;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Welkomscherm extends Application
-{
+public class Welkomscherm extends Application {
+
     @Override
-    public void start(Stage primaryStage)
-    {
+    public void start(Stage primaryStage) {
         returnScherm();
     }
 
-    public static GridPane returnScherm()
-    {
+    public static GridPane returnScherm() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int logoWidth = (int) (screenSize.getWidth() * 0.45);
         int logoHeight = (int) (screenSize.getHeight() * 0.45);
@@ -45,9 +44,17 @@ public class Welkomscherm extends Application
         welkomBericht.setFont(Font.font("Verdana", 40));
         welkomBericht.setFill(WHITE);
 
+        Line line = new Line();
+        line.setStartX(50);
+        line.setStartY(5);
+        line.setEndX(50);
+        line.setEndY(5);
+        line.setFill(RED);
+
         scherm.setAlignment(Pos.CENTER);
         scherm.add(welkomBericht, 0, 0);
         scherm.add(logoView, 0, 1);
+        scherm.add(line, 0, 2);
 
         return scherm;
     }

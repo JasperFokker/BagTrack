@@ -35,20 +35,17 @@ public class Invoerscherm extends Application {
 
     public static TabPane returnScherm() {
 
-
         GridPane kofferGegevensGrid = new GridPane();
         GridPane persoonGegevensGrid = new GridPane();
-        
-        
-        
+
         kofferGegevensGrid.setHgap(10);
         kofferGegevensGrid.setVgap(10);
         kofferGegevensGrid.setPadding(new Insets(25, 25, 25, 25));
-        
+
         persoonGegevensGrid.setHgap(10);
         persoonGegevensGrid.setVgap(10);
         persoonGegevensGrid.setPadding(new Insets(25, 25, 25, 25));
-        
+
         //datum
         Label dateLabel = new Label("Datum");
         GridPane.setHalignment(dateLabel, HPos.RIGHT);
@@ -66,9 +63,19 @@ public class Invoerscherm extends Application {
 
         ObservableList<String> airport
                 = FXCollections.observableArrayList(
+                        "LHR",
+                        "CDG",
+                        "FRA",
                         "AMS",
-                        "ADA",
-                        "KYA"
+                        "IST",
+                        "MAD",
+                        "MUC",
+                        "FMC",
+                        "LGW",
+                        "BCN",
+                        "DPS",
+                        "HRG",
+                        "CUR"
                 );
         final ComboBox airportBox = new ComboBox(airport);
         kofferGegevensGrid.add(airportBox, 1, 1);
@@ -80,8 +87,9 @@ public class Invoerscherm extends Application {
 
         ObservableList<String> typeBag
                 = FXCollections.observableArrayList(
-                        "Tas",
                         "Koffer",
+                        "Trolley",
+                        "Tas",
                         "Zak"
                 );
         final ComboBox typeBagBox = new ComboBox(typeBag);
@@ -102,9 +110,17 @@ public class Invoerscherm extends Application {
 
         ObservableList<String> color
                 = FXCollections.observableArrayList(
+                        "Zwart",
+                        "Wit",
+                        "Grijs",
+                        "Bruin",
                         "Rood",
                         "Blauw",
-                        "Geel"
+                        "Groen",
+                        "Geel",
+                        "Oranje",
+                        "Paars",
+                        "Roze"
                 );
         final ComboBox color1Box = new ComboBox(color);
         kofferGegevensGrid.add(color1Box, 1, 4);
@@ -170,19 +186,15 @@ public class Invoerscherm extends Application {
                     System.out.println(e);
                 }
 
-                
-                
-                
-                System.out.println("INSERT INTO bagtrack.bagage (idbagage,merk,kleur1,kleur2,soort,opdruk,luchthaven,datum,labelnummer,opmerkingen) VALUES ('"+ 50 +"','" + date1 + "','" +
-                        merk + "','" + color1Box.getValue() + "','"+ color2Box.getValue() + "','"+ typeBagBox.getValue() +
-                        "','"+ graphicBox.getValue() + "','"+ airportBox.getValue() + "','" + date1 + "','"+ numberField.getText() +
-                        "','"+ commentField.getText() +"');");
-                
-                sql.insert("INSERT INTO bagtrack.bagage (idbagage,merk,kleur1,kleur2,soort,opdruk,luchthaven,datum,labelnummer,opmerkingen) VALUES ('"+ (id+1) +"','" + 
-                        merk + "','" + color1Box.getValue() + "','"+ color2Box.getValue() + "','"+ typeBagBox.getValue() +
-                        "','"+ graphicBox.getValue() + "','"+ airportBox.getValue() + "','" + date1 + "','"+ numberField.getText() +
-                        "','"+ commentField.getText() +"');");
-                
+                System.out.println("INSERT INTO bagtrack.bagage (idbagage,merk,kleur1,kleur2,soort,opdruk,luchthaven,datum,labelnummer,opmerkingen) VALUES ('" + 50 + "','" + date1 + "','"
+                        + merk + "','" + color1Box.getValue() + "','" + color2Box.getValue() + "','" + typeBagBox.getValue()
+                        + "','" + graphicBox.getValue() + "','" + airportBox.getValue() + "','" + date1 + "','" + numberField.getText()
+                        + "','" + commentField.getText() + "');");
+
+                sql.insert("INSERT INTO bagtrack.bagage (idbagage,merk,kleur1,kleur2,soort,opdruk,luchthaven,datum,labelnummer,opmerkingen) VALUES ('" + (id + 1) + "','"
+                        + merk + "','" + color1Box.getValue() + "','" + color2Box.getValue() + "','" + typeBagBox.getValue()
+                        + "','" + graphicBox.getValue() + "','" + airportBox.getValue() + "','" + date1 + "','" + numberField.getText()
+                        + "','" + commentField.getText() + "');");
 
             }
         });
@@ -205,88 +217,87 @@ public class Invoerscherm extends Application {
                 commentField.setText(null);
             }
         });
-        
+
         //Voornaam
         Label voornaamLabel = new Label("Voornaam");
         GridPane.setHalignment(voornaamLabel, HPos.RIGHT);
         persoonGegevensGrid.add(voornaamLabel, 0, 0);
-        
+
         TextField voornaamField = new TextField();
         persoonGegevensGrid.add(voornaamField, 1, 0);
-        
+
         //Voorletters
         Label voorlettersLabel = new Label("Voorletters");
         GridPane.setHalignment(voorlettersLabel, HPos.RIGHT);
         persoonGegevensGrid.add(voorlettersLabel, 0, 1);
-        
+
         TextField voorlettersField = new TextField();
         persoonGegevensGrid.add(voorlettersField, 1, 1);
-        
+
         //achternaam
         Label achternaamLabel = new Label("Achternaam");
         GridPane.setHalignment(achternaamLabel, HPos.RIGHT);
         persoonGegevensGrid.add(achternaamLabel, 0, 2);
-        
+
         TextField achternaamField = new TextField();
         persoonGegevensGrid.add(achternaamField, 1, 2);
-        
+
         //adress
         Label adressLabel = new Label("Adres");
         GridPane.setHalignment(adressLabel, HPos.RIGHT);
         persoonGegevensGrid.add(adressLabel, 0, 3);
-        
+
         TextField adressField = new TextField();
         persoonGegevensGrid.add(adressField, 1, 3);
-        
+
         //vakantieadress
         Label vakantieAdressLabel = new Label("Vakantieadres");
         GridPane.setHalignment(vakantieAdressLabel, HPos.RIGHT);
         persoonGegevensGrid.add(vakantieAdressLabel, 0, 4);
-        
+
         TextField vakantieAdressField = new TextField();
         persoonGegevensGrid.add(vakantieAdressField, 1, 4);
-        
+
         //telefoon1
         Label phoneLabel = new Label("Telefoon 1");
         GridPane.setHalignment(phoneLabel, HPos.RIGHT);
         persoonGegevensGrid.add(phoneLabel, 0, 5);
-        
+
         TextField phoneField = new TextField();
         persoonGegevensGrid.add(phoneField, 1, 5);
-        
+
         //telefoon2
         Label phone2Label = new Label("Telefoon 2");
         GridPane.setHalignment(phone2Label, HPos.RIGHT);
         persoonGegevensGrid.add(phone2Label, 0, 6);
-        
+
         TextField phone2Field = new TextField();
         persoonGegevensGrid.add(phone2Field, 1, 6);
-        
+
         //email
         Label emailLabel = new Label("Email");
         GridPane.setHalignment(emailLabel, HPos.RIGHT);
         persoonGegevensGrid.add(emailLabel, 0, 7);
-        
+
         TextField emailField = new TextField();
         persoonGegevensGrid.add(emailField, 1, 7);
-        
+
         //vluchtnummer
         Label vluchtnummerLabel = new Label("Vluchtnummer");
         GridPane.setHalignment(vluchtnummerLabel, HPos.RIGHT);
         persoonGegevensGrid.add(vluchtnummerLabel, 0, 8);
-        
+
         TextField vluchtnummerField = new TextField();
         persoonGegevensGrid.add(vluchtnummerField, 1, 8);
-        
-        
+
         //opmerkingen
         Label persoonCommentLabel = new Label("Opmerkingen");
         GridPane.setHalignment(persoonCommentLabel, HPos.RIGHT);
         persoonGegevensGrid.add(persoonCommentLabel, 0, 9);
-        
+
         TextField persoonCommentField = new TextField();
         persoonGegevensGrid.add(persoonCommentField, 1, 9);
-        
+
         //clear
         Button clearPersoon = new Button();
         clearPersoon.setText("Leegmaken");
@@ -307,9 +318,8 @@ public class Invoerscherm extends Application {
                 persoonCommentField.setText(null);
             }
         });
-        
+
         TabPane invoerTabs = new TabPane();
-        
 
         Tab kofferGegevens = new Tab();
         kofferGegevens.setText("Koffergegevens");
@@ -317,14 +327,10 @@ public class Invoerscherm extends Application {
         Tab persoonGegevens = new Tab();
         persoonGegevens.setText("Persoongegevens");
         persoonGegevens.setClosable(false);
-        
+
         kofferGegevens.setContent(kofferGegevensGrid);
         persoonGegevens.setContent(persoonGegevensGrid);
         invoerTabs.getTabs().addAll(kofferGegevens, persoonGegevens);
-        
-        
-        
-       
 
         return invoerTabs;
     }
