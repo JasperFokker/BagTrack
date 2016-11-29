@@ -73,6 +73,7 @@ public class Main extends Application {
         Button formulierButton = new Button();
         
         statistiekenButton.setText("Statistieken");
+        statistiekenButton.getStyleClass().add("leftmenubuttons");
         statistiekenButton.setGraphic(new ImageView(Statistieken));
         statistiekenButton.setContentDisplay(ContentDisplay.TOP);
         statistiekenButton.setPrefSize(menuwidth, 112.5);
@@ -81,15 +82,16 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(statistieken);
-                statistiekenButton.setStyle("-fx-background-color: #ff0000; ");
-                zoekButton.setStyle("-fx-background-color: #d81e05; ");
-                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
-                helpButton.setStyle("-fx-background-color: #d81e05; ");
-                formulierButton.setStyle("-fx-background-color: #d81e05; ");
+//                statistiekenButton.setStyle("-fx-background-color: #ff0000; ");
+//                zoekButton.setStyle("-fx-background-color: #d81e05; ");
+//                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
+//                helpButton.setStyle("-fx-background-color: #d81e05; ");
+//                formulierButton.setStyle("-fx-background-color: #d81e05; ");
             }
         });
 
         zoekButton.setText("Zoeken");
+        zoekButton.getStyleClass().add("leftmenubuttons");
         zoekButton.setGraphic(new ImageView(Zoom));
         zoekButton.setContentDisplay(ContentDisplay.TOP);
         zoekButton.setPrefSize(menuwidth, 112.5);
@@ -98,16 +100,18 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(zoekScherm);
-                zoekButton.setStyle("-fx-background-color: #ff0000; ");
-                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
-                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
-                helpButton.setStyle("-fx-background-color: #d81e05; ");
-                formulierButton.setStyle("-fx-background-color: #d81e05; ");
+                
+//                zoekButton.setStyle("-fx-background-color: #ff0000; ");
+//                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
+//                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
+//                helpButton.setStyle("-fx-background-color: #d81e05; ");
+//                formulierButton.setStyle("-fx-background-color: #d81e05; ");
             }
         });
         
         
         instellingenButton.setText("Instellingen");
+        instellingenButton.getStyleClass().add("leftmenubuttons");
         instellingenButton.setGraphic(new ImageView(Instellingen));
         instellingenButton.setContentDisplay(ContentDisplay.TOP);
         instellingenButton.setPrefSize(menuwidth, 112.5);
@@ -117,16 +121,17 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(instellingen);
-                instellingenButton.setStyle("-fx-background-color: #ff0000; ");
-                zoekButton.setStyle("-fx-background-color: #d81e05; ");
-                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
-                helpButton.setStyle("-fx-background-color: #d81e05; ");
-                formulierButton.setStyle("-fx-background-color: #d81e05; ");
+//                instellingenButton.setStyle("-fx-background-color: #ff0000; ");
+//                zoekButton.setStyle("-fx-background-color: #d81e05; ");
+//                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
+//                helpButton.setStyle("-fx-background-color: #d81e05; ");
+//                formulierButton.setStyle("-fx-background-color: #d81e05; ");
             }
         });
 
         
         helpButton.setText("Help");
+        helpButton.getStyleClass().add("leftmenubuttons");
         helpButton.setGraphic(new ImageView(Help));
         helpButton.setContentDisplay(ContentDisplay.TOP);
         helpButton.setPrefSize(menuwidth, 112.5);
@@ -135,16 +140,17 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(helpScherm);
-                helpButton.setStyle("-fx-background-color: #ff0000; ");
-                zoekButton.setStyle("-fx-background-color: #d81e05; ");
-                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
-                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
-                formulierButton.setStyle("-fx-background-color: #d81e05; ");
+//                helpButton.setStyle("-fx-background-color: #ff0000; ");
+//                zoekButton.setStyle("-fx-background-color: #d81e05; ");
+//                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
+//                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
+//                formulierButton.setStyle("-fx-background-color: #d81e05; ");
             }
         });
 
         
         formulierButton.setText("Invoer");
+        formulierButton.getStyleClass().add("leftmenubuttons");
         formulierButton.setGraphic(new ImageView(Formulier));
         formulierButton.setContentDisplay(ContentDisplay.TOP);
         formulierButton.setPrefSize(menuwidth, 112.5);
@@ -153,11 +159,11 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(formulierScherm);
-                formulierButton.setStyle("-fx-background-color: #ff0000; ");               
-                zoekButton.setStyle("-fx-background-color: #d81e05; ");
-                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
-                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
-                helpButton.setStyle("-fx-background-color: #d81e05; ");
+//                formulierButton.setStyle("-fx-background-color: #ff0000; ");               
+//                zoekButton.setStyle("-fx-background-color: #d81e05; ");
+//                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
+//                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
+//                helpButton.setStyle("-fx-background-color: #d81e05; ");
                
             }
         });
