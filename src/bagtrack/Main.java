@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -80,11 +81,11 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(statistieken);
-                zoekButton.setDisable(false);
-                statistiekenButton.setDisable(true);
-                instellingenButton.setDisable(false);
-                helpButton.setDisable(false);
-                formulierButton.setDisable(false);
+                statistiekenButton.setStyle("-fx-background-color: #ff0000; ");
+                zoekButton.setStyle("-fx-background-color: #d81e05; ");
+                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
+                helpButton.setStyle("-fx-background-color: #d81e05; ");
+                formulierButton.setStyle("-fx-background-color: #d81e05; ");
             }
         });
 
@@ -97,11 +98,11 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(zoekScherm);
-                zoekButton.setDisable(true);
-                statistiekenButton.setDisable(false);
-                instellingenButton.setDisable(false);
-                helpButton.setDisable(false);
-                formulierButton.setDisable(false);
+                zoekButton.setStyle("-fx-background-color: #ff0000; ");
+                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
+                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
+                helpButton.setStyle("-fx-background-color: #d81e05; ");
+                formulierButton.setStyle("-fx-background-color: #d81e05; ");
             }
         });
         
@@ -116,11 +117,11 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(instellingen);
-                zoekButton.setDisable(false);
-                statistiekenButton.setDisable(false);
-                instellingenButton.setDisable(true);
-                helpButton.setDisable(false);
-                formulierButton.setDisable(false);
+                instellingenButton.setStyle("-fx-background-color: #ff0000; ");
+                zoekButton.setStyle("-fx-background-color: #d81e05; ");
+                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
+                helpButton.setStyle("-fx-background-color: #d81e05; ");
+                formulierButton.setStyle("-fx-background-color: #d81e05; ");
             }
         });
 
@@ -134,11 +135,11 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(helpScherm);
-                zoekButton.setDisable(false);
-                statistiekenButton.setDisable(false);
-                instellingenButton.setDisable(false);
-                helpButton.setDisable(true);
-                formulierButton.setDisable(false);
+                helpButton.setStyle("-fx-background-color: #ff0000; ");
+                zoekButton.setStyle("-fx-background-color: #d81e05; ");
+                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
+                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
+                formulierButton.setStyle("-fx-background-color: #d81e05; ");
             }
         });
 
@@ -152,11 +153,12 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(formulierScherm);
-                zoekButton.setDisable(false);
-                statistiekenButton.setDisable(false);
-                instellingenButton.setDisable(false);
-                helpButton.setDisable(false);
-                formulierButton.setDisable(true);
+                formulierButton.setStyle("-fx-background-color: #ff0000; ");               
+                zoekButton.setStyle("-fx-background-color: #d81e05; ");
+                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
+                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
+                helpButton.setStyle("-fx-background-color: #d81e05; ");
+               
             }
         });
 

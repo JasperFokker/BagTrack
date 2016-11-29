@@ -12,6 +12,14 @@
     -fx-faint-focus-color: transparent; 
 }
 
+.button-zoekButton:hover{
+       -fx-background-color: #ff0000;
+}
+
+
+
+
+
 .scroll-pane{
     -fx-background-color: #333333;
 }

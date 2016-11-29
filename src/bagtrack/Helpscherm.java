@@ -45,23 +45,23 @@ public class Helpscherm extends Application {
 
         TitledPane vraag1 = new TitledPane();
         vraag1.setText("Het zoeken naar koffers.");
-        vraag1.setContent(new Text("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\nbbbbbbbbbbbbbbbbbbbbbbbbb"
-                + "\ncccccccccccccccccccccccccccccccccccc\n\ndddddddddddddddddddddddddddddddddddddd"
-                + "\neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"));
+        vraag1.setContent(new Text("Klik op de knop \"Zoeken\" en vul de invoervelden in waarop u wilt zoeken."
+                + " Druk vervolgens op \"Zoek\" en er wordt een lijst met koffers weergegeven die voldoen aan de informatie"
+                + " die u ingevuld heeft in de invoervelden."));
         vraag1.setExpanded(false);
 
         TitledPane vraag2 = new TitledPane();
-        vraag2.setText("Het invoeren van koffers");
-        vraag2.setContent(new Text("\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\nbbbbbbbbbbbbbbbbbbbbbbbbb\"\n"
-                + "                + \"\\ncccccccccccccccccccccccccccccccccccc\\n\\ndddddddddddddddddddddddddddddddddddddd\"\n"
-                + "                + \"\\neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\""));
+        vraag2.setText("Het invoeren van koffers.");
+        vraag2.setContent(new Text("Klik op de knop \"Invoer\" en vul de invoer velden in waarvan u beschikt over de juiste informatie"
+                + ". Velden waar u geen informatie over heeft, kunt u leeglaten. Klik vervolgens op \"Opslaan\" en de door u ingevulde"
+                + " invoervelden worden opgeslagen in de database."));
         vraag2.setExpanded(false);
 
         TitledPane vraag3 = new TitledPane();
-        vraag3.setText("Het spelen van kofferclicker");
-        vraag3.setContent(new Text("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\nbbbbbbbbbbbbbbbbbbbbbbbbb"
-                + "\ncccccccccccccccccccccccccccccccccccc\n\ndddddddddddddddddddddddddddddddddddddd"
-                + "\neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"));
+        vraag3.setText("Het inzien van de statistieken.");
+        vraag3.setContent(new Text("Als u als manager bent inglogd, kunt u de statistieken inzien. "
+                + "Klik op de knop \"Statistieken\" om naar de statistieken te gaan. Hier vindt u verschillende grafieken"
+                + "die informatie verschaffen over het aantal gevonden koffers, waar de koffers gevonden en verloren zijn en andere statistieken"));
         vraag3.setExpanded(false);
 
         TitledPane vraag4 = new TitledPane();
@@ -89,9 +89,6 @@ public class Helpscherm extends Application {
         faq.addRow(1, new Text(""));
         faq.addRow(2, new Text(""));
         faq.addRow(3, new Text(""));
-        faq.addRow(5, new Text(""));
-        faq.addRow(6, new Text(""));
-        faq.addRow(7, new Text(""));
         faq.addRow(8, new Text(""));
         faq.addRow(15, new Text(""));
         faq.addRow(16, new Text(""));
