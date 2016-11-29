@@ -64,7 +64,7 @@ public class Main extends Application {
         Image Help = new Image("info_icon&48.png");
         Image Statistieken = new Image ("chart_line_icon&48.png");
         Image Instellingen = new Image ("cog_icon&48.png");
-        Image Logo = new Image ("titel_simpel.png", menuwidth * 1.50, w*0.035, false, false);
+        Image Logo = new Image ("titel_simpel.png", menuwidth * 1.50, w*0.04, false, false);
         
         Button statistiekenButton = new Button();
         Button zoekButton = new Button();
