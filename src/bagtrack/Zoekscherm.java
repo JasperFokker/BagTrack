@@ -19,8 +19,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
@@ -37,7 +39,7 @@ public class Zoekscherm extends Application {
 
         returnScherm();
     }
-public static GridPane returnScherm3() {
+public static GridPane returnScherm3(String idbagage) {
 GridPane scherm3 = new GridPane();
         scherm3.setPrefSize(600, 450);
         scherm3.setHgap(1);
@@ -371,7 +373,7 @@ GridPane scherm3 = new GridPane();
         KoffersZoeken.setContent(scherm);
         
         
-        PersoonZoeken.setContent(returnScherm3());
+        PersoonZoeken.setContent(returnScherm3(""));
         ZoekTabs.getTabs().addAll(KoffersZoeken, PersoonZoeken);
         
         
@@ -383,13 +385,15 @@ GridPane scherm3 = new GridPane();
 
     public static GridPane returnScherm2(String query) {
         //Tabelscherm dat linkt naar Tabeldata.java 
+        HBox hbox = new HBox();
+        BorderPane border = new BorderPane();
         GridPane scherm2 = new GridPane();
         scherm2.setPrefSize(600, 450);
 
         ObservableList<ObservableList> data = FXCollections.observableArrayList();
         
         
-
+        
         final Label label = new Label("Zoekresultaten");
         label.setFont(new Font("Arial", 18));
         GridPane.setHalignment(label, HPos.CENTER);
@@ -400,6 +404,7 @@ GridPane scherm3 = new GridPane();
         table.setPrefHeight(680);
         
         ResultSet rs = sql.select(query);
+        
           
         
         try{
@@ -439,6 +444,57 @@ GridPane scherm3 = new GridPane();
         }catch(Exception e){
             System.out.println(e);
         }
+        
+        
+        Button matchNew = new Button();
+        matchNew.setText("Match Nieuw");
+        
+        matchNew.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                int index = table.getSelectionModel().selectedIndexProperty().get();
+                int idbagage = 0;
+                System.out.println(index);
+                
+                try{
+                    rs.absolute(index+1);
+                    idbagage = rs.getInt("idbagage");
+                    
+                    Main.change(Invoerscherm.matchPersoon(Integer.toString(idbagage)));
+                    
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+                
+            }
+        });
+        
+        Button matchOld = new Button();
+        matchOld.setText("Match Oud");
+        
+        matchOld.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                int index = table.getSelectionModel().selectedIndexProperty().get();
+                int idbagage = 0;
+                System.out.println(index);
+                
+                try{
+                    rs.absolute(index+1);
+                    idbagage = rs.getInt("idbagage");
+                    
+                    returnScherm3(Integer.toString(idbagage));
+                    
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+                
+            }
+        });
+        
+        
+        
         
         
         
@@ -483,8 +539,16 @@ GridPane scherm3 = new GridPane();
         table.setItems(data);
         //table.getColumns().addAll(naamCol, merkCol, kleurCol, luchthavenCol, gewichtCol, soortCol, opdrukCol);
 
+        
+        //scherm2.add(matchOld, 1, 3);
         scherm2.add(label, 0, 0);
         scherm2.add(table, 0, 1);
+        scherm2.add(hbox, 0, 3);
+        
+        hbox.getChildren().addAll(matchNew,matchOld);
+        
+        border.setCenter(scherm2);
+        border.setRight(hbox);
 
         return scherm2;
 

@@ -272,6 +272,8 @@ public class Invoerscherm extends Application {
             }
             }});
 
+        
+        
         //clear
         Button clear = new Button();
         clear.setText("Leegmaken");
@@ -291,6 +293,9 @@ public class Invoerscherm extends Application {
             }
         });
         
+        
+        
+    
         //Voornaam
         Label voornaamLabel = new Label("Voornaam");
         GridPane.setHalignment(voornaamLabel, HPos.RIGHT);
@@ -447,5 +452,152 @@ public class Invoerscherm extends Application {
        
 
         return invoerTabs;
+    }
+    
+    public static GridPane matchPersoon(String idbagage){
+         //Voornaam
+         
+        GridPane persoonGegevensGrid = new GridPane();
+        
+        Label lblid = new Label(idbagage);
+        persoonGegevensGrid.add(lblid, 0, 20);
+        
+        Label voornaamLabel = new Label("Voornaam");
+        GridPane.setHalignment(voornaamLabel, HPos.RIGHT);
+        persoonGegevensGrid.add(voornaamLabel, 0, 0);
+        
+        TextField voornaamField = new TextField();
+        persoonGegevensGrid.add(voornaamField, 1, 0);
+        
+        //Voorletters
+        Label voorlettersLabel = new Label("Voorletters");
+        GridPane.setHalignment(voorlettersLabel, HPos.RIGHT);
+        persoonGegevensGrid.add(voorlettersLabel, 0, 1);
+        
+        TextField voorlettersField = new TextField();
+        persoonGegevensGrid.add(voorlettersField, 1, 1);
+        
+        //achternaam
+        Label achternaamLabel = new Label("Achternaam");
+        GridPane.setHalignment(achternaamLabel, HPos.RIGHT);
+        persoonGegevensGrid.add(achternaamLabel, 0, 2);
+        
+        TextField achternaamField = new TextField();
+        persoonGegevensGrid.add(achternaamField, 1, 2);
+        
+        //adress
+        Label adressLabel = new Label("Adres");
+        GridPane.setHalignment(adressLabel, HPos.RIGHT);
+        persoonGegevensGrid.add(adressLabel, 0, 3);
+        
+        TextField adressField = new TextField();
+        persoonGegevensGrid.add(adressField, 1, 3);
+        
+        //vakantieadress
+        Label vakantieAdressLabel = new Label("Vakantieadres");
+        GridPane.setHalignment(vakantieAdressLabel, HPos.RIGHT);
+        persoonGegevensGrid.add(vakantieAdressLabel, 0, 4);
+        
+        TextField vakantieAdressField = new TextField();
+        persoonGegevensGrid.add(vakantieAdressField, 1, 4);
+        
+        //telefoon1
+        Label phoneLabel = new Label("Telefoon 1");
+        GridPane.setHalignment(phoneLabel, HPos.RIGHT);
+        persoonGegevensGrid.add(phoneLabel, 0, 5);
+        
+        TextField phoneField = new TextField();
+        persoonGegevensGrid.add(phoneField, 1, 5);
+        
+        //telefoon2
+        Label phone2Label = new Label("Telefoon 2");
+        GridPane.setHalignment(phone2Label, HPos.RIGHT);
+        persoonGegevensGrid.add(phone2Label, 0, 6);
+        
+        TextField phone2Field = new TextField();
+        persoonGegevensGrid.add(phone2Field, 1, 6);
+        
+        //email
+        Label emailLabel = new Label("Email");
+        GridPane.setHalignment(emailLabel, HPos.RIGHT);
+        persoonGegevensGrid.add(emailLabel, 0, 7);
+        
+        TextField emailField = new TextField();
+        persoonGegevensGrid.add(emailField, 1, 7);
+        
+        //vluchtnummer
+        Label vluchtnummerLabel = new Label("Vluchtnummer");
+        GridPane.setHalignment(vluchtnummerLabel, HPos.RIGHT);
+        persoonGegevensGrid.add(vluchtnummerLabel, 0, 8);
+        
+        TextField vluchtnummerField = new TextField();
+        persoonGegevensGrid.add(vluchtnummerField, 1, 8);
+        
+        
+        //opmerkingen
+        Label persoonCommentLabel = new Label("Opmerkingen");
+        GridPane.setHalignment(persoonCommentLabel, HPos.RIGHT);
+        persoonGegevensGrid.add(persoonCommentLabel, 0, 9);
+        
+        TextField persoonCommentField = new TextField();
+        persoonGegevensGrid.add(persoonCommentField, 1, 9);
+                
+        Button save2 = new Button();
+        save2.setText("Opslaan");
+        GridPane.setHalignment(save2, HPos.LEFT);
+        persoonGegevensGrid.add(save2, 0, 10);
+        save2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+
+               
+                ResultSet idget = sql.select("SELECT * FROM persoonsgegevens ORDER BY idpersoonsgegevens DESC LIMIT 1;");
+                int id = 0;
+                try {
+                    if (idget.next()) {
+                        id = idget.getInt("idpersoonsgegevens");
+                    }
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                
+                System.out.println("INSERT INTO bagtrack.persoonsgegevens (idpersoonsgegevens,voornaam,voorletter,achternaam,adress,vakantieadress,telefoon1,telefoon2,email,vluchtnummer,opmerkingen,idbagage) VALUES ('"+ (id+1) +"','" + 
+                        voornaamField.getText() + "','" + voorlettersField.getText() + "','"+ achternaamField.getText() + "','"+ adressField.getText() +
+                        "','"+ vakantieAdressField.getText() + "','"+ phoneField.getText() + "','" + phone2Field.getText() + "','"+ emailField.getText() +
+                        "','"+ vluchtnummerField.getText()+ "','" + persoonCommentField.getText() + "','"+ ""+"');");
+
+              
+                
+                sql.insert("INSERT INTO bagtrack.persoonsgegevens (idpersoonsgegevens,voornaam,voorletter,achternaam,adress,vakantieadress,telefoon1,telefoon2,email,vluchtnummer,opmerkingen,idbagage) VALUES ('"+ (id+1) +"','" + 
+                        voornaamField.getText() + "','" + voorlettersField.getText() + "','"+ achternaamField.getText() + "','"+ adressField.getText() +
+                        "','"+ vakantieAdressField.getText() + "','"+ phoneField.getText() + "','" + phone2Field.getText() + "','"+ emailField.getText() +
+                        "','"+ vluchtnummerField.getText()+ "','" + persoonCommentField.getText() + "','"+ idbagage +"');");
+                
+
+            }
+        });
+        //clear
+        Button clearPersoon = new Button();
+        clearPersoon.setText("Leegmaken");
+        persoonGegevensGrid.add(clearPersoon, 1, 10);
+        clearPersoon.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                voornaamField.setText(null);
+                voorlettersField.setText(null);
+                achternaamField.setText(null);
+                adressField.setText(null);
+                vakantieAdressField.setText(null);
+                phoneField.setText(null);
+                phone2Field.setText(null);
+                emailField.setText(null);
+                vluchtnummerField.setText(null);
+                persoonCommentField.setText(null);
+            }
+        });
+        
+        return persoonGegevensGrid;
     }
 }
