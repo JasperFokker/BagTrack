@@ -33,7 +33,9 @@ import javafx.util.Callback;
  * @author Rick
  */
 public class Zoekscherm extends Application {
-
+    
+    
+    
     @Override
     public void start(Stage primaryStage) {
 
@@ -127,7 +129,12 @@ GridPane scherm3 = new GridPane();
                 ;
                 
 
-                Main.change(Zoekscherm.returnScherm2(query));
+                if(idbagage == ""){
+                    Main.change(Zoekscherm.returnScherm2(query, 3, ""));
+                }else{
+                    Main.change(Zoekscherm.returnScherm2(query, 2, idbagage));
+                }
+                
 
             }
         });
@@ -330,7 +337,7 @@ GridPane scherm3 = new GridPane();
                 comboBoxSoort.setValue(null);
                 comboBoxOpdruk.setValue(null);
 
-                Main.change(Zoekscherm.returnScherm2(query));
+                Main.change(Zoekscherm.returnScherm2(query,1,""));
 
             }
         });
@@ -383,7 +390,7 @@ GridPane scherm3 = new GridPane();
 
     }
 
-    public static GridPane returnScherm2(String query) {
+    public static GridPane returnScherm2(String query, int match, String id) {
         //Tabelscherm dat linkt naar Tabeldata.java 
         HBox hbox = new HBox();
         BorderPane border = new BorderPane();
@@ -484,8 +491,32 @@ GridPane scherm3 = new GridPane();
                     rs.absolute(index+1);
                     idbagage = rs.getInt("idbagage");
                     
-                    returnScherm3(Integer.toString(idbagage));
+                    Main.change(returnScherm3(Integer.toString(idbagage)));
                     
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+                
+            }
+        });
+        
+        Button matchFound = new Button();
+        matchFound.setText("Match gevonden");
+        
+        matchFound.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                int index = table.getSelectionModel().selectedIndexProperty().get();
+                int idpersoonsgegevens = 0;
+                System.out.println(index);
+                
+                try{
+                    rs.absolute(index+1);
+                    idpersoonsgegevens = rs.getInt("idpersoonsgegevens");
+                    System.out.println(idpersoonsgegevens);
+                    sql.insert("UPDATE persoonsgegevens SET idbagage="+ id +" WHERE idpersoonsgegevens="+idpersoonsgegevens+";");
+                    Main.change(returnScherm2(query, 3, ""));
                 }catch(Exception e){
                     System.out.println(e);
                 }
@@ -496,12 +527,22 @@ GridPane scherm3 = new GridPane();
         
         table.setItems(data);
         
-        scherm2.add(matchOld, 1, 3);
+        //scherm2.add(matchOld, 1, 3);
         scherm2.add(label, 0, 0);
         scherm2.add(table, 0, 1);
         scherm2.add(hbox, 0, 2);
         
-        hbox.getChildren().addAll(matchNew,matchOld);
+        if(match == 1){
+            hbox.getChildren().addAll(matchNew,matchOld);
+        }
+        if(match == 2){
+            hbox.getChildren().addAll(matchFound);
+        }
+        if(match == 3){
+            
+        }
+        
+        
         
         border.setCenter(scherm2);
         
