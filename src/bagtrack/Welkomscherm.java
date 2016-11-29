@@ -41,7 +41,7 @@ public class Welkomscherm extends Application
         logoView.setImage(logo);
 
         //welkomsbericht eigenschappen
-        welkomBericht.setText("Welkom bij het Corendon bagagesysteem");
+        welkomBericht.setText("Welkom "+Loginscherm.getUsername()+" bij het Corendon bagagesysteem");
         welkomBericht.setFont(Font.font("Verdana", 40));
         welkomBericht.setFill(WHITE);
 

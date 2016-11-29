@@ -37,7 +37,13 @@ import javafx.scene.text.Text;
  * @author Thom
  */
 public class Loginscherm extends Application {
+    
+    static String username;
 
+    public static String getUsername() {
+        return username;
+    }
+    
     @Override
     public void start(Stage primaryStage) {
         returnScherm();
@@ -105,7 +111,7 @@ public class Loginscherm extends Application {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
-                    String username = userTextField.getText();
+                    username = userTextField.getText();
                     String password = pwBox.getText();
                     ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord FROM users WHERE BINARY loginnaam = '" + username + "' "
                             + "AND BINARY wachtwoord = '" + password + "'");
