@@ -286,7 +286,42 @@ public class Invoerscherm extends Application {
         
         TextField persoonCommentField = new TextField();
         persoonGegevensGrid.add(persoonCommentField, 1, 9);
-        
+                
+        Button save2 = new Button();
+        save2.setText("Opslaan");
+        GridPane.setHalignment(save, HPos.LEFT);
+        persoonGegevensGrid.add(save2, 0, 10);
+        save2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println(dp.getValue());
+
+               
+                ResultSet idget = sql.select("SELECT * FROM persoonsgegevens ORDER BY idpersoonsgegevens DESC LIMIT 1;");
+                int id = 0;
+                try {
+                    if (idget.next()) {
+                        id = idget.getInt("idpersoonsgegevens");
+                    }
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                
+                System.out.println("INSERT INTO bagtrack.persoonsgegevens (idpersoonsgegevens,voornaam,voorletter,achternaam,adress,vakantieadress,telefoon1,telefoon2,email,vluchtnummer,opmerkingen,idbagage) VALUES ('"+ (id+1) +"','" + 
+                        voornaamField.getText() + "','" + voorlettersField.getText() + "','"+ achternaamField.getText() + "','"+ adressField.getText() +
+                        "','"+ vakantieAdressField.getText() + "','"+ phoneField.getText() + "','" + phone2Field.getText() + "','"+ emailField.getText() +
+                        "','"+ vluchtnummerField.getText()+ "','" + persoonCommentField.getText() + "','"+ ""+"');");
+
+              
+                
+                sql.insert("INSERT INTO bagtrack.persoonsgegevens (idpersoonsgegevens,voornaam,voorletter,achternaam,adress,vakantieadress,telefoon1,telefoon2,email,vluchtnummer,opmerkingen,idbagage) VALUES ('"+ (id+1) +"','" + 
+                        voornaamField.getText() + "','" + voorlettersField.getText() + "','"+ achternaamField.getText() + "','"+ adressField.getText() +
+                        "','"+ vakantieAdressField.getText() + "','"+ phoneField.getText() + "','" + phone2Field.getText() + "','"+ emailField.getText() +
+                        "','"+ vluchtnummerField.getText()+ "','" + persoonCommentField.getText() + "','"+ ""+"');");
+                
+
+            }
+        });
         //clear
         Button clearPersoon = new Button();
         clearPersoon.setText("Leegmaken");
