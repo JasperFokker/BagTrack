@@ -357,7 +357,7 @@ public class Invoerscherm extends Application {
 
         Button save2 = new Button();
         save2.setText("Opslaan");
-        GridPane.setHalignment(save, HPos.LEFT);
+        GridPane.setHalignment(save2, HPos.RIGHT);
         persoonGegevensGrid.add(save2, 0, 10);
         
         //melding2
@@ -365,7 +365,7 @@ public class Invoerscherm extends Application {
         melding2.setText("Niet alle velden zijn ingevuld.");
         melding2.setFill(Color.RED);
         melding2.setVisible(false);
-        persoonGegevensGrid.add(melding2, 0, 9);
+        persoonGegevensGrid.add(melding2, 0, 11);
         
         save2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
