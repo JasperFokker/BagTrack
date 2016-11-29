@@ -409,14 +409,14 @@ GridPane scherm3 = new GridPane();
         
         try{
             for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
-                //We are using non property style for making dynamic table
                 final int j = i;                
                 System.out.println((String)rs.getMetaData().getColumnName(i+1));
+                
                 if(i == 0){
                     continue;
                 }
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
-                
+                if("idbagage".equals((String)rs.getMetaData().getColumnName(1)) ){col.prefWidthProperty().bind(table.widthProperty().divide(11.1));}
                 col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
                     public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
                         return new SimpleStringProperty(param.getValue().get(j).toString());                        
@@ -493,7 +493,7 @@ GridPane scherm3 = new GridPane();
             }
         });
         
-        
+       
         table.setItems(data);
         
         scherm2.add(matchOld, 1, 3);
