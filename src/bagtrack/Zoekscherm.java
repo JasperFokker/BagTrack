@@ -117,7 +117,12 @@ GridPane scherm3 = new GridPane();
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String query = null;
+                String query = "SELECT * FROM persoonsgegevens WHERE voornaam LIKE '%"+ textveldVoornaam.getText() +"%' AND voorletter LIKE '%"+
+                        textveldVoorletters.getText() +"%' AND achternaam LIKE '%"+ textveldAchternaam.getText() +"%' AND adress LIKE '%"+
+                        textveldAdres.getText() +"%' AND vakantieadress LIKE '%"+
+                        textveldVakantieadres.getText() +"%' AND telefoon1 LIKE '%"+ textveldTelefoon1.getText() +"%' AND telefoon2 LIKE '%"+
+                        textveldTelefoon1.getText() +"%' AND email LIKE '%"+ textveldEmail.getText() +"%' AND vluchtnummer LIKE '%"+ textveldVluchtnummer.getText() +"%';";
+                ;
                 
 
                 Main.change(Zoekscherm.returnScherm2(query));
