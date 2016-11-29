@@ -19,6 +19,8 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -176,6 +178,13 @@ public class Invoerscherm extends Application {
         melding1.setFill(Color.RED);
         melding1.setVisible(false);
         kofferGegevensGrid.add(melding1, 0, 9);
+        
+        //succesMelding2
+        Text succesMelding = new Text();
+        succesMelding.setText("Succesvol ingevoerd!");
+        succesMelding.setFill(Color.LIGHTGREEN);
+        succesMelding.setVisible(false);
+        kofferGegevensGrid.add(succesMelding, 0, 10);
 
         save.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -223,8 +232,8 @@ public class Invoerscherm extends Application {
                 }
 
                 if (dp.getValue() != null && airportBox.getValue() != null && typeBagBox.getValue() != null && !brandField.getText().trim().equals("") && color1Box.getValue() != null && graphicBox.getValue() != null) {
-
                     melding1.setVisible(false);
+                    succesMelding.setVisible(true);
 
                     System.out.println(dp.getValue());
 
@@ -276,14 +285,7 @@ public class Invoerscherm extends Application {
                 commentField.setText(null);
             }
         });
-<<<<<<< HEAD
-        
-        
-        
-    
-=======
 
->>>>>>> 0ea8c1a841afdb6d60edd483fc161cfdbd111b0a
         //Voornaam
         Label voornaamLabel = new Label("Voornaam");
         GridPane.setHalignment(voornaamLabel, HPos.RIGHT);
@@ -376,6 +378,13 @@ public class Invoerscherm extends Application {
         melding2.setVisible(false);
         persoonGegevensGrid.add(melding2, 0, 11);
         
+        //succesMelding2
+        Text succesMelding2 = new Text();
+        succesMelding2.setText("Succesvol ingevoerd!");
+        succesMelding2.setFill(Color.LIGHTGREEN);
+        succesMelding2.setVisible(false);
+        persoonGegevensGrid.add(succesMelding2, 0, 12);
+        
         save2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -424,6 +433,7 @@ public class Invoerscherm extends Application {
                 if (!voornaamField.getText().trim().equals("") && !voorlettersField.getText().trim().equals("") && !achternaamField.getText().trim().equals("") && !adressField.getText().trim().equals("") && !phoneField.getText().trim().equals("") && !phone2Field.getText().trim().equals("") && !phoneField.getText().trim().equals("")) {
 
                 melding2.setVisible(false);
+                succesMelding2.setVisible(true);
                 
                 System.out.println(dp.getValue());
 

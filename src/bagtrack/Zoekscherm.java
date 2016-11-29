@@ -500,7 +500,7 @@ GridPane scherm3 = new GridPane();
             }
         });
         
-<<<<<<< HEAD
+
         Button matchFound = new Button();
         matchFound.setText("Match gevonden");
         
@@ -526,9 +526,7 @@ GridPane scherm3 = new GridPane();
         });
         
         
-=======
-       
->>>>>>> 7755e6457c1b65d8114b6d48d44709de450ad94d
+
         table.setItems(data);
         
         //scherm2.add(matchOld, 1, 3);
