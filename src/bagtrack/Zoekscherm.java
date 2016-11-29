@@ -1,5 +1,7 @@
 package bagtrack;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import javafx.scene.control.Label;
 import javafx.application.Application;
@@ -11,8 +13,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Separator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
@@ -393,6 +397,7 @@ GridPane scherm3 = new GridPane();
     public static GridPane returnScherm2(String query, int match, String id) {
         //Tabelscherm dat linkt naar Tabeldata.java 
         HBox hbox = new HBox();
+        hbox.setPrefHeight(200);
         BorderPane border = new BorderPane();
         GridPane scherm2 = new GridPane();
         scherm2.setPrefSize(600, 450);
@@ -407,8 +412,8 @@ GridPane scherm3 = new GridPane();
 
         final TableView table = new TableView();
         table.setEditable(true);
-        table.setPrefWidth(1170);
-        table.setPrefHeight(680);
+        table.setPrefWidth(1920);
+        table.setPrefHeight(1080);
         
         ResultSet rs = sql.select(query);
         
@@ -452,10 +457,14 @@ GridPane scherm3 = new GridPane();
             System.out.println(e);
         }
         
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int h = (int) screenSize.getHeight();
+        int w = (int) screenSize.getWidth();
         
         Button matchNew = new Button();
         matchNew.setText("Match Nieuw");
-        
+        matchNew.setPrefSize(w*0.45, 50);
+        matchNew.setFont(Font.font("Verdana", 20));
         matchNew.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -478,7 +487,8 @@ GridPane scherm3 = new GridPane();
         
         Button matchOld = new Button();
         matchOld.setText("Match Oud");
-        
+        matchOld.setPrefSize(w*0.45, 50);
+        matchOld.setFont(Font.font("Verdana", 20));
         matchOld.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -503,7 +513,8 @@ GridPane scherm3 = new GridPane();
 
         Button matchFound = new Button();
         matchFound.setText("Match gevonden");
-        
+        matchFound.setPrefSize(w*0.90, 50);
+        matchFound.setFont(Font.font("Verdana", 20));
         matchFound.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -525,7 +536,8 @@ GridPane scherm3 = new GridPane();
             }
         });
         
-        
+        Separator separator = new Separator();
+        separator.setOrientation(Orientation.VERTICAL);
 
         table.setItems(data);
         
@@ -535,7 +547,7 @@ GridPane scherm3 = new GridPane();
         scherm2.add(hbox, 0, 2);
         
         if(match == 1){
-            hbox.getChildren().addAll(matchNew,matchOld);
+            hbox.getChildren().addAll(matchNew,separator,matchOld);
         }
         if(match == 2){
             hbox.getChildren().addAll(matchFound);

@@ -584,6 +584,20 @@ public class Invoerscherm extends Application {
         TextField persoonCommentField = new TextField();
         persoonGegevensGrid.add(persoonCommentField, 1, 9);
                 
+        //melding2
+        Text melding2 = new Text();
+        melding2.setText("Niet alle velden zijn ingevuld.");
+        melding2.setFill(Color.RED);
+        melding2.setVisible(false);
+        persoonGegevensGrid.add(melding2, 0, 11);
+        
+        //succesMelding2
+        Text succesMelding2 = new Text();
+        succesMelding2.setText("Succesvol ingevoerd!");
+        succesMelding2.setFill(Color.LIGHTGREEN);
+        succesMelding2.setVisible(false);
+        persoonGegevensGrid.add(succesMelding2, 0, 12);
+        
         Button save2 = new Button();
         save2.setText("Opslaan");
         GridPane.setHalignment(save2, HPos.LEFT);
@@ -592,6 +606,50 @@ public class Invoerscherm extends Application {
             @Override
             public void handle(ActionEvent event) {
                 
+                
+                if (voornaamField.getText().trim().equals("")) {
+                    voornaamField.setStyle("-fx-background-color: tomato;");
+                    melding2.setVisible(true);
+                } else {
+                    voornaamField.setStyle("");
+                }
+
+                if (voorlettersField.getText().trim().equals("")) {
+                    voorlettersField.setStyle("-fx-background-color: tomato;");
+                    melding2.setVisible(true);
+                } else {
+                    voorlettersField.setStyle("");
+                }
+
+                if (achternaamField.getText().trim().equals("")) {
+                    achternaamField.setStyle("-fx-background-color: tomato;");
+                    melding2.setVisible(true);
+                } else {
+                    achternaamField.setStyle("");
+                }
+
+                if (adressField.getText().trim().equals("")) {
+                    adressField.setStyle("-fx-background-color: tomato;");
+                    melding2.setVisible(true);
+                } else {
+                    adressField.setStyle("");
+                }
+
+                if (phoneField.getText().trim().equals("")) {
+                    phoneField.setStyle("-fx-background-color: tomato;");
+                    melding2.setVisible(true);
+                } else {
+                    phoneField.setStyle("");
+                }
+
+                if (emailField.getText().trim().equals("")) {
+                    emailField.setStyle("-fx-background-color: tomato;");
+                    melding2.setVisible(true);
+                } else {
+                    emailField.setStyle("");
+                }
+                
+                if (!voornaamField.getText().trim().equals("") && !voorlettersField.getText().trim().equals("") && !achternaamField.getText().trim().equals("") && !adressField.getText().trim().equals("") && !phoneField.getText().trim().equals("") && !phone2Field.getText().trim().equals("") && !phoneField.getText().trim().equals("")) {
 
                
                 ResultSet idget = sql.select("SELECT * FROM persoonsgegevens ORDER BY idpersoonsgegevens DESC LIMIT 1;");
@@ -616,7 +674,7 @@ public class Invoerscherm extends Application {
                         "','"+ vakantieAdressField.getText() + "','"+ phoneField.getText() + "','" + phone2Field.getText() + "','"+ emailField.getText() +
                         "','"+ vluchtnummerField.getText()+ "','" + persoonCommentField.getText() + "','"+ idbagage +"');");
                 
-
+               }
             }
         });
         //clear
