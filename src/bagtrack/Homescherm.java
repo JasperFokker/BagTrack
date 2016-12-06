@@ -23,9 +23,8 @@ public class Homescherm extends Application {
     }
 
     public static GridPane returnScherm() {
-        //log in scherm
+        //home scherm
         GridPane scherm = new GridPane();
-        
         
         
 

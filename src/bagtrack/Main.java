@@ -60,6 +60,7 @@ public class Main extends Application {
         GridPane homeScherm = Homescherm.returnScherm();
 
         Image Zoom = new Image("zoom_icon&48.png");
+        Image Home = new Image("home_icon&48[1].png");
         Image Formulier = new Image("doc_edit_icon&48.png");
         Image Help = new Image("info_icon&48.png");
         Image Statistieken = new Image("chart_line_icon&48.png");
@@ -112,7 +113,7 @@ public class Main extends Application {
 
         homeButton.setText("Home");
         homeButton.getStyleClass().add("leftmenubuttons");
-        homeButton.setGraphic(new ImageView(Zoom));
+        homeButton.setGraphic(new ImageView(Home));
         homeButton.setContentDisplay(ContentDisplay.TOP);
         homeButton.setPrefSize(menuwidth, 112.5);
         homeButton.setPrefSize(200, 112.5);
