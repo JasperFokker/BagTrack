@@ -30,6 +30,8 @@ import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 /**
@@ -58,6 +60,7 @@ public class Loginscherm extends Application {
         scherm.setHgap(30);
         scherm.setVgap(30);
         scherm.setPadding(new Insets(25, 25, 25, 25));
+        scherm.setPrefSize(80, 80);
 
         Image Logo = new Image("titel_simpel.png", 250, 68, false, false);
         Label logoDingetje = new Label();
@@ -104,8 +107,37 @@ public class Loginscherm extends Application {
         rect.setStroke(Color.BLACK);
         rect.setFill(Color.rgb(120, 120, 120));
 
-        stack.getChildren().addAll(rect, scherm);
-
+        
+        Button uitlogbutton = new Button();
+        uitlogbutton.setText("Afsluiten");
+        uitlogbutton.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        uitlogbutton.setPrefSize(140, 40);
+        uitlogbutton.setAlignment(Pos.TOP_RIGHT);
+        uitlogbutton.setStyle("-fx-background-color: transparent;");
+        uitlogbutton.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                System.exit(0);
+            }
+        });
+        
+        GridPane uitlogpane = new GridPane();
+        
+        Rectangle uitknopveld = new Rectangle(130, 40);        
+        uitlogpane.setAlignment(Pos.TOP_RIGHT);
+        
+        uitknopveld.setArcHeight(30);
+        uitknopveld.setArcWidth(30);
+        uitknopveld.setStroke(Color.BLACK);
+        uitknopveld.setFill(Color.rgb(120, 120, 120));
+        
+        stack.getChildren().addAll(rect, uitlogpane, scherm, uitknopveld, uitlogbutton);
+        
+        stack.setAlignment(uitknopveld, Pos.TOP_RIGHT);
+        stack.setAlignment(uitlogbutton, Pos.TOP_RIGHT);
+        
         //Enter button
         scherm.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
