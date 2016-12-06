@@ -64,7 +64,7 @@ public class Main extends Application {
         TabPane zoekScherm = Zoekscherm.returnScherm();
         GridPane helpScherm = Helpscherm.returnScherm();
         StackPane inlogScherm = Loginscherm.returnScherm();
-        TabPane formulierScherm = Invoerscherm.returnScherm();
+        StackPane formulierScherm = Invoerscherm.returnScherm();
         GridPane statistieken = Statistiekenscherm.returnScherm();
         GridPane instellingen = Instellingenscherm.returnScherm();
         GridPane homeScherm = Homescherm.returnScherm();

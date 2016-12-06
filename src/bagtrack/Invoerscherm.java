@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
+import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -19,9 +21,9 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -36,8 +38,16 @@ public class Invoerscherm extends Application {
         returnScherm();
     }
 
-    public static TabPane returnScherm() {
-
+    public static StackPane returnScherm() {
+        TabPane invoerTabs = new TabPane();
+        StackPane stack = new StackPane();
+        GridPane popupGrid = new GridPane();
+        popupGrid.setAlignment(Pos.CENTER);
+        
+        popupGrid.setHgap(10);
+        popupGrid.setVgap(10);
+        popupGrid.setPadding(new Insets(25, 25, 25, 25));
+        
         GridPane kofferGegevensGrid = new GridPane();
         GridPane persoonGegevensGrid = new GridPane();
 
@@ -186,113 +196,27 @@ public class Invoerscherm extends Application {
         succesMelding.setFill(Color.LIGHTGREEN);
         succesMelding.setVisible(false);
         kofferGegevensGrid.add(succesMelding, 0, 10);
-
-        save.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (dp.getValue() == null) {
-                    dp.setStyle("-fx-background-color: tomato;");
-                    melding1.setVisible(true);
-                } else {
-                    dp.setStyle("");
-                }
-
-                if (airportBox.getValue() == null) {
-                    airportBox.setStyle("-fx-background-color: tomato;");
-                    melding1.setVisible(true);
-                } else {
-                    airportBox.setStyle("");
-                }
-
-                if (typeBagBox.getValue() == null) {
-                    typeBagBox.setStyle("-fx-background-color: tomato;");
-                    melding1.setVisible(true);
-                } else {
-                    typeBagBox.setStyle("");
-                }
-
-                if (brandField.getText().trim().equals("")) {
-                    brandField.setStyle("-fx-background-color: tomato;");
-                    melding1.setVisible(true);
-                } else {
-                    brandField.setStyle("");
-                }
-
-                if (color1Box.getValue() == null) {
-                    color1Box.setStyle("-fx-background-color: tomato;");
-                    melding1.setVisible(true);
-                } else {
-                    color1Box.setStyle("");
-                }
-
-                if (graphicBox.getValue() == null) {
-                    graphicBox.setStyle("-fx-background-color: tomato;");
-                    melding1.setVisible(true);
-                } else {
-                    graphicBox.setStyle("");
-                }
-
-                if (dp.getValue() != null && airportBox.getValue() != null && typeBagBox.getValue() != null && !brandField.getText().trim().equals("") && color1Box.getValue() != null && graphicBox.getValue() != null) {
-                    melding1.setVisible(false);
-                    succesMelding.setVisible(true);
-
-                    System.out.println(dp.getValue());
-
-                    String date1 = dp.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    String merk = brandField.getText();
-
-                    System.out.println(date1);
-                    ResultSet idget = sql.select("SELECT * FROM bagage ORDER BY idbagage DESC LIMIT 1;");
-                    int id = 0;
-                    try {
-                        if (idget.next()) {
-                            id = idget.getInt("idbagage");
-                        }
-                    } catch (Exception e) {
-                        System.out.println(e);
-                    }
-                    
-                    
-                    
-
-                    System.out.println("INSERT INTO bagtrack.bagage (idbagage,merk,kleur1,kleur2,soort,opdruk,luchthaven,datum,labelnummer,opmerkingen) VALUES ('" + 50 + "','" + date1 + "','"
-                            + merk + "','" + color1Box.getValue() + "','" + color2Box.getValue() + "','" + typeBagBox.getValue()
-                            + "','" + graphicBox.getValue() + "','" + airportBox.getValue() + "','" + date1 + "','" + numberField.getText()
-                            + "','" + commentField.getText() + "');");
-
-                    sql.insert("INSERT INTO bagtrack.bagage (idbagage,merk,kleur1,kleur2,soort,opdruk,luchthaven,datum,labelnummer,opmerkingen) VALUES ('" + (id + 1) + "','"
-                            + merk + "','" + color1Box.getValue() + "','" + color2Box.getValue() + "','" + typeBagBox.getValue()
-                            + "','" + graphicBox.getValue() + "','" + airportBox.getValue() + "','" + date1 + "','" + numberField.getText()
-                            + "','" + commentField.getText() + "');");
-
-                    
-                    
-                    Statistiekenscherm.addPieData();
-                }
-            }
-        });
-
         
+        Rectangle popupRect = new Rectangle(300, 100);
+
+        popupRect.setArcHeight(30);
+        popupRect.setArcWidth(30);
+        popupRect.setFill(Color.rgb(120, 120, 120));
         
-        //clear
-        Button clear = new Button();
-        clear.setText("Leegmaken");
-        kofferGegevensGrid.add(clear, 1, 8);
-        clear.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-
-                dp.setValue(null);
-                airportBox.setValue(null);
-                typeBagBox.setValue(null);
-                brandField.setText(null);
-                color1Box.setValue(null);
-                color2Box.setValue(null);
-                graphicBox.setValue(null);
-                commentField.setText(null);
-            }
-        });
-
+        Label sureLabel = new Label("Weet je zeker dat je dit wilt toevoegen?");
+        popupGrid.add(sureLabel, 0, 0);
+        
+        Button yesButton = new Button("Ja");
+        popupGrid.add(yesButton, 0, 1);
+        
+        Button noButton = new Button("Nee");
+        GridPane.setHalignment(noButton, HPos.RIGHT);
+        popupGrid.add(noButton, 0, 1);
+        
+        Group popup = new Group();
+        popup.getChildren().addAll(popupRect, popupGrid);
+        popup.setVisible(false);
+        
         //Voornaam
         Label voornaamLabel = new Label("Voornaam");
         GridPane.setHalignment(voornaamLabel, HPos.RIGHT);
@@ -392,6 +316,160 @@ public class Invoerscherm extends Application {
         succesMelding2.setVisible(false);
         persoonGegevensGrid.add(succesMelding2, 0, 12);
         
+        
+        yesButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                invoerTabs.setDisable(false);
+                if (invoerTabs.getSelectionModel().getSelectedItem().getText().equals("Koffergegevens"))
+            {
+                System.out.println(dp.getValue());
+
+                    String date1 = dp.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    String merk = brandField.getText();
+
+                    System.out.println(date1);
+                    ResultSet idget = sql.select("SELECT * FROM bagage ORDER BY idbagage DESC LIMIT 1;");
+                    int id = 0;
+                    try {
+                        if (idget.next()) {
+                            id = idget.getInt("idbagage");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+
+                    System.out.println("INSERT INTO bagtrack.bagage (idbagage,merk,kleur1,kleur2,soort,opdruk,luchthaven,datum,labelnummer,opmerkingen) VALUES ('" + 50 + "','" + date1 + "','"
+                            + merk + "','" + color1Box.getValue() + "','" + color2Box.getValue() + "','" + typeBagBox.getValue()
+                            + "','" + graphicBox.getValue() + "','" + airportBox.getValue() + "','" + date1 + "','" + numberField.getText()
+                            + "','" + commentField.getText() + "');");
+
+                    sql.insert("INSERT INTO bagtrack.bagage (idbagage,merk,kleur1,kleur2,soort,opdruk,luchthaven,datum,labelnummer,opmerkingen) VALUES ('" + (id + 1) + "','"
+                            + merk + "','" + color1Box.getValue() + "','" + color2Box.getValue() + "','" + typeBagBox.getValue()
+                            + "','" + graphicBox.getValue() + "','" + airportBox.getValue() + "','" + date1 + "','" + numberField.getText()
+                            + "','" + commentField.getText() + "');");
+                    
+                    Statistiekenscherm.addPieData();
+            }
+                if (invoerTabs.getSelectionModel().getSelectedItem().getText().equals("Persoongegevens"))
+            {
+                System.out.println(dp.getValue());
+
+                ResultSet idget = sql.select("SELECT * FROM persoonsgegevens ORDER BY idpersoonsgegevens DESC LIMIT 1;");
+                int id = 0;
+                try {
+                    if (idget.next()) {
+                        id = idget.getInt("idpersoonsgegevens");
+                    }
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+
+                System.out.println("INSERT INTO bagtrack.persoonsgegevens (idpersoonsgegevens,voornaam,voorletter,achternaam,adress,vakantieadress,telefoon1,telefoon2,email,vluchtnummer,opmerkingen,idbagage) VALUES ('" + (id + 1) + "','"
+                        + voornaamField.getText() + "','" + voorlettersField.getText() + "','" + achternaamField.getText() + "','" + adressField.getText()
+                        + "','" + vakantieAdressField.getText() + "','" + phoneField.getText() + "','" + phone2Field.getText() + "','" + emailField.getText()
+                        + "','" + vluchtnummerField.getText() + "','" + persoonCommentField.getText() + "','" + "" + "');");
+
+                sql.insert("INSERT INTO bagtrack.persoonsgegevens (idpersoonsgegevens,voornaam,voorletter,achternaam,adress,vakantieadress,telefoon1,telefoon2,email,vluchtnummer,opmerkingen,idbagage) VALUES ('" + (id + 1) + "','"
+                        + voornaamField.getText() + "','" + voorlettersField.getText() + "','" + achternaamField.getText() + "','" + adressField.getText()
+                        + "','" + vakantieAdressField.getText() + "','" + phoneField.getText() + "','" + phone2Field.getText() + "','" + emailField.getText()
+                        + "','" + vluchtnummerField.getText() + "','" + persoonCommentField.getText() + "','" + "" + "');");
+
+            }
+
+                    
+                popup.setVisible(false);
+                succesMelding.setVisible(true);
+            }
+        });
+        
+        noButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                popup.setVisible(false);
+                invoerTabs.setDisable(false);
+            }
+        });
+
+        save.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (dp.getValue() == null) {
+                    dp.setStyle("-fx-background-color: tomato;");
+                    melding1.setVisible(true);
+                } else {
+                    dp.setStyle("");
+                }
+
+                if (airportBox.getValue() == null) {
+                    airportBox.setStyle("-fx-background-color: tomato;");
+                    melding1.setVisible(true);
+                } else {
+                    airportBox.setStyle("");
+                }
+
+                if (typeBagBox.getValue() == null) {
+                    typeBagBox.setStyle("-fx-background-color: tomato;");
+                    melding1.setVisible(true);
+                } else {
+                    typeBagBox.setStyle("");
+                }
+
+                if (brandField.getText().trim().equals("")) {
+                    brandField.setStyle("-fx-background-color: tomato;");
+                    melding1.setVisible(true);
+                } else {
+                    brandField.setStyle("");
+                }
+
+                if (color1Box.getValue() == null) {
+                    color1Box.setStyle("-fx-background-color: tomato;");
+                    melding1.setVisible(true);
+                } else {
+                    color1Box.setStyle("");
+                }
+
+                if (graphicBox.getValue() == null) {
+                    graphicBox.setStyle("-fx-background-color: tomato;");
+                    melding1.setVisible(true);
+                } else {
+                    graphicBox.setStyle("");
+                }
+
+                if (dp.getValue() != null && airportBox.getValue() != null && typeBagBox.getValue() != null && !brandField.getText().trim().equals("") && color1Box.getValue() != null && graphicBox.getValue() != null) {
+                    melding1.setVisible(false);
+                    popup.setVisible(true);
+                    invoerTabs.setDisable(true);
+                    
+                }
+            }
+        });
+
+        
+        
+        //clear
+        Button clear = new Button();
+        clear.setText("Leegmaken");
+        kofferGegevensGrid.add(clear, 1, 8);
+        clear.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                dp.setValue(date);
+                airportBox.setValue(null);
+                typeBagBox.setValue(null);
+                brandField.setText(null);
+                color1Box.setValue(null);
+                color2Box.setValue(null);
+                graphicBox.setValue(null);
+                commentField.setText(null);
+                numberField.setText(null);
+            }
+        });
+
+        
+        
+        
         save2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -439,31 +517,10 @@ public class Invoerscherm extends Application {
                 
                 if (!voornaamField.getText().trim().equals("") && !voorlettersField.getText().trim().equals("") && !achternaamField.getText().trim().equals("") && !adressField.getText().trim().equals("") && !phoneField.getText().trim().equals("") && !phone2Field.getText().trim().equals("") && !phoneField.getText().trim().equals("")) {
 
-                melding2.setVisible(false);
-                succesMelding2.setVisible(true);
+                    melding2.setVisible(false);
+                    popup.setVisible(true);
+                    invoerTabs.setDisable(true);
                 
-                System.out.println(dp.getValue());
-
-                ResultSet idget = sql.select("SELECT * FROM persoonsgegevens ORDER BY idpersoonsgegevens DESC LIMIT 1;");
-                int id = 0;
-                try {
-                    if (idget.next()) {
-                        id = idget.getInt("idpersoonsgegevens");
-                    }
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-
-                System.out.println("INSERT INTO bagtrack.persoonsgegevens (idpersoonsgegevens,voornaam,voorletter,achternaam,adress,vakantieadress,telefoon1,telefoon2,email,vluchtnummer,opmerkingen,idbagage) VALUES ('" + (id + 1) + "','"
-                        + voornaamField.getText() + "','" + voorlettersField.getText() + "','" + achternaamField.getText() + "','" + adressField.getText()
-                        + "','" + vakantieAdressField.getText() + "','" + phoneField.getText() + "','" + phone2Field.getText() + "','" + emailField.getText()
-                        + "','" + vluchtnummerField.getText() + "','" + persoonCommentField.getText() + "','" + "" + "');");
-
-                sql.insert("INSERT INTO bagtrack.persoonsgegevens (idpersoonsgegevens,voornaam,voorletter,achternaam,adress,vakantieadress,telefoon1,telefoon2,email,vluchtnummer,opmerkingen,idbagage) VALUES ('" + (id + 1) + "','"
-                        + voornaamField.getText() + "','" + voorlettersField.getText() + "','" + achternaamField.getText() + "','" + adressField.getText()
-                        + "','" + vakantieAdressField.getText() + "','" + phoneField.getText() + "','" + phone2Field.getText() + "','" + emailField.getText()
-                        + "','" + vluchtnummerField.getText() + "','" + persoonCommentField.getText() + "','" + "" + "');");
-
             }}
         });
         //clear
@@ -487,7 +544,7 @@ public class Invoerscherm extends Application {
             }
         });
 
-        TabPane invoerTabs = new TabPane();
+        
 
         Tab kofferGegevens = new Tab();
         kofferGegevens.setText("Koffergegevens");
@@ -499,18 +556,20 @@ public class Invoerscherm extends Application {
         kofferGegevens.setContent(kofferGegevensGrid);
         persoonGegevens.setContent(persoonGegevensGrid);
         invoerTabs.getTabs().addAll(kofferGegevens, persoonGegevens);
-
-        return invoerTabs;
+        
+        
+        stack.getChildren().addAll(invoerTabs, popup);
+        return stack;
     }
     
     public static GridPane matchPersoon(String idbagage){
-         //Voornaam
          
         GridPane persoonGegevensGrid = new GridPane();
         
         Label lblid = new Label(idbagage);
         persoonGegevensGrid.add(lblid, 0, 20);
         
+        //Voornaam
         Label voornaamLabel = new Label("Voornaam");
         GridPane.setHalignment(voornaamLabel, HPos.RIGHT);
         persoonGegevensGrid.add(voornaamLabel, 0, 0);
@@ -613,7 +672,6 @@ public class Invoerscherm extends Application {
             @Override
             public void handle(ActionEvent event) {
                 
-                
                 if (voornaamField.getText().trim().equals("")) {
                     voornaamField.setStyle("-fx-background-color: tomato;");
                     melding2.setVisible(true);
@@ -657,7 +715,7 @@ public class Invoerscherm extends Application {
                 }
                 
                 if (!voornaamField.getText().trim().equals("") && !voorlettersField.getText().trim().equals("") && !achternaamField.getText().trim().equals("") && !adressField.getText().trim().equals("") && !phoneField.getText().trim().equals("") && !phone2Field.getText().trim().equals("") && !phoneField.getText().trim().equals("")) {
-
+                    
                
                 ResultSet idget = sql.select("SELECT * FROM persoonsgegevens ORDER BY idpersoonsgegevens DESC LIMIT 1;");
                 int id = 0;
