@@ -41,11 +41,16 @@ import javafx.scene.text.Text;
 public class Loginscherm extends Application {
     
     static String username;
+    static int privilege;
 
     public static String getUsername() {
         return username;
     }
     
+    public static int getPrivilege() {
+//        System.out.println(privilege);
+        return privilege;
+    }    
     @Override
     public void start(Stage primaryStage) {
         returnScherm();
@@ -143,62 +148,66 @@ public class Loginscherm extends Application {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
-                    username = userTextField.getText();
-                    String password = pwBox.getText();
-                    ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord FROM users WHERE BINARY loginnaam = '" + username + "' "
-                            + "AND BINARY wachtwoord = '" + password + "'");
-
-                    try {
-                        if (getUser.next()) {
-                            Main.change(Welkomscherm.returnScherm());
-                            Main.menu();
-                            Main.topmenu();
-                            melding.setVisible(false);
-                            userTextField.setText(null);
-                            pwBox.setText(null);
-
-                        } else {
-                            melding.setVisible(true);
-
-                        }
-                    } catch (Exception r) {
-                        System.out.println(r);
-                    }
-                }
-            }
-
-        });
-
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-
-                String username = userTextField.getText();
+                username = userTextField.getText();
                 String password = pwBox.getText();
-                ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord FROM users WHERE BINARY loginnaam = '" + username + "' AND BINARY wachtwoord = '" + password + "'");
-
-                try {
+                ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord, privilege FROM users WHERE BINARY loginnaam = '" + username + "' AND BINARY wachtwoord = '"
+                        + password + "'");
+                
+                try {                                        
                     if (getUser.next()) {
+                        privilege = getUser.getInt("privilege");
                         Main.change(Welkomscherm.returnScherm());
                         Main.menu();
                         Main.topmenu();
                         melding.setVisible(false);
                         userTextField.setText(null);
                         pwBox.setText(null);
-
+                        if (privilege == 1) {
+                            Main.statistiekenButton.setDisable(true);
+                        } else {
+                            Main.statistiekenButton.setDisable(false);
+                        }
                     } else {
                         melding.setVisible(true);
-                        
-
                     }
                 } catch (Exception r) {
                     System.out.println(r);
                 }
-
+                }
             }
-
         });
+
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                username = userTextField.getText();
+                String password = pwBox.getText();
+                ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord, privilege FROM users WHERE BINARY loginnaam = '" + username + "' AND BINARY wachtwoord = '" + password + "'");
+                
+                try {                                        
+                    if (getUser.next()) {
+                        privilege = getUser.getInt("privilege");
+                        Main.change(Welkomscherm.returnScherm());
+                        Main.menu();
+                        Main.topmenu();
+                        melding.setVisible(false);
+                        userTextField.setText(null);
+                        pwBox.setText(null);
+                        if (privilege == 1) {
+                            Main.statistiekenButton.setDisable(true);
+                        } else {
+                            Main.statistiekenButton.setDisable(false);
+                        }
+                    } else {
+                        melding.setVisible(true);
+                    }
+                } catch (Exception r) {
+                    System.out.println(r);
+                }
+            }
+        });
+        
 
         return stack;
     }

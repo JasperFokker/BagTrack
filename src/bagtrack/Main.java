@@ -11,8 +11,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -20,12 +22,14 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
 
 /**
  * @author Jasper & Jimmy
  */
 public class Main extends Application {
 
+    
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int h = (int) screenSize.getHeight();
     int w = (int) screenSize.getWidth();
@@ -33,9 +37,11 @@ public class Main extends Application {
 
     static BorderPane scherm = new BorderPane();
     static VBox menu = new VBox();
+    static VBox privmenu = new VBox();
     static HBox topmenu = new HBox();
     static HBox logo = new HBox();
-
+    static Button statistiekenButton = new Button();
+    
     //wissel scherm.
     public static void change(GridPane gridpane) {
         scherm.setCenter(gridpane);
@@ -43,6 +49,10 @@ public class Main extends Application {
 
     public static void menu() {
         scherm.setLeft(menu);
+    }
+    
+    public static void privmenu() {
+        scherm.setLeft(privmenu);
     }
 
     public static void topmenu() {
@@ -67,7 +77,6 @@ public class Main extends Application {
         Image Instellingen = new Image("cog_icon&48.png");
         Image Logo = new Image("titel_simpel.png", menuwidth * 1.50, w * 0.04, false, false);
 
-        Button statistiekenButton = new Button();
         Button zoekButton = new Button();
         Button instellingenButton = new Button();
         Button helpButton = new Button();
@@ -80,9 +89,11 @@ public class Main extends Application {
         statistiekenButton.setContentDisplay(ContentDisplay.TOP);
         statistiekenButton.setPrefSize(menuwidth, 112.5);
         statistiekenButton.setPrefSize(200, 112.5);
-        statistiekenButton.setOnAction(new EventHandler<ActionEvent>() {
+        statistiekenButton.setOnAction(new EventHandler<ActionEvent>()
+        {
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(ActionEvent event)
+            {
                 scherm.setCenter(statistieken);
 //                statistiekenButton.setStyle("-fx-background-color: #ff0000; ");
 //                zoekButton.setStyle("-fx-background-color: #d81e05; ");
@@ -231,7 +242,7 @@ public class Main extends Application {
         primaryStage.setTitle("Main Screen");
         primaryStage.setScene(scene);
         primaryStage.show();
-
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         primaryStage.setFullScreen(true);
     }
 
