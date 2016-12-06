@@ -8,7 +8,10 @@ package bagtrack;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,15 +20,21 @@ import static javafx.scene.paint.Color.WHITE;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Welkomscherm extends Application
 {
+    static Thread welkom;
     @Override
     public void start(Stage primaryStage)
     {
         returnScherm();
     }
 
+    public static void flip(){
+        Main.change(Zoekscherm.returnScherm2("SELECT * FROM bagage", 3, ""));
+    }
+    
     public static GridPane returnScherm()
     {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -48,7 +57,14 @@ public class Welkomscherm extends Application
         scherm.setAlignment(Pos.CENTER);
         scherm.add(welkomBericht, 0, 0);
         scherm.add(logoView, 0, 1);
+        
+        Timeline timeline = new Timeline(new KeyFrame(
+        Duration.millis(2500),
+        ae -> flip()));
+        timeline.play();
 
+        
+        
         return scherm;
     }
 }
