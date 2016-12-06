@@ -120,7 +120,7 @@ public class Main extends Application {
         homeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                scherm.setCenter(homeScherm);
+                scherm.setCenter(Zoekscherm.returnScherm2("SELECT * FROM bagage;", 1, ""));
 
 //                zoekButton.setStyle("-fx-background-color: #ff0000; ");
 //                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");

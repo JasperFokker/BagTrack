@@ -647,7 +647,7 @@ GridPane scherm3 = new GridPane();
             }
         });
         
-        vbox.getChildren().addAll(vermist,gevonden,verzonden);
+        vbox.getChildren().addAll(gevonden,vermist,verzonden);
         
         Separator separator = new Separator();
         separator.setOrientation(Orientation.VERTICAL);
