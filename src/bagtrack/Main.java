@@ -11,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -30,12 +29,12 @@ public class Main extends Application {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int h = (int) screenSize.getHeight();
     int w = (int) screenSize.getWidth();
-    int menuwidth = (int)(w*0.10);
-        
+    int menuwidth = (int) (w * 0.10);
+
     static BorderPane scherm = new BorderPane();
     static VBox menu = new VBox();
     static HBox topmenu = new HBox();
-    static HBox logo = new HBox();    
+    static HBox logo = new HBox();
 
     //wissel scherm.
     public static void change(GridPane gridpane) {
@@ -45,8 +44,8 @@ public class Main extends Application {
     public static void menu() {
         scherm.setLeft(menu);
     }
-    
-    public static void topmenu(){
+
+    public static void topmenu() {
         scherm.setTop(topmenu);
     }
 
@@ -58,20 +57,23 @@ public class Main extends Application {
         TabPane formulierScherm = Invoerscherm.returnScherm();
         GridPane statistieken = Statistiekenscherm.returnScherm();
         GridPane instellingen = Instellingenscherm.returnScherm();
-        
+        GridPane homeScherm = Homescherm.returnScherm();
+
         Image Zoom = new Image("zoom_icon&48.png");
+        Image Home = new Image("home_icon&48[1].png");
         Image Formulier = new Image("doc_edit_icon&48.png");
         Image Help = new Image("info_icon&48.png");
-        Image Statistieken = new Image ("chart_line_icon&48.png");
-        Image Instellingen = new Image ("cog_icon&48.png");
-        Image Logo = new Image ("titel_simpel.png", menuwidth * 1.50, w*0.04, false, false);
-        
+        Image Statistieken = new Image("chart_line_icon&48.png");
+        Image Instellingen = new Image("cog_icon&48.png");
+        Image Logo = new Image("titel_simpel.png", menuwidth * 1.50, w * 0.04, false, false);
+
         Button statistiekenButton = new Button();
         Button zoekButton = new Button();
         Button instellingenButton = new Button();
         Button helpButton = new Button();
         Button formulierButton = new Button();
-        
+        Button homeButton = new Button();
+
         statistiekenButton.setText("Statistieken");
         statistiekenButton.getStyleClass().add("leftmenubuttons");
         statistiekenButton.setGraphic(new ImageView(Statistieken));
@@ -100,7 +102,7 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(zoekScherm);
-                
+
 //                zoekButton.setStyle("-fx-background-color: #ff0000; ");
 //                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
 //                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
@@ -108,8 +110,26 @@ public class Main extends Application {
 //                formulierButton.setStyle("-fx-background-color: #d81e05; ");
             }
         });
-        
-        
+
+        homeButton.setText("Home");
+        homeButton.getStyleClass().add("leftmenubuttons");
+        homeButton.setGraphic(new ImageView(Home));
+        homeButton.setContentDisplay(ContentDisplay.TOP);
+        homeButton.setPrefSize(menuwidth, 112.5);
+        homeButton.setPrefSize(200, 112.5);
+        homeButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                scherm.setCenter(homeScherm);
+
+//                zoekButton.setStyle("-fx-background-color: #ff0000; ");
+//                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
+//                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
+//                helpButton.setStyle("-fx-background-color: #d81e05; ");
+//                formulierButton.setStyle("-fx-background-color: #d81e05; ");
+            }
+        });
+
         instellingenButton.setText("Instellingen");
         instellingenButton.getStyleClass().add("leftmenubuttons");
         instellingenButton.setGraphic(new ImageView(Instellingen));
@@ -129,7 +149,6 @@ public class Main extends Application {
             }
         });
 
-        
         helpButton.setText("Help");
         helpButton.getStyleClass().add("leftmenubuttons");
         helpButton.setGraphic(new ImageView(Help));
@@ -148,7 +167,6 @@ public class Main extends Application {
             }
         });
 
-        
         formulierButton.setText("Invoer");
         formulierButton.getStyleClass().add("leftmenubuttons");
         formulierButton.setGraphic(new ImageView(Formulier));
@@ -164,17 +182,17 @@ public class Main extends Application {
 //                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
 //                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
 //                helpButton.setStyle("-fx-background-color: #d81e05; ");
-               
+
             }
         });
 
         Label placeholder = new Label();
         placeholder.setVisible(true);
-        placeholder.setPrefSize(w-menuwidth, 60);
+        placeholder.setPrefSize(w - menuwidth, 60);
         placeholder.setGraphic(new ImageView(Logo));
         placeholder.setContentDisplay(ContentDisplay.LEFT);
         placeholder.setDisable(false);
-        
+
         Button uitlogButton = new Button();
         uitlogButton.setText("Uitloggen");
         uitlogButton.setContentDisplay(ContentDisplay.RIGHT);
@@ -192,23 +210,24 @@ public class Main extends Application {
                 instellingenButton.setDisable(false);
                 helpButton.setDisable(false);
                 formulierButton.setDisable(false);
+                homeButton.setDisable(false);
             }
         });
-                        
-        menu.getChildren().addAll(zoekButton, formulierButton, helpButton, statistiekenButton,
+
+        menu.getChildren().addAll(homeButton, zoekButton, formulierButton, helpButton, statistiekenButton,
                 instellingenButton);
         topmenu.getChildren().addAll(logo, uitlogButton);
         logo.getChildren().addAll(placeholder);
-        
+
         scherm.setCenter(inlogScherm);
 
         Scene scene = new Scene(scherm, w, h);
         String css = Main.class.getResource("Theme.css").toExternalForm();
         scene.getStylesheets().add(css);
         logo.setStyle("-fx-background-color: #c10b0b;");
-        logo.setPrefWidth(menuwidth+200);
-        topmenu.setSpacing(w-menuwidth-300);
-        
+        logo.setPrefWidth(menuwidth + 200);
+        topmenu.setSpacing(w - menuwidth - 300);
+
         primaryStage.setTitle("Main Screen");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -216,8 +235,7 @@ public class Main extends Application {
         primaryStage.setFullScreen(true);
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
 
         launch(args);
     }

@@ -85,23 +85,31 @@ public class Helpscherm extends Application {
 
         //vraag 4
         TitledPane vraag4 = new TitledPane();
-        vraag4.setText("Het matchen van verloren bagage.");
-        vraag4.setContent(new Text("Klik"));
+        GridPane grid4 = new GridPane();
+        grid4.setHgap(10);
+        grid4.setVgap(10);
+        grid4.setPadding(new Insets(25, 25, 25, 25));
+        Text text4 = new Text("Als u een verloren koffer gevonden heeft, kunt u in de kolom \"Status\" de status veranderen naar \n"
+                + "gevonden. ");
+        grid4.add(text4, 0, 0);
+        vraag4.setText("Het matchen van koffers.");
+        vraag4.setContent(grid4);
         vraag4.setExpanded(false);
-
+        
+        //vraag 5
         TitledPane vraag5 = new TitledPane();
-        vraag5.setText("De Statistieken inzien.");
-        vraag5.setContent(new Text("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\nbbbbbbbbbbbbbbbbbbbbbbbbb"
-                + "\ncccccccccccccccccccccccccccccccccccc\n\ndddddddddddddddddddddddddddddddddddddd"
-                + "\neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"));
+        GridPane grid5 = new GridPane();
+        grid5.setHgap(10);
+        grid5.setVgap(10);
+        grid5.setPadding(new Insets(25, 25, 25, 25));
+        Text text5 = new Text("Als er een foute invoer is, kunt u de koffer verwijderen door bij \"Home\" of via \"Zoeken\"\n"
+                + "de koffer te selecteren en op de \"Verwijderen\" knop te drukken.");
+        grid5.add(text5, 0, 0);
+        vraag5.setText("Het verwijderen van koffers.");
+        vraag5.setContent(grid5);
         vraag5.setExpanded(false);
 
-        TitledPane vraag6 = new TitledPane();
-        vraag6.setText("De Statistieken inzien.");
-        vraag6.setContent(new Text("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\nbbbbbbbbbbbbbbbbbbbbbbbbb"
-                + "\ncccccccccccccccccccccccccccccccccccc\n\ndddddddddddddddddddddddddddddddddddddd"
-                + "\neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"));
-        vraag6.setExpanded(false);
+        
 
         faq.addRow(0, new Text(""));
         faq.addRow(1, new Text(""));
@@ -117,7 +125,7 @@ public class Helpscherm extends Application {
         faq.add(vraag3, 0, 11);
         faq.add(vraag4, 0, 12);
         faq.add(vraag5, 0, 13);
-        faq.add(vraag6, 0, 14);
+        
 
         ScrollPane scrollpane = new ScrollPane();
 
