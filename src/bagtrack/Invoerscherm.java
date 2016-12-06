@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -250,6 +251,9 @@ public class Invoerscherm extends Application {
                     } catch (Exception e) {
                         System.out.println(e);
                     }
+                    
+                    
+                    
 
                     System.out.println("INSERT INTO bagtrack.bagage (idbagage,merk,kleur1,kleur2,soort,opdruk,luchthaven,datum,labelnummer,opmerkingen) VALUES ('" + 50 + "','" + date1 + "','"
                             + merk + "','" + color1Box.getValue() + "','" + color2Box.getValue() + "','" + typeBagBox.getValue()
@@ -261,6 +265,9 @@ public class Invoerscherm extends Application {
                             + "','" + graphicBox.getValue() + "','" + airportBox.getValue() + "','" + date1 + "','" + numberField.getText()
                             + "','" + commentField.getText() + "');");
 
+                    
+                    
+                    Statistiekenscherm.addPieData();
                 }
             }
         });

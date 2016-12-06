@@ -5,6 +5,7 @@
  */
 package bagtrack;
 
+import java.sql.ResultSet;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -28,10 +29,59 @@ import javafx.stage.Stage;
  */
 public class Statistiekenscherm extends Application
 {
+    static ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList();
     @Override
     public void start(Stage primaryStage)
     {
         returnScherm();
+    }
+    
+    public static void addPieData(){
+        ResultSet rs = sql.select("SELECT DISTINCT merk FROM bagage;");
+        pieChartData.clear();
+        
+        try{
+            while(rs.next()){
+                String sliceNaam = rs.getString("merk");
+                System.out.println(sliceNaam);
+                ResultSet rs1 = sql.select("SELECT COUNT(merk)AS NumberOfRows FROM bagage WHERE merk='"+sliceNaam+"';");
+                
+                if(rs1.next()){
+                PieChart.Data test = new PieChart.Data(sliceNaam,rs1.getInt("NumberOfRows"));
+                pieChartData.add(test);
+                
+            }
+                
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public static void addPieData(String merk){
+        try{
+            System.out.println(merk);
+            ResultSet rs1 = sql.select("SELECT COUNT(merk)AS NumberOfRows FROM bagage WHERE merk='"+merk+"';");
+            PieChart.Data dataRem = null;
+            PieChart.Data dataAdd = null;
+            if(rs1.next()){
+                int value = rs1.getInt("NumberOfRows");
+                dataRem = new PieChart.Data(merk,value-1);
+                dataAdd = new PieChart.Data(merk,value);
+            }
+            
+            
+            //pieChartData.indexOf(data)
+            //pieChartData.remove(dataRem);
+            int index = pieChartData.indexOf(dataRem);
+            System.out.println(index);
+            pieChartData.set(index, dataAdd);
+            
+        
+        }catch(Exception e){
+            System.out.println(e);
+        }
     }
     
     public static GridPane returnScherm() {
@@ -103,17 +153,32 @@ public class Statistiekenscherm extends Application
         series3.getData().add(new XYChart.Data("Nov", 12));
         series3.getData().add(new XYChart.Data("Dec", 1));
         
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
-                    new PieChart.Data("Samsonite", 13),
-                    new PieChart.Data("Hema huismerk", 25),
-                    new PieChart.Data("AH Basic Koffer", 10),
-                    new PieChart.Data("Dora's rugzak", 22),
-                    new PieChart.Data("overig", 30)
-                        
-                );
+        
+        
+        
+        /*
+        try{
+            if(rs1.next()){
+                PieChart.Data test = new PieChart.Data("Samsonite",rs1.getInt("NumberOfRows"));
+                pieChartData.add(test);
+            }
+            if(rs2.next()){
+                PieChart.Data test = new PieChart.Data("Dora",rs2.getInt("NumberOfRows"));
+                pieChartData.add(test);
+            }
+            if(rs3.next()){
+                PieChart.Data test = new PieChart.Data("SuperTrash",rs3.getInt("NumberOfRows"));
+                pieChartData.add(test);
+            }
+        
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+        */
         
         final PieChart pieChart = new PieChart(pieChartData);
+        addPieData();
         pieChart.setTitle("Verloren merken");
         pieChart.setVisible(false);
                  

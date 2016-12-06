@@ -23,11 +23,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
@@ -487,7 +490,7 @@ GridPane scherm3 = new GridPane();
         
         Button matchOld = new Button();
         matchOld.setText("Match Oud");
-        matchOld.setPrefSize(w*0.45, 50);
+        matchOld.setPrefSize(w*0.30, 50);
         matchOld.setFont(Font.font("Verdana", 20));
         matchOld.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -513,7 +516,7 @@ GridPane scherm3 = new GridPane();
 
         Button matchFound = new Button();
         matchFound.setText("Match gevonden");
-        matchFound.setPrefSize(w*0.90, 50);
+        matchFound.setPrefSize(w*0.30, 50);
         matchFound.setFont(Font.font("Verdana", 20));
         matchFound.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -536,6 +539,116 @@ GridPane scherm3 = new GridPane();
             }
         });
         
+        Button delete = new Button();
+        delete.setText("Verwijder Geselecteerd");
+        delete.setPrefSize(w*0.30, 50);
+        delete.setFont(Font.font("Verdana", 20));
+        delete.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                int index = table.getSelectionModel().selectedIndexProperty().get();
+                int idbagage = 0;
+                System.out.println(index);
+                
+                try{
+                    rs.absolute(index+1);
+                    idbagage = rs.getInt("idbagage");
+                    
+                    sql.insert("DELETE FROM bagage WHERE idbagage=" + idbagage+";");
+                    
+                    Main.change(returnScherm2(query, 1, ""));
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+                
+                
+                
+            }
+        });
+        VBox vbox = new VBox();
+        
+        Image vermistIcon = new Image("delete_icon&48.png");
+        Image gevondenIcon = new Image("checkmark_icon&48.png");
+        Image verzondenIcon = new Image("track_icon&48.png");
+        
+        
+        Button vermist = new Button();
+        vermist.setGraphic(new ImageView(vermistIcon));
+        vermist.setPrefSize(w*0.30, 50);
+        vermist.setFont(Font.font("Verdana", 20));
+        vermist.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+                
+                int index = table.getSelectionModel().selectedIndexProperty().get();
+                int idbagage = 0;
+                System.out.println(index);
+                
+                try{
+                    rs.absolute(index+1);
+                    idbagage = rs.getInt("idbagage");
+                    System.out.println(idbagage);
+                    sql.insert("UPDATE bagage SET status='Vermist' WHERE idbagage="+idbagage+";");
+                    Main.change(returnScherm2(query, 1, ""));
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+
+                
+            }
+        });
+        Button gevonden = new Button();
+        gevonden.setGraphic(new ImageView(gevondenIcon));
+        gevonden.setPrefSize(w*0.30, 50);
+        gevonden.setFont(Font.font("Verdana", 20));
+        gevonden.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                int index = table.getSelectionModel().selectedIndexProperty().get();
+                int idbagage = 0;
+                System.out.println(index);
+                
+                try{
+                    rs.absolute(index+1);
+                    idbagage = rs.getInt("idbagage");
+                    System.out.println(idbagage);
+                    sql.insert("UPDATE bagage SET status='Gevonden' WHERE idbagage="+idbagage+";");
+                    Main.change(returnScherm2(query, 1, ""));
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+                
+            }
+        });
+        Button verzonden = new Button();
+        verzonden.setGraphic(new ImageView(verzondenIcon));
+        verzonden.setPrefSize(w*0.30, 50);
+        verzonden.setFont(Font.font("Verdana", 20));
+        verzonden.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                int index = table.getSelectionModel().selectedIndexProperty().get();
+                int idbagage = 0;
+                System.out.println(index);
+                
+                try{
+                    rs.absolute(index+1);
+                    idbagage = rs.getInt("idbagage");
+                    System.out.println(idbagage);
+                    sql.insert("UPDATE bagage SET status='Verzonden' WHERE idbagage="+idbagage+";");
+                    Main.change(returnScherm2(query, 1, ""));
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+        });
+        
+        vbox.getChildren().addAll(vermist,gevonden,verzonden);
+        
         Separator separator = new Separator();
         separator.setOrientation(Orientation.VERTICAL);
 
@@ -545,15 +658,16 @@ GridPane scherm3 = new GridPane();
         scherm2.add(label, 0, 0);
         scherm2.add(table, 0, 1);
         scherm2.add(hbox, 0, 2);
+        scherm2.add(vbox, 1,1);
         
         if(match == 1){
-            hbox.getChildren().addAll(matchNew,separator,matchOld);
+            hbox.getChildren().addAll(matchNew,separator,matchOld,delete);
         }
         if(match == 2){
             hbox.getChildren().addAll(matchFound);
         }
         if(match == 3){
-            
+            hbox.getChildren().addAll(delete);
         }
         
         
