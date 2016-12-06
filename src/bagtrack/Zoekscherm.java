@@ -21,6 +21,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -43,6 +44,11 @@ import javafx.util.Callback;
  */
 public class Zoekscherm extends Application {
     
+<<<<<<< HEAD
+=======
+    static boolean currTable;
+    
+>>>>>>> 55750141672cdb7e57cc805ef5a94bec284810ff
     @Override
     public void start(Stage primaryStage) {
 
@@ -517,6 +523,7 @@ public class Zoekscherm extends Application {
         ResultSet rs = sql.select(query);
         
           
+        currTable = false;
         
         try{
             for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
@@ -527,7 +534,10 @@ public class Zoekscherm extends Application {
                     continue;
                 }
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
-                if("idbagage".equals((String)rs.getMetaData().getColumnName(1)) ){col.prefWidthProperty().bind(table.widthProperty().divide(11.1));}
+                if("idbagage".equals((String)rs.getMetaData().getColumnName(1)) ){
+                    col.prefWidthProperty().bind(table.widthProperty().divide(11.1));
+                    currTable = true;
+                }
                 col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
                     public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
                         return new SimpleStringProperty(param.getValue().get(j).toString());                        
@@ -642,6 +652,39 @@ public class Zoekscherm extends Application {
         delete.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                
+                if(currTable == true){
+                    int index = table.getSelectionModel().selectedIndexProperty().get();
+                    int idbagage = 0;
+                    System.out.println(index);
+                
+                    try{
+                        rs.absolute(index+1);
+                        idbagage = rs.getInt("idbagage");
+
+                        sql.insert("DELETE FROM bagage WHERE idbagage=" + idbagage+";");
+
+                        Main.change(returnScherm2(query, 1, ""));
+                    }catch(Exception e){
+                        System.out.println(e);
+                    }
+                }else{
+                    int index = table.getSelectionModel().selectedIndexProperty().get();
+                    int idpersoonsgegevens = 0;
+                    System.out.println(index);
+                
+                    try{
+                        rs.absolute(index+1);
+                        idpersoonsgegevens = rs.getInt("idpersoonsgegevens");
+
+                        sql.insert("DELETE FROM persoonsgegevens WHERE idpersoonsgegevens=" + idpersoonsgegevens+";");
+
+                        Main.change(returnScherm2(query, 1, ""));
+                    }catch(Exception e){
+                        System.out.println(e);
+                    }
+                }
+                
 
                 int index = table.getSelectionModel().selectedIndexProperty().get();
                 int idbagage = 0;
@@ -677,7 +720,9 @@ public class Zoekscherm extends Application {
             @Override
             public void handle(ActionEvent event) {
                 
-                
+                if(currTable == true){
+                    
+                }
                 int index = table.getSelectionModel().selectedIndexProperty().get();
                 int idbagage = 0;
                 System.out.println(index);
