@@ -25,6 +25,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -41,15 +43,13 @@ import javafx.util.Callback;
  */
 public class Zoekscherm extends Application {
     
-    
-    
     @Override
     public void start(Stage primaryStage) {
 
         returnScherm();
     }
-public static GridPane returnScherm3(String idbagage) {
-GridPane scherm3 = new GridPane();
+        public static GridPane returnScherm3(String idbagage) {
+        GridPane scherm3 = new GridPane();
         scherm3.setPrefSize(600, 450);
         scherm3.setHgap(1);
         scherm3.setVgap(10);
@@ -60,14 +60,10 @@ GridPane scherm3 = new GridPane();
         RowConstraints row = new RowConstraints(50);
         scherm3.getRowConstraints().add(row);
 
-        
-        
-        
         //Labels, Textvelden, buttons en comboboxen.
         final int textWidth = 200;
         final int boxWidth = 200;
         
-
         //TextField textveldNaam = new TextField();
         //textveldNaam.setPrefWidth(textWidth);
         TextField textveldVoornaam = new TextField();
@@ -88,7 +84,6 @@ GridPane scherm3 = new GridPane();
         textveldEmail.setPrefWidth(textWidth);
         TextField textveldVluchtnummer = new TextField();
         textveldVluchtnummer.setPrefWidth(textWidth);
-        
 
         Label label = new Label();
         label.setText("Voornaam   ");
@@ -125,27 +120,54 @@ GridPane scherm3 = new GridPane();
 
         Button btn = new Button("Zoek");
 
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+        btn.setOnAction(new EventHandler<ActionEvent>()
+        {
             @Override
-            public void handle(ActionEvent event) {
-                String query = "SELECT * FROM persoonsgegevens WHERE voornaam LIKE '%"+ textveldVoornaam.getText() +"%' AND voorletter LIKE '%"+
-                        textveldVoorletters.getText() +"%' AND achternaam LIKE '%"+ textveldAchternaam.getText() +"%' AND adress LIKE '%"+
-                        textveldAdres.getText() +"%' AND vakantieadress LIKE '%"+
-                        textveldVakantieadres.getText() +"%' AND telefoon1 LIKE '%"+ textveldTelefoon1.getText() +"%' AND telefoon2 LIKE '%"+
-                        textveldTelefoon1.getText() +"%' AND email LIKE '%"+ textveldEmail.getText() +"%' AND vluchtnummer LIKE '%"+ textveldVluchtnummer.getText() +"%';";
-                ;
-                
-
-                if(idbagage == ""){
+            public void handle(ActionEvent event)
+            {
+                String query = "SELECT * FROM persoonsgegevens WHERE voornaam LIKE '%" + textveldVoornaam.getText() + "%' AND voorletter LIKE '%"
+                        + textveldVoorletters.getText() + "%' AND achternaam LIKE '%" + textveldAchternaam.getText() + "%' AND adress LIKE '%"
+                        + textveldAdres.getText() + "%' AND vakantieadress LIKE '%"
+                        + textveldVakantieadres.getText() + "%' AND telefoon1 LIKE '%" + textveldTelefoon1.getText() + "%' AND telefoon2 LIKE '%"
+                        + textveldTelefoon1.getText() + "%' AND email LIKE '%" + textveldEmail.getText() + "%' AND vluchtnummer LIKE '%" + textveldVluchtnummer.getText() + "%';";
+                if (idbagage == "")
+                {
                     Main.change(Zoekscherm.returnScherm2(query, 3, ""));
-                }else{
+                } else
+                {
                     Main.change(Zoekscherm.returnScherm2(query, 2, idbagage));
                 }
-                
-
             }
         });
-
+        
+        scherm3.setOnKeyPressed(new EventHandler<KeyEvent>()
+        {
+            @Override
+            public void handle(KeyEvent event)
+            {
+                if (event.getCode().equals(KeyCode.ENTER))
+                {
+                    String query = "SELECT * FROM persoonsgegevens WHERE voornaam LIKE '%"
+                        + textveldVoornaam.getText() + "%' AND voorletter LIKE '%"
+                        + textveldVoorletters.getText() + "%' AND achternaam LIKE '%"
+                        + textveldAchternaam.getText() + "%' AND adress LIKE '%"
+                        + textveldAdres.getText() + "%' AND vakantieadress LIKE '%"
+                        + textveldVakantieadres.getText() + "%' AND telefoon1 LIKE '%"
+                        + textveldTelefoon1.getText() + "%' AND telefoon2 LIKE '%"
+                        + textveldTelefoon1.getText() + "%' AND email LIKE '%"
+                        + textveldEmail.getText() + "%' AND vluchtnummer LIKE '%"
+                        + textveldVluchtnummer.getText() + "%';";
+            if (idbagage == "")
+            {
+                Main.change(Zoekscherm.returnScherm2(query, 3, ""));
+            } else
+            {
+                Main.change(Zoekscherm.returnScherm2(query, 2, idbagage));
+            }
+                }
+            }
+        });
+                
         //Dit kan korter, geen idee hoe.
         scherm3.add(label, 1, 1);
         scherm3.add(label2, 1, 2);
@@ -167,6 +189,13 @@ GridPane scherm3 = new GridPane();
         scherm3.add(textveldEmail, 2, 8);
         scherm3.add(textveldVluchtnummer, 2, 9);
         scherm3.add(btn, 2, 10);
+        
+        textveldVoornaam.requestFocus();
+        if (!textveldVoornaam.isFocused()) {
+            textveldVoornaam.requestFocus();
+        }
+        
+        btn.setDefaultButton(true);
         return scherm3;
 }
     public static TabPane returnScherm() {
@@ -348,6 +377,73 @@ GridPane scherm3 = new GridPane();
 
             }
         });
+        
+        scherm.setOnKeyPressed(new EventHandler<KeyEvent>()
+        {
+            @Override
+            public void handle(KeyEvent event)
+            {
+                if (event.getCode().equals(KeyCode.ENTER))
+                {
+                                    String query = null;
+                
+                String kleur1 = (String)comboBoxKleur1.getValue();
+                String kleur2 = (String)comboBoxKleur2.getValue();
+                String luchthaven = (String)comboBoxLuchthaven.getValue();
+                String soort = (String)comboBoxSoort.getValue();
+                String opdruk = (String)comboBoxOpdruk.getValue();
+                String labelnr = (String)textveldLabelnr.getText();
+                
+                if(textveldLabelnr.getText() == null){
+                    labelnr = "";
+                }
+                
+                if(comboBoxKleur1.getValue() == null){
+                    kleur1 = "";
+                }
+                
+                if(comboBoxKleur2.getValue() == null){
+                    kleur2 = "";
+                }
+                
+                if(comboBoxLuchthaven.getValue() == null){
+                    luchthaven = "";
+                }
+                
+                if(comboBoxSoort.getValue() == null){
+                    soort = "";
+                }
+                
+                if(comboBoxOpdruk.getValue() == null){
+                    opdruk = "";
+                }
+                
+                System.out.println(kleur1);
+                System.out.println("SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%"+
+                        kleur1 +"%' AND kleur2 LIKE '%"+ kleur2 +"%' AND soort LIKE '%"+
+                        soort +"%' AND opdruk LIKE '%"+
+                        opdruk +"%' AND luchthaven LIKE '%"+ luchthaven +"%' AND labelnummer LIKE '%"+
+                        textveldLabelnr.getText() +"%';");
+                query = "SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%"+
+                        kleur1 +"%' AND kleur2 LIKE '%"+ kleur2 +"%' AND soort LIKE '%"+
+                        soort +"%' AND opdruk LIKE '%"+
+                        opdruk +"%' AND luchthaven LIKE '%"+ luchthaven +"%' AND labelnummer LIKE '%"+
+                        textveldLabelnr.getText() +"%';";
+                
+                //textveldNaam.setText(null);
+                textveldMerk.setText("");
+                comboBoxKleur1.setValue(null);
+                comboBoxKleur2.setValue(null);
+                comboBoxLuchthaven.setValue(null);
+                textveldLabelnr.setText("");
+                comboBoxSoort.setValue(null);
+                comboBoxOpdruk.setValue(null);
+
+                Main.change(Zoekscherm.returnScherm2(query,1,""));
+
+                }
+            }
+        });
 
         //Dit kan korter, geen idee hoe.
         //scherm.add(label, 1, 1);
@@ -390,7 +486,7 @@ GridPane scherm3 = new GridPane();
         PersoonZoeken.setContent(returnScherm3(""));
         ZoekTabs.getTabs().addAll(KoffersZoeken, PersoonZoeken);
         
-        
+        btn.setDefaultButton(true);
         
 
         return ZoekTabs;
@@ -674,7 +770,7 @@ GridPane scherm3 = new GridPane();
         
         border.setCenter(scherm2);
         
-
+        
         return scherm2;
 
     }
