@@ -44,11 +44,10 @@ import javafx.util.Callback;
  */
 public class Zoekscherm extends Application {
     
-<<<<<<< HEAD
-=======
+
     static boolean currTable;
     
->>>>>>> 55750141672cdb7e57cc805ef5a94bec284810ff
+
     @Override
     public void start(Stage primaryStage) {
 

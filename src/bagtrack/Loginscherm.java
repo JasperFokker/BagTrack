@@ -67,7 +67,7 @@ public class Loginscherm extends Application {
         scherm.setPadding(new Insets(25, 25, 25, 25));
         scherm.setPrefSize(80, 80);
 
-        Image Logo = new Image("titel_simpel.png", 250, 68, false, false);
+        Image Logo = new Image("titel_simpel.png", 275, 75, false, false);
         Label logoDingetje = new Label();
         logoDingetje.setGraphic(new ImageView(Logo));
         scherm.add(logoDingetje, 0, 0);
@@ -109,8 +109,7 @@ public class Loginscherm extends Application {
 
         rect.setArcHeight(30);
         rect.setArcWidth(30);
-        rect.setStroke(Color.BLACK);
-        rect.setFill(Color.rgb(120, 120, 120));
+        rect.setFill(Color.rgb(0, 0, 0, .50));
 
         
         Button uitlogbutton = new Button();
@@ -135,8 +134,7 @@ public class Loginscherm extends Application {
         
         uitknopveld.setArcHeight(30);
         uitknopveld.setArcWidth(30);
-        uitknopveld.setStroke(Color.BLACK);
-        uitknopveld.setFill(Color.rgb(120, 120, 120));
+        uitknopveld.setFill(Color.rgb(0, 0, 0, .50));
         
         stack.getChildren().addAll(rect, uitlogpane, scherm, uitknopveld, uitlogbutton);
         
