@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.chart.PieChart;
 import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -39,42 +38,17 @@ public class Invoerscherm extends Application {
     }
 
     public static StackPane returnScherm() {
-        TabPane invoerTabs = new TabPane();
-        StackPane stack = new StackPane();
-        GridPane popupGrid = new GridPane();
-        popupGrid.setAlignment(Pos.CENTER);
-        
-        popupGrid.setHgap(10);
-        popupGrid.setVgap(10);
-        popupGrid.setPadding(new Insets(25, 25, 25, 25));
-        
-        GridPane kofferGegevensGrid = new GridPane();
-        GridPane persoonGegevensGrid = new GridPane();
 
-        kofferGegevensGrid.setHgap(10);
-        kofferGegevensGrid.setVgap(10);
-        kofferGegevensGrid.setPadding(new Insets(25, 25, 25, 25));
-
-        persoonGegevensGrid.setHgap(10);
-        persoonGegevensGrid.setVgap(10);
-        persoonGegevensGrid.setPadding(new Insets(25, 25, 25, 25));
+        LocalDate datum = LocalDate.now();
+        DatePicker datumKiezer = new DatePicker(datum);
 
         //datum
-        Label dateLabel = new Label("Datum");
-        GridPane.setHalignment(dateLabel, HPos.RIGHT);
-        kofferGegevensGrid.add(dateLabel, 0, 0);
-
-        LocalDate date = LocalDate.now();
-        DatePicker dp = new DatePicker(date);
-        GridPane.setHalignment(dp, HPos.RIGHT);
-        kofferGegevensGrid.add(dp, 1, 0);
+        Label datumLabel = new Label("Datum");
 
         //luchthaven
-        Label airportLabel = new Label("Luchthaven");
-        GridPane.setHalignment(airportLabel, HPos.RIGHT);
-        kofferGegevensGrid.add(airportLabel, 0, 1);
+        Label luchthavenLabel = new Label("Luchthaven");
 
-        ObservableList<String> airport
+        ObservableList<String> luchthaven
                 = FXCollections.observableArrayList(
                         "LHR",
                         "CDG",
@@ -90,38 +64,29 @@ public class Invoerscherm extends Application {
                         "HRG",
                         "CUR"
                 );
-        final ComboBox airportBox = new ComboBox(airport);
-        kofferGegevensGrid.add(airportBox, 1, 1);
+        final ComboBox luchthavenComboBox = new ComboBox(luchthaven);
 
         //combobox soort
-        Label typeBagLabel = new Label("Soort");
-        GridPane.setHalignment(typeBagLabel, HPos.RIGHT);
-        kofferGegevensGrid.add(typeBagLabel, 0, 2);
+        Label kofferSoortLabel = new Label("Soort");
 
-        ObservableList<String> typeBag
+        ObservableList<String> kofferSoort
                 = FXCollections.observableArrayList(
                         "Koffer",
                         "Trolley",
                         "Tas",
                         "Zak"
                 );
-        final ComboBox typeBagBox = new ComboBox(typeBag);
-        kofferGegevensGrid.add(typeBagBox, 1, 2);
+        final ComboBox kofferSoortComboBox = new ComboBox(kofferSoort);
 
         //invoer merk
-        Label brandLabel = new Label("Merk");
-        GridPane.setHalignment(brandLabel, HPos.RIGHT);
-        kofferGegevensGrid.add(brandLabel, 0, 3);
+        Label kofferMerk = new Label("Merk");
 
-        TextField brandField = new TextField();
-        kofferGegevensGrid.add(brandField, 1, 3);
+        TextField kofferMerkField = new TextField();
 
         //comboboxes kleur
-        Label color1Label = new Label("Kleur 1");
-        GridPane.setHalignment(color1Label, HPos.RIGHT);
-        kofferGegevensGrid.add(color1Label, 0, 4);
+        Label kofferKleur1Label = new Label("Kleur 1");
 
-        ObservableList<String> color
+        ObservableList<String> kofferKleur
                 = FXCollections.observableArrayList(
                         "Zwart",
                         "Wit",
@@ -135,201 +100,375 @@ public class Invoerscherm extends Application {
                         "Paars",
                         "Roze"
                 );
-        final ComboBox color1Box = new ComboBox(color);
-        color1Box.setVisibleRowCount(12);
-        kofferGegevensGrid.add(color1Box, 1, 4);
+        final ComboBox kofferKleur1ComboBox = new ComboBox(kofferKleur);
+        kofferKleur1ComboBox.setVisibleRowCount(12);
 
-        Label color2Label = new Label("Kleur 2");
-        GridPane.setHalignment(color2Label, HPos.RIGHT);
-        kofferGegevensGrid.add(color2Label, 2, 4);
+        Label KofferKleur2Label = new Label("Kleur 2");
 
-        final ComboBox color2Box = new ComboBox(color);
-        color2Box.setVisibleRowCount(12);
-        kofferGegevensGrid.add(color2Box, 3, 4);
+        final ComboBox kofferKleur2ComboBox = new ComboBox(kofferKleur);
+        kofferKleur2ComboBox.setVisibleRowCount(12);
 
         //combobox opdruk
-        Label graphicLabel = new Label("Opdruk");
-        GridPane.setHalignment(graphicLabel, HPos.RIGHT);
-        kofferGegevensGrid.add(graphicLabel, 0, 5);
+        Label kofferOpdrukLabel = new Label("Opdruk");
 
-        ObservableList<String> graphic
+        ObservableList<String> kofferOpdruk
                 = FXCollections.observableArrayList(
                         "Effen kleur",
                         "Afbeelding",
                         "Patroon"
                 );
-        final ComboBox graphicBox = new ComboBox(graphic);
-        kofferGegevensGrid.add(graphicBox, 1, 5);
+        final ComboBox kofferOpdrukComboBox = new ComboBox(kofferOpdruk);
 
         //invoer labelnummer
-        Label numberLabel = new Label("Labelnummer");
-        GridPane.setHalignment(numberLabel, HPos.RIGHT);
-        kofferGegevensGrid.add(numberLabel, 0, 6);
+        Label kofferLabelnummerLabel = new Label("Labelnummer");
 
-        TextField numberField = new TextField();
-        kofferGegevensGrid.add(numberField, 1, 6);
+        TextField kofferLabelnummerField = new TextField();
 
         //invoer opmerkingen
-        Label commentLabel = new Label("Opmerkingen");
-        GridPane.setHalignment(commentLabel, HPos.RIGHT);
-        kofferGegevensGrid.add(commentLabel, 0, 7);
+        Label kofferOpmerkingenLabel = new Label("Opmerkingen");
 
-        TextField commentField = new TextField();
-        kofferGegevensGrid.add(commentField, 1, 7);
-
-        //opslaan
-        Button save = new Button();
-        save.setText("Opslaan");
-        GridPane.setHalignment(save, HPos.RIGHT);
-        kofferGegevensGrid.add(save, 0, 8);
+        TextField kofferOpmerkingenField = new TextField();
 
         //melding1
-        Text melding1 = new Text();
-        melding1.setText("Niet alle velden zijn ingevuld.");
-        melding1.setFill(Color.RED);
-        melding1.setVisible(false);
-        kofferGegevensGrid.add(melding1, 0, 9);
-        
+        Text foutMelding = new Text();
+        foutMelding.setText("Niet alle velden zijn ingevuld.");
+        foutMelding.setFill(Color.RED);
+        foutMelding.setVisible(false);
+
         //succesMelding2
         Text succesMelding = new Text();
         succesMelding.setText("Succesvol ingevoerd!");
         succesMelding.setFill(Color.LIGHTGREEN);
         succesMelding.setVisible(false);
-        kofferGegevensGrid.add(succesMelding, 0, 10);
-        
-        Rectangle popupRect = new Rectangle(300, 100);
 
-        popupRect.setArcHeight(30);
-        popupRect.setArcWidth(30);
-        popupRect.setFill(Color.rgb(120, 120, 120));
-        
-        Label sureLabel = new Label("Weet je zeker dat je dit wilt toevoegen?");
-        popupGrid.add(sureLabel, 0, 0);
-        
-        Button yesButton = new Button("Ja");
-        popupGrid.add(yesButton, 0, 1);
-        
-        Button noButton = new Button("Nee");
-        GridPane.setHalignment(noButton, HPos.RIGHT);
-        popupGrid.add(noButton, 0, 1);
-        
-        Group popup = new Group();
-        popup.getChildren().addAll(popupRect, popupGrid);
-        popup.setVisible(false);
-        
+        Label bevestigLabel = new Label("Weet je zeker dat je dit wilt toevoegen?");
+
         //Voornaam
         Label voornaamLabel = new Label("Voornaam");
-        GridPane.setHalignment(voornaamLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(voornaamLabel, 0, 0);
 
         TextField voornaamField = new TextField();
-        persoonGegevensGrid.add(voornaamField, 1, 0);
 
         //Voorletters
         Label voorlettersLabel = new Label("Voorletters");
-        GridPane.setHalignment(voorlettersLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(voorlettersLabel, 0, 1);
 
         TextField voorlettersField = new TextField();
-        persoonGegevensGrid.add(voorlettersField, 1, 1);
 
         //achternaam
         Label achternaamLabel = new Label("Achternaam");
-        GridPane.setHalignment(achternaamLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(achternaamLabel, 0, 2);
 
         TextField achternaamField = new TextField();
-        persoonGegevensGrid.add(achternaamField, 1, 2);
 
         //adress
-        Label adressLabel = new Label("Adres");
-        GridPane.setHalignment(adressLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(adressLabel, 0, 3);
+        Label adresLabel = new Label("Adres");
 
-        TextField adressField = new TextField();
-        persoonGegevensGrid.add(adressField, 1, 3);
+        TextField adresField = new TextField();
 
         //vakantieadress
-        Label vakantieAdressLabel = new Label("Vakantieadres");
-        GridPane.setHalignment(vakantieAdressLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(vakantieAdressLabel, 0, 4);
+        Label vakantieAdresLabel = new Label("Vakantieadres");
 
-        TextField vakantieAdressField = new TextField();
-        persoonGegevensGrid.add(vakantieAdressField, 1, 4);
+        TextField vakantieAdresField = new TextField();
 
         //telefoon1
-        Label phoneLabel = new Label("Telefoon 1");
-        GridPane.setHalignment(phoneLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(phoneLabel, 0, 5);
+        Label telefoon1Label = new Label("Telefoon 1");
 
-        TextField phoneField = new TextField();
-        persoonGegevensGrid.add(phoneField, 1, 5);
+        TextField telefoon1Field = new TextField();
 
         //telefoon2
-        Label phone2Label = new Label("Telefoon 2");
-        GridPane.setHalignment(phone2Label, HPos.RIGHT);
-        persoonGegevensGrid.add(phone2Label, 0, 6);
+        Label telefoon2Label = new Label("Telefoon 2");
 
-        TextField phone2Field = new TextField();
-        persoonGegevensGrid.add(phone2Field, 1, 6);
+        TextField telefoon2Field = new TextField();
 
         //email
         Label emailLabel = new Label("Email");
-        GridPane.setHalignment(emailLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(emailLabel, 0, 7);
 
         TextField emailField = new TextField();
-        persoonGegevensGrid.add(emailField, 1, 7);
 
         //vluchtnummer
         Label vluchtnummerLabel = new Label("Vluchtnummer");
-        GridPane.setHalignment(vluchtnummerLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(vluchtnummerLabel, 0, 8);
 
         TextField vluchtnummerField = new TextField();
-        persoonGegevensGrid.add(vluchtnummerField, 1, 8);
 
         //opmerkingen
-        Label persoonCommentLabel = new Label("Opmerkingen");
-        GridPane.setHalignment(persoonCommentLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(persoonCommentLabel, 0, 9);
+        Label persoonOpmerkingenLabel = new Label("Opmerkingen");
 
-        TextField persoonCommentField = new TextField();
-        persoonGegevensGrid.add(persoonCommentField, 1, 9);
+        TextField persoonOpmerkingenField = new TextField();
 
-        Button save2 = new Button();
-        save2.setText("Opslaan");
-        GridPane.setHalignment(save2, HPos.RIGHT);
-        persoonGegevensGrid.add(save2, 0, 10);
-        
         //melding2
-        Text melding2 = new Text();
-        melding2.setText("Niet alle velden zijn ingevuld.");
-        melding2.setFill(Color.RED);
-        melding2.setVisible(false);
-        persoonGegevensGrid.add(melding2, 0, 11);
-        
+        Text foutMelding2 = new Text();
+        foutMelding2.setText("Niet alle velden zijn ingevuld.");
+        foutMelding2.setFill(Color.RED);
+        foutMelding2.setVisible(false);
+
         //succesMelding2
         Text succesMelding2 = new Text();
         succesMelding2.setText("Succesvol ingevoerd!");
         succesMelding2.setFill(Color.LIGHTGREEN);
         succesMelding2.setVisible(false);
-        persoonGegevensGrid.add(succesMelding2, 0, 12);
-        
-        
-        yesButton.setOnAction(new EventHandler<ActionEvent>() {
+
+        //koffer clear knop
+        Button kofferGegevensWisButton = new Button();
+        kofferGegevensWisButton.setText("Leegmaken");
+        kofferGegevensWisButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                datumKiezer.setValue(datum);
+                luchthavenComboBox.setValue(null);
+                kofferSoortComboBox.setValue(null);
+                kofferMerkField.setText(null);
+                kofferKleur1ComboBox.setValue(null);
+                kofferKleur2ComboBox.setValue(null);
+                kofferOpdrukComboBox.setValue(null);
+                kofferOpmerkingenField.setText(null);
+                kofferLabelnummerField.setText(null);
+            }
+        });
+
+        //persoon clear
+        Button persoonWissenButton = new Button();
+        persoonWissenButton.setText("Leegmaken");
+        persoonWissenButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                voornaamField.setText(null);
+                voorlettersField.setText(null);
+                achternaamField.setText(null);
+                adresField.setText(null);
+                vakantieAdresField.setText(null);
+                telefoon1Field.setText(null);
+                telefoon2Field.setText(null);
+                emailField.setText(null);
+                vluchtnummerField.setText(null);
+                persoonOpmerkingenField.setText(null);
+            }
+        });
+
+        Group popup = new Group();
+        TabPane invoerTabs = new TabPane();
+
+        //koffer opslaan knop
+        Button kofferOpslaanButton = new Button();
+        kofferOpslaanButton.setText("Opslaan");
+        kofferOpslaanButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (datumKiezer.getValue() == null) {
+                    datumKiezer.setStyle("-fx-background-color: tomato;");
+                    foutMelding.setVisible(true);
+                } else {
+                    datumKiezer.setStyle("");
+                }
+
+                if (luchthavenComboBox.getValue() == null) {
+                    luchthavenComboBox.setStyle(
+                            "-fx-background-color: tomato;");
+                    foutMelding.setVisible(true);
+                } else {
+                    luchthavenComboBox.setStyle("");
+                }
+
+                if (kofferSoortComboBox.getValue() == null) {
+                    kofferSoortComboBox.setStyle(
+                            "-fx-background-color: tomato;");
+                    foutMelding.setVisible(true);
+                } else {
+                    kofferSoortComboBox.setStyle("");
+                }
+
+                if (kofferMerkField.getText().trim().equals("")) {
+                    kofferMerkField.setStyle("-fx-background-color: tomato;");
+                    foutMelding.setVisible(true);
+                } else {
+                    kofferMerkField.setStyle("");
+                }
+
+                if (kofferKleur1ComboBox.getValue() == null) {
+                    kofferKleur1ComboBox.setStyle(
+                            "-fx-background-color: tomato;");
+                    foutMelding.setVisible(true);
+                } else {
+                    kofferKleur1ComboBox.setStyle("");
+                }
+
+                if (kofferOpdrukComboBox.getValue() == null) {
+                    kofferOpdrukComboBox.setStyle(
+                            "-fx-background-color: tomato;");
+                    foutMelding.setVisible(true);
+                } else {
+                    kofferOpdrukComboBox.setStyle("");
+                }
+
+                if (datumKiezer.getValue() != null
+                        && luchthavenComboBox.getValue() != null
+                        && kofferSoortComboBox.getValue() != null
+                        && !kofferMerkField.getText().trim().equals("")
+                        && kofferKleur1ComboBox.getValue() != null
+                        && kofferOpdrukComboBox.getValue() != null) {
+                    foutMelding.setVisible(false);
+                    popup.setVisible(true);
+                    invoerTabs.setDisable(true);
+
+                }
+            }
+        });
+
+        //persoon opslaan knop
+        Button persoonOpslaanButton = new Button();
+        persoonOpslaanButton.setText("Opslaan");
+        GridPane.setHalignment(persoonOpslaanButton, HPos.RIGHT);
+        persoonOpslaanButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (voornaamField.getText().trim().equals("")) {
+                    voornaamField.setStyle("-fx-background-color: tomato;");
+                    foutMelding2.setVisible(true);
+                } else {
+                    voornaamField.setStyle("");
+                }
+
+                if (voorlettersField.getText().trim().equals("")) {
+                    voorlettersField.setStyle("-fx-background-color: tomato;");
+                    foutMelding2.setVisible(true);
+                } else {
+                    voorlettersField.setStyle("");
+                }
+
+                if (achternaamField.getText().trim().equals("")) {
+                    achternaamField.setStyle("-fx-background-color: tomato;");
+                    foutMelding2.setVisible(true);
+                } else {
+                    achternaamField.setStyle("");
+                }
+
+                if (adresField.getText().trim().equals("")) {
+                    adresField.setStyle("-fx-background-color: tomato;");
+                    foutMelding2.setVisible(true);
+                } else {
+                    adresField.setStyle("");
+                }
+
+                if (telefoon1Field.getText().trim().equals("")) {
+                    telefoon1Field.setStyle("-fx-background-color: tomato;");
+                    foutMelding2.setVisible(true);
+                } else {
+                    telefoon1Field.setStyle("");
+                }
+
+                if (emailField.getText().trim().equals("")) {
+                    emailField.setStyle("-fx-background-color: tomato;");
+                    foutMelding2.setVisible(true);
+                } else {
+                    emailField.setStyle("");
+                }
+
+                if (!voornaamField.getText().trim().equals("")
+                        && !voorlettersField.getText().trim().equals("")
+                        && !achternaamField.getText().trim().equals("")
+                        && !adresField.getText().trim().equals("")
+                        && !telefoon1Field.getText().trim().equals("")
+                        && !telefoon2Field.getText().trim().equals("")) {
+
+                    foutMelding2.setVisible(false);
+                    popup.setVisible(true);
+                    invoerTabs.setDisable(true);
+
+                }
+            }
+        });
+
+        GridPane kofferGegevensPane = new GridPane();
+        kofferGegevensPane.setHgap(10);
+        kofferGegevensPane.setVgap(10);
+        kofferGegevensPane.setPadding(new Insets(25, 25, 25, 25));
+
+        kofferGegevensPane.add(datumLabel, 0, 0);
+        kofferGegevensPane.add(datumKiezer, 1, 0);
+        kofferGegevensPane.add(luchthavenLabel, 0, 1);
+        kofferGegevensPane.add(luchthavenComboBox, 1, 1);
+        kofferGegevensPane.add(kofferSoortLabel, 0, 2);
+        kofferGegevensPane.add(kofferSoortComboBox, 1, 2);
+        kofferGegevensPane.add(kofferMerk, 0, 3);
+        kofferGegevensPane.add(kofferMerkField, 1, 3);
+        kofferGegevensPane.add(kofferKleur1Label, 0, 4);
+        kofferGegevensPane.add(kofferKleur1ComboBox, 1, 4);
+        kofferGegevensPane.add(KofferKleur2Label, 2, 4);
+        kofferGegevensPane.add(kofferKleur2ComboBox, 3, 4);
+        kofferGegevensPane.add(kofferOpdrukLabel, 0, 5);
+        kofferGegevensPane.add(kofferOpdrukComboBox, 1, 5);
+        kofferGegevensPane.add(kofferLabelnummerLabel, 0, 6);
+        kofferGegevensPane.add(kofferLabelnummerField, 1, 6);
+        kofferGegevensPane.add(kofferOpmerkingenLabel, 0, 7);
+        kofferGegevensPane.add(kofferOpmerkingenField, 1, 7);
+        kofferGegevensPane.add(kofferOpslaanButton, 0, 8);
+        kofferGegevensPane.add(foutMelding, 0, 9);
+        kofferGegevensPane.add(succesMelding, 0, 10);
+        kofferGegevensPane.add(kofferGegevensWisButton, 1, 8);
+
+        GridPane persoonGegevensPane = new GridPane();
+        persoonGegevensPane.setHgap(10);
+        persoonGegevensPane.setVgap(10);
+        persoonGegevensPane.setPadding(new Insets(25, 25, 25, 25));
+
+        persoonGegevensPane.add(voornaamLabel, 0, 0);
+        persoonGegevensPane.add(voornaamField, 1, 0);
+        persoonGegevensPane.add(voorlettersLabel, 0, 1);
+        persoonGegevensPane.add(voorlettersField, 1, 1);
+        persoonGegevensPane.add(achternaamLabel, 0, 2);
+        persoonGegevensPane.add(achternaamField, 1, 2);
+        persoonGegevensPane.add(adresLabel, 0, 3);
+        persoonGegevensPane.add(adresField, 1, 3);
+        persoonGegevensPane.add(vakantieAdresLabel, 0, 4);
+        persoonGegevensPane.add(vakantieAdresField, 1, 4);
+        persoonGegevensPane.add(telefoon1Label, 0, 5);
+        persoonGegevensPane.add(telefoon1Field, 1, 5);
+        persoonGegevensPane.add(telefoon2Label, 0, 6);
+        persoonGegevensPane.add(telefoon2Field, 1, 6);
+        persoonGegevensPane.add(emailLabel, 0, 7);
+        persoonGegevensPane.add(emailField, 1, 7);
+        persoonGegevensPane.add(vluchtnummerLabel, 0, 8);
+        persoonGegevensPane.add(vluchtnummerField, 1, 8);
+        persoonGegevensPane.add(persoonOpmerkingenLabel, 0, 9);
+        persoonGegevensPane.add(persoonOpmerkingenField, 1, 9);
+        persoonGegevensPane.add(foutMelding2, 0, 11);
+        persoonGegevensPane.add(succesMelding2, 0, 12);
+
+        Tab kofferGegevens = new Tab();
+        kofferGegevens.setText("Koffergegevens");
+        kofferGegevens.setClosable(false);
+        kofferGegevens.setContent(kofferGegevensPane);
+
+        Tab persoonGegevens = new Tab();
+        persoonGegevens.setText("Persoongegevens");
+        persoonGegevens.setClosable(false);
+        persoonGegevens.setContent(persoonGegevensPane);
+
+        persoonGegevensPane.add(persoonWissenButton, 1, 10);
+        persoonGegevensPane.add(persoonOpslaanButton, 0, 10);
+
+        invoerTabs.getTabs().addAll(kofferGegevens, persoonGegevens);
+
+        Rectangle popupVeld = new Rectangle(300, 100);
+        popupVeld.setArcHeight(30);
+        popupVeld.setArcWidth(30);
+        popupVeld.setFill(Color.rgb(120, 120, 120));
+
+        Button jaButton = new Button("Ja");
+        jaButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 invoerTabs.setDisable(false);
-                if (invoerTabs.getSelectionModel().getSelectedItem().getText().equals("Koffergegevens"))
-            {
-                System.out.println(dp.getValue());
+                if (invoerTabs.getSelectionModel().getSelectedItem().getText()
+                        .equals("Koffergegevens")) {
+                    System.out.println(datumKiezer.getValue());
 
-                    String date1 = dp.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    String merk = brandField.getText();
+                    String date1 = datumKiezer.getValue()
+                            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    String merk = kofferMerkField.getText();
 
                     System.out.println(date1);
-                    ResultSet idget = sql.select("SELECT * FROM bagage ORDER BY idbagage DESC LIMIT 1;");
+                    ResultSet idget = sql.select("SELECT * FROM bagage ORDER "
+                            + "BY idbagage DESC LIMIT 1;");
                     int id = 0;
                     try {
                         if (idget.next()) {
@@ -339,51 +478,92 @@ public class Invoerscherm extends Application {
                         System.out.println(e);
                     }
 
-                    System.out.println("INSERT INTO bagtrack.bagage (idbagage,merk,kleur1,kleur2,soort,opdruk,luchthaven,datum,labelnummer,opmerkingen) VALUES ('" + 50 + "','" + date1 + "','"
-                            + merk + "','" + color1Box.getValue() + "','" + color2Box.getValue() + "','" + typeBagBox.getValue()
-                            + "','" + graphicBox.getValue() + "','" + airportBox.getValue() + "','" + date1 + "','" + numberField.getText()
-                            + "','" + commentField.getText() + "');");
+                    System.out.println("INSERT INTO bagtrack.bagage (idbagage,"
+                            + "merk,kleur1,kleur2,soort,opdruk,luchthaven,"
+                            + "datum,labelnummer,opmerkingen) VALUES ('" + 50
+                            + "','" + date1 + "','" + merk + "','"
+                            + kofferKleur1ComboBox.getValue() + "','"
+                            + kofferKleur2ComboBox.getValue() + "','"
+                            + kofferSoortComboBox.getValue() + "','"
+                            + kofferOpdrukComboBox.getValue() + "','"
+                            + luchthavenComboBox.getValue() + "','" + date1
+                            + "','" + kofferLabelnummerField.getText() + "','"
+                            + kofferOpmerkingenField.getText() + "');");
 
-                    sql.insert("INSERT INTO bagtrack.bagage (idbagage,merk,kleur1,kleur2,soort,opdruk,luchthaven,datum,labelnummer,opmerkingen) VALUES ('" + (id + 1) + "','"
-                            + merk + "','" + color1Box.getValue() + "','" + color2Box.getValue() + "','" + typeBagBox.getValue()
-                            + "','" + graphicBox.getValue() + "','" + airportBox.getValue() + "','" + date1 + "','" + numberField.getText()
-                            + "','" + commentField.getText() + "');");
-                    
+                    sql.insert("INSERT INTO bagtrack.bagage (idbagage,merk,"
+                            + "kleur1,kleur2,soort,opdruk,luchthaven,datum,"
+                            + "labelnummer,opmerkingen) VALUES ('" + (id + 1)
+                            + "','" + merk + "','"
+                            + kofferKleur1ComboBox.getValue() + "','"
+                            + kofferKleur2ComboBox.getValue() + "','"
+                            + kofferSoortComboBox.getValue() + "','"
+                            + kofferOpdrukComboBox.getValue() + "','"
+                            + luchthavenComboBox.getValue() + "','" + date1
+                            + "','" + kofferLabelnummerField.getText() + "','"
+                            + kofferOpmerkingenField.getText() + "');");
+
                     Statistiekenscherm.addPieData();
-            }
-                if (invoerTabs.getSelectionModel().getSelectedItem().getText().equals("Persoongegevens"))
-            {
-                System.out.println(dp.getValue());
-
-                ResultSet idget = sql.select("SELECT * FROM persoonsgegevens ORDER BY idpersoonsgegevens DESC LIMIT 1;");
-                int id = 0;
-                try {
-                    if (idget.next()) {
-                        id = idget.getInt("idpersoonsgegevens");
-                    }
-                } catch (Exception e) {
-                    System.out.println(e);
                 }
 
-                System.out.println("INSERT INTO bagtrack.persoonsgegevens (idpersoonsgegevens,voornaam,voorletter,achternaam,adress,vakantieadress,telefoon1,telefoon2,email,vluchtnummer,opmerkingen,idbagage) VALUES ('" + (id + 1) + "','"
-                        + voornaamField.getText() + "','" + voorlettersField.getText() + "','" + achternaamField.getText() + "','" + adressField.getText()
-                        + "','" + vakantieAdressField.getText() + "','" + phoneField.getText() + "','" + phone2Field.getText() + "','" + emailField.getText()
-                        + "','" + vluchtnummerField.getText() + "','" + persoonCommentField.getText() + "','" + "" + "');");
+                if (invoerTabs.getSelectionModel().getSelectedItem().getText()
+                        .equals("Persoongegevens")) {
+                    System.out.println(datumKiezer.getValue());
 
-                sql.insert("INSERT INTO bagtrack.persoonsgegevens (idpersoonsgegevens,voornaam,voorletter,achternaam,adress,vakantieadress,telefoon1,telefoon2,email,vluchtnummer,opmerkingen,idbagage) VALUES ('" + (id + 1) + "','"
-                        + voornaamField.getText() + "','" + voorlettersField.getText() + "','" + achternaamField.getText() + "','" + adressField.getText()
-                        + "','" + vakantieAdressField.getText() + "','" + phoneField.getText() + "','" + phone2Field.getText() + "','" + emailField.getText()
-                        + "','" + vluchtnummerField.getText() + "','" + persoonCommentField.getText() + "','" + "" + "');");
+                    ResultSet idget = sql.select("SELECT * FROM "
+                            + "persoonsgegevens ORDER BY idpersoonsgegevens "
+                            + "DESC LIMIT 1;");
+                    int id = 0;
+                    try {
+                        if (idget.next()) {
+                            id = idget.getInt("idpersoonsgegevens");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
 
-            }
+                    System.out.println("INSERT INTO bagtrack.persoonsgegevens ("
+                            + "idpersoonsgegevens,voornaam,voorletter,"
+                            + "achternaam,adress,vakantieadress,telefoon1,"
+                            + "telefoon2,email,vluchtnummer,opmerkingen,"
+                            + "idbagage) VALUES ('" + (id + 1) + "','"
+                            + voornaamField.getText() + "','"
+                            + voorlettersField.getText() + "','"
+                            + achternaamField.getText() + "','"
+                            + adresField.getText() + "','"
+                            + vakantieAdresField.getText() + "','"
+                            + telefoon1Field.getText() + "','"
+                            + telefoon2Field.getText()
+                            + "','" + emailField.getText() + "','"
+                            + vluchtnummerField.getText() + "','"
+                            + persoonOpmerkingenField.getText() + "','" + ""
+                            + "');");
 
-                    
+                    sql.insert("INSERT INTO bagtrack.persoonsgegevens ("
+                            + "idpersoonsgegevens,voornaam,voorletter,"
+                            + "achternaam,adress,vakantieadress,telefoon1,"
+                            + "telefoon2,email,vluchtnummer,opmerkingen,"
+                            + "idbagage) VALUES ('" + (id + 1) + "','"
+                            + voornaamField.getText() + "','"
+                            + voorlettersField.getText() + "','"
+                            + achternaamField.getText() + "','"
+                            + adresField.getText() + "','"
+                            + vakantieAdresField.getText() + "','"
+                            + telefoon1Field.getText() + "','"
+                            + telefoon2Field.getText()
+                            + "','" + emailField.getText() + "','"
+                            + vluchtnummerField.getText() + "','"
+                            + persoonOpmerkingenField.getText() + "','" + ""
+                            + "');");
+
+                }
+
                 popup.setVisible(false);
                 succesMelding.setVisible(true);
             }
         });
-        
-        noButton.setOnAction(new EventHandler<ActionEvent>() {
+
+        Button neeButton = new Button("Nee");
+        neeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 popup.setVisible(false);
@@ -391,362 +571,226 @@ public class Invoerscherm extends Application {
             }
         });
 
-        save.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (dp.getValue() == null) {
-                    dp.setStyle("-fx-background-color: tomato;");
-                    melding1.setVisible(true);
-                } else {
-                    dp.setStyle("");
-                }
+        GridPane popupPane = new GridPane();
+        popupPane.setAlignment(Pos.CENTER);
+        popupPane.setHgap(10);
+        popupPane.setVgap(10);
+        popupPane.setPadding(new Insets(25, 25, 25, 25));
 
-                if (airportBox.getValue() == null) {
-                    airportBox.setStyle("-fx-background-color: tomato;");
-                    melding1.setVisible(true);
-                } else {
-                    airportBox.setStyle("");
-                }
+        popupPane.add(bevestigLabel, 0, 0);
+        popupPane.add(jaButton, 0, 1);
+        popupPane.add(neeButton, 0, 1);
 
-                if (typeBagBox.getValue() == null) {
-                    typeBagBox.setStyle("-fx-background-color: tomato;");
-                    melding1.setVisible(true);
-                } else {
-                    typeBagBox.setStyle("");
-                }
+        popup.getChildren().addAll(popupVeld, popupPane);
+        popup.setVisible(false);
 
-                if (brandField.getText().trim().equals("")) {
-                    brandField.setStyle("-fx-background-color: tomato;");
-                    melding1.setVisible(true);
-                } else {
-                    brandField.setStyle("");
-                }
+        GridPane.setHalignment(datumLabel, HPos.RIGHT);
+        GridPane.setHalignment(datumKiezer, HPos.RIGHT);
+        GridPane.setHalignment(luchthavenLabel, HPos.RIGHT);
+        GridPane.setHalignment(kofferSoortLabel, HPos.RIGHT);
+        GridPane.setHalignment(kofferMerk, HPos.RIGHT);
+        GridPane.setHalignment(kofferKleur1Label, HPos.RIGHT);
+        GridPane.setHalignment(KofferKleur2Label, HPos.RIGHT);
+        GridPane.setHalignment(kofferOpdrukLabel, HPos.RIGHT);
+        GridPane.setHalignment(kofferLabelnummerLabel, HPos.RIGHT);
+        GridPane.setHalignment(kofferOpmerkingenLabel, HPos.RIGHT);
+        GridPane.setHalignment(kofferOpslaanButton, HPos.RIGHT);
+        GridPane.setHalignment(neeButton, HPos.RIGHT);
+        GridPane.setHalignment(voornaamLabel, HPos.RIGHT);
+        GridPane.setHalignment(voorlettersLabel, HPos.RIGHT);
+        GridPane.setHalignment(achternaamLabel, HPos.RIGHT);
+        GridPane.setHalignment(adresLabel, HPos.RIGHT);
+        GridPane.setHalignment(vakantieAdresLabel, HPos.RIGHT);
+        GridPane.setHalignment(telefoon1Label, HPos.RIGHT);
+        GridPane.setHalignment(telefoon2Label, HPos.RIGHT);
+        GridPane.setHalignment(emailLabel, HPos.RIGHT);
+        GridPane.setHalignment(vluchtnummerLabel, HPos.RIGHT);
+        GridPane.setHalignment(persoonOpmerkingenLabel, HPos.RIGHT);
 
-                if (color1Box.getValue() == null) {
-                    color1Box.setStyle("-fx-background-color: tomato;");
-                    melding1.setVisible(true);
-                } else {
-                    color1Box.setStyle("");
-                }
-
-                if (graphicBox.getValue() == null) {
-                    graphicBox.setStyle("-fx-background-color: tomato;");
-                    melding1.setVisible(true);
-                } else {
-                    graphicBox.setStyle("");
-                }
-
-                if (dp.getValue() != null && airportBox.getValue() != null && typeBagBox.getValue() != null && !brandField.getText().trim().equals("") && color1Box.getValue() != null && graphicBox.getValue() != null) {
-                    melding1.setVisible(false);
-                    popup.setVisible(true);
-                    invoerTabs.setDisable(true);
-                    
-                }
-            }
-        });
-
-        
-        
-        //clear
-        Button clear = new Button();
-        clear.setText("Leegmaken");
-        kofferGegevensGrid.add(clear, 1, 8);
-        clear.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-
-                dp.setValue(date);
-                airportBox.setValue(null);
-                typeBagBox.setValue(null);
-                brandField.setText(null);
-                color1Box.setValue(null);
-                color2Box.setValue(null);
-                graphicBox.setValue(null);
-                commentField.setText(null);
-                numberField.setText(null);
-            }
-        });
-
-        
-        
-        
-        save2.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (voornaamField.getText().trim().equals("")) {
-                    voornaamField.setStyle("-fx-background-color: tomato;");
-                    melding2.setVisible(true);
-                } else {
-                    voornaamField.setStyle("");
-                }
-
-                if (voorlettersField.getText().trim().equals("")) {
-                    voorlettersField.setStyle("-fx-background-color: tomato;");
-                    melding2.setVisible(true);
-                } else {
-                    voorlettersField.setStyle("");
-                }
-
-                if (achternaamField.getText().trim().equals("")) {
-                    achternaamField.setStyle("-fx-background-color: tomato;");
-                    melding2.setVisible(true);
-                } else {
-                    achternaamField.setStyle("");
-                }
-
-                if (adressField.getText().trim().equals("")) {
-                    adressField.setStyle("-fx-background-color: tomato;");
-                    melding2.setVisible(true);
-                } else {
-                    adressField.setStyle("");
-                }
-
-                if (phoneField.getText().trim().equals("")) {
-                    phoneField.setStyle("-fx-background-color: tomato;");
-                    melding2.setVisible(true);
-                } else {
-                    phoneField.setStyle("");
-                }
-
-                if (emailField.getText().trim().equals("")) {
-                    emailField.setStyle("-fx-background-color: tomato;");
-                    melding2.setVisible(true);
-                } else {
-                    emailField.setStyle("");
-                }
-                
-                if (!voornaamField.getText().trim().equals("") && !voorlettersField.getText().trim().equals("") && !achternaamField.getText().trim().equals("") && !adressField.getText().trim().equals("") && !phoneField.getText().trim().equals("") && !phone2Field.getText().trim().equals("") && !phoneField.getText().trim().equals("")) {
-
-                    melding2.setVisible(false);
-                    popup.setVisible(true);
-                    invoerTabs.setDisable(true);
-                
-            }}
-        });
-        //clear
-        Button clearPersoon = new Button();
-        clearPersoon.setText("Leegmaken");
-        persoonGegevensGrid.add(clearPersoon, 1, 10);
-        clearPersoon.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-
-                voornaamField.setText(null);
-                voorlettersField.setText(null);
-                achternaamField.setText(null);
-                adressField.setText(null);
-                vakantieAdressField.setText(null);
-                phoneField.setText(null);
-                phone2Field.setText(null);
-                emailField.setText(null);
-                vluchtnummerField.setText(null);
-                persoonCommentField.setText(null);
-            }
-        });
-
-        
-
-        Tab kofferGegevens = new Tab();
-        kofferGegevens.setText("Koffergegevens");
-        kofferGegevens.setClosable(false);
-        Tab persoonGegevens = new Tab();
-        persoonGegevens.setText("Persoongegevens");
-        persoonGegevens.setClosable(false);
-
-        kofferGegevens.setContent(kofferGegevensGrid);
-        persoonGegevens.setContent(persoonGegevensGrid);
-        invoerTabs.getTabs().addAll(kofferGegevens, persoonGegevens);
-        
-        
+        StackPane stack = new StackPane();
         stack.getChildren().addAll(invoerTabs, popup);
+
         return stack;
     }
-    
-    public static GridPane matchPersoon(String idbagage){
-         
-        GridPane persoonGegevensGrid = new GridPane();
-        
-        Label lblid = new Label(idbagage);
-        persoonGegevensGrid.add(lblid, 0, 20);
-        
+
+    public static GridPane matchPersoon(String idbagage) {
+
+        Label bagageID = new Label(idbagage);
+
         //Voornaam
         Label voornaamLabel = new Label("Voornaam");
-        GridPane.setHalignment(voornaamLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(voornaamLabel, 0, 0);
-        
+
         TextField voornaamField = new TextField();
-        persoonGegevensGrid.add(voornaamField, 1, 0);
-        
+
         //Voorletters
         Label voorlettersLabel = new Label("Voorletters");
-        GridPane.setHalignment(voorlettersLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(voorlettersLabel, 0, 1);
-        
+
         TextField voorlettersField = new TextField();
-        persoonGegevensGrid.add(voorlettersField, 1, 1);
-        
+
         //achternaam
         Label achternaamLabel = new Label("Achternaam");
-        GridPane.setHalignment(achternaamLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(achternaamLabel, 0, 2);
-        
+
         TextField achternaamField = new TextField();
-        persoonGegevensGrid.add(achternaamField, 1, 2);
-        
+
         //adress
         Label adressLabel = new Label("Adres");
-        GridPane.setHalignment(adressLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(adressLabel, 0, 3);
-        
+
         TextField adressField = new TextField();
-        persoonGegevensGrid.add(adressField, 1, 3);
-        
+
         //vakantieadress
         Label vakantieAdressLabel = new Label("Vakantieadres");
-        GridPane.setHalignment(vakantieAdressLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(vakantieAdressLabel, 0, 4);
-        
+
         TextField vakantieAdressField = new TextField();
-        persoonGegevensGrid.add(vakantieAdressField, 1, 4);
-        
+
         //telefoon1
-        Label phoneLabel = new Label("Telefoon 1");
-        GridPane.setHalignment(phoneLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(phoneLabel, 0, 5);
-        
-        TextField phoneField = new TextField();
-        persoonGegevensGrid.add(phoneField, 1, 5);
-        
+        Label telefoon1Label = new Label("Telefoon 1");
+
+        TextField telefoon1Field = new TextField();
+
         //telefoon2
-        Label phone2Label = new Label("Telefoon 2");
-        GridPane.setHalignment(phone2Label, HPos.RIGHT);
-        persoonGegevensGrid.add(phone2Label, 0, 6);
-        
-        TextField phone2Field = new TextField();
-        persoonGegevensGrid.add(phone2Field, 1, 6);
-        
+        Label telefoon2Label = new Label("Telefoon 2");
+
+        TextField telefoon2Field = new TextField();
+
         //email
         Label emailLabel = new Label("Email");
-        GridPane.setHalignment(emailLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(emailLabel, 0, 7);
-        
+
         TextField emailField = new TextField();
-        persoonGegevensGrid.add(emailField, 1, 7);
-        
+
         //vluchtnummer
         Label vluchtnummerLabel = new Label("Vluchtnummer");
-        GridPane.setHalignment(vluchtnummerLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(vluchtnummerLabel, 0, 8);
-        
+
         TextField vluchtnummerField = new TextField();
-        persoonGegevensGrid.add(vluchtnummerField, 1, 8);
-        
-        
+
         //opmerkingen
         Label persoonCommentLabel = new Label("Opmerkingen");
-        GridPane.setHalignment(persoonCommentLabel, HPos.RIGHT);
-        persoonGegevensGrid.add(persoonCommentLabel, 0, 9);
-        
+
         TextField persoonCommentField = new TextField();
-        persoonGegevensGrid.add(persoonCommentField, 1, 9);
-                
+
         //melding2
-        Text melding2 = new Text();
-        melding2.setText("Niet alle velden zijn ingevuld.");
-        melding2.setFill(Color.RED);
-        melding2.setVisible(false);
-        persoonGegevensGrid.add(melding2, 0, 11);
-        
+        Text foutMelding = new Text();
+        foutMelding.setText("Niet alle velden zijn ingevuld.");
+        foutMelding.setFill(Color.RED);
+        foutMelding.setVisible(false);
+
         //succesMelding2
-        Text succesMelding2 = new Text();
-        succesMelding2.setText("Succesvol ingevoerd!");
-        succesMelding2.setFill(Color.LIGHTGREEN);
-        succesMelding2.setVisible(false);
-        persoonGegevensGrid.add(succesMelding2, 0, 12);
-        
-        Button save2 = new Button();
-        save2.setText("Opslaan");
-        GridPane.setHalignment(save2, HPos.LEFT);
-        persoonGegevensGrid.add(save2, 0, 10);
-        save2.setOnAction(new EventHandler<ActionEvent>() {
+        Text succesMelding = new Text();
+        succesMelding.setText("Succesvol ingevoerd!");
+        succesMelding.setFill(Color.LIGHTGREEN);
+        succesMelding.setVisible(false);
+
+        //opslaan
+        Button persoonOpslaan = new Button();
+        persoonOpslaan.setText("Opslaan");
+        GridPane.setHalignment(persoonOpslaan, HPos.LEFT);
+        persoonOpslaan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+
                 if (voornaamField.getText().trim().equals("")) {
                     voornaamField.setStyle("-fx-background-color: tomato;");
-                    melding2.setVisible(true);
+                    foutMelding.setVisible(true);
                 } else {
                     voornaamField.setStyle("");
                 }
 
                 if (voorlettersField.getText().trim().equals("")) {
                     voorlettersField.setStyle("-fx-background-color: tomato;");
-                    melding2.setVisible(true);
+                    foutMelding.setVisible(true);
                 } else {
                     voorlettersField.setStyle("");
                 }
 
                 if (achternaamField.getText().trim().equals("")) {
                     achternaamField.setStyle("-fx-background-color: tomato;");
-                    melding2.setVisible(true);
+                    foutMelding.setVisible(true);
                 } else {
                     achternaamField.setStyle("");
                 }
 
                 if (adressField.getText().trim().equals("")) {
                     adressField.setStyle("-fx-background-color: tomato;");
-                    melding2.setVisible(true);
+                    foutMelding.setVisible(true);
                 } else {
                     adressField.setStyle("");
                 }
 
-                if (phoneField.getText().trim().equals("")) {
-                    phoneField.setStyle("-fx-background-color: tomato;");
-                    melding2.setVisible(true);
+                if (telefoon1Field.getText().trim().equals("")) {
+                    telefoon1Field.setStyle("-fx-background-color: tomato;");
+                    foutMelding.setVisible(true);
                 } else {
-                    phoneField.setStyle("");
+                    telefoon1Field.setStyle("");
                 }
 
                 if (emailField.getText().trim().equals("")) {
                     emailField.setStyle("-fx-background-color: tomato;");
-                    melding2.setVisible(true);
+                    foutMelding.setVisible(true);
                 } else {
                     emailField.setStyle("");
                 }
-                
-                if (!voornaamField.getText().trim().equals("") && !voorlettersField.getText().trim().equals("") && !achternaamField.getText().trim().equals("") && !adressField.getText().trim().equals("") && !phoneField.getText().trim().equals("") && !phone2Field.getText().trim().equals("") && !phoneField.getText().trim().equals("")) {
-                    
-               
-                ResultSet idget = sql.select("SELECT * FROM persoonsgegevens ORDER BY idpersoonsgegevens DESC LIMIT 1;");
-                int id = 0;
-                try {
-                    if (idget.next()) {
-                        id = idget.getInt("idpersoonsgegevens");
-                    }
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                
-                System.out.println("INSERT INTO bagtrack.persoonsgegevens (idpersoonsgegevens,voornaam,voorletter,achternaam,adress,vakantieadress,telefoon1,telefoon2,email,vluchtnummer,opmerkingen,idbagage) VALUES ('"+ (id+1) +"','" + 
-                        voornaamField.getText() + "','" + voorlettersField.getText() + "','"+ achternaamField.getText() + "','"+ adressField.getText() +
-                        "','"+ vakantieAdressField.getText() + "','"+ phoneField.getText() + "','" + phone2Field.getText() + "','"+ emailField.getText() +
-                        "','"+ vluchtnummerField.getText()+ "','" + persoonCommentField.getText() + "','"+ ""+"');");
 
-              
-                
-                sql.insert("INSERT INTO bagtrack.persoonsgegevens (idpersoonsgegevens,voornaam,voorletter,achternaam,adress,vakantieadress,telefoon1,telefoon2,email,vluchtnummer,opmerkingen,idbagage) VALUES ('"+ (id+1) +"','" + 
-                        voornaamField.getText() + "','" + voorlettersField.getText() + "','"+ achternaamField.getText() + "','"+ adressField.getText() +
-                        "','"+ vakantieAdressField.getText() + "','"+ phoneField.getText() + "','" + phone2Field.getText() + "','"+ emailField.getText() +
-                        "','"+ vluchtnummerField.getText()+ "','" + persoonCommentField.getText() + "','"+ idbagage +"');");
-                
-               }
+                if (!voornaamField.getText().trim().equals("")
+                        && !voorlettersField.getText().trim().equals("")
+                        && !achternaamField.getText().trim().equals("")
+                        && !adressField.getText().trim().equals("")
+                        && !telefoon1Field.getText().trim().equals("")
+                        && !telefoon2Field.getText().trim().equals("")
+                        && !telefoon1Field.getText().trim().equals("")) {
+
+                    ResultSet idget = sql.select("SELECT * FROM "
+                            + "persoonsgegevens ORDER BY idpersoonsgegevens "
+                            + "DESC LIMIT 1;");
+                    int id = 0;
+                    try {
+                        if (idget.next()) {
+                            id = idget.getInt("idpersoonsgegevens");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+
+                    System.out.println("INSERT INTO bagtrack.persoonsgegevens "
+                            + "(idpersoonsgegevens,voornaam,voorletter,"
+                            + "achternaam,adress,vakantieadress,telefoon1,"
+                            + "telefoon2,email,vluchtnummer,opmerkingen,"
+                            + "idbagage) VALUES ('" + (id + 1) + "','"
+                            + voornaamField.getText() + "','"
+                            + voorlettersField.getText() + "','"
+                            + achternaamField.getText() + "','"
+                            + adressField.getText() + "','"
+                            + vakantieAdressField.getText() + "','"
+                            + telefoon1Field.getText() + "','"
+                            + telefoon2Field.getText() + "','"
+                            + emailField.getText() + "','"
+                            + vluchtnummerField.getText() + "','"
+                            + persoonCommentField.getText() + "','" + ""
+                            + "');");
+
+                    sql.insert("INSERT INTO bagtrack.persoonsgegevens "
+                            + "(idpersoonsgegevens,voornaam,voorletter,"
+                            + "achternaam,adress,vakantieadress,telefoon1,"
+                            + "telefoon2,email,vluchtnummer,opmerkingen,"
+                            + "idbagage) VALUES ('" + (id + 1) + "','"
+                            + voornaamField.getText() + "','"
+                            + voorlettersField.getText() + "','"
+                            + achternaamField.getText() + "','"
+                            + adressField.getText() + "','"
+                            + vakantieAdressField.getText() + "','"
+                            + telefoon1Field.getText() + "','"
+                            + telefoon2Field.getText() + "','"
+                            + emailField.getText() + "','"
+                            + vluchtnummerField.getText() + "','"
+                            + persoonCommentField.getText() + "','" + ""
+                            + "');");
+
+                }
             }
         });
+
         //clear
-        Button clearPersoon = new Button();
-        clearPersoon.setText("Leegmaken");
-        persoonGegevensGrid.add(clearPersoon, 1, 10);
-        clearPersoon.setOnAction(new EventHandler<ActionEvent>() {
+        Button persoonLegen = new Button();
+        persoonLegen.setText("Leegmaken");
+        persoonLegen.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
 
@@ -755,14 +799,52 @@ public class Invoerscherm extends Application {
                 achternaamField.setText(null);
                 adressField.setText(null);
                 vakantieAdressField.setText(null);
-                phoneField.setText(null);
-                phone2Field.setText(null);
+                telefoon1Field.setText(null);
+                telefoon2Field.setText(null);
                 emailField.setText(null);
                 vluchtnummerField.setText(null);
                 persoonCommentField.setText(null);
             }
         });
-        
-        return persoonGegevensGrid;
+
+        GridPane persoonGegevensPane = new GridPane();
+        persoonGegevensPane.add(bagageID, 0, 20);
+        persoonGegevensPane.add(voornaamLabel, 0, 0);
+        persoonGegevensPane.add(voornaamField, 1, 0);
+        persoonGegevensPane.add(voorlettersLabel, 0, 1);
+        persoonGegevensPane.add(voorlettersField, 1, 1);
+        persoonGegevensPane.add(achternaamLabel, 0, 2);
+        persoonGegevensPane.add(achternaamField, 1, 2);
+        persoonGegevensPane.add(adressLabel, 0, 3);
+        persoonGegevensPane.add(adressField, 1, 3);
+        persoonGegevensPane.add(vakantieAdressLabel, 0, 4);
+        persoonGegevensPane.add(vakantieAdressField, 1, 4);
+        persoonGegevensPane.add(telefoon1Label, 0, 5);
+        persoonGegevensPane.add(telefoon1Field, 1, 5);
+        persoonGegevensPane.add(telefoon2Label, 0, 6);
+        persoonGegevensPane.add(telefoon2Field, 1, 6);
+        persoonGegevensPane.add(emailLabel, 0, 7);
+        persoonGegevensPane.add(emailField, 1, 7);
+        persoonGegevensPane.add(vluchtnummerLabel, 0, 8);
+        persoonGegevensPane.add(vluchtnummerField, 1, 8);
+        persoonGegevensPane.add(persoonCommentLabel, 0, 9);
+        persoonGegevensPane.add(persoonCommentField, 1, 9);
+        persoonGegevensPane.add(foutMelding, 0, 11);
+        persoonGegevensPane.add(succesMelding, 0, 12);
+        persoonGegevensPane.add(persoonOpslaan, 0, 10);
+        persoonGegevensPane.add(persoonLegen, 1, 10);
+
+        GridPane.setHalignment(voornaamLabel, HPos.RIGHT);
+        GridPane.setHalignment(voorlettersLabel, HPos.RIGHT);
+        GridPane.setHalignment(achternaamLabel, HPos.RIGHT);
+        GridPane.setHalignment(adressLabel, HPos.RIGHT);
+        GridPane.setHalignment(vakantieAdressLabel, HPos.RIGHT);
+        GridPane.setHalignment(telefoon1Label, HPos.RIGHT);
+        GridPane.setHalignment(telefoon2Label, HPos.RIGHT);
+        GridPane.setHalignment(emailLabel, HPos.RIGHT);
+        GridPane.setHalignment(vluchtnummerLabel, HPos.RIGHT);
+        GridPane.setHalignment(persoonCommentLabel, HPos.RIGHT);
+
+        return persoonGegevensPane;
     }
 }

@@ -5,15 +5,13 @@
  */
 package bagtrack;
 
-import static bagtrack.Loginscherm.returnScherm;
 import javafx.application.Application;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
  *
- * @author Jason
+ * @author Team Twee
  */
 public class Homescherm extends Application {
 
@@ -25,8 +23,6 @@ public class Homescherm extends Application {
     public static GridPane returnScherm() {
         //home scherm
         GridPane scherm = new GridPane();
-        
-        
 
         return scherm;
     }

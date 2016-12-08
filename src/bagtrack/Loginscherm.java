@@ -36,176 +36,176 @@ import javafx.scene.text.Text;
 
 /**
  *
- * @author Thom
+ * @author Team Twee
  */
 public class Loginscherm extends Application {
-    
+
     static String username;
     static int privilege;
 
     public static String getUsername() {
         return username;
     }
-    
+
     public static int getPrivilege() {
 //        System.out.println(privilege);
         return privilege;
-    }    
+    }
+
     @Override
     public void start(Stage primaryStage) {
         returnScherm();
     }
 
     public static StackPane returnScherm() {
-        //log in scherm
-        GridPane scherm = new GridPane();
-        StackPane stack = new StackPane();
-        stack.setPrefSize(800, 450);
-        scherm.setAlignment(Pos.CENTER);
-        scherm.setHgap(30);
-        scherm.setVgap(30);
-        scherm.setPadding(new Insets(25, 25, 25, 25));
-        scherm.setPrefSize(80, 80);
 
-        Image Logo = new Image("titel_simpel.png", 275, 75, false, false);
-        Label logoDingetje = new Label();
-        logoDingetje.setGraphic(new ImageView(Logo));
-        scherm.add(logoDingetje, 0, 0);
+        Image logoPath = new Image("titel_simpel.png", 275, 75, false, false);
 
-        TextField userTextField = new TextField();
-        userTextField.setPromptText("Gebruikersnaam");
-        scherm.add(userTextField, 0, 1);
+        Label logo = new Label();
+        logo.setGraphic(new ImageView(logoPath));
 
-        PasswordField pwBox = new PasswordField();
-        pwBox.setPromptText("Wachtwoord");
-        scherm.add(pwBox, 0, 2);
+        TextField gebruikersnaamField = new TextField();
+        gebruikersnaamField.setPromptText("Gebruikersnaam");
+
+        PasswordField wachtwoordField = new PasswordField();
+        wachtwoordField.setPromptText("Wachtwoord");
 
         Text melding = new Text();
         melding.setText("Onjuiste combinatie gebruikersnaam en wachtwoord.");
         melding.setFill(Color.RED);
         melding.setVisible(false);
-        
-        scherm.add(melding, 0, 4);
 
-        Button btn = new Button("Log in");
-        HBox hbBtn = new HBox();
-        btn.setPrefSize(200, 20);
-        hbBtn.setAlignment(Pos.BOTTOM_CENTER);
-        hbBtn.getChildren().add(btn);
-        scherm.add(hbBtn, 0, 3);
+        Button inlogButton = new Button("Log in");
+        inlogButton.setPrefSize(200, 20);
+        inlogButton.setOnAction(new EventHandler<ActionEvent>() {
 
-        // new Image(url)
-        Image image = new Image("background.jpg");
-        // new BackgroundSize(width, height, widthAsPercentage, heightAsPercentage, contain, cover)
-        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
-        //// new BackgroundImage(image, repeatX, repeatY, position, size)
-        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
-        //// new Background(images...)
-        Background background = new Background(backgroundImage);
-
-        stack.setBackground(background);
-
-        Rectangle rect = new Rectangle(300, 300);
-
-        rect.setArcHeight(30);
-        rect.setArcWidth(30);
-        rect.setFill(Color.rgb(0, 0, 0, .50));
-
-        
-        Button uitlogbutton = new Button();
-        uitlogbutton.setText("Afsluiten");
-        uitlogbutton.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-        uitlogbutton.setPrefSize(140, 40);
-        uitlogbutton.setAlignment(Pos.TOP_RIGHT);
-        uitlogbutton.setStyle("-fx-background-color: transparent;");
-        uitlogbutton.setOnAction(new EventHandler<ActionEvent>()
-        {
             @Override
-            public void handle(ActionEvent e)
-            {
+            public void handle(ActionEvent e) {
+                username = gebruikersnaamField.getText();
+                ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord, "
+                        + "privilege FROM users WHERE BINARY loginnaam = '"
+                        + username + "' AND BINARY wachtwoord = '"
+                        + wachtwoordField.getText() + "'");
+
+                try {
+                    if (getUser.next()) {
+                        privilege = getUser.getInt("privilege");
+                        Main.change(Welkomscherm.returnScherm());
+                        Main.menu();
+                        Main.topmenu();
+                        melding.setVisible(false);
+                        gebruikersnaamField.setText(null);
+                        wachtwoordField.setText(null);
+
+                        if (privilege == 1) {
+                            Main.statistiekenButton.setDisable(true);
+                        } else {
+                            Main.statistiekenButton.setDisable(false);
+                        }
+                    } else {
+                        melding.setVisible(true);
+                    }
+                } catch (Exception r) {
+                    System.out.println(r);
+                }
+            }
+        });
+
+        Button uitlogButton = new Button("Afsluiten");
+        uitlogButton.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        uitlogButton.setPrefSize(140, 40);
+        uitlogButton.setAlignment(Pos.TOP_RIGHT);
+        uitlogButton.setStyle("-fx-background-color: transparent;");
+        uitlogButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
                 System.exit(0);
             }
         });
+
+        Image achtergrondImagePath = new Image("background.jpg");
+
+        BackgroundSize achtergrondGrootte = new BackgroundSize(100, 100, true,
+                true, true, false);
         
-        GridPane uitlogpane = new GridPane();
+        BackgroundImage achtergrondImage = new BackgroundImage(
+                achtergrondImagePath, BackgroundRepeat.REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                achtergrondGrootte);
         
-        Rectangle uitknopveld = new Rectangle(130, 40);        
-        uitlogpane.setAlignment(Pos.TOP_RIGHT);
-        
-        uitknopveld.setArcHeight(30);
-        uitknopveld.setArcWidth(30);
-        uitknopveld.setFill(Color.rgb(0, 0, 0, .50));
-        
-        stack.getChildren().addAll(rect, uitlogpane, scherm, uitknopveld, uitlogbutton);
-        
-        stack.setAlignment(uitknopveld, Pos.TOP_RIGHT);
-        stack.setAlignment(uitlogbutton, Pos.TOP_RIGHT);
-        
-        //Enter button
+        Background achtergrond = new Background(achtergrondImage);
+
+        Rectangle inlogVeld = new Rectangle(300, 300);
+        inlogVeld.setArcHeight(30);
+        inlogVeld.setArcWidth(30);
+        inlogVeld.setFill(Color.rgb(0, 0, 0, .50));
+
+        Rectangle uitknopVeld = new Rectangle(130, 40);
+        uitknopVeld.setArcHeight(30);
+        uitknopVeld.setArcWidth(30);
+        uitknopVeld.setFill(Color.rgb(0, 0, 0, .50));
+
+        HBox inlogButtonPane = new HBox();
+        inlogButtonPane.setAlignment(Pos.BOTTOM_CENTER);
+        inlogButtonPane.getChildren().add(inlogButton);
+
+        GridPane scherm = new GridPane();
+        scherm.setAlignment(Pos.CENTER);
+        scherm.setHgap(30);
+        scherm.setVgap(30);
+        scherm.setPadding(new Insets(25, 25, 25, 25));
+        scherm.setPrefSize(80, 80);
+        //enter knop
         scherm.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
-                username = userTextField.getText();
-                String password = pwBox.getText();
-                ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord, privilege FROM users WHERE BINARY loginnaam = '" + username + "' AND BINARY wachtwoord = '"
-                        + password + "'");
-                
-                try {                                        
-                    if (getUser.next()) {
-                        privilege = getUser.getInt("privilege");
-                        Main.change(Welkomscherm.returnScherm());
-                        Main.menu();
-                        Main.topmenu();
-                        melding.setVisible(false);
-                        userTextField.setText(null);
-                        pwBox.setText(null);
-                        if (privilege == 1) {
-                            Main.statistiekenButton.setDisable(true);
+                    username = gebruikersnaamField.getText();
+                    ResultSet getUser = sql.select("SELECT loginnaam, "
+                            + "wachtwoord, privilege FROM users WHERE BINARY "
+                            + "loginnaam = '" + username + "' AND BINARY "
+                            + "wachtwoord = '" + wachtwoordField.getText()
+                            + "'");
+
+                    try {
+                        if (getUser.next()) {
+                            privilege = getUser.getInt("privilege");
+                            Main.change(Welkomscherm.returnScherm());
+                            Main.menu();
+                            Main.topmenu();
+                            melding.setVisible(false);
+                            gebruikersnaamField.setText(null);
+                            wachtwoordField.setText(null);
+
+                            if (privilege == 1) {
+                                Main.statistiekenButton.setDisable(true);
+                            } else {
+                                Main.statistiekenButton.setDisable(false);
+                            }
                         } else {
-                            Main.statistiekenButton.setDisable(false);
+                            melding.setVisible(true);
                         }
-                    } else {
-                        melding.setVisible(true);
+                    } catch (Exception r) {
+                        System.out.println(r);
                     }
-                } catch (Exception r) {
-                    System.out.println(r);
-                }
                 }
             }
         });
 
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+        scherm.add(logo, 0, 0);
+        scherm.add(gebruikersnaamField, 0, 1);
+        scherm.add(wachtwoordField, 0, 2);
+        scherm.add(melding, 0, 4);
+        scherm.add(inlogButtonPane, 0, 3);
 
-            @Override
-            public void handle(ActionEvent e) {
-                username = userTextField.getText();
-                String password = pwBox.getText();
-                ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord, privilege FROM users WHERE BINARY loginnaam = '" + username + "' AND BINARY wachtwoord = '" + password + "'");
-                
-                try {                                        
-                    if (getUser.next()) {
-                        privilege = getUser.getInt("privilege");
-                        Main.change(Welkomscherm.returnScherm());
-                        Main.menu();
-                        Main.topmenu();
-                        melding.setVisible(false);
-                        userTextField.setText(null);
-                        pwBox.setText(null);
-                        if (privilege == 1) {
-                            Main.statistiekenButton.setDisable(true);
-                        } else {
-                            Main.statistiekenButton.setDisable(false);
-                        }
-                    } else {
-                        melding.setVisible(true);
-                    }
-                } catch (Exception r) {
-                    System.out.println(r);
-                }
-            }
-        });
-        
+        StackPane stack = new StackPane();
+        stack.setPrefSize(800, 450);
+        stack.setBackground(achtergrond);
+        StackPane.setAlignment(uitknopVeld, Pos.TOP_RIGHT);
+        StackPane.setAlignment(uitlogButton, Pos.TOP_RIGHT);
+
+        stack.getChildren().addAll(inlogVeld, scherm, uitknopVeld,
+                uitlogButton);
 
         return stack;
     }

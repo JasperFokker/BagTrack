@@ -19,74 +19,40 @@ import javafx.stage.Stage;
  *
  * @author Jason
  */
-public class Instellingenscherm extends Application
-{
+public class Instellingenscherm extends Application {
+
     @Override
-    public void start(Stage primaryStage)
-    {
+    public void start(Stage primaryStage) {
         returnScherm();
     }
-    
 
-    
     public static GridPane returnScherm() {
-        GridPane scherm = new GridPane();
-        scherm.setPrefSize(600, 450);
-        
-        /* 
-        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        =====================================================================
-        HIERONDER WERK JE!!
-        HIERONDER WERK JE!!
-        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        =====================================================================
-        */
-        
-        
-        
-               
+
         Button btn = new Button();
         btn.setText("SQL TEST");
         btn.setPrefSize(300, 20);
         btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override 
+
+            @Override
             public void handle(ActionEvent event) {
                 ResultSet results;
                 results = sql.select("SELECT * FROM bagage;");
-                try{
-                    if(results.next()){
+                try {
+                    if (results.next()) {
                         System.out.println(results.getString("naam"));
                     }
-                    
-                }catch(Exception e){
+
+                } catch (Exception e) {
                     System.out.println(e);
                 }
-                
-        
-                
-                
-                
-                
-                
             }
         });
-              
+
+        GridPane scherm = new GridPane();
+        scherm.setPrefSize(600, 450);
+
         scherm.add(btn, 0, 1);
-      
-        
-        
-        
-        
-        
-        /* 
-        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        =====================================================================
-        HIERONDER WERK JE NIET!!
-        HIERONDER WERK JE NIET!!
-        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        =====================================================================
-        */
+
         return scherm;
     }
 }

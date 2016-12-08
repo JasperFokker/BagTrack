@@ -1,16 +1,31 @@
 .root{
     -fx-background-color: #333333;
-    
+
 }
 .button{
     -fx-background-color: #d81e05;
     -fx-text-fill: #ffffff;
-    
+
     -fx-border-width: 0;
     -fx-border-color: #333333;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent; 
 }
+
+.leftmenubuttons:hover{
+    -fx-background-color: #ff0000;
+}
+
+.leftmenubuttons:focused{
+    -fx-background-color: #ff0000;
+}
+
+
+
+
+
+
+
 
 .scroll-pane{
     -fx-background-color: #333333;
@@ -65,7 +80,7 @@ VBox{
 .default-color0.chart-series-line { -fx-stroke: blueviolet; }
 .default-color1.chart-series-line { -fx-stroke: #ff9900; }
 .default-color2.chart-series-line { -fx-stroke: #d81e05; }
- 
+
 .default-color0.chart-line-symbol { -fx-background-color: blueviolet, white; }
 .default-color1.chart-line-symbol { -fx-background-color: #ff9900, white; }
 .default-color2.chart-line-symbol { -fx-background-color: #d81e05, white; }
@@ -76,7 +91,7 @@ VBox{
 }
 
 .axis-label {
-   -fx-text-fill: white; 
+    -fx-text-fill: white; 
 }
 
 .chart-pie-label {

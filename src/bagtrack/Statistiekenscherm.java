@@ -27,89 +27,64 @@ import javafx.stage.Stage;
  *
  * @author Jason
  */
-public class Statistiekenscherm extends Application
-{
-    static ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList();
+public class Statistiekenscherm extends Application {
+
+    static ObservableList<PieChart.Data> pieChartData
+            = FXCollections.observableArrayList();
+
     @Override
-    public void start(Stage primaryStage)
-    {
+    public void start(Stage primaryStage) {
         returnScherm();
     }
-    
-    public static void addPieData(){
+
+    public static void addPieData() {
         ResultSet rs = sql.select("SELECT DISTINCT merk FROM bagage;");
         pieChartData.clear();
-        
-        try{
-            while(rs.next()){
+
+        try {
+            while (rs.next()) {
                 String sliceNaam = rs.getString("merk");
                 System.out.println(sliceNaam);
-                ResultSet rs1 = sql.select("SELECT COUNT(merk)AS NumberOfRows FROM bagage WHERE merk='"+sliceNaam+"';");
-                
-                if(rs1.next()){
-                PieChart.Data test = new PieChart.Data(sliceNaam,rs1.getInt("NumberOfRows"));
-                pieChartData.add(test);
-                
+                ResultSet rs1 = sql.select("SELECT COUNT(merk)AS NumberOfRows "
+                        + "FROM bagage WHERE merk='" + sliceNaam + "';");
+
+                if (rs1.next()) {
+                    PieChart.Data test = new PieChart.Data(sliceNaam,
+                            rs1.getInt( "NumberOfRows"));
+                    pieChartData.add(test);
+                }
             }
-                
-            }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
-    
-    public static void addPieData(String merk){
-        try{
-            System.out.println(merk);
-            ResultSet rs1 = sql.select("SELECT COUNT(merk)AS NumberOfRows FROM bagage WHERE merk='"+merk+"';");
+
+    public static void addPieData(String merk) {
+        try {
+            ResultSet rs1 = sql.select("SELECT COUNT(merk)AS NumberOfRows FROM "
+                    + "bagage WHERE merk='" + merk + "';");
             PieChart.Data dataRem = null;
             PieChart.Data dataAdd = null;
-            if(rs1.next()){
+            
+            if (rs1.next()) {
                 int value = rs1.getInt("NumberOfRows");
-                dataRem = new PieChart.Data(merk,value-1);
-                dataAdd = new PieChart.Data(merk,value);
+                dataRem = new PieChart.Data(merk, value - 1);
+                dataAdd = new PieChart.Data(merk, value);
             }
             
-            
-            //pieChartData.indexOf(data)
-            //pieChartData.remove(dataRem);
             int index = pieChartData.indexOf(dataRem);
             System.out.println(index);
             pieChartData.set(index, dataAdd);
-            
-        
-        }catch(Exception e){
+
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
-    
+
     public static GridPane returnScherm() {
-        GridPane scherm = new GridPane();
-        scherm.getStyleClass().add("root");
-        scherm.setPrefSize(600, 450);
         
-        /* 
-        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        =====================================================================
-        HIERONDER WERK JE!!
-        HIERONDER WERK JE!!
-        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        =====================================================================
-        */
-        
-        final CategoryAxis xAxis = new CategoryAxis();
-        final NumberAxis yAxis = new NumberAxis();
-        xAxis.setLabel("Maand");
-
-        final LineChart<String, Number> lineChart
-                = new LineChart<String, Number>(xAxis, yAxis);
-
-        lineChart.setTitle("Teruggevonden baggage");
-
         XYChart.Series series = new XYChart.Series();
         series.setName("Teruggevonden koffers");
-
         series.getData().add(new XYChart.Data("Jan", 23));
         series.getData().add(new XYChart.Data("Feb", 14));
         series.getData().add(new XYChart.Data("Mar", 15));
@@ -122,7 +97,7 @@ public class Statistiekenscherm extends Application
         series.getData().add(new XYChart.Data("Oct", 17));
         series.getData().add(new XYChart.Data("Nov", 29));
         series.getData().add(new XYChart.Data("Dec", 25));
-        
+
         XYChart.Series series2 = new XYChart.Series();
         series2.setName("Vermist gemeld");
         series2.getData().add(new XYChart.Data("Jan", 33));
@@ -137,7 +112,7 @@ public class Statistiekenscherm extends Application
         series2.getData().add(new XYChart.Data("Oct", 27));
         series2.getData().add(new XYChart.Data("Nov", 37));
         series2.getData().add(new XYChart.Data("Dec", 29));
-        
+
         XYChart.Series series3 = new XYChart.Series();
         series3.setName("Koffers kwijt");
         series3.getData().add(new XYChart.Data("Jan", 2));
@@ -152,72 +127,52 @@ public class Statistiekenscherm extends Application
         series3.getData().add(new XYChart.Data("Oct", 4));
         series3.getData().add(new XYChart.Data("Nov", 12));
         series3.getData().add(new XYChart.Data("Dec", 1));
-        
-        
-        
-        
-        /*
-        try{
-            if(rs1.next()){
-                PieChart.Data test = new PieChart.Data("Samsonite",rs1.getInt("NumberOfRows"));
-                pieChartData.add(test);
-            }
-            if(rs2.next()){
-                PieChart.Data test = new PieChart.Data("Dora",rs2.getInt("NumberOfRows"));
-                pieChartData.add(test);
-            }
-            if(rs3.next()){
-                PieChart.Data test = new PieChart.Data("SuperTrash",rs3.getInt("NumberOfRows"));
-                pieChartData.add(test);
-            }
-        
-        }catch(Exception e){
-            System.out.println(e);
-        }
-        
-        */
+
+        final CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("Maand");
+        final NumberAxis yAxis = new NumberAxis();
+
+        final LineChart<String, Number> lineChart
+                = new LineChart<String, Number>(xAxis, yAxis);
+        lineChart.setTitle("Teruggevonden baggage");
+        lineChart.getData().addAll(series, series2, series3);
         
         final PieChart pieChart = new PieChart(pieChartData);
         addPieData();
         pieChart.setTitle("Verloren merken");
         pieChart.setVisible(false);
-                 
-        ComboBox statistiekenKeuze = new ComboBox();
-        statistiekenKeuze.getItems().addAll("Line Chart", "Graph Chart");
-        statistiekenKeuze.setPromptText("Line Chart");
-        statistiekenKeuze.setStyle("-fx-font: 15px \"Arial\";");
-        
-        statistiekenKeuze.valueProperty().addListener(new ChangeListener<String>() {
-                @Override 
-                public void changed(ObservableValue ov, String s, String s1) {
-                    if ("Line Chart".equals(s1))
-                    {
-                        lineChart.setVisible(true);
-                        pieChart.setVisible(false);
-                    } else {
-                        lineChart.setVisible(false);
-                        pieChart.setVisible(true);
-                    }
 
-                }    
-         });
-         
+        ComboBox statistiekenKeuze = new ComboBox();
+        statistiekenKeuze.getItems().addAll("Gevonden Koffers Tijdlijn",
+                "Aantal Koffers Gesorteerd Op merk");
+        statistiekenKeuze.setPromptText("Gevonden Koffers Tijdlijn");
+        statistiekenKeuze.setStyle("-fx-font: 15px \"Arial\";");
+
+        statistiekenKeuze.valueProperty().addListener(
+                new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue ov, String s, String s1) {
+                if ("Gevonden Koffers Tijdlijn".equals(s1)) {
+                    lineChart.setVisible(true);
+                    pieChart.setVisible(false);
+                } else {
+                    lineChart.setVisible(false);
+                    pieChart.setVisible(true);
+                }
+            }
+        });
+
+        GridPane scherm = new GridPane();
+        scherm.getStyleClass().add("root");
+        scherm.setPrefSize(600, 450);
+        
+        scherm.getChildren().addAll(lineChart, pieChart, statistiekenKeuze);
+                
         GridPane.setHgrow(lineChart, Priority.ALWAYS);
         GridPane.setVgrow(lineChart, Priority.ALWAYS);
         GridPane.setHalignment(statistiekenKeuze, HPos.RIGHT);
         GridPane.setValignment(statistiekenKeuze, VPos.TOP);
-        
-        lineChart.getData().addAll(series, series2, series3);
-        scherm.getChildren().addAll(lineChart, pieChart, statistiekenKeuze);
-        
-        /* 
-        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        =====================================================================
-        HIERONDER WERK JE NIET!!
-        HIERONDER WERK JE NIET!!
-        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        =====================================================================
-        */
+
         return scherm;
     }
 }

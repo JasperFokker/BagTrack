@@ -2,8 +2,7 @@
  * Dit is het scherm dat de gebruiker te zien krijgt als zij/hij inlogt.
  * Het scherm bestaat uit het Corendon logo en een welkomsbericht.
  * @author Team Twee
- */ 
-
+ */
 package bagtrack;
 
 import java.awt.Dimension;
@@ -22,49 +21,48 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Welkomscherm extends Application
-{
+public class Welkomscherm extends Application {
+
     static Thread welkom;
+
     @Override
-    public void start(Stage primaryStage)
-    {
+    public void start(Stage primaryStage) {
         returnScherm();
     }
 
-    public static void flip(){
+    public static void flip() {
         Main.change(Zoekscherm.returnScherm2("SELECT * FROM bagage", 3, ""));
     }
-    
-    public static GridPane returnScherm()
-    {
+
+    public static GridPane returnScherm() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int logoWidth = (int) (screenSize.getWidth() * 0.45);
         int logoHeight = (int) (screenSize.getHeight() * 0.45);
 
-        GridPane scherm = new GridPane();
-        Text welkomBericht = new Text();
-
         //Corendon logo eigenschappen
-        Image logo = new Image("Corendon Logo.png", logoWidth, logoHeight, false, false);
+        Image logo = new Image("Corendon Logo.png", logoWidth, logoHeight,
+                false, false);
         ImageView logoView = new ImageView();
         logoView.setImage(logo);
 
         //welkomsbericht eigenschappen
-        welkomBericht.setText("Welkom "+Loginscherm.getUsername()+" bij het Corendon bagagesysteem");
+        Text welkomBericht = new Text();
+        welkomBericht.setText("Welkom " + Loginscherm.getUsername() + " bij het"
+                + " Corendon bagagesysteem");
         welkomBericht.setFont(Font.font("Verdana", 40));
         welkomBericht.setFill(WHITE);
 
+        GridPane scherm = new GridPane();
         scherm.setAlignment(Pos.CENTER);
         scherm.add(welkomBericht, 0, 0);
         scherm.add(logoView, 0, 1);
-        
+
         Timeline timeline = new Timeline(new KeyFrame(
-        Duration.millis(2500),
-        ae -> flip()));
+                Duration.millis(2500),
+                ae -> flip()
+        ));
         timeline.play();
 
-        
-        
         return scherm;
     }
 }
