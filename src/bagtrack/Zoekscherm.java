@@ -138,7 +138,7 @@ public class Zoekscherm extends Application {
                         + textveldTelefoon1.getText() + "%' AND email LIKE '%" + textveldEmail.getText() + "%' AND vluchtnummer LIKE '%" + textveldVluchtnummer.getText() + "%';";
                 if (idbagage == "")
                 {
-                    Main.change(Zoekscherm.returnScherm2(query, 3, ""));
+                    Main.change(Zoekscherm.returnScherm2(query, 4, ""));
                 } else
                 {
                     Main.change(Zoekscherm.returnScherm2(query, 2, idbagage));
@@ -165,7 +165,7 @@ public class Zoekscherm extends Application {
                         + textveldVluchtnummer.getText() + "%';";
             if (idbagage == "")
             {
-                Main.change(Zoekscherm.returnScherm2(query, 3, ""));
+                Main.change(Zoekscherm.returnScherm2(query, 4, ""));
             } else
             {
                 Main.change(Zoekscherm.returnScherm2(query, 2, idbagage));
@@ -676,8 +676,9 @@ public class Zoekscherm extends Application {
                         idbagage = rs.getInt("idbagage");
 
                         sql.insert("DELETE FROM bagage WHERE idbagage=" + idbagage+";");
-
                         Main.change(returnScherm2(query, 1, ""));
+
+                        
                     }catch(Exception e){
                         System.out.println(e);
                     }
@@ -692,13 +693,13 @@ public class Zoekscherm extends Application {
 
                         sql.insert("DELETE FROM persoonsgegevens WHERE idpersoonsgegevens=" + idpersoonsgegevens+";");
 
-                        Main.change(returnScherm2(query, 1, ""));
+                        Main.change(returnScherm2(query, 4, ""));
                     }catch(Exception e){
                         System.out.println(e);
                     }
                 }
                 
-
+/*
                 int index = table.getSelectionModel().selectedIndexProperty().get();
                 int idbagage = 0;
                 System.out.println(index);
@@ -709,11 +710,11 @@ public class Zoekscherm extends Application {
                     
                     sql.insert("DELETE FROM bagage WHERE idbagage=" + idbagage+";");
                     
-                    Main.change(returnScherm2(query, 1, ""));
+                    Main.change(returnScherm2(query, 4, ""));
                 }catch(Exception e){
                     System.out.println(e);
                 }
-                
+                */
                 
                 
             }
@@ -806,7 +807,7 @@ public class Zoekscherm extends Application {
             }
         });
         
-        vbox.getChildren().addAll(gevonden,vermist,verzonden);
+        //vbox.getChildren().addAll(gevonden,vermist,verzonden);
         
         Separator separator = new Separator();
         separator.setOrientation(Orientation.VERTICAL);
@@ -824,14 +825,26 @@ public class Zoekscherm extends Application {
         
         if(match == 1){
             hbox.getChildren().addAll(matchNew,separator,matchOld,separator2,delete);
+            vbox.getChildren().addAll(gevonden,vermist,verzonden);
         }
         if(match == 2){
             hbox.getChildren().addAll(matchFound);
+            vbox.getChildren().addAll(gevonden,vermist,verzonden);
+            gevonden.setVisible(false);
+            vermist.setVisible(false);
+            verzonden.setVisible(false);
         }
         if(match == 3){
             hbox.getChildren().addAll(delete);
+            vbox.getChildren().addAll(gevonden,vermist,verzonden);
         }
-        
+        if(match == 4){
+            hbox.getChildren().addAll(delete);
+            vbox.getChildren().addAll(gevonden,vermist,verzonden);
+            gevonden.setVisible(false);
+            vermist.setVisible(false);
+            verzonden.setVisible(false);
+        }
         
         
         border.setCenter(scherm2);
