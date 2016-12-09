@@ -6,7 +6,10 @@
 package bagtrack;
 
 import static bagtrack.Main.scherm;
+import static bagtrack.Welkomscherm.flip;
 import java.sql.ResultSet;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -34,6 +37,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 /**
  *
@@ -104,7 +108,15 @@ public class Loginscherm extends Application {
                             Main.statistiekenButton.setDisable(false);
                         }
                     } else {
+
                         melding.setVisible(true);
+
+                        Timeline timeline = new Timeline(new KeyFrame(
+                                Duration.millis(2500),
+                                ae -> melding.setVisible(false)));
+
+                        timeline.play();
+
                     }
                 } catch (Exception r) {
                     System.out.println(r);
@@ -128,12 +140,12 @@ public class Loginscherm extends Application {
 
         BackgroundSize achtergrondGrootte = new BackgroundSize(100, 100, true,
                 true, true, false);
-        
+
         BackgroundImage achtergrondImage = new BackgroundImage(
                 achtergrondImagePath, BackgroundRepeat.REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                 achtergrondGrootte);
-        
+
         Background achtergrond = new Background(achtergrondImage);
 
         Rectangle inlogVeld = new Rectangle(300, 300);
@@ -184,6 +196,12 @@ public class Loginscherm extends Application {
                             }
                         } else {
                             melding.setVisible(true);
+
+                            Timeline timeline = new Timeline(new KeyFrame(
+                                    Duration.millis(2500),
+                                    ae -> melding.setVisible(false)));
+
+                            timeline.play();
                         }
                     } catch (Exception r) {
                         System.out.println(r);
