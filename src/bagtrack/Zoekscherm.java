@@ -506,7 +506,7 @@ public class Zoekscherm extends Application {
         
         GridPane.setColumnSpan(hbox, GridPane.REMAINING);
         GridPane.setHalignment(hbox, HPos.LEFT);
-        hbox.setStyle("-fx-background-color: #333333;;");
+        hbox.getStyleClass().add("geen-schilderij");
         BorderPane border = new BorderPane();
         GridPane scherm2 = new GridPane();
         scherm2.setPrefSize(600, 450);
@@ -579,7 +579,7 @@ public class Zoekscherm extends Application {
         int w = (int) screenSize.getWidth();
         
         Button matchNew = new Button();
-        matchNew.setStyle("-fx-background-color: #333333;;");
+        matchNew.getStyleClass().add("geen-schilderij");
         matchNew.setText("Match Nieuw");
         matchNew.setPrefSize(w*0.25, 50);
         matchNew.setFont(Font.font("Verdana", 20));
@@ -604,7 +604,7 @@ public class Zoekscherm extends Application {
         });
         
         Button matchOld = new Button();
-        matchOld.setStyle("-fx-background-color: #333333;;");
+        matchOld.getStyleClass().add("geen-schilderij");
         matchOld.setText("Match Oud");
         matchOld.setPrefSize(w*0.30, 50);
         matchOld.setFont(Font.font("Verdana", 20));
@@ -659,7 +659,7 @@ public class Zoekscherm extends Application {
         
         Button delete = new Button();
         delete.setText("Verwijder Geselecteerd");
-        delete.setStyle("-fx-background-color: #333333;;");
+        delete.getStyleClass().add("geen-schilderij");
         delete.setPrefSize(w*0.30, 50);
         delete.setFont(Font.font("Verdana", 20));
         delete.setOnAction(new EventHandler<ActionEvent>() {
@@ -720,7 +720,7 @@ public class Zoekscherm extends Application {
         });
         VBox vbox = new VBox();
         //GridPane.setRowSpan(vbox, GridPane.REMAINING);
-        vbox.setStyle("-fx-background-color: #333333;;");
+        vbox.getStyleClass().add("geen-schilderij");
         
         Image vermistIcon = new Image("delete_icon&48.png");
         Image gevondenIcon = new Image("checkmark_icon&48.png");
@@ -728,7 +728,7 @@ public class Zoekscherm extends Application {
         
         
         Button vermist = new Button();
-        vermist.setStyle("-fx-background-color: #333333;;");
+        vermist.getStyleClass().add("geen-schilderij");
         vermist.setGraphic(new ImageView(vermistIcon));
         vermist.setPrefSize(w*0.30, 50);
         vermist.setFont(Font.font("Verdana", 20));
@@ -757,7 +757,7 @@ public class Zoekscherm extends Application {
             }
         });
         Button gevonden = new Button();
-        gevonden.setStyle("-fx-background-color: #333333;;");
+        gevonden.getStyleClass().add("geen-schilderij");
         gevonden.setGraphic(new ImageView(gevondenIcon));
         gevonden.setPrefSize(w*0.30, 50);
         gevonden.setFont(Font.font("Verdana", 20));
@@ -782,7 +782,7 @@ public class Zoekscherm extends Application {
             }
         });
         Button verzonden = new Button();
-        verzonden.setStyle("-fx-background-color: #333333;;");
+        verzonden.getStyleClass().add("geen-schilderij");
         verzonden.setGraphic(new ImageView(verzondenIcon));
         verzonden.setPrefSize(w*0.30, 50);
         verzonden.setFont(Font.font("Verdana", 20));
