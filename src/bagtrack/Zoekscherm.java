@@ -46,6 +46,7 @@ public class Zoekscherm extends Application {
     
 
     static boolean currTable;
+    static int indexKoffer;
     
 
     @Override
@@ -543,7 +544,11 @@ public class Zoekscherm extends Application {
                 }
                 col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
                     public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
-                        return new SimpleStringProperty(param.getValue().get(j).toString());                        
+                        try{ return new SimpleStringProperty(param.getValue().get(j).toString());  
+                        }catch (Exception e) {
+                            return null;
+                            
+                        }                      
                     }                    
                 });
 
@@ -612,6 +617,7 @@ public class Zoekscherm extends Application {
                 System.out.println(index);
                 
                 try{
+                    
                     rs.absolute(index+1);
                     idbagage = rs.getInt("idbagage");
                     
@@ -642,6 +648,7 @@ public class Zoekscherm extends Application {
                     idpersoonsgegevens = rs.getInt("idpersoonsgegevens");
                     System.out.println(idpersoonsgegevens);
                     sql.insert("UPDATE persoonsgegevens SET idbagage="+ id +" WHERE idpersoonsgegevens="+idpersoonsgegevens+";");
+                    sql.insert("UPDATE bagage SET status='Gevonden' WHERE idbagage="+id+";");
                     Main.change(returnScherm2(query, 3, ""));
                 }catch(Exception e){
                     System.out.println(e);
