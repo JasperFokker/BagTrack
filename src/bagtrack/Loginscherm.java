@@ -177,13 +177,15 @@ public class Loginscherm extends Application {
                 }
             }
         });
-
-        Button uitlogButton = new Button("Afsluiten");
-        uitlogButton.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-        uitlogButton.setPrefSize(140, 40);
-        uitlogButton.setAlignment(Pos.TOP_RIGHT);
-        uitlogButton.setStyle("-fx-background-color: transparent;");
-        uitlogButton.setOnAction(new EventHandler<ActionEvent>() {
+        Image afsluiten = new Image("delete_icon&48.png", 0.9 , 0.9, false ,false );
+        Button afsluitButton = new Button();
+        afsluitButton.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        afsluitButton.setGraphic(new ImageView(afsluiten));
+        afsluitButton.setPrefSize(60, 60);
+        afsluitButton.setAlignment(Pos.CENTER);
+        
+        afsluitButton.setStyle("-fx-background-color: transparent;");
+        afsluitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 System.exit(0);
@@ -207,9 +209,8 @@ public class Loginscherm extends Application {
         inlogVeld.setArcWidth(30);
         inlogVeld.setFill(Color.rgb(0, 0, 0, .50));
 
-        Rectangle uitknopVeld = new Rectangle(130, 40);
-        uitknopVeld.setArcHeight(30);
-        uitknopVeld.setArcWidth(30);
+        Rectangle uitknopVeld = new Rectangle(74, 65);
+
         uitknopVeld.setFill(Color.rgb(0, 0, 0, .50));
 
         HBox inlogButtonPane = new HBox();
@@ -319,10 +320,10 @@ public class Loginscherm extends Application {
         stack.setPrefSize(800, 450);
         stack.setBackground(achtergrond);
         StackPane.setAlignment(uitknopVeld, Pos.TOP_RIGHT);
-        StackPane.setAlignment(uitlogButton, Pos.TOP_RIGHT);
+        StackPane.setAlignment(afsluitButton, Pos.TOP_RIGHT);
 
         stack.getChildren().addAll(inlogVeld, scherm, uitknopVeld,
-                uitlogButton);
+                afsluitButton);
 
         return stack;
     }
