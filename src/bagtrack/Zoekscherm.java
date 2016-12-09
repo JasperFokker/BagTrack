@@ -502,6 +502,9 @@ public class Zoekscherm extends Application {
         //Tabelscherm dat linkt naar Tabeldata.java 
         HBox hbox = new HBox();
         hbox.setPrefHeight(200);
+        
+        GridPane.setColumnSpan(hbox, GridPane.REMAINING);
+        GridPane.setHalignment(hbox, HPos.LEFT);
         BorderPane border = new BorderPane();
         GridPane scherm2 = new GridPane();
         scherm2.setPrefSize(600, 450);
@@ -571,7 +574,7 @@ public class Zoekscherm extends Application {
         
         Button matchNew = new Button();
         matchNew.setText("Match Nieuw");
-        matchNew.setPrefSize(w*0.45, 50);
+        matchNew.setPrefSize(w*0.25, 50);
         matchNew.setFont(Font.font("Verdana", 20));
         matchNew.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -705,6 +708,7 @@ public class Zoekscherm extends Application {
             }
         });
         VBox vbox = new VBox();
+        GridPane.setRowSpan(vbox, GridPane.REMAINING);
         
         Image vermistIcon = new Image("delete_icon&48.png");
         Image gevondenIcon = new Image("checkmark_icon&48.png");
@@ -791,17 +795,20 @@ public class Zoekscherm extends Application {
         
         Separator separator = new Separator();
         separator.setOrientation(Orientation.VERTICAL);
-
+        
+        Separator separator2 = new Separator();
+        separator2.setOrientation(Orientation.VERTICAL);
+        
         table.setItems(data);
         
         //scherm2.add(matchOld, 1, 3);
         scherm2.add(label, 0, 0);
         scherm2.add(table, 0, 1);
         scherm2.add(hbox, 0, 2);
-        scherm2.add(vbox, 1,1);
+        scherm2.add(vbox, 1,0);
         
         if(match == 1){
-            hbox.getChildren().addAll(matchNew,separator,matchOld,delete);
+            hbox.getChildren().addAll(matchNew,separator,matchOld,separator2,delete);
         }
         if(match == 2){
             hbox.getChildren().addAll(matchFound);
