@@ -367,7 +367,7 @@ public class Invoerscherm extends Application {
                         && !achternaamField.getText().trim().equals("")
                         && !adresField.getText().trim().equals("")
                         && !telefoon1Field.getText().trim().equals("")
-                        && !telefoon2Field.getText().trim().equals("")) {
+                        && !emailField.getText().trim().equals("")) {
 
                     foutMelding2.setVisible(false);
                     popup.setVisible(true);
