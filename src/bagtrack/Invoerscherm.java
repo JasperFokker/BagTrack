@@ -501,7 +501,7 @@ public class Invoerscherm extends Application {
                             + luchthavenComboBox.getValue() + "','" + date1
                             + "','" + kofferLabelnummerField.getText() + "','"
                             + kofferOpmerkingenField.getText() + "');");
-
+                    succesMelding.setVisible(true);
                     Statistiekenscherm.addPieData();
                 }
 
@@ -538,11 +538,11 @@ public class Invoerscherm extends Application {
                             + persoonOpmerkingenField.getText() + "','" + ""
                             + "');");
 
-                    sql.insert("INSERT INTO bagtrack.persoonsgegevens ("
+                sql.insert("INSERT INTO bagtrack.persoonsgegevens ("
                             + "idpersoonsgegevens,voornaam,voorletter,"
                             + "achternaam,adress,vakantieadress,telefoon1,"
-                            + "telefoon2,email,vluchtnummer,opmerkingen,"
-                            + "idbagage) VALUES ('" + (id + 1) + "','"
+                            + "telefoon2,email,vluchtnummer,opmerkingen)"
+                            + " VALUES ('" + (id + 1) + "','"
                             + voornaamField.getText() + "','"
                             + voorlettersField.getText() + "','"
                             + achternaamField.getText() + "','"
@@ -552,13 +552,12 @@ public class Invoerscherm extends Application {
                             + telefoon2Field.getText()
                             + "','" + emailField.getText() + "','"
                             + vluchtnummerField.getText() + "','"
-                            + persoonOpmerkingenField.getText() + "','" + ""
-                            + "');");
+                            + persoonOpmerkingenField.getText() + "');");
+                    succesMelding2.setVisible(true);
 
                 }
 
                 popup.setVisible(false);
-                succesMelding.setVisible(true);
             }
         });
 
