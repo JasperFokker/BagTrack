@@ -699,22 +699,7 @@ public class Zoekscherm extends Application {
                     }
                 }
                 
-/*
-                int index = table.getSelectionModel().selectedIndexProperty().get();
-                int idbagage = 0;
-                System.out.println(index);
-                
-                try{
-                    rs.absolute(index+1);
-                    idbagage = rs.getInt("idbagage");
-                    
-                    sql.insert("DELETE FROM bagage WHERE idbagage=" + idbagage+";");
-                    
-                    Main.change(returnScherm2(query, 4, ""));
-                }catch(Exception e){
-                    System.out.println(e);
-                }
-                */
+
                 
                 
             }

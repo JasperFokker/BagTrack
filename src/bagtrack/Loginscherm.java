@@ -7,6 +7,10 @@ package bagtrack;
 
 import static bagtrack.Main.scherm;
 import static bagtrack.Welkomscherm.flip;
+import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.ResultSet;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -38,6 +42,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 /**
  *
@@ -46,12 +52,75 @@ import javafx.util.Duration;
 public class Loginscherm extends Application {
 
     static String username;
+    static String password;
     static int privilege;
 
     public static String getUsername() {
         return username;
     }
+    
+    private static String generateStrongPasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        int iterations = 1000;
+        char[] chars = password.toCharArray();
+        byte[] salt = getSalt();
+         
+        PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 64 * 8);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        byte[] hash = skf.generateSecret(spec).getEncoded();
+        return iterations + ":" + toHex(salt) + ":" + toHex(hash);
+    }
+    
+    private static byte[] getSalt() throws NoSuchAlgorithmException
+    {
+        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+        byte[] salt = new byte[16];
+        sr.nextBytes(salt);
+        return salt;
+    }
+    
+    private static String toHex(byte[] array) throws NoSuchAlgorithmException
+    {
+        BigInteger bi = new BigInteger(1, array);
+        String hex = bi.toString(16);
+        int paddingLength = (array.length * 2) - hex.length();
+        if(paddingLength > 0)
+        {
+            return String.format("%0"  +paddingLength + "d", 0) + hex;
+        }else{
+            return hex;
+        }
+    }
+    
+    private static byte[] fromHex(String hex) throws NoSuchAlgorithmException
+    {
+        byte[] bytes = new byte[hex.length() / 2];
+        for(int i = 0; i<bytes.length ;i++)
+        {
+            bytes[i] = (byte)Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
+        }
+        return bytes;
+    }
 
+    private static boolean validatePassword(String originalPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        String[] parts = storedPassword.split(":");
+        int iterations = Integer.parseInt(parts[0]);
+        byte[] salt = fromHex(parts[1]);
+        byte[] hash = fromHex(parts[2]);
+         
+        PBEKeySpec spec = new PBEKeySpec(originalPassword.toCharArray(), salt, iterations, hash.length * 8);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        byte[] testHash = skf.generateSecret(spec).getEncoded();
+         
+        int diff = hash.length ^ testHash.length;
+        for(int i = 0; i < hash.length && i < testHash.length; i++)
+        {
+            diff |= hash[i] ^ testHash[i];
+        }
+        return diff == 0;
+    }
+    
     public static int getPrivilege() {
 //        System.out.println(privilege);
         return privilege;
@@ -63,6 +132,8 @@ public class Loginscherm extends Application {
     }
 
     public static StackPane returnScherm() {
+        
+        
 
         Image logoPath = new Image("titel_simpel.png", 275, 75, false, false);
 
@@ -89,13 +160,56 @@ public class Loginscherm extends Application {
                 username = gebruikersnaamField.getText();
                 ResultSet getUser = sql.select("SELECT loginnaam, wachtwoord, "
                         + "privilege FROM users WHERE BINARY loginnaam = '"
-                        + username + "' AND BINARY wachtwoord = '"
-                        + wachtwoordField.getText() + "'");
+                        + username + "';");
+                try{
+                    if(getUser.next()){
+                        
+                        String  originalPassword = wachtwoordField.getText();
+                        String dbPassword = getUser.getString("wachtwoord");
+                        boolean check = validatePassword(originalPassword, dbPassword);
+                        System.out.println(check);
+                        
+                        try {
+                            if (check) {
+                                privilege = getUser.getInt("privilege");
+                                Main.change(Welkomscherm.returnScherm());
+                                scherm.setLeft(null);
+                                Main.topmenu();
+                                melding.setVisible(false);
+                                gebruikersnaamField.setText(null);
+                                wachtwoordField.setText(null);
+
+                                if (privilege == 1) {
+                                    Main.statistiekenButton.setDisable(true);
+                                } else {
+                                    Main.statistiekenButton.setDisable(false);
+                                }
+                            } else {
+
+                                melding.setVisible(true);
+
+                                Timeline timeline = new Timeline(new KeyFrame(
+                                        Duration.millis(2500),
+                                        ae -> melding.setVisible(false)));
+
+                                timeline.play();
+
+                            }
+                        } catch (Exception r) {
+                            System.out.println(r);
+                        }
+                        
+                        
+                        
+                    }
+                }catch(Exception x){
+                    System.out.println(e);
+                }
 
                 try {
                     if (getUser.next()) {
                         privilege = getUser.getInt("privilege");
-                        Main.change(Welkomscherm.returnScherm());
+                        //Main.change(Welkomscherm.returnScherm());
                         scherm.setLeft(null);
                         Main.topmenu();
                         melding.setVisible(false);
