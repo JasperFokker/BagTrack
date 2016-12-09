@@ -5,6 +5,7 @@
  */
 package bagtrack;
 
+import static bagtrack.Main.scherm;
 import java.sql.ResultSet;
 import javafx.scene.control.Label;
 import javafx.application.Application;
@@ -91,7 +92,7 @@ public class Loginscherm extends Application {
                     if (getUser.next()) {
                         privilege = getUser.getInt("privilege");
                         Main.change(Welkomscherm.returnScherm());
-                        Main.menu();
+                        scherm.setLeft(null);
                         Main.topmenu();
                         melding.setVisible(false);
                         gebruikersnaamField.setText(null);
@@ -171,7 +172,6 @@ public class Loginscherm extends Application {
                         if (getUser.next()) {
                             privilege = getUser.getInt("privilege");
                             Main.change(Welkomscherm.returnScherm());
-                            Main.menu();
                             Main.topmenu();
                             melding.setVisible(false);
                             gebruikersnaamField.setText(null);

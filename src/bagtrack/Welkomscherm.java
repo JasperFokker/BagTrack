@@ -5,6 +5,7 @@
  */
 package bagtrack;
 
+import static bagtrack.Main.scherm;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javafx.animation.KeyFrame;
@@ -30,14 +31,20 @@ public class Welkomscherm extends Application {
         returnScherm();
     }
 
+    
+    
     public static void flip() {
-        Main.change(Zoekscherm.returnScherm2("SELECT * FROM bagage", 3, ""));
+        Main.change(Zoekscherm.returnScherm2("SELECT * FROM bagage", 1, ""));
+        Main.menu();
+        Main.uitlogButton.setVisible(true);
+        
     }
 
     public static GridPane returnScherm() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int logoWidth = (int) (screenSize.getWidth() * 0.45);
         int logoHeight = (int) (screenSize.getHeight() * 0.45);
+        
 
         //Corendon logo eigenschappen
         Image logo = new Image("Corendon Logo.png", logoWidth, logoHeight,
@@ -47,8 +54,7 @@ public class Welkomscherm extends Application {
 
         //welkomsbericht eigenschappen
         Text welkomBericht = new Text();
-        welkomBericht.setText("Welkom " + Loginscherm.getUsername() + " bij het"
-                + " Corendon bagagesysteem");
+        welkomBericht.setText("Welkom bij BagTrack, " + Loginscherm.getUsername());
         welkomBericht.setFont(Font.font("Verdana", 40));
         welkomBericht.setFill(WHITE);
 
@@ -59,9 +65,13 @@ public class Welkomscherm extends Application {
 
         Timeline timeline = new Timeline(new KeyFrame(
                 Duration.millis(2500),
-                ae -> flip()
-        ));
+                ae -> flip()));
+        
+        
         timeline.play();
+        Main.uitlogButton.setVisible(false);
+        
+        
 
         return scherm;
     }

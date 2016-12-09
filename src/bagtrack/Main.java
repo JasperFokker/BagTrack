@@ -41,6 +41,7 @@ public class Main extends Application {
     static HBox topmenu = new HBox();
     static HBox logo = new HBox();
     static Button statistiekenButton = new Button();
+    static Button uitlogButton = new Button();
     
     //wissel scherm.
     public static void change(GridPane gridpane) {
@@ -95,11 +96,7 @@ public class Main extends Application {
             public void handle(ActionEvent event)
             {
                 scherm.setCenter(statistieken);
-//                statistiekenButton.setStyle("-fx-background-color: #ff0000; ");
-//                zoekButton.setStyle("-fx-background-color: #d81e05; ");
-//                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
-//                helpButton.setStyle("-fx-background-color: #d81e05; ");
-//                formulierButton.setStyle("-fx-background-color: #d81e05; ");
+
             }
         });
 
@@ -114,11 +111,7 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 scherm.setCenter(zoekScherm);
 
-//                zoekButton.setStyle("-fx-background-color: #ff0000; ");
-//                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
-//                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
-//                helpButton.setStyle("-fx-background-color: #d81e05; ");
-//                formulierButton.setStyle("-fx-background-color: #d81e05; ");
+
             }
         });
 
@@ -133,11 +126,7 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 scherm.setCenter(Zoekscherm.returnScherm2("SELECT * FROM bagage;", 1, ""));
 
-//                zoekButton.setStyle("-fx-background-color: #ff0000; ");
-//                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
-//                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
-//                helpButton.setStyle("-fx-background-color: #d81e05; ");
-//                formulierButton.setStyle("-fx-background-color: #d81e05; ");
+
             }
         });
 
@@ -152,11 +141,7 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(instellingen);
-//                instellingenButton.setStyle("-fx-background-color: #ff0000; ");
-//                zoekButton.setStyle("-fx-background-color: #d81e05; ");
-//                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
-//                helpButton.setStyle("-fx-background-color: #d81e05; ");
-//                formulierButton.setStyle("-fx-background-color: #d81e05; ");
+
             }
         });
 
@@ -170,11 +155,7 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(helpScherm);
-//                helpButton.setStyle("-fx-background-color: #ff0000; ");
-//                zoekButton.setStyle("-fx-background-color: #d81e05; ");
-//                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
-//                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
-//                formulierButton.setStyle("-fx-background-color: #d81e05; ");
+
             }
         });
 
@@ -188,11 +169,7 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 scherm.setCenter(formulierScherm);
-//                formulierButton.setStyle("-fx-background-color: #ff0000; ");               
-//                zoekButton.setStyle("-fx-background-color: #d81e05; ");
-//                statistiekenButton.setStyle("-fx-background-color: #d81e05; ");
-//                instellingenButton.setStyle("-fx-background-color: #d81e05; ");
-//                helpButton.setStyle("-fx-background-color: #d81e05; ");
+
 
             }
         });
@@ -204,7 +181,7 @@ public class Main extends Application {
         placeholder.setContentDisplay(ContentDisplay.LEFT);
         placeholder.setDisable(false);
 
-        Button uitlogButton = new Button();
+        
         uitlogButton.setText("Uitloggen");
         uitlogButton.setContentDisplay(ContentDisplay.RIGHT);
         uitlogButton.setPrefSize(menuwidth, 55);
