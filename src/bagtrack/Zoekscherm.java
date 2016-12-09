@@ -138,7 +138,7 @@ public class Zoekscherm extends Application {
                         + textveldTelefoon1.getText() + "%' AND email LIKE '%" + textveldEmail.getText() + "%' AND vluchtnummer LIKE '%" + textveldVluchtnummer.getText() + "%';";
                 if (idbagage == "")
                 {
-                    Main.change(Zoekscherm.returnScherm2(query, 3, ""));
+                    Main.change(Zoekscherm.returnScherm2(query, 4, ""));
                 } else
                 {
                     Main.change(Zoekscherm.returnScherm2(query, 2, idbagage));
@@ -165,7 +165,7 @@ public class Zoekscherm extends Application {
                         + textveldVluchtnummer.getText() + "%';";
             if (idbagage == "")
             {
-                Main.change(Zoekscherm.returnScherm2(query, 3, ""));
+                Main.change(Zoekscherm.returnScherm2(query, 4, ""));
             } else
             {
                 Main.change(Zoekscherm.returnScherm2(query, 2, idbagage));
@@ -506,7 +506,7 @@ public class Zoekscherm extends Application {
         
         GridPane.setColumnSpan(hbox, GridPane.REMAINING);
         GridPane.setHalignment(hbox, HPos.LEFT);
-        hbox.setStyle("-fx-background-color: #333333;;");
+        hbox.getStyleClass().add("geen-schilderij");
         BorderPane border = new BorderPane();
         GridPane scherm2 = new GridPane();
         scherm2.setPrefSize(600, 450);
@@ -579,7 +579,7 @@ public class Zoekscherm extends Application {
         int w = (int) screenSize.getWidth();
         
         Button matchNew = new Button();
-        matchNew.setStyle("-fx-background-color: #333333;;");
+        matchNew.getStyleClass().add("geen-schilderij");
         matchNew.setText("Match Nieuw");
         matchNew.setPrefSize(w*0.25, 50);
         matchNew.setFont(Font.font("Verdana", 20));
@@ -604,7 +604,7 @@ public class Zoekscherm extends Application {
         });
         
         Button matchOld = new Button();
-        matchOld.setStyle("-fx-background-color: #333333;;");
+        matchOld.getStyleClass().add("geen-schilderij");
         matchOld.setText("Match Oud");
         matchOld.setPrefSize(w*0.30, 50);
         matchOld.setFont(Font.font("Verdana", 20));
@@ -659,7 +659,7 @@ public class Zoekscherm extends Application {
         
         Button delete = new Button();
         delete.setText("Verwijder Geselecteerd");
-        delete.setStyle("-fx-background-color: #333333;;");
+        delete.getStyleClass().add("geen-schilderij");
         delete.setPrefSize(w*0.30, 50);
         delete.setFont(Font.font("Verdana", 20));
         delete.setOnAction(new EventHandler<ActionEvent>() {
@@ -676,8 +676,9 @@ public class Zoekscherm extends Application {
                         idbagage = rs.getInt("idbagage");
 
                         sql.insert("DELETE FROM bagage WHERE idbagage=" + idbagage+";");
-
                         Main.change(returnScherm2(query, 1, ""));
+
+                        
                     }catch(Exception e){
                         System.out.println(e);
                     }
@@ -692,13 +693,13 @@ public class Zoekscherm extends Application {
 
                         sql.insert("DELETE FROM persoonsgegevens WHERE idpersoonsgegevens=" + idpersoonsgegevens+";");
 
-                        Main.change(returnScherm2(query, 1, ""));
+                        Main.change(returnScherm2(query, 4, ""));
                     }catch(Exception e){
                         System.out.println(e);
                     }
                 }
                 
-
+/*
                 int index = table.getSelectionModel().selectedIndexProperty().get();
                 int idbagage = 0;
                 System.out.println(index);
@@ -709,18 +710,18 @@ public class Zoekscherm extends Application {
                     
                     sql.insert("DELETE FROM bagage WHERE idbagage=" + idbagage+";");
                     
-                    Main.change(returnScherm2(query, 1, ""));
+                    Main.change(returnScherm2(query, 4, ""));
                 }catch(Exception e){
                     System.out.println(e);
                 }
-                
+                */
                 
                 
             }
         });
         VBox vbox = new VBox();
         //GridPane.setRowSpan(vbox, GridPane.REMAINING);
-        vbox.setStyle("-fx-background-color: #333333;;");
+        vbox.getStyleClass().add("geen-schilderij");
         
         Image vermistIcon = new Image("delete_icon&48.png");
         Image gevondenIcon = new Image("checkmark_icon&48.png");
@@ -728,7 +729,7 @@ public class Zoekscherm extends Application {
         
         
         Button vermist = new Button();
-        vermist.setStyle("-fx-background-color: #333333;;");
+        vermist.getStyleClass().add("geen-schilderij");
         vermist.setGraphic(new ImageView(vermistIcon));
         vermist.setPrefSize(w*0.30, 50);
         vermist.setFont(Font.font("Verdana", 20));
@@ -757,7 +758,7 @@ public class Zoekscherm extends Application {
             }
         });
         Button gevonden = new Button();
-        gevonden.setStyle("-fx-background-color: #333333;;");
+        gevonden.getStyleClass().add("geen-schilderij");
         gevonden.setGraphic(new ImageView(gevondenIcon));
         gevonden.setPrefSize(w*0.30, 50);
         gevonden.setFont(Font.font("Verdana", 20));
@@ -782,7 +783,7 @@ public class Zoekscherm extends Application {
             }
         });
         Button verzonden = new Button();
-        verzonden.setStyle("-fx-background-color: #333333;;");
+        verzonden.getStyleClass().add("geen-schilderij");
         verzonden.setGraphic(new ImageView(verzondenIcon));
         verzonden.setPrefSize(w*0.30, 50);
         verzonden.setFont(Font.font("Verdana", 20));
@@ -806,7 +807,7 @@ public class Zoekscherm extends Application {
             }
         });
         
-        vbox.getChildren().addAll(gevonden,vermist,verzonden);
+        //vbox.getChildren().addAll(gevonden,vermist,verzonden);
         
         Separator separator = new Separator();
         separator.setOrientation(Orientation.VERTICAL);
@@ -824,14 +825,26 @@ public class Zoekscherm extends Application {
         
         if(match == 1){
             hbox.getChildren().addAll(matchNew,separator,matchOld,separator2,delete);
+            vbox.getChildren().addAll(gevonden,vermist,verzonden);
         }
         if(match == 2){
             hbox.getChildren().addAll(matchFound);
+            vbox.getChildren().addAll(gevonden,vermist,verzonden);
+            gevonden.setVisible(false);
+            vermist.setVisible(false);
+            verzonden.setVisible(false);
         }
         if(match == 3){
             hbox.getChildren().addAll(delete);
+            vbox.getChildren().addAll(gevonden,vermist,verzonden);
         }
-        
+        if(match == 4){
+            hbox.getChildren().addAll(delete);
+            vbox.getChildren().addAll(gevonden,vermist,verzonden);
+            gevonden.setVisible(false);
+            vermist.setVisible(false);
+            verzonden.setVisible(false);
+        }
         
         
         border.setCenter(scherm2);
