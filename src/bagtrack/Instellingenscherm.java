@@ -25,6 +25,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -140,7 +141,8 @@ public class Instellingenscherm extends Application {
                     rs.absolute(index + 1);
                     String login = rs.getString("loginnaam");
 
-                    sql.insert("DELETE FROM users WHERE loginnaam = " + login + ";");
+                    sql.insert("DELETE FROM users WHERE loginnaam = '" + login + "';");
+                    Main.change(returnScherm());
 
                 } catch (Exception e) {
                     System.out.println(e);
@@ -174,7 +176,7 @@ public class Instellingenscherm extends Application {
 
         Label wachtwoordLabel = new Label("Wachtwoord");
 
-        TextField wachtwoordField = new TextField();
+        PasswordField wachtwoordField = new PasswordField();
 
         Label privilegeLabel = new Label("Privilege");
 
@@ -184,9 +186,17 @@ public class Instellingenscherm extends Application {
         jaButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                String password = wachtwoordField.getText();
+                String hash = "";
+                try{
+                    hash = WachtwoordEncryptie.generateStrongPasswordHash(password);
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+                
 
                 sql.insert("INSERT INTO bagtrack.users (loginnaam, wachtwoord, privilege)"
-                        + " VALUES ('" + loginnaamField.getText() + "','" + wachtwoordField.getText() + "','" + privilegeField.getText() + "');");
+                        + " VALUES ('" + loginnaamField.getText() + "','" + hash + "','" + privilegeField.getText() + "');");
 
                 popup.setVisible(false);
                 verwijderButton.setDisable(false);
@@ -194,6 +204,7 @@ public class Instellingenscherm extends Application {
                 loginnaamField.setText(null);
                 wachtwoordField.setText(null);
                 privilegeField.setText(null);
+                Main.change(returnScherm());
 
             }
         });
