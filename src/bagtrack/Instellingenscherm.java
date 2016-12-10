@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package bagtrack;
 
 import static bagtrack.Zoekscherm.currTable;
@@ -44,7 +40,7 @@ import javafx.util.Callback;
 
 /**
  *
- * @author Jason
+ * @author Team Twee
  */
 public class Instellingenscherm extends Application {
 

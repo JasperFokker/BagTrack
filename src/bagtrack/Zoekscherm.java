@@ -40,15 +40,13 @@ import javafx.util.Callback;
 
 /**
  *
- * @author Rick
+ * @author Team Twee
  */
 public class Zoekscherm extends Application {
     
 
     static boolean currTable;
-    static int indexKoffer;
-    
-
+   
     @Override
     public void start(Stage primaryStage) {
 

@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Floris Wichers
+ * @author Team Twee
  */
 public class Invoerscherm extends Application {
 

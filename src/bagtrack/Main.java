@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 
 
 /**
- * @author Jasper & Jimmy
+ * @author Team Twee
  */
 public class Main extends Application {
 
@@ -68,8 +68,7 @@ public class Main extends Application {
         StackPane formulierScherm = Invoerscherm.returnScherm();
         GridPane statistieken = Statistiekenscherm.returnScherm();
         GridPane instellingen = Instellingenscherm.returnScherm();
-        GridPane homeScherm = Homescherm.returnScherm();
-
+        
         Image Zoom = new Image("zoom_icon&48.png");
         Image Home = new Image("home_icon&48[1].png");
         Image Formulier = new Image("doc_edit_icon&48.png");
