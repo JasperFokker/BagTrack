@@ -22,10 +22,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.scene.input.MouseEvent;
+
 
 /**
- * @author Jasper & Jimmy
+ * @author Team Twee
  */
 public class Main extends Application {
 
@@ -72,17 +72,25 @@ public class Main extends Application {
         GridPane statistieken = Statistiekenscherm.returnScherm();
         GridPane instellingen = Instellingenscherm.returnScherm();
         
+<<<<<<< HEAD
 
         
         //iconen knoppen initialiseren
+=======
+>>>>>>> df5bc5721f64be6edb875f7974fd8e9a23a97f93
         Image Zoom = new Image("zoom_icon&48.png");
         Image Home = new Image("home_icon&48[1].png");
         Image Formulier = new Image("doc_edit_icon&48.png");
         Image Help = new Image("info_icon&48.png");
         Image Statistieken = new Image("chart_line_icon&48.png");
         Image Instellingen = new Image("cog_icon&48.png");
+        Image Uitloggen = new Image("export_icon&48.png", menuwidth * 0.25, w * 0.025, false ,false);
         Image Logo = new Image("titel_simpel.png", menuwidth * 1.50, w * 0.04, false, false);
-
+ 
+        
+        
+        
+        
         Button zoekButton = new Button();
         Button instellingenButton = new Button();
         Button helpButton = new Button();
@@ -190,8 +198,10 @@ public class Main extends Application {
 
         
         uitlogButton.setText("Uitloggen");
-        uitlogButton.setContentDisplay(ContentDisplay.RIGHT);
-        uitlogButton.setPrefSize(menuwidth, 55);
+        uitlogButton.setContentDisplay(ContentDisplay.LEFT);
+        uitlogButton.setPrefSize(menuwidth * 1.5, 55);
+        uitlogButton.setGraphic(new ImageView(Uitloggen));
+        
         uitlogButton.setFont(Font.font("Verdana", 18));
         uitlogButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package bagtrack;
 
 import java.sql.ResultSet;
@@ -25,7 +21,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Jason
+ * @author Team Twee
  */
 public class Statistiekenscherm extends Application {
 

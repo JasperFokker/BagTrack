@@ -46,9 +46,13 @@ public class Zoekscherm extends Application {
     
 
     static boolean currTable;
+<<<<<<< HEAD
 
     
 
+=======
+   
+>>>>>>> df5bc5721f64be6edb875f7974fd8e9a23a97f93
     @Override
     public void start(Stage primaryStage) {
 
