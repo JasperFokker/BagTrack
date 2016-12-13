@@ -38,20 +38,22 @@ public class Statistiekenscherm extends Application {
     }
 
     public static void addPieData() {
-        ResultSet rs = sql.select("SELECT DISTINCT merk FROM bagage;");
-        pieChartData.clear();
+        ResultSet rs = sql.select("SELECT DISTINCT merk FROM bagage;"); //selecteer alle unieke merken koffers in de database
+        pieChartData.clear();//maak de piechart leeg om opnieuw te vullen met data
 
         try {
             while (rs.next()) {
-                String sliceNaam = rs.getString("merk");
+                String sliceNaam = rs.getString("merk");//maak een slice van de piechart aan met de data uit de database
                 System.out.println(sliceNaam);
+                //hoevaak komt een koffer voor
                 ResultSet rs1 = sql.select("SELECT COUNT(merk)AS NumberOfRows "
                         + "FROM bagage WHERE merk='" + sliceNaam + "';");
 
                 if (rs1.next()) {
-                    PieChart.Data test = new PieChart.Data(sliceNaam,
+                    //data toevoegen aan piechart
+                    PieChart.Data pieData = new PieChart.Data(sliceNaam,
                             rs1.getInt( "NumberOfRows"));
-                    pieChartData.add(test);
+                    pieChartData.add(pieData);
                 }
             }
         } catch (Exception e) {
@@ -59,7 +61,7 @@ public class Statistiekenscherm extends Application {
         }
     }
 
-    public static void addPieData(String merk) {
+    public static void addPieData(String merk) { //zelfde als addPieData() maar dan met een gespecificeerd merk om toe te voegen
         try {
             ResultSet rs1 = sql.select("SELECT COUNT(merk)AS NumberOfRows FROM "
                     + "bagage WHERE merk='" + merk + "';");
@@ -82,7 +84,7 @@ public class Statistiekenscherm extends Application {
     }
 
     public static GridPane returnScherm() {
-        
+        //Placeholder line graph data
         XYChart.Series series = new XYChart.Series();
         series.setName("Teruggevonden koffers");
         series.getData().add(new XYChart.Data("Jan", 23));
@@ -142,12 +144,14 @@ public class Statistiekenscherm extends Application {
         pieChart.setTitle("Verloren merken");
         pieChart.setVisible(false);
 
+        //combobox om te switchen tussen grafieken
         ComboBox statistiekenKeuze = new ComboBox();
         statistiekenKeuze.getItems().addAll("Gevonden Koffers Tijdlijn",
                 "Aantal Koffers Gesorteerd Op merk");
         statistiekenKeuze.setPromptText("Gevonden Koffers Tijdlijn");
         statistiekenKeuze.setStyle("-fx-font: 15px \"Arial\";");
 
+        //bij het veranderen van de combobox keuze de andere grafiek tonen
         statistiekenKeuze.valueProperty().addListener(
                 new ChangeListener<String>() {
             @Override

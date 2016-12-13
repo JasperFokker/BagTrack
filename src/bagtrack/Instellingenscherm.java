@@ -6,11 +6,9 @@
 package bagtrack;
 
 import static bagtrack.Zoekscherm.currTable;
-import static bagtrack.Zoekscherm.returnScherm2;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.ResultSet;
-import java.time.format.DateTimeFormatter;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,11 +20,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.Separator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -55,8 +51,8 @@ public class Instellingenscherm extends Application {
 
     public static GridPane returnScherm() {
 
-        //Tabelscherm dat linkt naar Tabeldata.java 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); //opslaan schermgrootte
         int h = (int) screenSize.getHeight();
         int w = (int) screenSize.getWidth();
         int menuwidth = (int) (w * 0.10);
@@ -77,43 +73,44 @@ public class Instellingenscherm extends Application {
         table.setPrefWidth(menuwidth * 2);
         table.setPrefHeight(menuheight * 2);
 
-        String query = "SELECT loginnaam, privilege FROM bagtrack.users;";
+        String query = "SELECT loginnaam, privilege FROM bagtrack.users;"; //vraag alle gebruikers op in het systeem
         ResultSet rs = sql.select(query);
 
         currTable = false;
 
         try {
+            //Automatisch genereren kolommen tabel gebruikers, gebaseerd op database
             for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
                 final int j = i;
-                System.out.println((String) rs.getMetaData().getColumnName(i + 1));
+                System.out.println((String) rs.getMetaData().getColumnName(i + 1)); //testprint bugtracking
 
-                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1)); //aanmaken nieuwe tabelkolom
                 col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
                     public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {
                         try {
-                            return new SimpleStringProperty(param.getValue().get(j).toString());
+                            return new SimpleStringProperty(param.getValue().get(j).toString()); //naam in kolom invoeren
                         } catch (Exception e) {
                             return null;
                         }
                     }
                 });
 
-                table.getColumns().addAll(col);
-                System.out.println("Column [" + i + "] ");
+                table.getColumns().addAll(col); //voeg kolom toe aan tabel
+                System.out.println("Column [" + i + "] ");//aangeven iteratie for loop
             }
         } catch (Exception e) {
             System.out.println(e);
         }
         try {
-            while (rs.next()) {
-                //Iterate Row
+            while (rs.next()) {//als er nog een item bevind in de resultset
+                
                 ObservableList<String> row = FXCollections.observableArrayList();
-                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                    //Iterate Column
-                    row.add(rs.getString(i));
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {//door kolommen heen gaan
+                    
+                    row.add(rs.getString(i));//toevoegen data per cel
                 }
                 System.out.println("Row [1] added " + row);
-                data.add(row);
+                data.add(row);//voeg complete rij toe aan tabel
 
             }
         } catch (Exception e) {
@@ -128,6 +125,7 @@ public class Instellingenscherm extends Application {
         Image vermistIcon = new Image("delete_icon&48.png");
         Image gevondenIcon = new Image("checkmark_icon&48.png");
 
+        //verwijder user uit de database/tabel
         Button verwijderButton = new Button();
         verwijderButton.setStyle("-fx-background-color: #333333;;");
         verwijderButton.setGraphic(new ImageView(vermistIcon));
@@ -137,12 +135,12 @@ public class Instellingenscherm extends Application {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    int index = table.getSelectionModel().selectedIndexProperty().get();
+                    int index = table.getSelectionModel().selectedIndexProperty().get(); //de geselecteerde rij index
                     rs.absolute(index + 1);
                     String login = rs.getString("loginnaam");
 
-                    sql.insert("DELETE FROM users WHERE loginnaam = '" + login + "';");
-                    Main.change(returnScherm());
+                    sql.insert("DELETE FROM users WHERE loginnaam = '" + login + "';"); //verwijder user uit database
+                    Main.change(returnScherm()); //refresh tabel met geupdate informatie
 
                 } catch (Exception e) {
                     System.out.println(e);
@@ -150,6 +148,7 @@ public class Instellingenscherm extends Application {
             }
         });
 
+        //aanmaken nieuwe user
         Button aanmakenButton = new Button();
         aanmakenButton.setStyle("-fx-background-color: #333333;;");
         aanmakenButton.setGraphic(new ImageView(gevondenIcon));
@@ -182,19 +181,20 @@ public class Instellingenscherm extends Application {
 
         TextField privilegeField = new TextField();
 
-        Button jaButton = new Button("Ja");
+        //bevestigen invoer van nieuwe gebruiker
+        Button jaButton = new Button("Bevestig");
         jaButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String password = wachtwoordField.getText();
+                String password = wachtwoordField.getText(); //ingevoerd wachtwoord
                 String hash = "";
                 try{
-                    hash = WachtwoordEncryptie.generateStrongPasswordHash(password);
+                    hash = WachtwoordEncryptie.generateStrongPasswordHash(password);//maakt een hash aan voor opgegeven wachtwoord
                 }catch(Exception e){
                     System.out.println(e);
                 }
                 
-
+                //SQL nieuwe user in database aanmaken
                 sql.insert("INSERT INTO bagtrack.users (loginnaam, wachtwoord, privilege)"
                         + " VALUES ('" + loginnaamField.getText() + "','" + hash + "','" + privilegeField.getText() + "');");
 
@@ -204,12 +204,13 @@ public class Instellingenscherm extends Application {
                 loginnaamField.setText(null);
                 wachtwoordField.setText(null);
                 privilegeField.setText(null);
-                Main.change(returnScherm());
+                Main.change(returnScherm());//refresh tabel om veranderingen weer te geven
 
             }
         });
-
-        Button neeButton = new Button("Nee");
+        
+        //cancel invoer nieuwe user
+        Button neeButton = new Button("Annuleer");
         neeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

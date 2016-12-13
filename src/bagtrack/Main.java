@@ -29,7 +29,7 @@ import javafx.scene.input.MouseEvent;
  */
 public class Main extends Application {
 
-    
+    //Opslaan van de dimensies van het scherm
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int h = (int) screenSize.getHeight();
     int w = (int) screenSize.getWidth();
@@ -48,10 +48,12 @@ public class Main extends Application {
         scherm.setCenter(gridpane);
     }
 
+    //initialiseer het navigatiemenu
     public static void menu() {
         scherm.setLeft(menu);
     }
     
+    //initialiseer het navigatiemenu manager
     public static void privmenu() {
         scherm.setLeft(privmenu);
     }
@@ -62,14 +64,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        //initialiseer centerschermen
         TabPane zoekScherm = Zoekscherm.returnScherm();
         GridPane helpScherm = Helpscherm.returnScherm();
         StackPane inlogScherm = Loginscherm.returnScherm();
         StackPane formulierScherm = Invoerscherm.returnScherm();
         GridPane statistieken = Statistiekenscherm.returnScherm();
         GridPane instellingen = Instellingenscherm.returnScherm();
-        GridPane homeScherm = Homescherm.returnScherm();
+        
 
+        
+        //iconen knoppen initialiseren
         Image Zoom = new Image("zoom_icon&48.png");
         Image Home = new Image("home_icon&48[1].png");
         Image Formulier = new Image("doc_edit_icon&48.png");
@@ -124,7 +129,7 @@ public class Main extends Application {
         homeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                scherm.setCenter(Zoekscherm.returnScherm2("SELECT * FROM bagage;", 1, ""));
+                scherm.setCenter(Zoekscherm.returnScherm2("SELECT * FROM bagage;", 1, ""));//laat tabel zien met alle koffers er in
 
 
             }
@@ -174,6 +179,8 @@ public class Main extends Application {
             }
         });
 
+        
+        //BagTrack icoon links boven 
         Label placeholder = new Label();
         placeholder.setVisible(true);
         placeholder.setPrefSize(w - menuwidth, 60);

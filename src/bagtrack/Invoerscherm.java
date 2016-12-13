@@ -253,6 +253,7 @@ public class Invoerscherm extends Application {
         kofferOpslaanButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                //checken of invoer null is, zoja maak de velden rood
                 if (datumKiezer.getValue() == null) {
                     datumKiezer.setStyle("-fx-background-color: tomato;");
                     foutMelding.setVisible(true);
@@ -320,6 +321,7 @@ public class Invoerscherm extends Application {
         persoonOpslaanButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                //checken of velden persoonsgegevens null zijn, zoja kleur de velden rood
                 if (voornaamField.getText().trim().equals("")) {
                     voornaamField.setStyle("-fx-background-color: tomato;");
                     foutMelding2.setVisible(true);
@@ -433,6 +435,7 @@ public class Invoerscherm extends Application {
         persoonGegevensPane.add(foutMelding2, 0, 11);
         persoonGegevensPane.add(succesMelding2, 0, 12);
 
+        //tabs aanmaken om te kiezen wat ingevoerd word
         Tab kofferGegevens = new Tab();
         kofferGegevens.setText("Koffergegevens");
         kofferGegevens.setClosable(false);
@@ -448,6 +451,7 @@ public class Invoerscherm extends Application {
 
         invoerTabs.getTabs().addAll(kofferGegevens, persoonGegevens);
 
+        //maken van een bevestiging popup
         Rectangle popupVeld = new Rectangle(300, 100);
         popupVeld.setArcHeight(30);
         popupVeld.setArcWidth(30);
@@ -467,6 +471,8 @@ public class Invoerscherm extends Application {
                     String merk = kofferMerkField.getText();
 
                     System.out.println(date1);
+                    
+                    //laatste idbagage uit database halen
                     ResultSet idget = sql.select("SELECT * FROM bagage ORDER "
                             + "BY idbagage DESC LIMIT 1;");
                     int id = 0;
@@ -477,7 +483,8 @@ public class Invoerscherm extends Application {
                     } catch (Exception e) {
                         System.out.println(e);
                     }
-
+                    
+                    //test statement voor testen
                     System.out.println("INSERT INTO bagtrack.bagage (idbagage,"
                             + "merk,kleur1,kleur2,soort,opdruk,luchthaven,"
                             + "datum,labelnummer,opmerkingen) VALUES ('" + 50
@@ -489,10 +496,10 @@ public class Invoerscherm extends Application {
                             + luchthavenComboBox.getValue() + "','" + date1
                             + "','" + kofferLabelnummerField.getText() + "','"
                             + kofferOpmerkingenField.getText() + "');");
-
+                    //SQL statement voor invoer bagage
                     sql.insert("INSERT INTO bagtrack.bagage (idbagage,merk,"
                             + "kleur1,kleur2,soort,opdruk,luchthaven,datum,"
-                            + "labelnummer,opmerkingen) VALUES ('" + (id + 1)
+                            + "labelnummer,opmerkingen) VALUES ('" + (id + 1) //Laatste idbagage primary key opvragen en één bij optellen
                             + "','" + merk + "','"
                             + kofferKleur1ComboBox.getValue() + "','"
                             + kofferKleur2ComboBox.getValue() + "','"
@@ -502,13 +509,14 @@ public class Invoerscherm extends Application {
                             + "','" + kofferLabelnummerField.getText() + "','"
                             + kofferOpmerkingenField.getText() + "');");
                     succesMelding.setVisible(true);
-                    Statistiekenscherm.addPieData();
+                    Statistiekenscherm.addPieData(); //Updaten van de Piechart in het statestiekenscherm met net ingevulde data
                 }
 
                 if (invoerTabs.getSelectionModel().getSelectedItem().getText()
                         .equals("Persoongegevens")) {
                     System.out.println(datumKiezer.getValue());
-
+                    
+                    //laatste idpersoonsgegevens opvragen (primarykey)
                     ResultSet idget = sql.select("SELECT * FROM "
                             + "persoonsgegevens ORDER BY idpersoonsgegevens "
                             + "DESC LIMIT 1;");
@@ -520,7 +528,7 @@ public class Invoerscherm extends Application {
                     } catch (Exception e) {
                         System.out.println(e);
                     }
-
+                    //teststatement
                     System.out.println("INSERT INTO bagtrack.persoonsgegevens ("
                             + "idpersoonsgegevens,voornaam,voorletter,"
                             + "achternaam,adress,vakantieadress,telefoon1,"
@@ -537,12 +545,12 @@ public class Invoerscherm extends Application {
                             + vluchtnummerField.getText() + "','"
                             + persoonOpmerkingenField.getText() + "','" + ""
                             + "');");
-
-                sql.insert("INSERT INTO bagtrack.persoonsgegevens ("
+                    //SQL statement voor persoonsgegevens
+                    sql.insert("INSERT INTO bagtrack.persoonsgegevens ("
                             + "idpersoonsgegevens,voornaam,voorletter,"
                             + "achternaam,adress,vakantieadress,telefoon1,"
                             + "telefoon2,email,vluchtnummer,opmerkingen)"
-                            + " VALUES ('" + (id + 1) + "','"
+                            + " VALUES ('" + (id + 1) + "','" //laatste idpersoonsgegevens aanvragen en één bij optellen
                             + voornaamField.getText() + "','"
                             + voorlettersField.getText() + "','"
                             + achternaamField.getText() + "','"
@@ -557,10 +565,11 @@ public class Invoerscherm extends Application {
 
                 }
 
-                popup.setVisible(false);
+                popup.setVisible(false); //popup weghalen na klikken knop
             }
         });
 
+        //cancel invoer gegevens
         Button neeButton = new Button("Nee");
         neeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -612,6 +621,7 @@ public class Invoerscherm extends Application {
         return stack;
     }
 
+    //verbind de opgegeven koffer met een nieuw persoon
     public static GridPane matchPersoon(String idbagage) {
 
         Label bagageID = new Label(idbagage);
@@ -685,7 +695,7 @@ public class Invoerscherm extends Application {
         persoonOpslaan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                //checken of velden null zijn, zoja maak ze rood
                 if (voornaamField.getText().trim().equals("")) {
                     voornaamField.setStyle("-fx-background-color: tomato;");
                     foutMelding.setVisible(true);
@@ -735,7 +745,8 @@ public class Invoerscherm extends Application {
                         && !telefoon1Field.getText().trim().equals("")
                         && !telefoon2Field.getText().trim().equals("")
                         && !telefoon1Field.getText().trim().equals("")) {
-
+                    
+                    //vraag laatste idpersoonsgegevens op
                     ResultSet idget = sql.select("SELECT * FROM "
                             + "persoonsgegevens ORDER BY idpersoonsgegevens "
                             + "DESC LIMIT 1;");
@@ -747,7 +758,7 @@ public class Invoerscherm extends Application {
                     } catch (Exception e) {
                         System.out.println(e);
                     }
-
+                    //teststatement
                     System.out.println("INSERT INTO bagtrack.persoonsgegevens "
                             + "(idpersoonsgegevens,voornaam,voorletter,"
                             + "achternaam,adress,vakantieadress,telefoon1,"
@@ -764,12 +775,13 @@ public class Invoerscherm extends Application {
                             + vluchtnummerField.getText() + "','"
                             + persoonCommentField.getText() + "','" + ""
                             + "');");
-
+                    
+                    //SQL statement invoer nieuwe persoon bij matchen
                     sql.insert("INSERT INTO bagtrack.persoonsgegevens "
                             + "(idpersoonsgegevens,voornaam,voorletter,"
                             + "achternaam,adress,vakantieadress,telefoon1,"
                             + "telefoon2,email,vluchtnummer,opmerkingen,"
-                            + "idbagage) VALUES ('" + (id + 1) + "','"
+                            + "idbagage) VALUES ('" + (id + 1) + "','" //meest recent idpersoonsgegevens optellen bij 1 (primary key)
                             + voornaamField.getText() + "','"
                             + voorlettersField.getText() + "','"
                             + achternaamField.getText() + "','"
@@ -786,7 +798,7 @@ public class Invoerscherm extends Application {
             }
         });
 
-        //clear
+        //Maakt velden leeg
         Button persoonLegen = new Button();
         persoonLegen.setText("Leegmaken");
         persoonLegen.setOnAction(new EventHandler<ActionEvent>() {

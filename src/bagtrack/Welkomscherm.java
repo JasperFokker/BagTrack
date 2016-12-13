@@ -41,7 +41,7 @@ public class Welkomscherm extends Application {
     }
 
     public static GridPane returnScherm() {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); //schermhoogte en breedte 
         int logoWidth = (int) (screenSize.getWidth() * 0.45);
         int logoHeight = (int) (screenSize.getHeight() * 0.45);
         
@@ -63,6 +63,7 @@ public class Welkomscherm extends Application {
         scherm.add(welkomBericht, 0, 0);
         scherm.add(logoView, 0, 1);
 
+        //Timer voor het switchen naar de appliecatie van het welkomstscherm na drie seconden
         Timeline timeline = new Timeline(new KeyFrame(
                 Duration.millis(2500),
                 ae -> flip()));

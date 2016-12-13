@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class sql {
     
    
+    //functie voor Select statements
     public static ResultSet select(String query){
         try{
             Connection con = getConnection();
@@ -26,18 +27,7 @@ public class sql {
             ResultSet results = statement.executeQuery();
             
             return results;
-            
-            
-            //while(results.next()){
-            //    System.out.println(results.getString("naam"));
-            //    array.add(results.getString(query));
-                
-            //}
-            
-            
-            
-            
-            
+
         }catch(Exception e){
             System.out.println(e);
             System.out.println("NULL GIVEN");
@@ -48,6 +38,7 @@ public class sql {
         return null;
     }
     
+    //functie voor insert en update SQL stataments
     public static void insert(String query){
         
         try{
@@ -62,13 +53,15 @@ public class sql {
             System.out.println("Insert Complete");
         }
     }
+    
+    //maak verbinding met de database
     public static Connection getConnection(){
         try{
             String driver = "com.mysql.jdbc.Driver";
             String url = "jdbc:mysql://localhost:3306/bagtrack";
             String username = "java";
             String password = "password"; 
-            Class.forName(driver); Connection conn = DriverManager.getConnection(url,username,password);
+            Class.forName(driver); Connection conn = DriverManager.getConnection(url,username,password);//verbinding maken met de database
             System.out.println("Connected");
             return conn;
         } catch(Exception e){
