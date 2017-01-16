@@ -40,15 +40,19 @@ import javafx.util.Callback;
 
 /**
  *
- * @author Rick
+ * @author Team Twee
  */
 public class Zoekscherm extends Application {
     
 
     static boolean currTable;
-    static int indexKoffer;
+<<<<<<< HEAD
+
     
 
+=======
+   
+>>>>>>> df5bc5721f64be6edb875f7974fd8e9a23a97f93
     @Override
     public void start(Stage primaryStage) {
 
@@ -60,7 +64,7 @@ public class Zoekscherm extends Application {
         scherm3.setHgap(1);
         scherm3.setVgap(10);
         scherm3.setPadding(new Insets(25, 25, 25, 25));
-        //scherm.setGridLinesVisible(true);
+        
         ColumnConstraints column = new ColumnConstraints(100);
         scherm3.getColumnConstraints().add(column);
         RowConstraints row = new RowConstraints(50);
@@ -130,12 +134,13 @@ public class Zoekscherm extends Application {
         {
             @Override
             public void handle(ActionEvent event)
-            {
+            {//query voorbereiden voor zoeken in persoonsgegevens
                 String query = "SELECT * FROM persoonsgegevens WHERE voornaam LIKE '%" + textveldVoornaam.getText() + "%' AND voorletter LIKE '%"
                         + textveldVoorletters.getText() + "%' AND achternaam LIKE '%" + textveldAchternaam.getText() + "%' AND adress LIKE '%"
                         + textveldAdres.getText() + "%' AND vakantieadress LIKE '%"
                         + textveldVakantieadres.getText() + "%' AND telefoon1 LIKE '%" + textveldTelefoon1.getText() + "%' AND telefoon2 LIKE '%"
                         + textveldTelefoon1.getText() + "%' AND email LIKE '%" + textveldEmail.getText() + "%' AND vluchtnummer LIKE '%" + textveldVluchtnummer.getText() + "%';";
+                //checken op de status van het scherm, of je aan het matchen bent, of alleen zoeken
                 if (idbagage == "")
                 {
                     Main.change(Zoekscherm.returnScherm2(query, 4, ""));
@@ -146,6 +151,7 @@ public class Zoekscherm extends Application {
             }
         });
         
+        //met de Enter knop kunnen zoeken
         scherm3.setOnKeyPressed(new EventHandler<KeyEvent>()
         {
             @Override
@@ -212,7 +218,7 @@ public class Zoekscherm extends Application {
         scherm.setHgap(1);
         scherm.setVgap(10);
         scherm.setPadding(new Insets(25, 25, 25, 25));
-        //scherm.setGridLinesVisible(true);
+        
         ColumnConstraints column = new ColumnConstraints(100);
         scherm.getColumnConstraints().add(column);
         RowConstraints row = new RowConstraints(50);
@@ -266,7 +272,7 @@ public class Zoekscherm extends Application {
         );
         
         
-        //Labels, Textvelden, buttons en comboboxen.
+        //Labels, Textvelden, buttons en comboboxen voor koffer zoeken
         final int textWidth = 200;
         final int boxWidth = 200;
         final ComboBox comboBoxKleur1 = new ComboBox(kleuren);
@@ -364,6 +370,7 @@ public class Zoekscherm extends Application {
                         soort +"%' AND opdruk LIKE '%"+
                         opdruk +"%' AND luchthaven LIKE '%"+ luchthaven +"%' AND labelnummer LIKE '%"+
                         textveldLabelnr.getText() +"%';");
+                //SQL query select koffer
                 query = "SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%"+
                         kleur1 +"%' AND kleur2 LIKE '%"+ kleur2 +"%' AND soort LIKE '%"+
                         soort +"%' AND opdruk LIKE '%"+
@@ -383,7 +390,7 @@ public class Zoekscherm extends Application {
 
             }
         });
-        
+        //enter functionaliteit
         scherm.setOnKeyPressed(new EventHandler<KeyEvent>()
         {
             @Override
@@ -506,7 +513,7 @@ public class Zoekscherm extends Application {
         
         GridPane.setColumnSpan(hbox, GridPane.REMAINING);
         GridPane.setHalignment(hbox, HPos.LEFT);
-        hbox.getStyleClass().add("geen-schilderij");
+        hbox.getStyleClass().add("geen-schilderij");//non standaard styling voor de tabelview
         BorderPane border = new BorderPane();
         GridPane scherm2 = new GridPane();
         scherm2.setPrefSize(600, 450);
