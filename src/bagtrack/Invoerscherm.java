@@ -614,7 +614,7 @@ public class Invoerscherm extends Application {
 
     public static GridPane matchPersoon(String idbagage) {
 
-        Label bagageID = new Label(idbagage);
+        //Label bagageID = new Label(idbagage);
 
         //Voornaam
         Label voornaamLabel = new Label("Voornaam");
@@ -807,7 +807,7 @@ public class Invoerscherm extends Application {
         });
 
         GridPane persoonGegevensPane = new GridPane();
-        persoonGegevensPane.add(bagageID, 0, 20);
+        //persoonGegevensPane.add(bagageID, 0, 20);
         persoonGegevensPane.add(voornaamLabel, 0, 0);
         persoonGegevensPane.add(voornaamField, 1, 0);
         persoonGegevensPane.add(voorlettersLabel, 0, 1);
