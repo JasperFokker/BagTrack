@@ -46,13 +46,7 @@ public class Zoekscherm extends Application {
     
 
     static boolean currTable;
-<<<<<<< HEAD
-
     
-
-=======
-   
->>>>>>> df5bc5721f64be6edb875f7974fd8e9a23a97f93
     @Override
     public void start(Stage primaryStage) {
 
@@ -180,7 +174,7 @@ public class Zoekscherm extends Application {
             }
         });
                 
-        //Dit kan korter, geen idee hoe.
+      
         scherm3.add(label, 1, 1);
         scherm3.add(label2, 1, 2);
         scherm3.add(label3, 1, 3);
@@ -339,7 +333,7 @@ public class Zoekscherm extends Application {
                 String soort = (String)comboBoxSoort.getValue();
                 String opdruk = (String)comboBoxOpdruk.getValue();
                 String labelnr = (String)textveldLabelnr.getText();
-                
+                  
                 if(textveldLabelnr.getText() == null){
                     labelnr = "";
                 }
@@ -457,9 +451,7 @@ public class Zoekscherm extends Application {
                 }
             }
         });
-
-        //Dit kan korter, geen idee hoe.
-        //scherm.add(label, 1, 1);
+       
         scherm.add(label2, 1, 3);
         scherm.add(label3, 1, 4);
         scherm.add(label4, 1, 1);
@@ -467,7 +459,6 @@ public class Zoekscherm extends Application {
         scherm.add(label6, 1, 2);
         scherm.add(label7, 1, 5);
         scherm.add(label8, 3, 4);
-        //scherm.add(textveldNaam, 2, 1);
         scherm.add(textveldMerk, 2, 3);
         scherm.add(comboBoxKleur1, 2, 4);
         scherm.add(comboBoxKleur2, 4, 4);
@@ -477,11 +468,8 @@ public class Zoekscherm extends Application {
         scherm.add(comboBoxOpdruk, 2, 5);
         scherm.add(btn, 2, 8);
         
-        
-
         TabPane ZoekTabs = new TabPane();
         
-
         Tab KoffersZoeken = new Tab();
         KoffersZoeken.setText("Koffergegevens");
         KoffersZoeken.setClosable(false);
@@ -489,10 +477,6 @@ public class Zoekscherm extends Application {
         PersoonZoeken.setText("Persoongegevens");
         PersoonZoeken.setClosable(false);
         
-        
-        
-        //kofferGegevensBox.getChildren().add(kofferGegevensGrid);
-        //persoonGegevensBox.getChildren().add(persoonGegevensGrid);
         KoffersZoeken.setContent(scherm);
         
         
@@ -507,7 +491,6 @@ public class Zoekscherm extends Application {
     }
 
     public static GridPane returnScherm2(String query, int match, String id) {
-        //Tabelscherm dat linkt naar Tabeldata.java 
         HBox hbox = new HBox();
         hbox.setPrefHeight(10);
         
@@ -519,8 +502,6 @@ public class Zoekscherm extends Application {
         scherm2.setPrefSize(600, 450);
 
         ObservableList<ObservableList> data = FXCollections.observableArrayList();
-        
-        
         
         final Label label = new Label("Zoekresultaten");
         label.setFont(new Font("Arial", 18));
@@ -587,7 +568,7 @@ public class Zoekscherm extends Application {
         
         Button matchNew = new Button();
         matchNew.getStyleClass().add("geen-schilderij");
-        matchNew.setText("Match Nieuw");
+        matchNew.setText("Match met nieuw persoon");
         matchNew.setPrefSize(w*0.25, 50);
         matchNew.setFont(Font.font("Verdana", 20));
         matchNew.setOnAction(new EventHandler<ActionEvent>() {
@@ -612,7 +593,7 @@ public class Zoekscherm extends Application {
         
         Button matchOld = new Button();
         matchOld.getStyleClass().add("geen-schilderij");
-        matchOld.setText("Match Oud");
+        matchOld.setText("Match met bestaand persoon");
         matchOld.setPrefSize(w*0.30, 50);
         matchOld.setFont(Font.font("Verdana", 20));
         matchOld.setOnAction(new EventHandler<ActionEvent>() {
@@ -639,7 +620,7 @@ public class Zoekscherm extends Application {
         
 
         Button matchFound = new Button();
-        matchFound.setText("Match gevonden");
+        matchFound.setText("Match persoon met koffer");
         matchFound.setPrefSize(w*0.30, 50);
         matchFound.setFont(Font.font("Verdana", 20));
         matchFound.setOnAction(new EventHandler<ActionEvent>() {
@@ -665,7 +646,7 @@ public class Zoekscherm extends Application {
         });
         
         Button delete = new Button();
-        delete.setText("Verwijder Geselecteerd");
+        delete.setText("Verwijder geselecteerd");
         delete.getStyleClass().add("geen-schilderij");
         delete.setPrefSize(w*0.30, 50);
         delete.setFont(Font.font("Verdana", 20));
@@ -712,7 +693,6 @@ public class Zoekscherm extends Application {
             }
         });
         VBox vbox = new VBox();
-        //GridPane.setRowSpan(vbox, GridPane.REMAINING);
         vbox.getStyleClass().add("geen-schilderij");
         
         Image vermistIcon = new Image("delete_icon&48.png");
@@ -798,9 +778,7 @@ public class Zoekscherm extends Application {
                 }
             }
         });
-        
-        //vbox.getChildren().addAll(gevonden,vermist,verzonden);
-        
+                
         Separator separator = new Separator();
         separator.setOrientation(Orientation.VERTICAL);
         
@@ -809,7 +787,6 @@ public class Zoekscherm extends Application {
         
         table.setItems(data);
         
-        //scherm2.add(matchOld, 1, 3);
         scherm2.add(label, 0, 0);
         scherm2.add(table, 0, 1);
         scherm2.add(hbox, 0, 2);
@@ -828,7 +805,7 @@ public class Zoekscherm extends Application {
         }
         if(match == 3){
             hbox.getChildren().addAll(delete);
-            vbox.getChildren().addAll(gevonden,vermist,verzonden);
+            //vbox.getChildren().addAll(gevonden,vermist,verzonden);
         }
         if(match == 4){
             hbox.getChildren().addAll(delete);

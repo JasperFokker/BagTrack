@@ -57,7 +57,8 @@ public class sql {
             String url = "jdbc:mysql://localhost:3306/bagtrack";
             String username = "java";
             String password = "password"; 
-            Class.forName(driver); Connection conn = DriverManager.getConnection(url,username,password);//verbinding maken met de database
+            Class.forName(driver); 
+            Connection conn = DriverManager.getConnection(url,username,password);//verbinding maken met de database
             System.out.println("Connected");
             return conn;
         } catch(Exception e){

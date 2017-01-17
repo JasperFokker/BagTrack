@@ -72,12 +72,9 @@ public class Main extends Application {
         GridPane statistieken = Statistiekenscherm.returnScherm();
         GridPane instellingen = Instellingenscherm.returnScherm();
         
-<<<<<<< HEAD
 
         
         //iconen knoppen initialiseren
-=======
->>>>>>> df5bc5721f64be6edb875f7974fd8e9a23a97f93
         Image Zoom = new Image("zoom_icon&48.png");
         Image Home = new Image("home_icon&48[1].png");
         Image Formulier = new Image("doc_edit_icon&48.png");

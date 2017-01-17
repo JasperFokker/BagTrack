@@ -57,27 +57,27 @@ public class Statistiekenscherm extends Application {
         }
     }
 
-    public static void addPieData(String merk) { //zelfde als addPieData() maar dan met een gespecificeerd merk om toe te voegen
-        try {
-            ResultSet rs1 = sql.select("SELECT COUNT(merk)AS NumberOfRows FROM "
-                    + "bagage WHERE merk='" + merk + "';");
-            PieChart.Data dataRem = null;
-            PieChart.Data dataAdd = null;
-            
-            if (rs1.next()) {
-                int value = rs1.getInt("NumberOfRows");
-                dataRem = new PieChart.Data(merk, value - 1);
-                dataAdd = new PieChart.Data(merk, value);
-            }
-            
-            int index = pieChartData.indexOf(dataRem);
-            System.out.println(index);
-            pieChartData.set(index, dataAdd);
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
+//    public static void addPieData(String merk) { //zelfde als addPieData() maar dan met een gespecificeerd merk om toe te voegen
+//        try {
+//            ResultSet rs1 = sql.select("SELECT COUNT(merk)AS NumberOfRows FROM "
+//                    + "bagage WHERE merk='" + merk + "';");
+//            PieChart.Data dataRem = null;
+//            PieChart.Data dataAdd = null;
+//            
+//            if (rs1.next()) {
+//                int value = rs1.getInt("NumberOfRows");
+//                dataRem = new PieChart.Data(merk, value - 1);
+//                dataAdd = new PieChart.Data(merk, value);
+//            }
+//            
+//            int index = pieChartData.indexOf(dataRem);
+//            System.out.println(index);
+//            pieChartData.set(index, dataAdd);
+//
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//    }
 
     public static GridPane returnScherm() {
         //Placeholder line graph data
