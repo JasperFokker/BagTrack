@@ -78,7 +78,6 @@ public class Instellingenscherm extends Application {
             //Automatisch genereren kolommen tabel gebruikers, gebaseerd op database
             for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
                 final int j = i;
-                System.out.println((String) rs.getMetaData().getColumnName(i + 1)); //testprint bugtracking
 
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1)); //aanmaken nieuwe tabelkolom
                 col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
@@ -92,7 +91,6 @@ public class Instellingenscherm extends Application {
                 });
 
                 table.getColumns().addAll(col); //voeg kolom toe aan tabel
-                System.out.println("Column [" + i + "] ");//aangeven iteratie for loop
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -105,7 +103,6 @@ public class Instellingenscherm extends Application {
                     
                     row.add(rs.getString(i));//toevoegen data per cel
                 }
-                System.out.println("Row [1] added " + row);
                 data.add(row);//voeg complete rij toe aan tabel
 
             }

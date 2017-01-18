@@ -21,7 +21,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -43,22 +42,22 @@ import javafx.util.Callback;
  * @author Team Twee
  */
 public class Zoekscherm extends Application {
-    
 
     static boolean currTable;
-    
+
     @Override
     public void start(Stage primaryStage) {
 
         returnScherm();
     }
-        public static GridPane returnScherm3(String idbagage) {
+
+    public static GridPane returnScherm3(String idbagage) {
         GridPane scherm3 = new GridPane();
         scherm3.setPrefSize(600, 450);
         scherm3.setHgap(1);
         scherm3.setVgap(10);
         scherm3.setPadding(new Insets(25, 25, 25, 25));
-        
+
         ColumnConstraints column = new ColumnConstraints(100);
         scherm3.getColumnConstraints().add(column);
         RowConstraints row = new RowConstraints(50);
@@ -67,7 +66,7 @@ public class Zoekscherm extends Application {
         //Labels, Textvelden, buttons en comboboxen.
         final int textWidth = 200;
         final int boxWidth = 200;
-        
+
         //TextField textveldNaam = new TextField();
         //textveldNaam.setPrefWidth(textWidth);
         TextField textveldVoornaam = new TextField();
@@ -115,66 +114,56 @@ public class Zoekscherm extends Application {
 
         Label label7 = new Label("Telefoon2   ");
         GridPane.setHalignment(label7, HPos.RIGHT);
-        
+
         Label label8 = new Label("Email   ");
         GridPane.setHalignment(label8, HPos.RIGHT);
-        
-        Label label9 = new Label ("Vluchtnummer   ");
-        GridPane.setHalignment(label9,HPos.RIGHT);
+
+        Label label9 = new Label("Vluchtnummer   ");
+        GridPane.setHalignment(label9, HPos.RIGHT);
 
         Button btn = new Button("Zoek");
 
-        btn.setOnAction(new EventHandler<ActionEvent>()
-        {
+        btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event)
-            {//query voorbereiden voor zoeken in persoonsgegevens
+            public void handle(ActionEvent event) {//query voorbereiden voor zoeken in persoonsgegevens
                 String query = "SELECT * FROM persoonsgegevens WHERE voornaam LIKE '%" + textveldVoornaam.getText() + "%' AND voorletter LIKE '%"
                         + textveldVoorletters.getText() + "%' AND achternaam LIKE '%" + textveldAchternaam.getText() + "%' AND adress LIKE '%"
                         + textveldAdres.getText() + "%' AND vakantieadress LIKE '%"
                         + textveldVakantieadres.getText() + "%' AND telefoon1 LIKE '%" + textveldTelefoon1.getText() + "%' AND telefoon2 LIKE '%"
                         + textveldTelefoon1.getText() + "%' AND email LIKE '%" + textveldEmail.getText() + "%' AND vluchtnummer LIKE '%" + textveldVluchtnummer.getText() + "%';";
                 //checken op de status van het scherm, of je aan het matchen bent, of alleen zoeken
-                if (idbagage == "")
-                {
+                if (idbagage == "") {
                     Main.change(Zoekscherm.returnScherm2(query, 4, ""));
-                } else
-                {
+                } else {
                     Main.change(Zoekscherm.returnScherm2(query, 2, idbagage));
                 }
             }
         });
-        
+
         //met de Enter knop kunnen zoeken
-        scherm3.setOnKeyPressed(new EventHandler<KeyEvent>()
-        {
+        scherm3.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
-            public void handle(KeyEvent event)
-            {
-                if (event.getCode().equals(KeyCode.ENTER))
-                {
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.ENTER)) {
                     String query = "SELECT * FROM persoonsgegevens WHERE voornaam LIKE '%"
-                        + textveldVoornaam.getText() + "%' AND voorletter LIKE '%"
-                        + textveldVoorletters.getText() + "%' AND achternaam LIKE '%"
-                        + textveldAchternaam.getText() + "%' AND adress LIKE '%"
-                        + textveldAdres.getText() + "%' AND vakantieadress LIKE '%"
-                        + textveldVakantieadres.getText() + "%' AND telefoon1 LIKE '%"
-                        + textveldTelefoon1.getText() + "%' AND telefoon2 LIKE '%"
-                        + textveldTelefoon1.getText() + "%' AND email LIKE '%"
-                        + textveldEmail.getText() + "%' AND vluchtnummer LIKE '%"
-                        + textveldVluchtnummer.getText() + "%';";
-            if (idbagage == "")
-            {
-                Main.change(Zoekscherm.returnScherm2(query, 4, ""));
-            } else
-            {
-                Main.change(Zoekscherm.returnScherm2(query, 2, idbagage));
-            }
+                            + textveldVoornaam.getText() + "%' AND voorletter LIKE '%"
+                            + textveldVoorletters.getText() + "%' AND achternaam LIKE '%"
+                            + textveldAchternaam.getText() + "%' AND adress LIKE '%"
+                            + textveldAdres.getText() + "%' AND vakantieadress LIKE '%"
+                            + textveldVakantieadres.getText() + "%' AND telefoon1 LIKE '%"
+                            + textveldTelefoon1.getText() + "%' AND telefoon2 LIKE '%"
+                            + textveldTelefoon1.getText() + "%' AND email LIKE '%"
+                            + textveldEmail.getText() + "%' AND vluchtnummer LIKE '%"
+                            + textveldVluchtnummer.getText() + "%';";
+                    if (idbagage == "") {
+                        Main.change(Zoekscherm.returnScherm2(query, 4, ""));
+                    } else {
+                        Main.change(Zoekscherm.returnScherm2(query, 2, idbagage));
+                    }
                 }
             }
         });
-                
-      
+
         scherm3.add(label, 1, 1);
         scherm3.add(label2, 1, 2);
         scherm3.add(label3, 1, 3);
@@ -184,7 +173,7 @@ public class Zoekscherm extends Application {
         scherm3.add(label7, 1, 7);
         scherm3.add(label8, 1, 8);
         scherm3.add(label9, 1, 9);
-        
+
         scherm3.add(textveldVoornaam, 2, 1);
         scherm3.add(textveldVoorletters, 2, 2);
         scherm3.add(textveldAchternaam, 2, 3);
@@ -195,15 +184,16 @@ public class Zoekscherm extends Application {
         scherm3.add(textveldEmail, 2, 8);
         scherm3.add(textveldVluchtnummer, 2, 9);
         scherm3.add(btn, 2, 10);
-        
+
         textveldVoornaam.requestFocus();
         if (!textveldVoornaam.isFocused()) {
             textveldVoornaam.requestFocus();
         }
-        
+
         btn.setDefaultButton(true);
         return scherm3;
-}
+    }
+
     public static TabPane returnScherm() {
 
         //Zoekscherm met dropdown boxen en textfield
@@ -212,7 +202,7 @@ public class Zoekscherm extends Application {
         scherm.setHgap(1);
         scherm.setVgap(10);
         scherm.setPadding(new Insets(25, 25, 25, 25));
-        
+
         ColumnConstraints column = new ColumnConstraints(100);
         scherm.getColumnConstraints().add(column);
         RowConstraints row = new RowConstraints(50);
@@ -231,7 +221,6 @@ public class Zoekscherm extends Application {
                 "Oranje",
                 "Paars",
                 "Roze"
-
         );
         //Inhoud 2e combobox
         ObservableList<String> luchthaven = FXCollections.observableArrayList(
@@ -248,7 +237,6 @@ public class Zoekscherm extends Application {
                 "DPS",
                 "HRG",
                 "CUR"
-
         );
         //Inhoud 3e combobox
         ObservableList<String> soort = FXCollections.observableArrayList(
@@ -256,7 +244,6 @@ public class Zoekscherm extends Application {
                 "Trolley",
                 "Tas",
                 "Zak"
-
         );
         //Inhoud 4e combobox
         ObservableList<String> opdruk = FXCollections.observableArrayList(
@@ -264,8 +251,7 @@ public class Zoekscherm extends Application {
                 "Afbeelding",
                 "Patroon"
         );
-        
-        
+
         //Labels, Textvelden, buttons en comboboxen voor koffer zoeken
         final int textWidth = 200;
         final int boxWidth = 200;
@@ -282,13 +268,10 @@ public class Zoekscherm extends Application {
         final ComboBox comboBoxOpdruk = new ComboBox(opdruk);
         comboBoxOpdruk.setPrefWidth(boxWidth);
 
-        //TextField textveldNaam = new TextField();
-        //textveldNaam.setPrefWidth(textWidth);
         TextField textveldMerk = new TextField();
         textveldMerk.setPrefWidth(textWidth);
         TextField textveldLabelnr = new TextField();
         textveldLabelnr.setPrefWidth(textWidth);
-        
 
         Label label = new Label();
         label.setText("Naam   ");
@@ -316,7 +299,7 @@ public class Zoekscherm extends Application {
 
         Label label7 = new Label("Opdruk   ");
         GridPane.setHalignment(label7, HPos.RIGHT);
-        
+
         Label label8 = new Label("      Kleur 2 ");
         GridPane.setHalignment(label8, HPos.RIGHT);
 
@@ -326,51 +309,45 @@ public class Zoekscherm extends Application {
             @Override
             public void handle(ActionEvent event) {
                 String query = null;
-                
-                String kleur1 = (String)comboBoxKleur1.getValue();
-                String kleur2 = (String)comboBoxKleur2.getValue();
-                String luchthaven = (String)comboBoxLuchthaven.getValue();
-                String soort = (String)comboBoxSoort.getValue();
-                String opdruk = (String)comboBoxOpdruk.getValue();
-                String labelnr = (String)textveldLabelnr.getText();
-                  
-                if(textveldLabelnr.getText() == null){
+
+                String kleur1 = (String) comboBoxKleur1.getValue();
+                String kleur2 = (String) comboBoxKleur2.getValue();
+                String luchthaven = (String) comboBoxLuchthaven.getValue();
+                String soort = (String) comboBoxSoort.getValue();
+                String opdruk = (String) comboBoxOpdruk.getValue();
+                String labelnr = (String) textveldLabelnr.getText();
+
+                if (textveldLabelnr.getText() == null) {
                     labelnr = "";
                 }
-                
-                if(comboBoxKleur1.getValue() == null){
+
+                if (comboBoxKleur1.getValue() == null) {
                     kleur1 = "";
                 }
-                
-                if(comboBoxKleur2.getValue() == null){
+
+                if (comboBoxKleur2.getValue() == null) {
                     kleur2 = "";
                 }
-                
-                if(comboBoxLuchthaven.getValue() == null){
+
+                if (comboBoxLuchthaven.getValue() == null) {
                     luchthaven = "";
                 }
-                
-                if(comboBoxSoort.getValue() == null){
+
+                if (comboBoxSoort.getValue() == null) {
                     soort = "";
                 }
-                
-                if(comboBoxOpdruk.getValue() == null){
+
+                if (comboBoxOpdruk.getValue() == null) {
                     opdruk = "";
                 }
-                
-                System.out.println(kleur1);
-                System.out.println("SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%"+
-                        kleur1 +"%' AND kleur2 LIKE '%"+ kleur2 +"%' AND soort LIKE '%"+
-                        soort +"%' AND opdruk LIKE '%"+
-                        opdruk +"%' AND luchthaven LIKE '%"+ luchthaven +"%' AND labelnummer LIKE '%"+
-                        textveldLabelnr.getText() +"%';");
+
                 //SQL query select koffer
-                query = "SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%"+
-                        kleur1 +"%' AND kleur2 LIKE '%"+ kleur2 +"%' AND soort LIKE '%"+
-                        soort +"%' AND opdruk LIKE '%"+
-                        opdruk +"%' AND luchthaven LIKE '%"+ luchthaven +"%' AND labelnummer LIKE '%"+
-                        textveldLabelnr.getText() +"%';";
-                
+                query = "SELECT * FROM bagage WHERE merk LIKE '%" + textveldMerk.getText() + "%' AND kleur1 LIKE '%"
+                        + kleur1 + "%' AND kleur2 LIKE '%" + kleur2 + "%' AND soort LIKE '%"
+                        + soort + "%' AND opdruk LIKE '%"
+                        + opdruk + "%' AND luchthaven LIKE '%" + luchthaven + "%' AND labelnummer LIKE '%"
+                        + textveldLabelnr.getText() + "%';";
+
                 //textveldNaam.setText(null);
                 textveldMerk.setText("");
                 comboBoxKleur1.setValue(null);
@@ -380,78 +357,69 @@ public class Zoekscherm extends Application {
                 comboBoxSoort.setValue(null);
                 comboBoxOpdruk.setValue(null);
 
-                Main.change(Zoekscherm.returnScherm2(query,1,""));
+                Main.change(Zoekscherm.returnScherm2(query, 1, ""));
 
             }
         });
         //enter functionaliteit
-        scherm.setOnKeyPressed(new EventHandler<KeyEvent>()
-        {
+        scherm.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
-            public void handle(KeyEvent event)
-            {
-                if (event.getCode().equals(KeyCode.ENTER))
-                {
-                                    String query = null;
-                
-                String kleur1 = (String)comboBoxKleur1.getValue();
-                String kleur2 = (String)comboBoxKleur2.getValue();
-                String luchthaven = (String)comboBoxLuchthaven.getValue();
-                String soort = (String)comboBoxSoort.getValue();
-                String opdruk = (String)comboBoxOpdruk.getValue();
-                String labelnr = (String)textveldLabelnr.getText();
-                
-                if(textveldLabelnr.getText() == null){
-                    labelnr = "";
-                }
-                
-                if(comboBoxKleur1.getValue() == null){
-                    kleur1 = "";
-                }
-                
-                if(comboBoxKleur2.getValue() == null){
-                    kleur2 = "";
-                }
-                
-                if(comboBoxLuchthaven.getValue() == null){
-                    luchthaven = "";
-                }
-                
-                if(comboBoxSoort.getValue() == null){
-                    soort = "";
-                }
-                
-                if(comboBoxOpdruk.getValue() == null){
-                    opdruk = "";
-                }
-                
-                System.out.println(kleur1);
-                System.out.println("SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%"+
-                        kleur1 +"%' AND kleur2 LIKE '%"+ kleur2 +"%' AND soort LIKE '%"+
-                        soort +"%' AND opdruk LIKE '%"+
-                        opdruk +"%' AND luchthaven LIKE '%"+ luchthaven +"%' AND labelnummer LIKE '%"+
-                        textveldLabelnr.getText() +"%';");
-                query = "SELECT * FROM bagage WHERE merk LIKE '%"+ textveldMerk.getText() +"%' AND kleur1 LIKE '%"+
-                        kleur1 +"%' AND kleur2 LIKE '%"+ kleur2 +"%' AND soort LIKE '%"+
-                        soort +"%' AND opdruk LIKE '%"+
-                        opdruk +"%' AND luchthaven LIKE '%"+ luchthaven +"%' AND labelnummer LIKE '%"+
-                        textveldLabelnr.getText() +"%';";
-                
-                //textveldNaam.setText(null);
-                textveldMerk.setText("");
-                comboBoxKleur1.setValue(null);
-                comboBoxKleur2.setValue(null);
-                comboBoxLuchthaven.setValue(null);
-                textveldLabelnr.setText("");
-                comboBoxSoort.setValue(null);
-                comboBoxOpdruk.setValue(null);
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.ENTER)) {
+                    String query = null;
 
-                Main.change(Zoekscherm.returnScherm2(query,1,""));
+                    String kleur1 = (String) comboBoxKleur1.getValue();
+                    String kleur2 = (String) comboBoxKleur2.getValue();
+                    String luchthaven = (String) comboBoxLuchthaven.getValue();
+                    String soort = (String) comboBoxSoort.getValue();
+                    String opdruk = (String) comboBoxOpdruk.getValue();
+                    String labelnr = (String) textveldLabelnr.getText();
+
+                    if (textveldLabelnr.getText() == null) {
+                        labelnr = "";
+                    }
+
+                    if (comboBoxKleur1.getValue() == null) {
+                        kleur1 = "";
+                    }
+
+                    if (comboBoxKleur2.getValue() == null) {
+                        kleur2 = "";
+                    }
+
+                    if (comboBoxLuchthaven.getValue() == null) {
+                        luchthaven = "";
+                    }
+
+                    if (comboBoxSoort.getValue() == null) {
+                        soort = "";
+                    }
+
+                    if (comboBoxOpdruk.getValue() == null) {
+                        opdruk = "";
+                    }
+
+                    query = "SELECT * FROM bagage WHERE merk LIKE '%" + textveldMerk.getText() + "%' AND kleur1 LIKE '%"
+                            + kleur1 + "%' AND kleur2 LIKE '%" + kleur2 + "%' AND soort LIKE '%"
+                            + soort + "%' AND opdruk LIKE '%"
+                            + opdruk + "%' AND luchthaven LIKE '%" + luchthaven + "%' AND labelnummer LIKE '%"
+                            + textveldLabelnr.getText() + "%';";
+
+                    //textveldNaam.setText(null);
+                    textveldMerk.setText("");
+                    comboBoxKleur1.setValue(null);
+                    comboBoxKleur2.setValue(null);
+                    comboBoxLuchthaven.setValue(null);
+                    textveldLabelnr.setText("");
+                    comboBoxSoort.setValue(null);
+                    comboBoxOpdruk.setValue(null);
+
+                    Main.change(Zoekscherm.returnScherm2(query, 1, ""));
 
                 }
             }
         });
-       
+
         scherm.add(label2, 1, 3);
         scherm.add(label3, 1, 4);
         scherm.add(label4, 1, 1);
@@ -467,24 +435,22 @@ public class Zoekscherm extends Application {
         scherm.add(comboBoxSoort, 2, 2);
         scherm.add(comboBoxOpdruk, 2, 5);
         scherm.add(btn, 2, 8);
-        
+
         TabPane ZoekTabs = new TabPane();
-        
+
         Tab KoffersZoeken = new Tab();
         KoffersZoeken.setText("Koffergegevens");
         KoffersZoeken.setClosable(false);
         Tab PersoonZoeken = new Tab();
         PersoonZoeken.setText("Persoongegevens");
         PersoonZoeken.setClosable(false);
-        
+
         KoffersZoeken.setContent(scherm);
-        
-        
+
         PersoonZoeken.setContent(returnScherm3(""));
         ZoekTabs.getTabs().addAll(KoffersZoeken, PersoonZoeken);
-        
+
         btn.setDefaultButton(true);
-        
 
         return ZoekTabs;
 
@@ -493,7 +459,7 @@ public class Zoekscherm extends Application {
     public static GridPane returnScherm2(String query, int match, String id) {
         HBox hbox = new HBox();
         hbox.setPrefHeight(10);
-        
+
         GridPane.setColumnSpan(hbox, GridPane.REMAINING);
         GridPane.setHalignment(hbox, HPos.LEFT);
         hbox.getStyleClass().add("geen-schilderij");//non standaard styling voor de tabelview
@@ -502,7 +468,7 @@ public class Zoekscherm extends Application {
         scherm2.setPrefSize(600, 450);
 
         ObservableList<ObservableList> data = FXCollections.observableArrayList();
-        
+
         final Label label = new Label("Zoekresultaten");
         label.setFont(new Font("Arial", 18));
         GridPane.setHalignment(label, HPos.CENTER);
@@ -511,90 +477,90 @@ public class Zoekscherm extends Application {
         table.setEditable(true);
         table.setPrefWidth(1920);
         table.setPrefHeight(1080);
-        
+
         ResultSet rs = sql.select(query);
-        
-          
+
         currTable = false;
-        
-        try{
-            for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
-                final int j = i;                
-                System.out.println((String)rs.getMetaData().getColumnName(i+1));
+
+        try {
+            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+                final int j = i;
                 
-                if(i == 0){
+
+                if (i == 0) {
                     continue;
                 }
-                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
-                if("idbagage".equals((String)rs.getMetaData().getColumnName(1)) ){
+                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+                if ("idbagage".equals((String) rs.getMetaData().getColumnName(1))) {
                     col.prefWidthProperty().bind(table.widthProperty().divide(11.1));
                     currTable = true;
                 }
-                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
-                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
-                        try{ return new SimpleStringProperty(param.getValue().get(j).toString());  
-                        }catch (Exception e) {
+                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {
+                        try {
+                            return new SimpleStringProperty(param.getValue().get(j).toString());
+                        } catch (Exception e) {
                             return null;
-                            
-                        }                      
-                    }                    
+
+                        }
+                    }
                 });
 
-                table.getColumns().addAll(col); 
-                System.out.println("Column ["+i+"] ");
+                table.getColumns().addAll(col);
+                
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
-        try{
-            while(rs.next()){
+        try {
+            while (rs.next()) {
                 //Iterate Row
                 ObservableList<String> row = FXCollections.observableArrayList();
-                for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                     //Iterate Column
                     row.add(rs.getString(i));
                 }
-                System.out.println("Row [1] added "+row );
+                
                 data.add(row);
 
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
-        
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int h = (int) screenSize.getHeight();
         int w = (int) screenSize.getWidth();
-        
+
         Button matchNew = new Button();
         matchNew.getStyleClass().add("geen-schilderij");
         matchNew.setText("Match met nieuw persoon");
-        matchNew.setPrefSize(w*0.25, 50);
+        matchNew.setPrefSize(w * 0.25, 50);
         matchNew.setFont(Font.font("Verdana", 20));
         matchNew.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 int index = table.getSelectionModel().selectedIndexProperty().get();
                 int idbagage = 0;
-                System.out.println(index);
                 
-                try{
-                    rs.absolute(index+1);
+
+                try {
+                    rs.absolute(index + 1);
                     idbagage = rs.getInt("idbagage");
-                    
+
                     Main.change(Invoerscherm.matchPersoon(Integer.toString(idbagage)));
-                    
-                }catch(Exception e){
+
+                } catch (Exception e) {
                     System.out.println(e);
                 }
-                
+
             }
         });
-        
+
         Button matchOld = new Button();
         matchOld.getStyleClass().add("geen-schilderij");
         matchOld.setText("Match met bestaand persoon");
-        matchOld.setPrefSize(w*0.30, 50);
+        matchOld.setPrefSize(w * 0.30, 50);
         matchOld.setFont(Font.font("Verdana", 20));
         matchOld.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -602,26 +568,25 @@ public class Zoekscherm extends Application {
 
                 int index = table.getSelectionModel().selectedIndexProperty().get();
                 int idbagage = 0;
-                System.out.println(index);
                 
-                try{
-                    
-                    rs.absolute(index+1);
+
+                try {
+
+                    rs.absolute(index + 1);
                     idbagage = rs.getInt("idbagage");
-                    
+
                     Main.change(returnScherm3(Integer.toString(idbagage)));
-                    
-                }catch(Exception e){
+
+                } catch (Exception e) {
                     System.out.println(e);
                 }
-                
+
             }
         });
-        
 
         Button matchFound = new Button();
         matchFound.setText("Match persoon met koffer");
-        matchFound.setPrefSize(w*0.30, 50);
+        matchFound.setPrefSize(w * 0.30, 50);
         matchFound.setFont(Font.font("Verdana", 20));
         matchFound.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -629,110 +594,104 @@ public class Zoekscherm extends Application {
 
                 int index = table.getSelectionModel().selectedIndexProperty().get();
                 int idpersoonsgegevens = 0;
-                System.out.println(index);
                 
-                try{
-                    rs.absolute(index+1);
+
+                try {
+                    rs.absolute(index + 1);
                     idpersoonsgegevens = rs.getInt("idpersoonsgegevens");
-                    System.out.println(idpersoonsgegevens);
-                    sql.insert("UPDATE persoonsgegevens SET idbagage="+ id +" WHERE idpersoonsgegevens="+idpersoonsgegevens+";");
-                    sql.insert("UPDATE bagage SET status='Gevonden' WHERE idbagage="+id+";");
+                    
+                    sql.insert("UPDATE persoonsgegevens SET idbagage=" + id + " WHERE idpersoonsgegevens=" + idpersoonsgegevens + ";");
+                    sql.insert("UPDATE bagage SET status='Gevonden' WHERE idbagage=" + id + ";");
                     Main.change(returnScherm2(query, 3, ""));
-                }catch(Exception e){
+                } catch (Exception e) {
                     System.out.println(e);
                 }
-                
+
             }
         });
-        
+
         Button delete = new Button();
         delete.setText("Verwijder geselecteerd");
         delete.getStyleClass().add("geen-schilderij");
-        delete.setPrefSize(w*0.30, 50);
+        delete.setPrefSize(w * 0.30, 50);
         delete.setFont(Font.font("Verdana", 20));
         delete.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
-                if(currTable == true){
+
+                if (currTable == true) {
                     int index = table.getSelectionModel().selectedIndexProperty().get();
                     int idbagage = 0;
                     System.out.println(index);
-                
-                    try{
-                        rs.absolute(index+1);
+
+                    try {
+                        rs.absolute(index + 1);
                         idbagage = rs.getInt("idbagage");
 
-                        sql.insert("DELETE FROM bagage WHERE idbagage=" + idbagage+";");
+                        sql.insert("DELETE FROM bagage WHERE idbagage=" + idbagage + ";");
                         Main.change(returnScherm2(query, 1, ""));
 
-                        
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         System.out.println(e);
                     }
-                }else{
+                } else {
                     int index = table.getSelectionModel().selectedIndexProperty().get();
                     int idpersoonsgegevens = 0;
-                    System.out.println(index);
-                
-                    try{
-                        rs.absolute(index+1);
+                    
+
+                    try {
+                        rs.absolute(index + 1);
                         idpersoonsgegevens = rs.getInt("idpersoonsgegevens");
 
-                        sql.insert("DELETE FROM persoonsgegevens WHERE idpersoonsgegevens=" + idpersoonsgegevens+";");
+                        sql.insert("DELETE FROM persoonsgegevens WHERE idpersoonsgegevens=" + idpersoonsgegevens + ";");
 
                         Main.change(returnScherm2(query, 4, ""));
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         System.out.println(e);
                     }
                 }
-                
 
-                
-                
             }
         });
         VBox vbox = new VBox();
         vbox.getStyleClass().add("geen-schilderij");
-        
+
         Image vermistIcon = new Image("delete_icon&48.png");
         Image gevondenIcon = new Image("checkmark_icon&48.png");
         Image verzondenIcon = new Image("track_icon&48.png");
-        
-        
+
         Button vermist = new Button();
         vermist.getStyleClass().add("geen-schilderij");
         vermist.setGraphic(new ImageView(vermistIcon));
-        vermist.setPrefSize(w*0.30, 50);
+        vermist.setPrefSize(w * 0.30, 50);
         vermist.setFont(Font.font("Verdana", 20));
         vermist.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
-                if(currTable == true){
-                    
+
+                if (currTable == true) {
+
                 }
                 int index = table.getSelectionModel().selectedIndexProperty().get();
                 int idbagage = 0;
-                System.out.println(index);
                 
-                try{
-                    rs.absolute(index+1);
+
+                try {
+                    rs.absolute(index + 1);
                     idbagage = rs.getInt("idbagage");
-                    System.out.println(idbagage);
-                    sql.insert("UPDATE bagage SET status='Vermist' WHERE idbagage="+idbagage+";");
+                    
+                    sql.insert("UPDATE bagage SET status='Vermist' WHERE idbagage=" + idbagage + ";");
                     Main.change(returnScherm2(query, 1, ""));
-                }catch(Exception e){
+                } catch (Exception e) {
                     System.out.println(e);
                 }
 
-                
             }
         });
         Button gevonden = new Button();
         gevonden.getStyleClass().add("geen-schilderij");
         gevonden.setGraphic(new ImageView(gevondenIcon));
-        gevonden.setPrefSize(w*0.30, 50);
+        gevonden.setPrefSize(w * 0.30, 50);
         gevonden.setFont(Font.font("Verdana", 20));
         gevonden.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -740,24 +699,24 @@ public class Zoekscherm extends Application {
 
                 int index = table.getSelectionModel().selectedIndexProperty().get();
                 int idbagage = 0;
-                System.out.println(index);
                 
-                try{
-                    rs.absolute(index+1);
+
+                try {
+                    rs.absolute(index + 1);
                     idbagage = rs.getInt("idbagage");
-                    System.out.println(idbagage);
-                    sql.insert("UPDATE bagage SET status='Gevonden' WHERE idbagage="+idbagage+";");
+                    
+                    sql.insert("UPDATE bagage SET status='Gevonden' WHERE idbagage=" + idbagage + ";");
                     Main.change(returnScherm2(query, 1, ""));
-                }catch(Exception e){
+                } catch (Exception e) {
                     System.out.println(e);
                 }
-                
+
             }
         });
         Button verzonden = new Button();
         verzonden.getStyleClass().add("geen-schilderij");
         verzonden.setGraphic(new ImageView(verzondenIcon));
-        verzonden.setPrefSize(w*0.30, 50);
+        verzonden.setPrefSize(w * 0.30, 50);
         verzonden.setFont(Font.font("Verdana", 20));
         verzonden.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -765,65 +724,60 @@ public class Zoekscherm extends Application {
 
                 int index = table.getSelectionModel().selectedIndexProperty().get();
                 int idbagage = 0;
-                System.out.println(index);
                 
-                try{
-                    rs.absolute(index+1);
+
+                try {
+                    rs.absolute(index + 1);
                     idbagage = rs.getInt("idbagage");
-                    System.out.println(idbagage);
-                    sql.insert("UPDATE bagage SET status='Verzonden' WHERE idbagage="+idbagage+";");
+                    
+                    sql.insert("UPDATE bagage SET status='Verzonden' WHERE idbagage=" + idbagage + ";");
                     Main.change(returnScherm2(query, 1, ""));
-                }catch(Exception e){
+                } catch (Exception e) {
                     System.out.println(e);
                 }
             }
         });
-                
+
         Separator separator = new Separator();
         separator.setOrientation(Orientation.VERTICAL);
-        
+
         Separator separator2 = new Separator();
         separator2.setOrientation(Orientation.VERTICAL);
-        
+
         table.setItems(data);
-        
+
         scherm2.add(label, 0, 0);
         scherm2.add(table, 0, 1);
         scherm2.add(hbox, 0, 2);
-        scherm2.add(vbox, 1,1);
-        
-        if(match == 1){
-            hbox.getChildren().addAll(matchNew,separator,matchOld,separator2,delete);
-            vbox.getChildren().addAll(gevonden,vermist,verzonden);
+        scherm2.add(vbox, 1, 1);
+
+        if (match == 1) {
+            hbox.getChildren().addAll(matchNew, separator, matchOld, separator2, delete);
+            vbox.getChildren().addAll(gevonden, vermist, verzonden);
         }
-        if(match == 2){
+        if (match == 2) {
             hbox.getChildren().addAll(matchFound);
-            vbox.getChildren().addAll(gevonden,vermist,verzonden);
+            vbox.getChildren().addAll(gevonden, vermist, verzonden);
             gevonden.setVisible(false);
             vermist.setVisible(false);
             verzonden.setVisible(false);
         }
-        if(match == 3){
+        if (match == 3) {
             hbox.getChildren().addAll(delete);
-            //vbox.getChildren().addAll(gevonden,vermist,verzonden);
+            
         }
-        if(match == 4){
+        if (match == 4) {
             hbox.getChildren().addAll(delete);
-            vbox.getChildren().addAll(gevonden,vermist,verzonden);
+            vbox.getChildren().addAll(gevonden, vermist, verzonden);
             gevonden.setVisible(false);
             vermist.setVisible(false);
             verzonden.setVisible(false);
         }
-        
-        
+
         border.setCenter(scherm2);
-        
-        
+
         return scherm2;
 
     }
-    
-    
 
 }
-

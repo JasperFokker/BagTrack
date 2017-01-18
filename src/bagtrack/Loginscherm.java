@@ -2,11 +2,6 @@
 package bagtrack;
 
 import static bagtrack.Main.scherm;
-import static bagtrack.Welkomscherm.flip;
-import java.math.BigInteger;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
 import java.sql.ResultSet;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -38,8 +33,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
+
 
 /**
  *
@@ -58,7 +52,6 @@ public class Loginscherm extends Application {
     
     
     public static int getPrivilege() {
-//        System.out.println(privilege);
         return privilege;
     }
 
@@ -103,7 +96,7 @@ public class Loginscherm extends Application {
                         String  originalPassword = wachtwoordField.getText();
                         String dbPassword = getUser.getString("wachtwoord");
                         boolean check = WachtwoordEncryptie.validatePassword(originalPassword, dbPassword);
-                        System.out.println(check);
+
                         
                         try {
                             if (check) {
@@ -139,13 +132,12 @@ public class Loginscherm extends Application {
                         
                     }
                 }catch(Exception x){
-                    System.out.println(e);
+                    System.out.println(x);
                 }
 
                 try {
                     if (getUser.next()) {
                         privilege = getUser.getInt("privilege");
-                        //Main.change(Welkomscherm.returnScherm());
                         scherm.setLeft(null);
                         Main.topmenu();
                         melding.setVisible(false);
@@ -234,13 +226,12 @@ public class Loginscherm extends Application {
                         String  originalPassword = wachtwoordField.getText();
                         String dbPassword = getUser.getString("wachtwoord");
                         boolean check = WachtwoordEncryptie.validatePassword(originalPassword, dbPassword);
-                        System.out.println(check);
+
                         
                         try {
                             if (check) {
                                 privilege = getUser.getInt("privilege");
                                 Main.change(Welkomscherm.returnScherm());
-                                //scherm.setLeft(null);
                                 Main.topmenu();
                                 melding.setVisible(false);
                                 gebruikersnaamField.setText(null);
@@ -276,8 +267,6 @@ public class Loginscherm extends Application {
                 try {
                     if (getUser.next()) {
                         privilege = getUser.getInt("privilege");
-                        //Main.change(Welkomscherm.returnScherm());
-                        //scherm.setLeft(null);
                         Main.topmenu();
                         melding.setVisible(false);
                         gebruikersnaamField.setText(null);
